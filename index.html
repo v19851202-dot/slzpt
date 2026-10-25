@@ -57,6 +57,13 @@ main { flex: 999 1 560px; min-width: 0; }
 .search input::placeholder { color: #767676; }
 .search input:focus { outline: none; border-color: #232323; background: #ffffff; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.about { max-width: 36em; margin: 96px 0 0; padding-top: 32px; border-top: 1px solid #e6e6e6; scroll-margin-top: 24px; }
+.about h2 { font-size: 15px; font-weight: 600; margin: 0 0 20px; }
+.about p, .about li { font-size: 15px; line-height: 1.85; }
+.about p { margin: 0 0 16px; }
+.about ul { margin: 0 0 16px; padding-left: 1.2em; }
+.about li { margin-bottom: 6px; }
+.about strong { font-weight: 600; }
 .empty { font-size: 13px; color: #6b6b6b; padding: 48px 0; }
 [hidden] { display: none !important; }
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -82,7 +89,7 @@ main { flex: 999 1 560px; min-width: 0; }
   </aside>
 
   <main>
-    <section id="about" class="ticker" aria-label="大叔語錄">
+    <section class="ticker" aria-label="大叔語錄">
       <!-- 跑馬燈：一行一句，第二組是重複用來無縫循環的，內容要跟第一組一樣 -->
       <div class="ticker-track">
         <ul><li>年紀是真的，懶是假的。</li><li>爬坡不用快，只要不下車。</li><li>今天不想練？先把衣服換好，剩下的交給面子。</li><li>冷知識：沙發不會讓你變強，只會讓你變成沙發。</li><li>腿痠是今天的事，變強是明天的事。</li><li>家人問我要騎到幾歲，我說騎到他們追不上為止。</li><li>大叔的速度不快，但從來沒有停過。</li><li>熱身不是浪費時間，受傷才是。</li></ul>
@@ -115,6 +122,20 @@ main { flex: 999 1 560px; min-width: 0; }
       </article>
     </div>
     <p class="empty" hidden>還沒有貼文。</p>
+
+    <section id="about" class="about" aria-labelledby="about-title">
+      <h2 id="about-title">關於</h2>
+      <p>我是一個不太聽話的中年大叔。</p>
+      <p>白天是物理治療師，在臨床待了快二十年，專長是骨科徒手治療、術後復健和運動傷害。每天勸別人好好運動、好好休息，輪到自己的時候……嗯，知道跟做到，果然是兩回事。</p>
+      <p>下班後，我是一個（偶爾）有在顧家的人，也是一個還想騎車、爬山、去露營的人。時間永遠不夠用，膝蓋跟腰也三不五時出來抗議，但再忙還是得擠出時間動一動。</p>
+      <p>最近在準備 CSCS（肌力與體能訓練專家）證照。物理治療跟肌力體能是隔壁鄰居，但終究是不同領域，專業還是有差。所以這把年紀了還在乖乖 K 書，腦袋有點鈍，但還在轉。</p>
+      <p>這裡會放兩種東西：</p>
+      <ul>
+        <li><strong>心情</strong>：騎車、爬山、露營，還有生活裡的碎碎念。</li>
+        <li><strong>專業分享</strong>：用物理治療師的角度，整理我讀到、用到的東西。</li>
+      </ul>
+      <p>就這樣。內容對你有幫助，就是有緣啦！</p>
+    </section>
   </main>
 </div>
 <script>
