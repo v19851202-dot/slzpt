@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSCS 筆記：阻力訓練的內分泌適應 — LOLO大叔不聽話</title>
+<meta name="description" content="NSCA CSCS 科學基礎：睪固酮、生長激素、IGF-1、皮質醇與兒茶酚胺在阻力訓練中的反應，附原始研究出處。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #ffffff; color: #232323; font-family: Inter, "Noto Sans TC", system-ui, sans-serif; font-size: 16px; line-height: 1.8; }
+a { color: #232323; text-underline-offset: 3px; }
+.page { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+.back { font-size: 13px; text-decoration: none; display: inline-block; padding: 10px 0; }
+.back:hover { text-decoration: underline; }
+.meta { font-size: 12px; color: #6b6b6b; margin-top: 32px; }
+h1 { font-size: 26px; line-height: 1.4; margin: 8px 0 16px; font-weight: 700; }
+h2 { font-size: 19px; margin: 48px 0 8px; padding-top: 16px; border-top: 1px solid #e6e6e6; }
+h3 { font-size: 16px; margin: 28px 0 4px; }
+p, li { margin: 8px 0; }
+ul { padding-left: 1.3em; }
+.lead { font-size: 17px; color: #3a3a3a; }
+.trap { background: #f6f6f6; border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 15px; }
+.trap b { font-weight: 600; }
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid #e6e6e6; }
+th { font-weight: 600; font-size: 13px; color: #6b6b6b; }
+.refs { font-size: 13px; color: #555; }
+.refs li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<article class="page">
+  <a class="back" href="../#feed">← 回到所有貼文</a>
+  <div class="meta">專業分享 · 2026.10.25</div>
+  <h1>CSCS 筆記：阻力訓練的內分泌適應</h1>
+  <p class="lead">阻力訓練後的激素反應，是 CSCS 科學基礎的高頻考點。這份是我讀 NSCA 教科書時整理的重點，關鍵數字都回頭對過原始研究，出處列在文末。</p>
+
+  <h2>一、基礎觀念</h2>
+  <h3>激素的作用方式</h3>
+  <ul>
+    <li><b>內分泌（endocrine）</b>：腺體分泌激素進入血液，運送到遠端的目標組織。</li>
+    <li><b>旁分泌（paracrine）</b>：作用在鄰近的細胞。</li>
+    <li><b>自分泌（autocrine）</b>：作用在分泌它的細胞自己。肌肉受到牽張與張力時會表現肌肉型 IGF-1，在局部參與組織重塑 [1]。</li>
+  </ul>
+  <h3>鎖鑰理論與受體調節</h3>
+  <ul>
+    <li>激素必須跟特定受體結合，才會引發細胞內的反應。</li>
+    <li>睪固酮這類類固醇激素的受體位在<b>細胞質內</b>，不是細胞膜表面。急性激素升高加上機械刺激，會影響這些受體的上調與下調 [1]。</li>
+  </ul>
+  <h3>急性反應比靜止濃度重要</h3>
+  <p>回顧文獻指出，訓練後的急性激素反應，對組織生長與重塑可能比長期靜止濃度的變化更關鍵；很多研究在肌力與肌肥大都增加的情況下，靜止濃度並沒有明顯改變 [1]。</p>
+
+  <h2>二、合成代謝激素</h2>
+  <h3>1. 睪固酮（Testosterone）</h3>
+  <ul>
+    <li>促進肌肉蛋白質合成，參與肌肥大。</li>
+    <li>阻力訓練後約 15–30 分鐘內會升高，前提是刺激足夠 [1]。</li>
+    <li>容易引發較大急性反應的課表特徵：大肌群動作、中高強度、高訓練量、短休息 [1]。教科書常見的強度範圍是 85–95% 1RM。</li>
+    <li>性別差異：同樣的課表下，男性血清睪固酮在每個時間點都高於女性，且只有男性出現明顯高於靜止值的上升 [3]。</li>
+  </ul>
+  <div class="trap"><b>注意：</b>Kraemer 1990 比較了 6 種課表（5RM vs 10RM、休息 1 分 vs 3 分），睪固酮在所有課表都有上升，但曲線下面積在課表之間沒有差異 [2]。也就是說，睪固酮對課表變因的敏感度不如生長激素明顯。</div>
+
+  <h3>2. 生長激素（Growth Hormone, GH）</h3>
+  <ul>
+    <li>教科書列出的功能：促進胺基酸運輸與蛋白質合成、增加脂肪分解、減少葡萄糖利用、增加膠原蛋白合成。</li>
+    <li><b>最強急性反應的課表：10RM、休息 1 分鐘、高總做功量</b>。在 6 種課表中，這組的 GH 反應最高 [2]。</li>
+    <li>同一組研究在男女都觀察到：10RM／休息 1 分鐘的課表，GH 上升在每個時間點都大於 5RM／休息 3 分鐘；女性做 5RM／3 分鐘時 GH 完全沒有上升 [3]。</li>
+    <li><b>女性運動前的 GH 濃度明顯高於男性</b> [3]。</li>
+  </ul>
+  <div class="trap"><b>考試陷阱：</b>生長激素會「增加」膠原蛋白合成，不是降低。</div>
+
+  <h3>3. 類胰島素生長因子-1（IGF-1）</h3>
+  <ul>
+    <li>循環中的 IGF-1 主要由肝臟在 GH 刺激下分泌 [1]。</li>
+    <li>肌肉型 IGF-1 會因牽張與張力這類機械訊號而上調，可能在組織重塑中扮演重要角色 [1]。</li>
+    <li>訓練後的 IGF-1 變化不一定跟著 GH 走 [2]。</li>
+  </ul>
+
+  <h2>三、分解代謝與壓力激素</h2>
+  <h3>1. 皮質醇（Cortisol）</h3>
+  <ul>
+    <li>由腎上腺皮質分泌的糖皮質素，屬於分解代謝激素：促進糖質新生、抑制蛋白質合成。</li>
+    <li>高訓練量、短休息、大肌群的課表，同時會引發最大的睪固酮、GH <b>和皮質醇</b>急性反應 [1]。</li>
+    <li>過度訓練與恢復不足，是評估激素反應時必須考慮的因素 [1]。</li>
+  </ul>
+
+  <h3>2. 兒茶酚胺（Catecholamines）</h3>
+  <ul>
+    <li>包含腎上腺素與正腎上腺素；腎上腺素由腎上腺髓質分泌。</li>
+    <li>阻力訓練中兒茶酚胺的急性升高，對最佳的力量產出與能量釋放很關鍵 [1]。</li>
+  </ul>
+
+  <h2>四、總整理</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>激素</th><th>分類</th><th>主要功能</th><th>急性反應最大的課表特徵</th><th>考點</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>睪固酮</td><td>合成代謝</td><td>肌肉蛋白質合成</td><td>大肌群、中高強度、高量、短休息</td><td>男性濃度高於女性；對課表變因較不敏感</td></tr>
+        <tr><td>生長激素</td><td>合成代謝</td><td>蛋白質合成、脂肪分解、膠原蛋白合成</td><td>10RM、休息 1 分鐘、高總做功量</td><td>女性運動前濃度高於男性；增加膠原蛋白合成</td></tr>
+        <tr><td>IGF-1</td><td>合成代謝</td><td>組織生長與重塑</td><td>GH 刺激肝臟分泌；肌肉型受機械張力上調</td><td>變化不一定跟著 GH 走</td></tr>
+        <tr><td>皮質醇</td><td>分解代謝</td><td>糖質新生、抑制蛋白質合成</td><td>高量、短休息、大肌群</td><td>跟睪固酮、GH 被同一類課表推高</td></tr>
+        <tr><td>兒茶酚胺</td><td>壓力激素</td><td>力量產出、能量釋放</td><td>—</td><td>腎上腺素來自腎上腺髓質</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>參考文獻</h2>
+  <ol class="refs">
+    <li>Kraemer WJ, Ratamess NA. Hormonal responses and adaptations to resistance exercise and training. <i>Sports Med.</i> 2005;35(4):339-61. <a href="https://doi.org/10.2165/00007256-200535040-00004">DOI</a></li>
+    <li>Kraemer WJ, et al. Hormonal and growth factor responses to heavy resistance exercise protocols. <i>J Appl Physiol.</i> 1990;69(4):1442-50. <a href="https://doi.org/10.1152/jappl.1990.69.4.1442">DOI</a></li>
+    <li>Kraemer WJ, et al. Endogenous anabolic hormonal and growth factor responses to heavy resistance exercise in males and females. <i>Int J Sports Med.</i> 1991;12(2):228-35. <a href="https://doi.org/10.1055/s-2007-1024673">DOI</a></li>
+  </ol>
+  <p class="refs">文獻資料經 PubMed 檢索核對。未標號的內容依 NSCA《Essentials of Strength Training and Conditioning》教科書整理。</p>
+
+  <a class="back" href="../#feed">← 回到所有貼文</a>
+</article>
+</body>
+</html>

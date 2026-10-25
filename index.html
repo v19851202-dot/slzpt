@@ -33,6 +33,12 @@ main { flex: 999 1 560px; min-width: 0; }
 .imgpost img { width: 100%; flex: 1 1 auto; min-height: 0; object-fit: contain; }
 .meta { font-size: 12px; color: #6b6b6b; }
 .post-text { font-size: 15px; line-height: 1.7; margin: 8px 0 0; }
+.notepost { background: #f6f6f6; justify-content: space-between; color: #232323; }
+.notepost:hover { background: #efefef; }
+.note-title { font-size: 20px; line-height: 1.4; font-weight: 700; margin: 0; }
+.note-sub { font-size: 13px; color: #6b6b6b; margin: 8px 0 0; }
+.note-more { font-size: 13px; }
+@media (max-width: 480px) { .note-title { font-size: 16px; } .note-sub { display: none; } }
 .empty { font-size: 13px; color: #6b6b6b; padding: 48px 0; }
 [hidden] { display: none !important; }
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -67,6 +73,14 @@ main { flex: 999 1 560px; min-width: 0; }
 
     <div class="grid">
       <!-- 新貼文放在最上面。data-cat：mood = 心情、note = 專業分享 -->
+      <a class="tile notepost" data-cat="note" href="notes/cscs-endocrine.html">
+        <div>
+          <div class="meta">專業分享 · 2026.10.25</div>
+          <p class="note-title">CSCS 筆記：阻力訓練的內分泌適應</p>
+          <p class="note-sub">睪固酮、生長激素、IGF-1、皮質醇，附原始研究出處。</p>
+        </div>
+        <span class="note-more">閱讀全文 →</span>
+      </a>
       <article class="tile tile-feature imgpost" data-cat="mood">
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIi8+CiAgPCEtLSBmbG9vciAtLT4KICA8cGF0aCBkPSJNNjAgMjY4IEgzNzAiLz4KICA8IS0tIGNoYWlyIC0tPgogIDxwYXRoIGQ9Ik05OCAyMDYgSDE1OCIvPgogIDxwYXRoIGQ9Ik05OCAyMDYgTDkyIDEyOCIvPgogIDxwYXRoIGQ9Ik0xMDQgMjA2IFYyNjYiLz4KICA8cGF0aCBkPSJNMTUyIDIwNiBWMjY2Ii8+CiAgPCEtLSBkZXNrIC0tPgogIDxwYXRoIGQ9Ik0xOTYgMTg2IEgzNjYiLz4KICA8cGF0aCBkPSJNMjEwIDE4NiBWMjY2Ii8+CiAgPHBhdGggZD0iTTM1MiAxODYgVjI2NiIvPgogIDwhLS0gcGVyc29uOiBoZWFkLCBiYWNrLCBsZWdzIC0tPgogIDxjaXJjbGUgY3g9IjE1MiIgY3k9Ijk0IiByPSIyMCIvPgogIDxwYXRoIGQ9Ik0xNDkgMTE0IFExMzggMTYwIDEyOCAyMDAiLz4KICA8cGF0aCBkPSJNMTI4IDIwMCBIMTkyIFYyNjIgSDIxMCIvPgogIDwhLS0gYXJtIHJlc3Rpbmcgb24gdGhlIGRlc2sgLS0+CiAgPHBhdGggZD0iTTE0NSAxMzQgTDE4OCAxNzYgTDIzOCAxODEiLz4KICA8IS0tIHNlY29uZCBhcm0gaG9sZGluZyB0aGUgYm9vayAtLT4KICA8cGF0aCBkPSJNMTQ3IDEyOCBMMTg0IDE2NiBMMjI2IDE3NiIvPgogIDwhLS0gcGVuY2lsIC0tPgogIDxwYXRoIGQ9Ik0yMzYgMTgxIEwyNTAgMTcwIi8+CiAgPCEtLSBvcGVuIGJvb2sgLS0+CiAgPHBhdGggZD0iTTIyNiAxODUgUTI0NiAxNzEgMjY2IDE4MiBRMjg2IDE3MSAzMDYgMTg1Ii8+CiAgPHBhdGggZD0iTTI2NiAxODIgVjE4NiIvPgogIDxwYXRoIGQ9Ik0yMzYgMTgwIFEyNDYgMTc1IDI1OCAxNzkiLz4KICA8cGF0aCBkPSJNMjc0IDE3OSBRMjg2IDE3NSAyOTggMTgwIi8+CiAgPCEtLSBzdGFjayBvZiBib29rcyAtLT4KICA8cmVjdCB4PSIzMTQiIHk9IjE3MCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjE2IiByeD0iMS41Ii8+CiAgPHJlY3QgeD0iMzE4IiB5PSIxNTYiIHdpZHRoPSIzOCIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPgogIDxyZWN0IHg9IjMxNiIgeT0iMTQ0IiB3aWR0aD0iNDAiIGhlaWdodD0iMTIiIHJ4PSIxLjUiLz4KICA8dGV4dCB4PSIzMzciIHk9IjE4MSIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjMjMyMzIzIiBzdHJva2U9Im5vbmUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj5DU0NTPC90ZXh0PgogIDwhLS0gZGVzayBsYW1wIC0tPgogIDxwYXRoIGQ9Ik0zNDIgMTQ0IFYxMzQgTDMxOCAxMDQiLz4KICA8cGF0aCBkPSJNMzA0IDEwMCBMMzI2IDkyIEwzMjIgMTE2IFoiLz4KICA8cGF0aCBkPSJNMzAwIDEyMiBMMjg0IDE0NiIgc3Ryb2tlLWRhc2hhcnJheT0iMyA2Ii8+CiAgPHBhdGggZD0iTTMxMCAxMjYgTDMwMCAxNTYiIHN0cm9rZS1kYXNoYXJyYXk9IjMgNiIvPgogIDwhLS0gdGhpbmtpbmcgbWFya3MgLS0+CiAgPHBhdGggZD0iTTE3OCA2NiBMMTg2IDU4Ii8+CiAgPHBhdGggZD0iTTE4OCA3NCBMMTk4IDcwIi8+CiAgPHBhdGggZD0iTTE2NiA2MCBMMTY4IDUwIi8+Cjwvc3ZnPgo=" alt="線條人坐在書桌前 K 書，桌上有攤開的書和一疊 CSCS 書">
         <div>
