@@ -64,6 +64,8 @@ main { flex: 999 1 560px; min-width: 0; }
 .about ul { margin: 0 0 16px; padding-left: 1.2em; }
 .about li { margin-bottom: 6px; }
 .about strong { font-weight: 600; }
+.ig { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; align-self: flex-start; }
+.ig:hover span { text-decoration: underline; text-underline-offset: 3px; }
 .empty { font-size: 13px; color: #6b6b6b; padding: 48px 0; }
 [hidden] { display: none !important; }
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -85,6 +87,10 @@ main { flex: 999 1 560px; min-width: 0; }
     <nav aria-label="主選單">
       <a href="#about">→ 關於</a>
     </nav>
+    <a class="ig" href="https://www.instagram.com/hi_ptkong/" target="_blank" rel="noopener" aria-label="Instagram @hi_ptkong（另開新視窗）">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h2l1.5-2h4l1.5 2h2A2.5 2.5 0 0 1 20 8.5v9A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+      <span>@hi_ptkong</span>
+    </a>
     <div class="muted" style="font-size: 12px">© 2026 LOLO大叔不聽話</div>
   </aside>
 
