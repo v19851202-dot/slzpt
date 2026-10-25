@@ -1,0 +1,31 @@
+# 歡迎搜尋引擎與 AI 搜尋工具索引本站內容
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# AI 搜尋與回答引擎
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://slzpt.com/sitemap.xml
