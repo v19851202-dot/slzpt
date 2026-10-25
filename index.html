@@ -22,6 +22,38 @@ img { display: block; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
 .muted { color: #6b6b6b; }
 main { flex: 999 1 560px; min-width: 0; }
+.top-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+.top-row .ticker { flex: 1 1 320px; min-width: 0; }
+.wx { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.wx-guy { color: #232323; overflow: visible; }
+.wx-text { font-size: 12px; line-height: 1.5; }
+.wx-now { font-size: 13px; font-weight: 500; }
+.wx-mood { color: #232323; }
+.wx-credit { font-size: 11px; color: #767676; }
+.wx-credit a { color: #767676; text-decoration: underline; text-underline-offset: 2px; }
+.wx-guy .bob { animation: wx-bob 2.4s ease-in-out infinite; transform-origin: 32px 58px; }
+.wx-guy .wave { animation: wx-wave 1.2s ease-in-out infinite; transform-origin: 32px 28px; }
+.wx-guy .fan { animation: wx-wave .5s ease-in-out infinite; transform-origin: 32px 28px; }
+.wx-guy .shake { animation: wx-shake .25s linear infinite; transform-origin: 32px 40px; }
+.wx-guy .shiver { animation: wx-shiver .18s linear infinite; }
+.wx-guy .fall { animation: wx-fall 1s linear infinite; }
+.wx-guy .fall.d2 { animation-delay: .33s; } .wx-guy .fall.d3 { animation-delay: .66s; }
+.wx-guy .flash { animation: wx-flash 1.6s steps(1) infinite; }
+.wx-guy .drift { animation: wx-drift 3s ease-in-out infinite; }
+.wx-guy .float { animation: wx-float 2.4s ease-in-out infinite; }
+.wx-guy .drip { animation: wx-drip 1.4s ease-in infinite; }
+.wx-guy .spin { animation: wx-spin 8s linear infinite; transform-origin: 54px 10px; }
+@keyframes wx-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes wx-wave { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg); } }
+@keyframes wx-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-1px); } 75% { transform: translateX(1px); } }
+@keyframes wx-shiver { 0%,100% { transform: translateX(0); } 50% { transform: translateX(.8px); } }
+@keyframes wx-fall { from { transform: translateY(-6px); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(14px); opacity: 0; } }
+@keyframes wx-flash { 0%,60% { opacity: 1; } 61%,100% { opacity: .15; } }
+@keyframes wx-drift { 0%,100% { transform: translateX(-2px); } 50% { transform: translateX(3px); } }
+@keyframes wx-float { 0% { transform: translateY(2px); opacity: .2; } 50% { opacity: 1; } 100% { transform: translateY(-6px); opacity: 0; } }
+@keyframes wx-drip { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
+@keyframes wx-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .wx-guy * { animation: none !important; } }
 .ticker { position: relative; height: 1.7em; font-size: 17px; line-height: 1.7; overflow: hidden; }
 .ticker ul { list-style: none; margin: 0; padding: 0; }
 .ticker li { position: absolute; left: 0; right: 0; top: 0; opacity: 0; transform: translateY(-100%); transition: transform .6s ease, opacity .6s ease; }
@@ -84,22 +116,26 @@ main { flex: 999 1 560px; min-width: 0; }
       <span>@hi_ptkong</span>
     </a>
     <div class="muted" style="font-size: 12px">© 2026 LOLO大叔不聽話</div>
+    <div class="wx-credit" hidden>天氣資料：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a></div>
   </aside>
 
   <main>
-    <section class="ticker" aria-label="大叔語錄">
-      <!-- 跑馬燈：一行一句，每 4 秒換下一句，新的一句從上往下滑入 -->
-      <ul>
-        <li class="is-on">年紀是真的，懶是假的。</li>
-        <li aria-hidden="true">爬坡不用快，只要不下車。</li>
-        <li aria-hidden="true">今天不想練？先把衣服換好，剩下的交給面子。</li>
-        <li aria-hidden="true">冷知識：沙發不會讓你變強，只會讓你變成沙發。</li>
-        <li aria-hidden="true">腿痠是今天的事，變強是明天的事。</li>
-        <li aria-hidden="true">家人問我要騎到幾歲，我說騎到他們追不上為止。</li>
-        <li aria-hidden="true">大叔的速度不快，但從來沒有停過。</li>
-        <li aria-hidden="true">熱身不是浪費時間，受傷才是。</li>
-      </ul>
-    </section>
+    <div class="top-row">
+      <section class="ticker" aria-label="大叔語錄">
+        <!-- 跑馬燈：句庫在最下方的 LINES，每天依日期自動換一組，每 4 秒換下一句 -->
+        <ul>
+          <li class="is-on">年紀是真的，懶是假的。</li>
+        </ul>
+      </section>
+      <aside class="wx" aria-label="今日天氣" hidden>
+        <svg class="wx-guy" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+        <div class="wx-text">
+          <div class="wx-now"><span class="wx-city"></span> · <span class="wx-temp"></span></div>
+          <div class="wx-day muted"></div>
+          <div class="wx-mood"></div>
+        </div>
+      </aside>
+    </div>
 
     <div id="feed" class="tabs" role="toolbar" aria-label="篩選貼文">
       <button class="tab" type="button" data-filter="all" aria-pressed="true">全部</button>
@@ -171,14 +207,78 @@ main { flex: 999 1 560px; min-width: 0; }
   apply('all');
 })();
 (function () {
+  // ===== 跑馬燈句庫：每天依日期挑 8 句，想加句子就加在這裡 =====
+  var LINES = [
+    '年紀是真的，懶是假的。',
+    '爬坡不用快，只要不下車。',
+    '今天不想練？先把衣服換好，剩下的交給面子。',
+    '冷知識：沙發不會讓你變強，只會讓你變成沙發。',
+    '腿痠是今天的事，變強是明天的事。',
+    '家人問我要騎到幾歲，我說騎到他們追不上為止。',
+    '大叔的速度不快，但從來沒有停過。',
+    '熱身不是浪費時間，受傷才是。',
+    '休息日是課表的一部分，不是偷懶的藉口。',
+    '體重計不會說謊，但它很不會看場合。',
+    '今天流的汗，明天都是炫耀的本錢。',
+    '頭盔戴好，耍帥才有下一次。',
+    '爬山最難的不是上坡，是出門前那一步。',
+    'K 書跟騎車一樣，最痛苦的都是第一公里。',
+    '慢慢來比較快，但太慢會被叫回家吃飯。',
+    '天氣不好就練核心，天氣好就沒藉口。',
+    '不是每天都要拚，但每天都要動。',
+    '今天的進度：有出門。滿分。',
+    '露營最快樂的是沒訊號，沒人叫我回訊息。',
+    '被阿伯騎車超車，是最好的訓練動力。',
+    '睡飽也是一種訓練。',
+    '咖啡是燃料，車友是藉口，騎車是真的。',
+    'Age is real. Laziness is optional.',
+    'Slow is fine. Stopping is not.',
+    'The hardest climb is getting out the door.',
+    'Sweat now, brag later.',
+    'Rest days count. Couch days don’t.',
+    'Not fast. Just stubborn.',
+    'Helmet on. Ego off.',
+    'Warm up, or pay for it later.',
+    'My legs say no. My calendar says go.',
+    'Coffee first, then miles.',
+    'Progress, not perfection.',
+    'Old legs, new tricks.',
+    'Dad bod, diesel engine.',
+    'Studying is cardio for the brain. Probably.',
+    'Keep the rubber side down.'
+  ];
+  var PER_DAY = 8;
+
+  var now = new Date();
+  var seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+  function rand() {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+  var pool = LINES.slice();
+  for (var k = pool.length - 1; k > 0; k--) {
+    var j = Math.floor(rand() * (k + 1));
+    var tmp = pool[k]; pool[k] = pool[j]; pool[j] = tmp;
+  }
+  var today = pool.slice(0, PER_DAY);
+
   var box = document.querySelector('.ticker');
-  var items = box.querySelectorAll('li');
-  if (items.length < 2) return;
+  var list = box.querySelector('ul');
+  list.innerHTML = '';
+  today.forEach(function (text, n) {
+    var li = document.createElement('li');
+    li.textContent = text;
+    if (n === 0) li.className = 'is-on'; else li.setAttribute('aria-hidden', 'true');
+    list.appendChild(li);
+  });
+  var items = list.querySelectorAll('li');
   var i = 0, paused = false;
   box.addEventListener('mouseenter', function () { paused = true; });
   box.addEventListener('mouseleave', function () { paused = false; });
   setInterval(function () {
-    if (paused || document.hidden) return;
+    if (paused || document.hidden || items.length < 2) return;
     var cur = items[i];
     i = (i + 1) % items.length;
     var next = items[i];
@@ -186,6 +286,116 @@ main { flex: 999 1 560px; min-width: 0; }
     next.classList.remove('is-out'); next.classList.add('is-on'); next.removeAttribute('aria-hidden');
     setTimeout(function () { cur.classList.remove('is-out'); }, 650);
   }, 4000);
+})();
+(function () {
+  // ===== 天氣小人：依天氣換動作與表情 =====
+  var HEAD = '<circle cx="32" cy="16" r="7"/>';
+  var BODY = '<path d="M32 23 V42"/>';
+  var LEGS = '<path d="M32 42 L25 58 M32 42 L39 58"/>';
+  var EYES = '<path d="M29 15 h.01 M35 15 h.01" stroke-width="2.8"/>';
+  var SUN = '<g class="spin"><circle cx="54" cy="10" r="4"/><path d="M54 2 v2 M54 16 v2 M46 10 h2 M60 10 h2 M48.3 4.3 l1.4 1.4 M58.3 14.3 l1.4 1.4 M48.3 15.7 l1.4 -1.4 M58.3 5.7 l1.4 -1.4"/></g>';
+  var CLOUD = '<path d="M45 17 h14 a3.5 3.5 0 0 0 0 -7 a5 5 0 0 0 -9 -1 a4 4 0 0 0 -5 8 z"/>';
+
+  var GUY = {
+    sunny: '<g class="bob">' + HEAD + BODY + LEGS +
+      '<path d="M27 15 h4 M33 15 h4 M31 15 h2" stroke-width="2.6"/>' +
+      '<path d="M29 19 Q32 22 35 19"/><path d="M32 28 L24 36"/>' +
+      '<g class="wave"><path d="M32 28 L41 21 L44 14"/></g></g>' + SUN,
+    cloudy: '<g class="bob">' + HEAD + BODY + LEGS + EYES +
+      '<path d="M29 20 h6"/><path d="M32 28 L25 30 L22 25 M32 28 L39 30 L42 25"/></g>' +
+      '<g class="drift">' + CLOUD + '</g>',
+    rain: HEAD + BODY + LEGS + EYES +
+      '<path d="M29 21 Q32 18.5 35 21"/><path d="M32 28 L25 37 M32 28 L40 24"/>' +
+      '<path d="M24 6 Q40 -6 56 6 Z"/><path d="M40 6 V27 q0 3 -3 3"/>' +
+      '<path class="fall" d="M8 10 l-1 4"/><path class="fall d2" d="M14 6 l-1 4"/><path class="fall d3" d="M19 12 l-1 4"/>',
+    storm: '<g class="shake">' + HEAD + BODY + LEGS +
+      '<circle cx="29" cy="15" r="1.6"/><circle cx="35" cy="15" r="1.6"/><circle cx="32" cy="20" r="1.6"/>' +
+      '<path d="M32 28 L24 20 M32 28 L40 20"/></g>' + CLOUD +
+      '<path class="flash" d="M53 18 L48 26 h5 L49 33"/>',
+    snow: '<g class="shiver">' + HEAD + BODY + LEGS + EYES +
+      '<path d="M30 19.5 Q32 21 34 19.5"/><path d="M27 23 h10 M35 23 l2 7"/>' +
+      '<path d="M32 28 L25 33 L33 35 M32 28 L39 33 L31 35"/></g>' +
+      '<path class="fall" d="M10 4 v4 M8 6 h4"/><path class="fall d2" d="M52 8 v4 M50 10 h4"/><path class="fall d3" d="M18 14 v4 M16 16 h4"/>',
+    cold: '<g class="shiver">' + HEAD + BODY + LEGS + EYES +
+      '<path d="M29 20.5 h6" stroke-dasharray="1.5 1.5"/><path d="M27 23 h10 M35 23 l2 7"/>' +
+      '<path d="M32 28 L25 33 L33 35 M32 28 L39 33 L31 35"/></g>' +
+      '<path d="M46 12 q2 2 0 4 q-2 2 0 4 M50 10 q2 2 0 4 q-2 2 0 4"/>',
+    fog: '<g class="bob">' + HEAD + BODY + LEGS + EYES +
+      '<path d="M29 20 q1.5 -1.5 3 0 q1.5 1.5 3 0"/><path d="M32 28 L25 36 M32 28 L40 26 L38 16"/>' +
+      '<path d="M44 6 q0 -4 4 -4 q4 0 4 4 q0 3 -4 4 v2 M48 15 h.01"/></g>' +
+      '<g class="drift" opacity=".5"><path d="M2 46 h18 M44 50 h18 M8 54 h16"/></g>',
+    hot: HEAD + BODY + LEGS + EYES +
+      '<path d="M29 19 Q32 23 35 19 Z"/><path d="M32 28 L25 36"/>' +
+      '<g class="fan"><path d="M32 28 L41 22 M41 22 l4 -7 l4 4 z"/></g>' +
+      '<path class="drip" d="M24 11 q2 3 0 4 q-2 -1 0 -4 z"/>' +
+      '<g class="spin"><circle cx="54" cy="10" r="5"/><path d="M54 1 v2 M54 17 v2 M45 10 h2 M61 10 h2"/></g>',
+    night: '<g class="bob">' + HEAD + BODY + LEGS +
+      '<path d="M28 15 q1.5 1.5 3 0 M33 15 q1.5 1.5 3 0"/><path d="M31 20 h2"/>' +
+      '<path d="M32 28 L26 37 M32 28 L38 37"/></g>' +
+      '<path d="M53 3 a7 7 0 1 0 7 10 a5.5 5.5 0 1 1 -7 -10 z"/>' +
+      '<path class="float" d="M42 12 h4 l-4 4 h4"/>'
+  };
+  var MOOD = {
+    sunny: '大太陽！不出門對不起自己。',
+    cloudy: '陰陰的，騎車不怕曬。',
+    rain: '下雨了，今天改練核心。',
+    storm: '打雷了，乖乖待在室內。',
+    snow: '下雪！？先拍照再說。',
+    cold: '好冷，暖身拉長一點。',
+    fog: '霧很大，出門記得開燈。',
+    hot: '熱爆了，記得多喝水。',
+    night: '晚上了，睡飽也是訓練。'
+  };
+
+  function isRain(c) { return (c >= 51 && c <= 67) || (c >= 80 && c <= 82); }
+  function isSnow(c) { return (c >= 71 && c <= 77) || c === 85 || c === 86; }
+  function stateFor(d) {
+    var c = d.code, t = d.temp;
+    if (c >= 95) return 'storm';
+    if (isSnow(c)) return 'snow';
+    if (isRain(c)) return 'rain';
+    if (d.isDay === 0) return 'night';
+    if (t >= 31) return 'hot';
+    if (t <= 12) return 'cold';
+    if (c === 45 || c === 48) return 'fog';
+    if (c <= 1) return 'sunny';
+    return 'cloudy';
+  }
+  function desc(c) {
+    if (c === 0) return '晴';
+    if (c === 1) return '晴時多雲';
+    if (c === 2) return '多雲';
+    if (c === 3) return '陰';
+    if (c === 45 || c === 48) return '霧';
+    if (c >= 51 && c <= 57) return '毛毛雨';
+    if (c >= 61 && c <= 67) return '雨';
+    if (isSnow(c)) return '雪';
+    if (c >= 80 && c <= 82) return '陣雨';
+    if (c >= 95) return '雷雨';
+    return '';
+  }
+  function num(v) { return typeof v === 'number' && isFinite(v); }
+
+  var wx = document.querySelector('.wx');
+  var credit = document.querySelector('.wx-credit');
+  fetch('/api/weather', { headers: { accept: 'application/json' } })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (!d || d.error || !num(d.temp) || !num(d.code)) return;
+      var state = stateFor(d);
+      wx.querySelector('.wx-guy').innerHTML = GUY[state];
+      wx.querySelector('.wx-city').textContent = d.city || '你這裡';
+      wx.querySelector('.wx-temp').textContent = Math.round(d.temp) + '°';
+      var day = desc(num(d.todayCode) ? d.todayCode : d.code);
+      if (num(d.min) && num(d.max)) day += (day ? ' ' : '') + Math.round(d.min) + '–' + Math.round(d.max) + '°';
+      if (num(d.pop)) day += ' · 降雨 ' + d.pop + '%';
+      wx.querySelector('.wx-day').textContent = day;
+      wx.querySelector('.wx-mood').textContent = MOOD[state];
+      wx.setAttribute('data-state', state);
+      wx.hidden = false;
+      credit.hidden = false;
+    })
+    .catch(function () {});
 })();
 </script>
 </body>
