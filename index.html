@@ -22,6 +22,26 @@ img { display: block; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
 .muted { color: #6b6b6b; }
 main { flex: 999 1 560px; min-width: 0; }
+.clock { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 0 auto; }
+.clock-date { font-size: 12px; }
+.fc { display: inline-flex; align-items: center; gap: 3px; }
+.fc .sep { display: inline-flex; flex-direction: column; gap: 6px; padding: 0 2px; }
+.fc .sep i { width: 3px; height: 3px; border-radius: 50%; background: #9a9a9a; }
+.fd { position: relative; width: 22px; height: 32px; perspective: 120px; font-family: Inter, system-ui, sans-serif; font-size: 21px; font-weight: 600; color: #232323; font-variant-numeric: tabular-nums; }
+.fd .h { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; background: #f0f0f0; backface-visibility: hidden; }
+.fd .h span { position: absolute; left: 0; right: 0; height: 32px; line-height: 32px; text-align: center; }
+.fd .t { top: 0; border-radius: 4px 4px 0 0; }
+.fd .t span { top: 0; }
+.fd .b { bottom: 0; border-radius: 0 0 4px 4px; }
+.fd .b span { bottom: 0; }
+.fd::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #ffffff; z-index: 4; }
+.fd .ft { z-index: 3; transform-origin: 50% 100%; }
+.fd .fb { z-index: 3; transform-origin: 50% 0; transform: rotateX(90deg); }
+.fd.go .ft { animation: flip-top .22s ease-in forwards; background: #e9e9e9; }
+.fd.go .fb { animation: flip-bottom .22s ease-out .22s forwards; }
+@keyframes flip-top { to { transform: rotateX(-90deg); } }
+@keyframes flip-bottom { to { transform: rotateX(0deg); } }
+@media (prefers-reduced-motion: reduce) { .fd .ft, .fd .fb { display: none; } }
 .top-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
 .top-row .ticker { flex: 1 1 320px; min-width: 0; }
 .wx { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
@@ -127,6 +147,11 @@ main { flex: 999 1 560px; min-width: 0; }
           <li class="is-on">年紀是真的，懶是假的。</li>
         </ul>
       </section>
+      <div class="clock" aria-label="現在時間">
+        <div class="fc" aria-hidden="true"></div>
+        <time class="sr-only"></time>
+        <div class="clock-date muted"></div>
+      </div>
       <aside class="wx" aria-label="今日天氣" hidden>
         <svg class="wx-guy" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
         <div class="wx-text">
@@ -287,6 +312,51 @@ main { flex: 999 1 560px; min-width: 0; }
     next.classList.remove('is-out'); next.classList.add('is-on'); next.removeAttribute('aria-hidden');
     setTimeout(function () { cur.classList.remove('is-out'); }, 650);
   }, 4000);
+})();
+(function () {
+  // ===== 翻頁時鐘：瀏覽者當地時間，24 小時制 =====
+  var root = document.querySelector('.fc');
+  var label = document.querySelector('.clock time');
+  var dateEl = document.querySelector('.clock-date');
+  var digits = [];
+  function card() {
+    var d = document.createElement('span');
+    d.className = 'fd';
+    d.innerHTML = '<span class="h t"><span></span></span><span class="h b"><span></span></span>' +
+      '<span class="h t ft"><span></span></span><span class="h b fb"><span></span></span>';
+    root.appendChild(d);
+    return { el: d, t: d.children[0].firstChild, b: d.children[1].firstChild, ft: d.children[2].firstChild, fb: d.children[3].firstChild, v: null, timer: 0 };
+  }
+  function sep() { var s = document.createElement('span'); s.className = 'sep'; s.innerHTML = '<i></i><i></i>'; root.appendChild(s); }
+  for (var n = 0; n < 6; n++) { if (n === 2 || n === 4) sep(); digits.push(card()); }
+  function set(dg, v) {
+    if (dg.v === v) return;
+    var old = dg.v;
+    dg.v = v;
+    if (old === null) { dg.t.textContent = dg.b.textContent = dg.ft.textContent = dg.fb.textContent = v; return; }
+    clearTimeout(dg.timer);
+    dg.el.classList.remove('go');
+    dg.t.textContent = v; dg.b.textContent = old;
+    dg.ft.textContent = old; dg.fb.textContent = v;
+    void dg.el.offsetWidth;
+    dg.el.classList.add('go');
+    dg.timer = setTimeout(function () { dg.b.textContent = v; dg.ft.textContent = v; dg.el.classList.remove('go'); }, 460);
+  }
+  function pad(x) { return (x < 10 ? '0' : '') + x; }
+  var lastMinute = '';
+  function tick() {
+    var now = new Date();
+    var str = pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
+    for (var k = 0; k < 6; k++) set(digits[k], str.charAt(k));
+    var hm = str.slice(0, 2) + ':' + str.slice(2, 4);
+    if (hm !== lastMinute) {
+      lastMinute = hm;
+      label.textContent = hm;
+      dateEl.textContent = (now.getMonth() + 1) + '/' + now.getDate() + '（' + '日一二三四五六'.charAt(now.getDay()) + '）';
+    }
+    setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+  }
+  tick();
 })();
 (function () {
   // ===== 天氣小人：依天氣換動作與表情 =====
