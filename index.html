@@ -132,6 +132,7 @@ main { flex: 999 1 560px; min-width: 0; }
         <div class="wx-text">
           <div class="wx-now"><span class="wx-city"></span> · <span class="wx-temp"></span></div>
           <div class="wx-day muted"></div>
+          <div class="wx-time muted"></div>
           <div class="wx-mood"></div>
         </div>
       </aside>
@@ -391,6 +392,11 @@ main { flex: 999 1 560px; min-width: 0; }
       if (num(d.pop)) day += ' · 降雨 ' + d.pop + '%';
       wx.querySelector('.wx-day').textContent = day;
       wx.querySelector('.wx-mood').textContent = MOOD[state];
+      var m = typeof d.time === 'string' && d.time.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+      if (m) {
+        var wd = '日一二三四五六'.charAt(new Date(+m[1], +m[2] - 1, +m[3]).getDay());
+        wx.querySelector('.wx-time').textContent = (+m[2]) + '/' + (+m[3]) + '（' + wd + '）' + m[4] + ':' + m[5] + ' 更新';
+      }
       wx.setAttribute('data-state', state);
       wx.hidden = false;
       credit.hidden = false;

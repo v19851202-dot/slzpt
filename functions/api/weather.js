@@ -45,6 +45,7 @@ export async function onRequestGet({ request }) {
     {
       city: cf.city || '',
       country: cf.country || '',
+      time: cur.time || null,
       temp: cur.temperature_2m,
       code: cur.weather_code,
       isDay: cur.is_day,
