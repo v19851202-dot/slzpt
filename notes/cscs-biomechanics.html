@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算｜LOLO大叔不聽話</title>
+<meta name="description" content="CSCS 阻力訓練生物力學互動教學：拖曳角度看力矩變化、切換三類槓桿、輸入數字算 Margaria-Kalamen 爆發力，附考題與翻面卡。物理治療師整理，關鍵說法附原始出處。">
+<meta name="author" content="LOLO大叔不聽話（物理治療師）">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://slzpt.com/notes/cscs-biomechanics.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LOLO大叔不聽話">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算">
+<meta property="og:description" content="拖曳角度看力矩變化、切換三類槓桿、輸入數字算 Margaria-Kalamen 爆發力，附考題與翻面卡。">
+<meta property="og:url" content="https://slzpt.com/notes/cscs-biomechanics.html">
+<meta property="article:published_time" content="2026-10-26">
+<meta property="article:modified_time" content="2026-10-26">
+<meta property="article:section" content="專業分享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算">
+<meta name="twitter:description" content="拖曳角度看力矩變化、切換三類槓桿、輸入數字算 Margaria-Kalamen 爆發力，附考題與翻面卡。">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://slzpt.com/notes/cscs-biomechanics.html#article",
+   "mainEntityOfPage": "https://slzpt.com/notes/cscs-biomechanics.html",
+   "headline": "CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算",
+   "description": "CSCS 阻力訓練生物力學互動教學：三類槓桿與機械利益、關節力矩與力臂、肌肉收縮型態、伸展縮短循環、Margaria-Kalamen 爆發力計算，附互動工具與考題。",
+   "inLanguage": "zh-Hant",
+   "datePublished": "2026-10-26",
+   "dateModified": "2026-10-26",
+   "author": {"@id": "https://slzpt.com/#author"},
+   "publisher": {"@id": "https://slzpt.com/#author"},
+   "isPartOf": {"@type": "WebSite", "@id": "https://slzpt.com/#website", "name": "LOLO大叔不聽話", "url": "https://slzpt.com/"},
+   "articleSection": "專業分享",
+   "learningResourceType": "互動式教學",
+   "keywords": ["CSCS", "NSCA", "生物力學", "槓桿", "機械利益", "力矩", "力臂", "離心收縮", "伸展縮短循環", "SSC", "增強式訓練", "Margaria-Kalamen", "爆發力"],
+   "citation": [
+    {"@type": "ScholarlyArticle", "name": "Delayed onset muscle soreness: treatment strategies and performance factors", "author": "Cheung K, Hume P, Maxwell L", "datePublished": "2003", "isPartOf": {"@type": "Periodical", "name": "Sports Medicine"}, "url": "https://doi.org/10.2165/00007256-200333020-00005"},
+    {"@type": "ScholarlyArticle", "name": "A new approach for classification of stretch-shortening cycle: Beyond 250 ms of ground contact time", "author": "Ünver E, et al.", "datePublished": "2024", "isPartOf": {"@type": "Periodical", "name": "Journal of Sports Sciences"}, "url": "https://doi.org/10.1080/02640414.2024.2403873"},
+    {"@type": "Chapter", "name": "Program design and technique for plyometric training", "author": "Potach DH, Chu DA", "datePublished": "2015", "isPartOf": {"@type": "Book", "name": "Essentials of Strength Training and Conditioning (4th ed.)"}}
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://slzpt.com/#author",
+   "name": "LOLO大叔不聽話",
+   "jobTitle": "物理治療師",
+   "url": "https://slzpt.com/#about",
+   "sameAs": ["https://www.instagram.com/hi_ptkong/"],
+   "knowsAbout": ["物理治療", "骨科徒手治療", "術後復健", "運動傷害", "肌力與體能訓練"]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "LOLO大叔不聽話", "item": "https://slzpt.com/"},
+    {"@type": "ListItem", "position": 2, "name": "專業分享", "item": "https://slzpt.com/#feed"},
+    {"@type": "ListItem", "position": 3, "name": "CSCS 生物力學互動教學", "item": "https://slzpt.com/notes/cscs-biomechanics.html"}
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://slzpt.com/notes/cscs-biomechanics.html#faq",
+   "mainEntity": [
+    {"@type": "Question", "name": "人體最常見的是哪一類槓桿？", "acceptedAnswer": {"@type": "Answer", "text": "三類槓桿。施力點在支點與抗力點之間，機械利益小於 1，肌肉要出比外部阻力更大的力，換到的是更大的末端速度與活動範圍。"}},
+    {"@type": "Question", "name": "二頭肌彎舉在什麼角度時阻力力矩最大？", "acceptedAnswer": {"@type": "Answer", "text": "上臂垂直、前臂呈水平（前臂與重力線垂直）時。力臂等於關節中心到力的作用線的垂直距離，這時最長，所以阻力力矩最大。"}},
+    {"@type": "Question", "name": "離心收縮的能量成本比向心收縮高嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，離心收縮的能量成本較低，但能承受較大的力。離心活動造成肌肉微傷害的頻率與嚴重度高於其他收縮型態，也較容易引起延遲性肌肉痠痛（Cheung 等人 2003）。"}},
+    {"@type": "Question", "name": "快速與慢速伸展縮短循環怎麼區分？", "acceptedAnswer": {"@type": "Answer", "text": "常用觸地時間 250 毫秒作為門檻：小於 250 毫秒為快速 SSC，大於為慢速 SSC。不過 Ünver 等人 2024 年指出，這個門檻是怎麼訂出來的，文獻上仍有缺口。"}},
+    {"@type": "Question", "name": "Margaria-Kalamen 爆發力測驗怎麼計算？", "acceptedAnswer": {"@type": "Answer", "text": "功率（瓦特）= 體重（公斤）× 9.8 × 第 3 階到第 9 階的垂直高度（公尺）÷ 經過時間（秒）。最常見的錯誤是忘記乘 9.8，把公斤換算成牛頓。"}}
+   ]
+  }
+ ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+:root { --ink: #232323; --muted: #6b6b6b; --line: #e6e6e6; --soft: #f6f6f6; --accent: #c2410c; --ok: #15803d; --bad: #b91c1c; }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #ffffff; color: var(--ink); font-family: Inter, "Noto Sans TC", system-ui, sans-serif; font-size: 16px; line-height: 1.8; }
+a { color: var(--ink); text-underline-offset: 3px; }
+.page { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+.back { font-size: 13px; text-decoration: none; display: inline-block; padding: 10px 0; }
+.back:hover { text-decoration: underline; }
+.crumbs { font-size: 12px; color: var(--muted); margin-top: 8px; }
+.crumbs a { text-decoration: none; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-top: 32px; }
+h1 { font-size: 26px; line-height: 1.4; margin: 8px 0 12px; font-weight: 700; }
+h2 { font-size: 19px; margin: 48px 0 8px; padding-top: 16px; border-top: 1px solid var(--line); }
+h3 { font-size: 16px; margin: 28px 0 4px; }
+p, li { margin: 8px 0; }
+ul, ol { padding-left: 1.3em; }
+.byline { font-size: 13px; color: var(--muted); margin: 0 0 16px; }
+.lead { font-size: 17px; color: #3a3a3a; }
+.summary { border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 20px 0; }
+.summary h2 { border: 0; margin: 0 0 4px; padding: 0; font-size: 16px; }
+.summary ul { margin: 0; }
+.toc { font-size: 14px; }
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.trap { background: var(--soft); border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 15px; }
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+th { font-weight: 600; font-size: 13px; color: var(--muted); }
+.formula { font-family: ui-monospace, Menlo, Consolas, monospace; background: var(--soft); border-radius: 6px; padding: 2px 6px; font-size: 14px; white-space: nowrap; }
+
+/* 互動區塊 */
+.lab { border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 20px 0; }
+.lab-tag { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: .04em; }
+.lab-title { font-size: 16px; font-weight: 700; margin: 2px 0 12px; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.seg button, .btn { font: inherit; font-size: 14px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.seg button:focus-visible, .btn:focus-visible, .opt:focus-visible, .card:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lab svg { display: block; width: 100%; height: auto; max-width: 520px; margin: 0 auto; }
+.readout { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 12px; }
+.stat { background: var(--soft); border-radius: 8px; padding: 8px 12px; }
+.stat-k { font-size: 12px; color: var(--muted); }
+.stat-v { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.lab-note { font-size: 14px; color: #3a3a3a; margin: 10px 0 0; }
+.range { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin: 12px 0 0; font-size: 14px; }
+.range input { width: 100%; accent-color: var(--accent); min-height: 32px; }
+.range output { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 4.5em; text-align: right; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.fields label { font-size: 13px; color: var(--muted); display: block; }
+.fields input { font: inherit; width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.steps { margin: 12px 0 0; padding: 0; list-style: none; font-size: 14px; font-variant-numeric: tabular-nums; }
+.steps li { background: var(--soft); border-radius: 8px; padding: 8px 12px; margin: 6px 0; }
+.steps b { font-size: 16px; }
+
+/* 考題 */
+.quiz { border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 20px 0; }
+.quiz-q { font-weight: 600; margin: 4px 0 12px; }
+.opt { display: block; width: 100%; text-align: left; font: inherit; font-size: 15px; line-height: 1.6; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; color: var(--ink); }
+.opt:hover { border-color: #bdbdbd; }
+.opt.is-right { border-color: var(--ok); background: #f0fdf4; }
+.opt.is-wrong { border-color: var(--bad); background: #fef2f2; }
+.verdict { font-weight: 700; margin: 8px 0 0; }
+.verdict.ok { color: var(--ok); }
+.verdict.no { color: var(--bad); }
+.explain { font-size: 15px; }
+.explain[hidden] { display: none; }
+
+/* 翻面卡 */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+.card { display: block; width: 100%; perspective: 900px; background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; min-height: 170px; }
+.card-in { display: block; position: relative; width: 100%; height: 100%; min-height: 170px; transition: transform .45s; transform-style: preserve-3d; }
+.card[aria-pressed="true"] .card-in { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; border-radius: 10px; padding: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; }
+.front { background: var(--ink); color: #fff; justify-content: space-between; }
+.front .q { font-size: 17px; font-weight: 700; line-height: 1.5; }
+.front .hint { font-size: 12px; opacity: .7; }
+.back-f { background: var(--soft); transform: rotateY(180deg); font-size: 14px; line-height: 1.7; overflow: auto; }
+@media (prefers-reduced-motion: reduce) { .card-in { transition: none; } }
+
+.faq dt { font-weight: 600; margin-top: 20px; }
+.faq dd { margin: 4px 0 0; }
+.refs { font-size: 13px; color: #555; }
+.refs li { margin: 6px 0; }
+.author { background: var(--soft); border-radius: 8px; padding: 16px; margin-top: 40px; font-size: 14px; }
+.author p { margin: 2px 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<article class="page">
+  <a class="back" href="../#feed">← 回到所有貼文</a>
+  <nav class="crumbs" aria-label="麵包屑"><a href="../">首頁</a> › <a href="../#feed">專業分享</a> › CSCS 生物力學互動教學</nav>
+  <div class="meta">專業分享 · <time datetime="2026-10-26">2026.10.26</time></div>
+  <h1>CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算</h1>
+  <p class="byline">作者：<a href="../#about">LOLO大叔不聽話</a>（物理治療師）· 關鍵說法附原始出處</p>
+  <p class="lead">生物力學是 CSCS 最需要「看得到」的章節。這篇把重點做成可以動手玩的工具：切換槓桿、拖曳關節角度、輸入數字算爆發力，最後用考題和翻面卡自我檢查。</p>
+
+  <section class="summary" aria-labelledby="sum-title">
+    <h2 id="sum-title">重點摘要</h2>
+    <ul>
+      <li>人體最常見的是<b>三類槓桿</b>（機械利益 &lt; 1）：肌肉多出力，換到末端速度與活動範圍。</li>
+      <li><b>力臂</b>是關節中心到力作用線的垂直距離，會隨角度改變；彎舉時前臂水平，阻力力矩最大。</li>
+      <li><b>離心收縮</b>力量最大、能量成本最低，但較容易造成肌肉微傷害與延遲性痠痛。</li>
+      <li><b>SSC</b> 的轉換期太長，儲存的彈性能量會散失；常用 <b>250 毫秒</b>區分快速與慢速 SSC。</li>
+      <li><b>Margaria-Kalamen</b>：功率 = 體重 × 9.8 × 高度 ÷ 時間，別忘了乘 9.8。</li>
+    </ul>
+  </section>
+
+  <nav class="toc" aria-label="目錄">
+    <b>目錄</b>
+    <ol>
+      <li><a href="#lever">槓桿系統與機械利益</a></li>
+      <li><a href="#torque">關節力矩與力臂</a></li>
+      <li><a href="#muscle">肌肉收縮型態</a></li>
+      <li><a href="#ssc">伸展縮短循環（SSC）</a></li>
+      <li><a href="#power">爆發力計算：Margaria-Kalamen</a></li>
+      <li><a href="#cards">考前翻面卡</a></li>
+      <li><a href="#faq">常見問題</a></li>
+    </ol>
+  </nav>
+
+  <!-- 一、槓桿 -->
+  <h2 id="lever">一、槓桿系統與機械利益</h2>
+  <p>人體的骨骼與肌肉可以看成一套槓桿，由三個要素組成：</p>
+  <ul>
+    <li><b>支點（Fulcrum, F）</b>：旋轉的軸心，通常是關節。</li>
+    <li><b>抗力點（Load, L）</b>：外部阻力或體重作用的位置。</li>
+    <li><b>施力點（Effort, E）</b>：肌肉拉在骨頭上的位置。</li>
+  </ul>
+  <p>判斷槓桿類型的口訣是 <b>FLE123</b>：看哪一個要素在中間。F 在中間是一類，L 在中間是二類，E 在中間是三類。</p>
+  <p>機械利益的定義是 <span class="formula">MA = 施力臂 ÷ 抗力臂</span>。MA 大於 1 代表省力，小於 1 代表費力。</p>
+
+  <div class="lab" id="lever-lab">
+    <div class="lab-tag">互動 1</div>
+    <div class="lab-title">切換三類槓桿，看 F、L、E 的位置</div>
+    <div class="seg" role="group" aria-label="選擇槓桿類型">
+      <button type="button" data-lever="1" aria-pressed="false">一類槓桿</button>
+      <button type="button" data-lever="2" aria-pressed="false">二類槓桿</button>
+      <button type="button" data-lever="3" aria-pressed="true">三類槓桿</button>
+    </div>
+    <svg viewBox="0 -22 340 172" role="img" aria-labelledby="lever-svg-t">
+      <title id="lever-svg-t">槓桿示意圖：支點、施力點、抗力點的相對位置</title>
+      <line x1="20" y1="70" x2="320" y2="70" stroke="#232323" stroke-width="6" stroke-linecap="round"/>
+      <g id="lv-f"><polygon points="0,0 -18,32 18,32" fill="#232323"/><text y="52" text-anchor="middle" font-size="14" font-weight="700" fill="#232323">F 支點</text></g>
+      <g id="lv-e"><line x1="0" y1="66" x2="0" y2="14" stroke="#c2410c" stroke-width="4"/><polygon points="0,4 -9,20 9,20" fill="#c2410c"/><text y="0" text-anchor="middle" font-size="14" font-weight="700" fill="#c2410c">E 施力</text></g>
+      <g id="lv-l"><line x1="0" y1="74" x2="0" y2="96" stroke="#232323" stroke-width="2"/><rect x="-20" y="96" width="40" height="28" rx="4" fill="#6b6b6b"/><text y="144" text-anchor="middle" font-size="14" font-weight="700" fill="#232323">L 抗力</text></g>
+    </svg>
+    <div class="readout">
+      <div class="stat"><div class="stat-k">排列</div><div class="stat-v" id="lv-order">F – E – L</div></div>
+      <div class="stat"><div class="stat-k">機械利益</div><div class="stat-v" id="lv-ma">MA &lt; 1</div></div>
+    </div>
+    <p class="lab-note" id="lv-note"></p>
+  </div>
+
+  <h3>MA 小於 1 代表什麼？</h3>
+  <p>以二頭肌彎舉為例，用一組<b>示範用的假設值</b>計算：肌肉施力臂 4 公分、抗力臂 35 公分。</p>
+  <p><span class="formula">MA = 4 ÷ 35 ≈ 0.11</span>。要舉起 10 公斤的啞鈴，肌肉需要大約 <span class="formula">10 × 35 ÷ 4 ≈ 87.5</span> 公斤力（暫不計前臂本身重量）。</p>
+  <p>代價是要出很大的力，換到的是：肌肉只要縮短一點點，手掌端就能移動很長的距離、速度很快。投擲、揮拍、踢球這類動作，靠的就是這個特性。</p>
+
+  <div class="quiz" data-answer="b">
+    <div class="lab-tag">考題 1</div>
+    <p class="quiz-q">啞鈴二頭肌彎舉時，前臂從伸直彎到肘關節 90 度（前臂水平）。下列敘述何者最適當？</p>
+    <button type="button" class="opt" data-k="a">(A) 屬於二類槓桿，90 度時 MA 最大且大於 1。</button>
+    <button type="button" class="opt" data-k="b">(B) 屬於三類槓桿，90 度時抗力臂最長，阻力力矩最大，MA 仍小於 1。</button>
+    <button type="button" class="opt" data-k="c">(C) 屬於一類槓桿，90 度時施力臂變長，因此比伸直時省力。</button>
+    <button type="button" class="opt" data-k="d">(D) 屬於三類槓桿，90 度時施力臂與抗力臂相等，MA = 1。</button>
+    <p class="verdict" aria-live="polite"></p>
+    <div class="explain" hidden>
+      <p>支點是肘關節，施力點是二頭肌在橈骨上的附著處，抗力是前臂加啞鈴。施力點在中間，所以是三類槓桿，排除 A、C。</p>
+      <p>重力永遠垂直向下，前臂水平時，肘關節到重力作用線的垂直距離最長，阻力力矩最大。施力點離關節很近、抗力點離關節很遠，所以就算在 90 度，MA 還是遠小於 1，排除 D。</p>
+    </div>
+  </div>
+
+  <!-- 二、力矩 -->
+  <h2 id="torque">二、關節力矩與力臂</h2>
+  <p>力矩是讓關節轉動的「轉動力」：<span class="formula">力矩 τ = 力 F × 力臂 d⊥</span>。</p>
+  <p>力臂 d⊥ 是<b>關節中心到力作用線的垂直距離</b>，不是骨頭長度。骨頭長度固定，但力臂會隨關節角度改變：<span class="formula">d⊥ = 骨長 × sin θ</span>，θ 是前臂與重力線的夾角。</p>
+
+  <div class="lab" id="torque-lab">
+    <div class="lab-tag">互動 2</div>
+    <div class="lab-title">拖曳角度，看彎舉的阻力力矩怎麼變</div>
+    <svg viewBox="0 -70 340 320" role="img" aria-labelledby="tq-svg-t">
+      <title id="tq-svg-t">彎舉示意圖：前臂角度、重力作用線與力臂</title>
+      <line x1="110" y1="110" x2="110" y2="-60" stroke="#bdbdbd" stroke-width="10" stroke-linecap="round"/>
+      <text x="96" y="-40" text-anchor="end" font-size="12" fill="#6b6b6b">上臂</text>
+      <line x1="110" y1="120" x2="110" y2="245" stroke="#bdbdbd" stroke-width="1" stroke-dasharray="2 4"/>
+      <line id="tq-grav" x1="0" y1="0" x2="0" y2="0" stroke="#6b6b6b" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <line id="tq-arm" x1="110" y1="110" x2="110" y2="260" stroke="#c2410c" stroke-width="3"/>
+      <line id="tq-fore" x1="110" y1="110" x2="110" y2="240" stroke="#232323" stroke-width="10" stroke-linecap="round"/>
+      <circle cx="110" cy="110" r="9" fill="#fff" stroke="#232323" stroke-width="3"/>
+      <g id="tq-db"><rect x="-16" y="-9" width="32" height="18" rx="3" fill="#6b6b6b"/></g>
+      <text id="tq-armlabel" x="0" y="0" font-size="13" font-weight="700" fill="#c2410c" text-anchor="middle">d⊥</text>
+      <text id="tq-gravlabel" x="0" y="0" font-size="12" fill="#6b6b6b">重力線</text>
+    </svg>
+    <div class="range">
+      <label for="tq-angle">前臂與重力線夾角</label>
+      <input id="tq-angle" type="range" min="0" max="150" step="1" value="90">
+      <output id="tq-angle-o" for="tq-angle">90°</output>
+    </div>
+    <div class="fields" style="margin-top:12px">
+      <label>啞鈴重量（公斤）<input id="tq-mass" type="number" min="0" step="0.5" value="20" inputmode="decimal"></label>
+      <label>前臂長度：肘到啞鈴（公尺）<input id="tq-len" type="number" min="0" step="0.01" value="0.35" inputmode="decimal"></label>
+    </div>
+    <div class="readout">
+      <div class="stat"><div class="stat-k">阻力 F = m × 9.8</div><div class="stat-v" id="tq-f">196 N</div></div>
+      <div class="stat"><div class="stat-k">力臂 d⊥</div><div class="stat-v" id="tq-d">0.350 m</div></div>
+      <div class="stat"><div class="stat-k">阻力力矩 τ</div><div class="stat-v" id="tq-t">68.6 N·m</div></div>
+    </div>
+    <p class="lab-note" id="tq-note"></p>
+  </div>
+
+  <p>預設值的計算結果：20 公斤啞鈴、前臂 0.35 公尺時，30 度與 150 度的力臂都是 0.175 公尺、力矩 34.3 N·m；90 度時力臂 0.35 公尺、力矩 68.6 N·m，是整個動作中阻力力矩最大的位置。</p>
+  <div class="trap"><b>考點：</b>自由重量在動作中段阻力力矩最大，接近兩端反而變小。實務上會加彈力帶或鏈條（貼合阻力），讓動作後段的阻力隨之增加。</div>
+
+  <!-- 三、收縮 -->
+  <h2 id="muscle">三、肌肉收縮型態</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>收縮型態</th><th>肌肉長度</th><th>能產生的最大力量</th><th>能量成本</th></tr></thead>
+      <tbody>
+        <tr><td>向心（concentric）</td><td>縮短，做正功</td><td>三者中最低；速度越快，力量越小</td><td>較高</td></tr>
+        <tr><td>等長（isometric）</td><td>不變</td><td>介於兩者之間</td><td>—</td></tr>
+        <tr><td>離心（eccentric）</td><td>被拉長，做負功</td><td>三者中最高</td><td>較低</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Cheung 等人 2003 年的回顧指出：<b>離心活動造成肌肉微傷害的頻率與嚴重度，高於其他收縮型態</b>，是延遲性肌肉痠痛（DOMS）的主要來源 [1]。同一篇建議，做完會引起強烈 DOMS 的訓練後，接下來 1 到 2 天降低強度與時間；新的離心動作在 1 到 2 週內逐步加入 [1]。</p>
+  <div class="trap"><b>考點：</b>離心收縮 = 力量最大、能量成本最低、最容易痠痛。別因為「最痠」就以為它最耗能。</div>
+
+  <!-- 四、SSC -->
+  <h2 id="ssc">四、伸展縮短循環（SSC）</h2>
+  <p>SSC 是「先被拉長、緊接著縮短」的動作模式，增強式訓練（plyometrics）就是利用它。分三個階段：</p>
+  <ol>
+    <li><b>離心期</b>：肌肉肌腱被快速拉長，儲存彈性能量，並觸發肌梭的牽張反射。</li>
+    <li><b>轉換期（amortization）</b>：從拉長結束到開始縮短之間的短暫停頓。</li>
+    <li><b>向心期</b>：彈性能量與牽張反射一起釋放，產生比單純向心收縮更大的力量。</li>
+  </ol>
+  <p>NSCA 教科書指出：<b>轉換期如果太長，儲存的彈性能量會以熱的形式散失，牽張反射也無法發揮作用</b> [3]。所以增強式訓練的重點是轉換要快。</p>
+  <p>常見的分類用觸地時間 250 毫秒當門檻：<b>小於 250 毫秒是快速 SSC，大於 250 毫秒是慢速 SSC</b>。不過 Ünver 等人 2024 年指出，這個門檻當初怎麼訂出來的，文獻上仍有缺口；他們在跳落測試中找到另一組分界值 [2]。考試照 250 毫秒作答，實務上知道它不是絕對。</p>
+
+  <div class="lab" id="ssc-lab">
+    <div class="lab-tag">互動 3</div>
+    <div class="lab-title">調整觸地時間，看屬於哪一種 SSC</div>
+    <div class="range">
+      <label for="ssc-t">觸地時間</label>
+      <input id="ssc-t" type="range" min="100" max="600" step="10" value="180">
+      <output id="ssc-t-o" for="ssc-t">180 ms</output>
+    </div>
+    <svg viewBox="0 0 340 60" role="img" aria-labelledby="ssc-svg-t">
+      <title id="ssc-svg-t">觸地時間刻度：250 毫秒為快慢 SSC 分界</title>
+      <rect x="10" y="22" width="320" height="14" rx="7" fill="#f6f6f6"/>
+      <rect x="10" y="22" width="96" height="14" rx="7" fill="#fde7dc"/>
+      <line x1="106" y1="14" x2="106" y2="44" stroke="#232323" stroke-width="1.5"/>
+      <text x="106" y="10" font-size="11" text-anchor="middle" fill="#232323">250 ms</text>
+      <text x="10" y="56" font-size="11" fill="#6b6b6b">100</text>
+      <text x="330" y="56" font-size="11" fill="#6b6b6b" text-anchor="end">600 ms</text>
+      <circle id="ssc-dot" cx="61" cy="29" r="9" fill="#c2410c"/>
+    </svg>
+    <div class="readout">
+      <div class="stat"><div class="stat-k">分類</div><div class="stat-v" id="ssc-class">快速 SSC</div></div>
+    </div>
+    <p class="lab-note" id="ssc-note"></p>
+  </div>
+
+  <h3>彈力球 vs. 番茄</h3>
+  <p>增強式訓練教練 Jim Radcliffe 用過一個比喻：<b>落地要像彈力球（super ball），不要像番茄（tomato）</b> [4]。彈力球碰地就彈起；番茄落地就攤平。對應到動作上，就是落地時保持關節穩定、觸地時間短，而不是一路蹲到底、在地上停太久。</p>
+
+  <div class="quiz" data-answer="c">
+    <div class="lab-tag">考題 2</div>
+    <p class="quiz-q">跳遠選手做跳箱落地跳（depth jump），每次落地髖膝都大幅下蹲，觸地時間 0.40 秒。下列分析何者正確？</p>
+    <button type="button" class="opt" data-k="a">(A) 下蹲越深，儲存的彈性能量越多，向心功率會最大。</button>
+    <button type="button" class="opt" data-k="b">(B) 觸地時間長有利於徵召慢肌，屬於理想的「彈力球」落地。</button>
+    <button type="button" class="opt" data-k="c">(C) 0.40 秒超過 250 毫秒，轉換期過長，彈性能量容易散失；可考慮降低跳箱高度，強調落地穩定與短觸地。</button>
+    <button type="button" class="opt" data-k="d">(D) 離心收縮比向心收縮更耗能，所以深蹲緩衝是為了節省能量。</button>
+    <p class="verdict" aria-live="polite"></p>
+    <div class="explain" hidden>
+      <p>0.40 秒（400 毫秒）遠超過 250 毫秒，屬於慢速 SSC。轉換期太長，儲存的彈性能量會以熱散失，牽張反射也無法發揮 [3]，排除 A。</p>
+      <p>大幅下蹲、停留過久，比較像「番茄」而不是「彈力球」，排除 B。離心收縮的能量成本比向心低，D 的生理敘述是錯的。</p>
+    </div>
+  </div>
+
+  <!-- 五、爆發力 -->
+  <h2 id="power">五、爆發力計算：Margaria-Kalamen</h2>
+  <p>功率是單位時間做的功：<span class="formula">P = W ÷ t = F × d ÷ t</span>，單位是瓦特（W）。</p>
+  <p>Margaria-Kalamen 測驗：受測者衝上樓梯、一步跨三階，記錄踩到第 3 階到第 9 階的時間，量這段的垂直高度。計算分三步：</p>
+  <ol>
+    <li><span class="formula">F = 體重（kg）× 9.8</span>，換算成牛頓</li>
+    <li><span class="formula">W = F × 垂直高度（m）</span>，單位焦耳</li>
+    <li><span class="formula">P = W ÷ 時間（s）</span>，單位瓦特</li>
+  </ol>
+
+  <div class="lab" id="mk-lab">
+    <div class="lab-tag">互動 4</div>
+    <div class="lab-title">輸入數字，一步步算出爆發力</div>
+    <div class="fields">
+      <label>體重（公斤）<input id="mk-m" type="number" min="0" step="0.1" value="70" inputmode="decimal"></label>
+      <label>第 3–9 階垂直高度（公尺）<input id="mk-h" type="number" min="0" step="0.01" value="1.05" inputmode="decimal"></label>
+      <label>經過時間（秒）<input id="mk-t" type="number" min="0" step="0.01" value="0.45" inputmode="decimal"></label>
+    </div>
+    <ol class="steps" aria-live="polite">
+      <li id="mk-s1"></li>
+      <li id="mk-s2"></li>
+      <li id="mk-s3"></li>
+    </ol>
+    <p class="lab-note" id="mk-warn"></p>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <div class="lab-tag">考題 3</div>
+    <p class="quiz-q">體重 80 公斤的美式足球員做 Margaria-Kalamen 測驗，第 3 到第 9 階垂直高度 1.20 公尺，經過時間 0.40 秒（g = 9.8 m/s²）。爆發功率約為多少？</p>
+    <button type="button" class="opt" data-k="a">(A) 960 W</button>
+    <button type="button" class="opt" data-k="b">(B) 2352 W</button>
+    <button type="button" class="opt" data-k="c">(C) 1960 W</button>
+    <button type="button" class="opt" data-k="d">(D) 2400 W</button>
+    <p class="verdict" aria-live="polite"></p>
+    <div class="explain" hidden>
+      <p>F = 80 × 9.8 = 784 N；W = 784 × 1.20 = 940.8 J；P = 940.8 ÷ 0.40 = 2352 W。</p>
+      <p>如果忘記乘 9.8，直接算 80 × 1.20 ÷ 0.40，只會得到 240。可以把數字丟進上面的計算器驗算。</p>
+    </div>
+  </div>
+
+  <!-- 翻面卡 -->
+  <h2 id="cards">考前翻面卡</h2>
+  <p>點卡片翻面看答案。</p>
+  <div class="cards">
+    <button type="button" class="card" aria-pressed="false"><span class="card-in"><span class="face front"><span class="q">FLE123 怎麼用？</span><span class="hint">點我翻面</span></span><span class="face back-f">看中間是誰：F 在中間＝一類，L 在中間＝二類，E 在中間＝三類。人體最常見是三類（MA &lt; 1）；提踵是二類（MA &gt; 1）。</span></span></button>
+    <button type="button" class="card" aria-pressed="false"><span class="card-in"><span class="face front"><span class="q">力臂和骨頭長度一樣嗎？</span><span class="hint">點我翻面</span></span><span class="face back-f">不一樣。力臂 = 關節中心到力作用線的垂直距離，d⊥ = 骨長 × sin θ，會隨角度改變。彎舉時前臂水平，阻力力矩最大。</span></span></button>
+    <button type="button" class="card" aria-pressed="false"><span class="card-in"><span class="face front"><span class="q">三種收縮誰最有力、誰最省能？</span><span class="hint">點我翻面</span></span><span class="face back-f">最大力量：離心 &gt; 等長 &gt; 向心。能量成本：離心最低。離心也最容易造成肌肉微傷害與延遲性痠痛。</span></span></button>
+    <button type="button" class="card" aria-pressed="false"><span class="card-in"><span class="face front"><span class="q">SSC 的關鍵是什麼？</span><span class="hint">點我翻面</span></span><span class="face back-f">轉換期要短。太長的話彈性能量以熱散失、牽張反射無法發揮。常用 250 毫秒區分快速與慢速 SSC。</span></span></button>
+    <button type="button" class="card" aria-pressed="false"><span class="card-in"><span class="face front"><span class="q">Margaria-Kalamen 三步驟？</span><span class="hint">點我翻面</span></span><span class="face back-f">F = 體重 × 9.8 → W = F × 高度 → P = W ÷ 時間，單位瓦特。絕對不能漏乘 9.8。</span></span></button>
+  </div>
+
+  <!-- FAQ -->
+  <h2 id="faq">常見問題</h2>
+  <dl class="faq">
+    <dt>人體最常見的是哪一類槓桿？</dt>
+    <dd>三類槓桿。施力點在支點與抗力點之間，機械利益小於 1，肌肉要出比外部阻力更大的力，換到的是更大的末端速度與活動範圍。</dd>
+    <dt>二頭肌彎舉在什麼角度時阻力力矩最大？</dt>
+    <dd>上臂垂直、前臂呈水平（前臂與重力線垂直）時。力臂等於關節中心到力作用線的垂直距離，這時最長，所以阻力力矩最大。</dd>
+    <dt>離心收縮的能量成本比向心收縮高嗎？</dt>
+    <dd>不會，離心收縮的能量成本較低，但能承受較大的力。離心活動造成肌肉微傷害的頻率與嚴重度高於其他收縮型態，也較容易引起延遲性肌肉痠痛 [1]。</dd>
+    <dt>快速與慢速伸展縮短循環怎麼區分？</dt>
+    <dd>常用觸地時間 250 毫秒作為門檻：小於 250 毫秒為快速 SSC，大於為慢速 SSC。不過這個門檻是怎麼訂出來的，文獻上仍有缺口 [2]。</dd>
+    <dt>Margaria-Kalamen 爆發力測驗怎麼計算？</dt>
+    <dd>功率（瓦特）= 體重（公斤）× 9.8 × 第 3 階到第 9 階的垂直高度（公尺）÷ 經過時間（秒）。最常見的錯誤是忘記乘 9.8。</dd>
+  </dl>
+
+  <h2>參考文獻</h2>
+  <ol class="refs">
+    <li>Cheung K, Hume P, Maxwell L. Delayed onset muscle soreness: treatment strategies and performance factors. <i>Sports Med.</i> 2003;33(2):145-64. <a href="https://doi.org/10.2165/00007256-200333020-00005">DOI</a></li>
+    <li>Ünver E, et al. A new approach for classification of stretch-shortening cycle: Beyond 250 ms of ground contact time. <i>J Sports Sci.</i> 2024;42(17):1617-26. <a href="https://doi.org/10.1080/02640414.2024.2403873">DOI</a></li>
+    <li>Potach DH, Chu DA. Program design and technique for plyometric training. In: Haff GG, Triplett NT, eds. <i>Essentials of Strength Training and Conditioning</i>. 4th ed. NSCA; 2015.（內容轉引自 <a href="https://hprc-online.org/physical-fitness/training-performance/use-plyometrics-improve-muscular-power-and-military-fitness">HPRC</a>）</li>
+    <li>Radcliffe 的「彈力球 vs. 番茄」比喻：<a href="https://excelsiorgroup.co.uk/?p=1440">Plyometrics and Agility: Jim Radcliffe</a></li>
+  </ol>
+  <p class="refs">期刊文獻經 PubMed 檢索核對。未標號的內容（槓桿分類、力矩公式、收縮型態比較、Margaria-Kalamen 測驗方法）依 NSCA《Essentials of Strength Training and Conditioning》教科書整理；力矩與功率的數字是依公式計算的示範值。</p>
+
+  <aside class="author" aria-label="關於作者">
+    <p><b>LOLO大叔不聽話</b> · 物理治療師</p>
+    <p>臨床將近二十年，專長是骨科徒手治療、術後復健與運動傷害，目前正在準備 NSCA CSCS 證照。這裡的專業分享以實證為原則，數據都附原始出處。</p>
+    <p><a href="../#about">關於我</a> · <a href="https://www.instagram.com/hi_ptkong/" rel="noopener" target="_blank">Instagram @hi_ptkong</a> · <a href="cscs-endocrine.html">上一篇：CSCS 內分泌適應</a></p>
+  </aside>
+
+  <a class="back" href="../#feed">← 回到所有貼文</a>
+</article>
+
+<script>
+(function () {
+  function $(id) { return document.getElementById(id); }
+  function num(el) { var v = parseFloat(el.value); return isFinite(v) ? v : NaN; }
+  function fmt(v, d) { return v.toLocaleString('zh-TW', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+  /* 互動 1：槓桿 */
+  var LEVERS = {
+    1: { order: 'E – F – L', ma: 'MA 可 >1、=1 或 <1', pos: { e: 40, f: 170, l: 300 },
+         note: '支點在中間，像蹺蹺板。常見例子：頸部伸展抬頭，支點是頭頸交界的關節，抗力是頭的重量，施力是頸後肌群。' },
+    2: { order: 'F – L – E', ma: 'MA > 1（省力）', pos: { f: 40, l: 170, e: 300 },
+         note: '抗力在中間，施力臂比抗力臂長，所以省力。常見例子：站姿提踵，支點在蹠趾關節，抗力是體重，施力是小腿三頭肌透過阿基里斯腱拉起腳跟。人體裡少見。' },
+    3: { order: 'F – E – L', ma: 'MA < 1（費力）', pos: { f: 40, e: 170, l: 300 },
+         note: '施力點在中間，施力臂比抗力臂短，所以費力，但換到末端速度與活動範圍。常見例子：二頭肌彎舉，支點是肘關節，施力是二頭肌附著處，抗力是前臂與啞鈴。人體最常見的槓桿。' }
+  };
+  var lvBtns = document.querySelectorAll('[data-lever]');
+  function setLever(k) {
+    var L = LEVERS[k];
+    $('lv-f').setAttribute('transform', 'translate(' + L.pos.f + ',73)');
+    $('lv-e').setAttribute('transform', 'translate(' + L.pos.e + ',0)');
+    $('lv-l').setAttribute('transform', 'translate(' + L.pos.l + ',0)');
+    $('lv-order').textContent = L.order;
+    $('lv-ma').textContent = L.ma;
+    $('lv-note').textContent = L.note;
+    lvBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lever') === String(k) ? 'true' : 'false'); });
+  }
+  lvBtns.forEach(function (b) { b.addEventListener('click', function () { setLever(b.getAttribute('data-lever')); }); });
+  setLever(3);
+
+  /* 互動 2：力矩 */
+  var EX = 110, EY = 110, PX = 130;
+  function drawTorque() {
+    var deg = num($('tq-angle')), m = num($('tq-mass')), len = num($('tq-len'));
+    $('tq-angle-o').textContent = deg + '°';
+    var r = deg * Math.PI / 180, s = Math.sin(r), c = Math.cos(r);
+    var tx = EX + PX * s, ty = EY + PX * c;
+    $('tq-fore').setAttribute('x2', tx.toFixed(1)); $('tq-fore').setAttribute('y2', ty.toFixed(1));
+    $('tq-db').setAttribute('transform', 'translate(' + tx.toFixed(1) + ',' + ty.toFixed(1) + ') rotate(' + (-deg) + ')');
+    $('tq-grav').setAttribute('x1', tx.toFixed(1)); $('tq-grav').setAttribute('y1', (ty + 12).toFixed(1));
+    $('tq-grav').setAttribute('x2', tx.toFixed(1)); $('tq-grav').setAttribute('y2', '245');
+    $('tq-gravlabel').setAttribute('x', (tx + 6).toFixed(1)); $('tq-gravlabel').setAttribute('y', '242');
+    $('tq-arm').setAttribute('x1', EX); $('tq-arm').setAttribute('y1', '232');
+    $('tq-arm').setAttribute('x2', tx.toFixed(1)); $('tq-arm').setAttribute('y2', '232');
+    $('tq-armlabel').setAttribute('x', ((EX + tx) / 2).toFixed(1)); $('tq-armlabel').setAttribute('y', '226');
+    $('tq-armlabel').style.display = s < 0.08 ? 'none' : '';
+    var ok = isFinite(m) && isFinite(len) && m >= 0 && len >= 0;
+    if (!ok) { $('tq-f').textContent = $('tq-d').textContent = $('tq-t').textContent = '—'; $('tq-note').textContent = '請輸入有效的重量與長度。'; return; }
+    var F = m * 9.8, d = len * s, T = F * d;
+    $('tq-f').textContent = fmt(F, 1) + ' N';
+    $('tq-d').textContent = fmt(d, 3) + ' m';
+    $('tq-t').textContent = fmt(T, 1) + ' N·m';
+    var note;
+    if (deg === 90) note = '前臂水平，力臂等於整條前臂長，阻力力矩最大。';
+    else if (deg < 15) note = '手臂接近伸直下垂，重力線幾乎通過肘關節，力臂很短，阻力力矩很小。';
+    else if (deg > 90) note = '前臂已經過水平，力臂開始變短，阻力力矩下降。';
+    else note = '前臂還沒到水平，越接近 90° 力臂越長。';
+    $('tq-note').textContent = note + '（' + fmt(F, 1) + ' N × ' + fmt(d, 3) + ' m = ' + fmt(T, 1) + ' N·m）';
+  }
+  ['tq-angle', 'tq-mass', 'tq-len'].forEach(function (id) { $(id).addEventListener('input', drawTorque); });
+  drawTorque();
+
+  /* 互動 3：SSC */
+  function drawSSC() {
+    var t = num($('ssc-t'));
+    $('ssc-t-o').textContent = t + ' ms';
+    $('ssc-dot').setAttribute('cx', (10 + (t - 100) / 500 * 320).toFixed(1));
+    var fast = t < 250;
+    $('ssc-class').textContent = fast ? '快速 SSC' : '慢速 SSC';
+    $('ssc-note').textContent = fast
+      ? '觸地時間短於 250 毫秒。轉換快，比較能利用儲存的彈性能量與牽張反射。'
+      : '觸地時間超過 250 毫秒。轉換期越長，儲存的彈性能量越容易以熱散失。';
+  }
+  $('ssc-t').addEventListener('input', drawSSC);
+  drawSSC();
+
+  /* 互動 4：Margaria-Kalamen */
+  function calcMK() {
+    var m = num($('mk-m')), h = num($('mk-h')), t = num($('mk-t'));
+    if (!(m > 0 && h > 0 && t > 0)) {
+      $('mk-s1').textContent = $('mk-s2').textContent = $('mk-s3').textContent = '—';
+      $('mk-warn').textContent = '三個數字都要大於 0。';
+      return;
+    }
+    var F = m * 9.8, W = F * h, P = W / t;
+    $('mk-s1').innerHTML = '步驟 1：F = ' + fmt(m, 1) + ' × 9.8 = <b>' + fmt(F, 1) + ' N</b>';
+    $('mk-s2').innerHTML = '步驟 2：W = ' + fmt(F, 1) + ' × ' + fmt(h, 2) + ' = <b>' + fmt(W, 1) + ' J</b>';
+    $('mk-s3').innerHTML = '步驟 3：P = ' + fmt(W, 1) + ' ÷ ' + fmt(t, 2) + ' = <b>' + fmt(P, 1) + ' W</b>';
+    $('mk-warn').textContent = '如果漏乘 9.8，會算成 ' + fmt(m * h / t, 1) + '，差了將近 10 倍。';
+  }
+  ['mk-m', 'mk-h', 'mk-t'].forEach(function (id) { $(id).addEventListener('input', calcMK); });
+  calcMK();
+
+  /* 考題 */
+  var praise = ['答對了！', '沒錯！', '漂亮！'];
+  document.querySelectorAll('.quiz').forEach(function (q, qi) {
+    var ans = q.getAttribute('data-answer');
+    var opts = q.querySelectorAll('.opt');
+    var verdict = q.querySelector('.verdict');
+    var explain = q.querySelector('.explain');
+    opts.forEach(function (o) {
+      o.addEventListener('click', function () {
+        var k = o.getAttribute('data-k');
+        opts.forEach(function (x) { x.classList.remove('is-right', 'is-wrong'); });
+        if (k === ans) {
+          o.classList.add('is-right');
+          verdict.textContent = praise[qi % praise.length] + '正確答案是 (' + ans.toUpperCase() + ')。';
+          verdict.className = 'verdict ok';
+        } else {
+          o.classList.add('is-wrong');
+          q.querySelector('[data-k="' + ans + '"]').classList.add('is-right');
+          verdict.textContent = '差一點，正確答案是 (' + ans.toUpperCase() + ')。';
+          verdict.className = 'verdict no';
+        }
+        explain.hidden = false;
+      });
+    });
+  });
+
+  /* 翻面卡 */
+  document.querySelectorAll('.card').forEach(function (c) {
+    c.addEventListener('click', function () {
+      c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    });
+  });
+})();
+</script>
+</body>
+</html>

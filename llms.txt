@@ -6,6 +6,7 @@
 
 ## 專業分享
 
+- [CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算](https://slzpt.com/notes/cscs-biomechanics.html)：三類槓桿與機械利益（人體最常見三類槓桿，MA < 1）、力臂隨角度改變（彎舉前臂水平時阻力力矩最大）、離心收縮力量最大但能量成本最低、SSC 轉換期過長彈性能量散失、常用 250 ms 區分快慢 SSC、Margaria-Kalamen 功率 = 體重 × 9.8 × 高度 ÷ 時間；含互動計算器與考題；引用 Cheung 2003、Ünver 2024、NSCA Essentials。
 - [CSCS 內分泌適應重點：阻力訓練與睪固酮、生長激素、皮質醇](https://slzpt.com/notes/cscs-endocrine.html)：阻力訓練後的激素反應整理，包含哪種課表讓生長激素升最多（10RM、休息 1 分鐘）、男女激素反應差異、IGF-1 與皮質醇的角色；引用 Kraemer 1990、Kraemer 1991、Kraemer & Ratamess 2005。
 
 ## 關於
