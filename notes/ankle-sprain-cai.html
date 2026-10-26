@@ -369,10 +369,6 @@ figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 input:focus-visible, .btn:focus-visible, .chk input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-details.aside { border: 1px solid var(--line); border-radius: 8px; padding: 2px 14px; margin: 14px 0; font-size: 14px; color: #3a3a3a; }
-details.aside summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 8px 0; }
-details.aside[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 4px; }
-details.aside p, details.aside li { margin: 6px 0; }
 .faq dt { font-weight: 600; margin-top: 20px; }
 .faq dd { margin: 4px 0 0; }
 .refs { font-size: 13px; color: #555; }
@@ -410,6 +406,7 @@ details.aside p, details.aside li { margin: 6px 0; }
       <li><a href="#rts">重返運動評估：PAASS、ROAST 與 Ankle-GO</a></li>
       <li><a href="#calc">Ankle-GO 互動計分器</a></li>
       <li><a href="#faq">常見問題</a></li>
+      <li><a href="#ottawa">補充：Ottawa 足踝準則</a></li>
     </ol>
   </nav>
 
@@ -426,23 +423,14 @@ details.aside p, details.aside li { margin: 6px 0; }
   </ul>
   <p>美國家庭醫師學會期刊 2025 年的整理補充了幾個實務細節 [16]：</p>
   <ul>
-    <li>受傷後延到 <b>4 到 7 天</b>再檢查，判斷扭傷嚴重度較準確；急性期可用 Ottawa 足踝準則決定要不要照 X 光。</li>
+    <li>受傷後延到 <b>4 到 7 天</b>再檢查，判斷扭傷嚴重度較準確；急性期可用 <a href="#ottawa" id="ottawa-ref">Ottawa 足踝準則</a>決定要不要照 X 光（條文見<a href="#ottawa">文末補充</a>）。</li>
     <li>處理包括保護關節、控制疼痛、<b>外部支撐 5 到 10 天</b>、早期功能性活動，以及針對性的復健運動。</li>
     <li>乙醯胺酚、NSAIDs 與鴉片類止痛藥的止痛效果相當。</li>
     <li>恢復期使用半硬式護踝等外部支撐，搭配 <b>8 到 12 週</b>的神經肌肉復健。</li>
     <li>回到運動後持續功能訓練、運動時繼續使用外部支撐，有助於預防再扭傷。</li>
     <li>恢復不如預期時，應安排 MRI，排除距骨骨折、腓骨肌腱損傷等其他問題。</li>
   </ul>
-    <details class="aside">
-    <summary>延伸閱讀：Ottawa 足踝準則（要不要照 X 光？）</summary>
-    <p>Ottawa 足踝準則（Ottawa Ankle Rules）用來判斷急性踝扭傷後是否需要照 X 光排除骨折 [41]：</p>
-    <ul>
-      <li><b>照踝關節 X 光</b>：踝部疼痛，且外踝或內踝的<b>遠端 6 公分的後緣或踝尖</b>有骨頭壓痛，或受傷當下和就診時都<b>無法走 4 步</b>。</li>
-      <li><b>照足部 X 光</b>：中足疼痛，且<b>舟狀骨</b>或<b>第五蹠骨基部</b>有骨頭壓痛，或受傷當下和就診時都無法走 4 步。</li>
-    </ul>
-    <p>原始驗證研究中，準則對踝部與中足骨折的敏感度都是 100%，估計可減少約三分之一的 X 光檢查 [39]。統合 27 篇研究、15,581 位病人的系統性回顧也顯示敏感度接近 100%，但特異度普通，可減少 30% 到 40% 不必要的 X 光 [40]。也就是說，<b>準則陰性時可以放心排除骨折</b>；準則陽性不代表一定骨折。</p>
-  </details>
-  <p>軟組織傷害的處理原則 PEACE &amp; LOVE 主張急性期避免使用消炎類的處置，以免影響正常修復 [3]。這個架構也不鼓勵冰敷，但目前缺乏高品質研究評估冰敷在其中的效果；已有隨機對照試驗正在比較加或不加冰敷的差異 [17]。</p>
+    <p>軟組織傷害的處理原則 PEACE &amp; LOVE 主張急性期避免使用消炎類的處置，以免影響正常修復 [3]。這個架構也不鼓勵冰敷，但目前缺乏高品質研究評估冰敷在其中的效果；已有隨機對照試驗正在比較加或不加冰敷的差異 [17]。</p>
 
   <!-- 二 -->
   <h2 id="risk">二、哪些人容易變成 CAI，長期會怎樣</h2>
@@ -700,6 +688,16 @@ details.aside p, details.aside li { margin: 6px 0; }
     <dt>SEBT 哪個方向比較差，該優先練什麼？</dt>
     <dd>一篇統合 15 篇隨機試驗的研究發現：前方差，關節鬆動術效果最好；後外差，肌力訓練效果最好；後內差，本體感覺訓練效果最好。 [23]</dd>
   </dl>
+
+  <!-- 補充 -->
+  <h2 id="ottawa">補充：Ottawa 足踝準則</h2>
+  <p>Ottawa 足踝準則（Ottawa Ankle Rules）用來判斷急性踝扭傷後是否需要照 X 光排除骨折 [41]：</p>
+    <ul>
+      <li><b>照踝關節 X 光</b>：踝部疼痛，且外踝或內踝的<b>遠端 6 公分的後緣或踝尖</b>有骨頭壓痛，或受傷當下和就診時都<b>無法走 4 步</b>。</li>
+      <li><b>照足部 X 光</b>：中足疼痛，且<b>舟狀骨</b>或<b>第五蹠骨基部</b>有骨頭壓痛，或受傷當下和就診時都無法走 4 步。</li>
+    </ul>
+    <p>原始驗證研究中，準則對踝部與中足骨折的敏感度都是 100%，估計可減少約三分之一的 X 光檢查 [39]。統合 27 篇研究、15,581 位病人的系統性回顧也顯示敏感度接近 100%，但特異度普通，可減少 30% 到 40% 不必要的 X 光 [40]。也就是說，<b>準則陰性時可以放心排除骨折</b>；準則陽性不代表一定骨折。</p>
+  <p class="cite"><a href="#ottawa-ref">← 回到「急性扭傷怎麼處理」</a></p>
 
   <h2>參考文獻</h2>
   <ol class="refs">
