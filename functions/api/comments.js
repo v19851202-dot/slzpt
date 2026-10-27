@@ -120,7 +120,7 @@ async function aiCheck(env, info, name, body) {
     try {
       const out = await Promise.race([
         env.AI.run(model, input),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 9000))
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), model === AI_MODEL ? 5000 : 4000))
       ]);
       const m = aiText(out).match(/"verdict"\s*:\s*"(ok|spam|offtopic|abuse)"/i);
       if (m) return { verdict: m[1].toLowerCase(), source: model };
@@ -200,7 +200,7 @@ export async function onRequestPost({ request, env }) {
 
   const res = await env.DB.prepare(
     'INSERT INTO comments (page, name, body, created_at, status, reason, ip_hash) VALUES (?, ?, ?, ?, ?, ?, ?)'
-  ).bind(page, name, body, createdAt, status, reason ? reason + ' (' + source + ')' : null, ipHash).run();
+  ).bind(page, name, body, createdAt, status, (reason || 'ok') + ' (' + source + ')', ipHash).run();
 
   if (reason) {
     return json({
