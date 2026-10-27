@@ -114,9 +114,12 @@ async function aiCheck(env, info, name, body) {
   const messages = [{ role: 'system', content: system }, { role: 'user', content: user }];
 
   for (const model of [AI_MODEL, AI_FALLBACK_MODEL]) {
+    const input = { messages, max_tokens: 40, temperature: 0 };
+    // 判斷很簡單，關掉推理模式讓回應快一點
+    if (model === AI_MODEL) input.chat_template_kwargs = { enable_thinking: false };
     try {
       const out = await Promise.race([
-        env.AI.run(model, { messages, max_tokens: 600, temperature: 0 }),
+        env.AI.run(model, input),
         new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 9000))
       ]);
       const m = aiText(out).match(/"verdict"\s*:\s*"(ok|spam|offtopic|abuse)"/i);
