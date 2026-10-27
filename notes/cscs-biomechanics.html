@@ -293,6 +293,40 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
 .author { background: var(--soft); border-radius: 8px; padding: 16px; margin-top: 40px; font-size: 14px; }
 .author p { margin: 2px 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 文獻標記與參考文獻 */
+sup.cref { font-size: .68em; line-height: 0; vertical-align: super; margin-left: 1px; }
+sup.cref a { color: var(--accent); text-decoration: none; padding: 0 2px; border-radius: 3px; font-weight: 600; font-variant-numeric: tabular-nums; }
+sup.cref a:hover, sup.cref a:focus-visible { background: #fff1e6; outline: none; box-shadow: 0 0 0 2px var(--accent); }
+sup.cref.next::before { content: ","; color: var(--muted); }
+html.hide-cites sup.cref { display: none; }
+.cite-toggle { font: inherit; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 6px 14px; min-height: 36px; cursor: pointer; margin: 0 0 8px; }
+.cite-toggle .ct-dot { width: 28px; height: 16px; border-radius: 999px; background: #d4d4d4; position: relative; transition: background .2s; }
+.cite-toggle .ct-dot::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.cite-toggle[aria-pressed="true"] .ct-dot { background: var(--accent); }
+.cite-toggle[aria-pressed="true"] .ct-dot::after { transform: translateX(12px); }
+.cite-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+details.refs-box { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 8px; }
+details.refs-box summary { cursor: pointer; display: flex; align-items: baseline; gap: 10px; padding: 10px 0; min-height: 44px; list-style: none; }
+details.refs-box summary::-webkit-details-marker { display: none; }
+details.refs-box summary::before { content: "▸"; color: var(--muted); }
+details.refs-box[open] summary::before { content: "▾"; }
+.refs-title { font-size: 19px; font-weight: 700; }
+.refs-hint { font-size: 13px; color: var(--muted); }
+details.refs-box[open] .refs-hint { display: none; }
+.refs li:target { background: #fff7ed; border-radius: 4px; }
+#cite-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; justify-content: center; padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); pointer-events: none; }
+#cite-sheet .cs-card { pointer-events: auto; width: 100%; max-width: 640px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.18); padding: 14px 16px 12px; font-size: 14px; line-height: 1.7; transform: translateY(0); transition: transform .2s ease, opacity .2s ease; }
+#cite-sheet[hidden] { display: flex !important; visibility: hidden; }
+#cite-sheet[hidden] .cs-card { transform: translateY(24px); opacity: 0; }
+.cs-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
+.cs-label { font-size: 12px; font-weight: 600; color: var(--accent); }
+.cs-close { font: inherit; font-size: 20px; line-height: 1; border: 0; background: none; color: var(--muted); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; }
+.cs-close:hover, .cs-close:focus-visible { background: var(--soft); outline: none; }
+.cs-body { color: #333; overflow-wrap: anywhere; }
+.cs-body a { color: var(--ink); }
+.cs-all { display: inline-block; margin-top: 8px; font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { #cite-sheet .cs-card, .cite-toggle .ct-dot, .cite-toggle .ct-dot::after { transition: none; } }
 </style>
 </head>
 <body>
@@ -302,6 +336,7 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
   <div class="meta">專業分享 · <time datetime="2026-10-26">2026.10.26</time></div>
   <h1>CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算</h1>
   <p class="byline">作者：<a href="../#about">LOLO大叔不聽話</a>（物理治療師）· 關鍵說法附原始出處</p>
+  <button type="button" class="cite-toggle" aria-pressed="false"><span class="ct-dot" aria-hidden="true"></span>顯示文獻標記</button>
   <p class="lead">生物力學是 CSCS 最需要「看得到」的章節。這篇把重點做成可以動手玩的工具：切換槓桿、拖曳關節角度、輸入數字算爆發力，最後用考題和翻面卡自我檢查。</p>
 
   <section class="summary" aria-labelledby="sum-title">
@@ -434,7 +469,7 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
       </tbody>
     </table>
   </div>
-  <p>Cheung 等人 2003 年的回顧指出：<b>離心活動造成肌肉微傷害的頻率與嚴重度，高於其他收縮型態</b>，是延遲性肌肉痠痛（DOMS）的主要來源 [1]。同一篇建議，做完會引起強烈 DOMS 的訓練後，接下來 1 到 2 天降低強度與時間；新的離心動作在 1 到 2 週內逐步加入 [1]。</p>
+  <p>Cheung 等人 2003 年的回顧指出：<b>離心活動造成肌肉微傷害的頻率與嚴重度，高於其他收縮型態</b>，是延遲性肌肉痠痛（DOMS）的主要來源<sup class="cref"><a href="#ref-1" data-ref="1" aria-label="文獻 1">1</a></sup>。同一篇建議，做完會引起強烈 DOMS 的訓練後，接下來 1 到 2 天降低強度與時間；新的離心動作在 1 到 2 週內逐步加入<sup class="cref"><a href="#ref-1" data-ref="1" aria-label="文獻 1">1</a></sup>。</p>
   <div class="trap"><b>考點：</b>離心收縮 = 力量最大、能量成本最低、最容易痠痛。別因為「最痠」就以為它最耗能。</div>
 
   <!-- 四、SSC -->
@@ -445,9 +480,9 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
     <li><b>轉換期（amortization）</b>：從拉長結束到開始縮短之間的短暫停頓。</li>
     <li><b>向心期</b>：彈性能量與牽張反射一起釋放，產生比單純向心收縮更大的力量。</li>
   </ol>
-  <p>NSCA 教科書指出：<b>轉換期如果太長，儲存的彈性能量會以熱的形式散失，牽張反射也無法發揮作用</b> [3]。所以增強式訓練的重點是轉換要快。</p>
-  <p>常見的分類用觸地時間 250 毫秒當門檻：<b>小於 250 毫秒是快速 SSC，大於 250 毫秒是慢速 SSC</b>。不過 Ünver 等人 2024 年指出，這個門檻當初怎麼訂出來的，文獻上仍有缺口；他們在跳落測試中找到另一組分界值 [2]。考試照 250 毫秒作答，實務上知道它不是絕對。</p>
-  <p>針對<b>跳深（depth jump）這類高衝擊的衝擊法（shock method）</b>，標準更嚴格。《High-Powered Plyometrics》第 1 章引用 Siff 與 Verkhoshansky（1996）：在需要高衝擊、高強度或高發力率的動作中，<b>耦合時間超過約 0.15 秒，就不算典型的衝擊法增強式訓練</b> [5]。</p>
+  <p>NSCA 教科書指出：<b>轉換期如果太長，儲存的彈性能量會以熱的形式散失，牽張反射也無法發揮作用</b><sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>。所以增強式訓練的重點是轉換要快。</p>
+  <p>常見的分類用觸地時間 250 毫秒當門檻：<b>小於 250 毫秒是快速 SSC，大於 250 毫秒是慢速 SSC</b>。不過 Ünver 等人 2024 年指出，這個門檻當初怎麼訂出來的，文獻上仍有缺口；他們在跳落測試中找到另一組分界值<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。考試照 250 毫秒作答，實務上知道它不是絕對。</p>
+  <p>針對<b>跳深（depth jump）這類高衝擊的衝擊法（shock method）</b>，標準更嚴格。《High-Powered Plyometrics》第 1 章引用 Siff 與 Verkhoshansky（1996）：在需要高衝擊、高強度或高發力率的動作中，<b>耦合時間超過約 0.15 秒，就不算典型的衝擊法增強式訓練</b><sup class="cref"><a href="#ref-5" data-ref="5" aria-label="文獻 5">5</a></sup>。</p>
   <div class="trap"><b>考點：</b>一般快速 SSC 看 250 毫秒；跳深這類衝擊法看 0.15 秒（150 毫秒）。</div>
 
   <div class="lab" id="ssc-lab">
@@ -477,11 +512,11 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
   </div>
 
   <h3>彈力球 vs. 番茄</h3>
-  <p>增強式訓練教練 Jim Radcliffe 用過一個比喻：<b>落地要像彈力球（super ball），不要像番茄（tomato）</b> [4]。彈力球碰地就彈起；番茄落地就攤平。對應到動作上，就是落地時保持關節穩定、觸地時間短，而不是一路蹲到底、在地上停太久。</p>
+  <p>增強式訓練教練 Jim Radcliffe 用過一個比喻：<b>落地要像彈力球（super ball），不要像番茄（tomato）</b><sup class="cref"><a href="#ref-4" data-ref="4" aria-label="文獻 4">4</a></sup>。彈力球碰地就彈起；番茄落地就攤平。對應到動作上，就是落地時保持關節穩定、觸地時間短，而不是一路蹲到底、在地上停太久。</p>
 
   <h3>增強式訓練之間要休息多久？</h3>
-  <p>NSCA《Essentials of Strength Training and Conditioning》第 18 章的增強式課表設計建議：<b>兩次增強式訓練之間恢復 48 到 72 小時</b>，常見頻率是每週 2 到 3 次 [3]。</p>
-  <p>《High-Powered Plyometrics》第 1 章也有相同方向的建議：高壓力的訓練每週只做兩次，每次爆發與反應性訓練之間，至少安排兩天（48 到 72 小時）的積極恢復 [5]。</p>
+  <p>NSCA《Essentials of Strength Training and Conditioning》第 18 章的增強式課表設計建議：<b>兩次增強式訓練之間恢復 48 到 72 小時</b>，常見頻率是每週 2 到 3 次<sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>。</p>
+  <p>《High-Powered Plyometrics》第 1 章也有相同方向的建議：高壓力的訓練每週只做兩次，每次爆發與反應性訓練之間，至少安排兩天（48 到 72 小時）的積極恢復<sup class="cref"><a href="#ref-5" data-ref="5" aria-label="文獻 5">5</a></sup>。</p>
 
   <div class="quiz" data-answer="c">
     <div class="lab-tag">考題 2</div>
@@ -492,7 +527,7 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
     <button type="button" class="opt" data-k="d">(D) 離心收縮比向心收縮更耗能，所以深蹲緩衝是為了節省能量。</button>
     <p class="verdict" aria-live="polite"></p>
     <div class="explain" hidden>
-      <p>0.40 秒（400 毫秒）遠超過 250 毫秒，屬於慢速 SSC。轉換期太長，儲存的彈性能量會以熱散失，牽張反射也無法發揮 [3]，排除 A。跳深屬於衝擊法，標準是耦合時間約 0.15 秒以內 [5]，0.40 秒差得更遠。</p>
+      <p>0.40 秒（400 毫秒）遠超過 250 毫秒，屬於慢速 SSC。轉換期太長，儲存的彈性能量會以熱散失，牽張反射也無法發揮<sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>，排除 A。跳深屬於衝擊法，標準是耦合時間約 0.15 秒以內<sup class="cref"><a href="#ref-5" data-ref="5" aria-label="文獻 5">5</a></sup>，0.40 秒差得更遠。</p>
       <p>大幅下蹲、停留過久，比較像「番茄」而不是「彈力球」，排除 B。離心收縮的能量成本比向心低，D 的生理敘述是錯的。</p>
     </div>
   </div>
@@ -556,24 +591,26 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
     <dt>二頭肌彎舉在什麼角度時阻力力矩最大？</dt>
     <dd>上臂垂直、前臂呈水平（前臂與重力線垂直）時。力臂等於關節中心到力作用線的垂直距離，這時最長，所以阻力力矩最大。</dd>
     <dt>離心收縮的能量成本比向心收縮高嗎？</dt>
-    <dd>不會，離心收縮的能量成本較低，但能承受較大的力。離心活動造成肌肉微傷害的頻率與嚴重度高於其他收縮型態，也較容易引起延遲性肌肉痠痛 [1]。</dd>
+    <dd>不會，離心收縮的能量成本較低，但能承受較大的力。離心活動造成肌肉微傷害的頻率與嚴重度高於其他收縮型態，也較容易引起延遲性肌肉痠痛<sup class="cref"><a href="#ref-1" data-ref="1" aria-label="文獻 1">1</a></sup>。</dd>
     <dt>快速與慢速伸展縮短循環怎麼區分？</dt>
-    <dd>常用觸地時間 250 毫秒作為門檻：小於 250 毫秒為快速 SSC，大於為慢速 SSC。不過這個門檻是怎麼訂出來的，文獻上仍有缺口 [2]。</dd>
+    <dd>常用觸地時間 250 毫秒作為門檻：小於 250 毫秒為快速 SSC，大於為慢速 SSC。不過這個門檻是怎麼訂出來的，文獻上仍有缺口<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</dd>
     <dt>Margaria-Kalamen 爆發力測驗怎麼計算？</dt>
     <dd>功率（瓦特）= 體重（公斤）× 9.8 × 第 3 階到第 9 階的垂直高度（公尺）÷ 經過時間（秒）。最常見的錯誤是忘記乘 9.8。</dd>
     <dt>增強式訓練兩次之間要休息多久？</dt>
     <dd>NSCA《Essentials》第 18 章建議兩次增強式訓練之間恢復 48 到 72 小時，常見頻率每週 2 到 3 次。跳深這類衝擊法，耦合時間的標準是約 0.15 秒以內。</dd>
   </dl>
 
-  <h2>參考文獻</h2>
-  <ol class="refs">
-    <li>Cheung K, Hume P, Maxwell L. Delayed onset muscle soreness: treatment strategies and performance factors. <i>Sports Med.</i> 2003;33(2):145-64. <a href="https://doi.org/10.2165/00007256-200333020-00005">DOI</a></li>
-    <li>Ünver E, et al. A new approach for classification of stretch-shortening cycle: Beyond 250 ms of ground contact time. <i>J Sports Sci.</i> 2024;42(17):1617-26. <a href="https://doi.org/10.1080/02640414.2024.2403873">DOI</a></li>
-    <li>Potach DH, Chu DA. Program design and technique for plyometric training. In: Haff GG, Triplett NT, eds. <i>Essentials of Strength Training and Conditioning</i>. 4th ed. NSCA; 2015.第 18 章。（轉換期內容另見 <a href="https://hprc-online.org/physical-fitness/training-performance/use-plyometrics-improve-muscular-power-and-military-fitness">HPRC</a> 引用）</li>
-    <li>Radcliffe 的「彈力球 vs. 番茄」比喻：<a href="https://excelsiorgroup.co.uk/?p=1440">Plyometrics and Agility: Jim Radcliffe</a></li>
-    <li>Radcliffe JC, Farentinos RC. <i>High-Powered Plyometrics</i>. Human Kinetics. 第 1 章〈Principles of Plyometric Training〉（含其引用的 Siff &amp; Verkhoshansky 1996）。</li>
+  <details class="refs-box" id="refs">
+    <summary><span class="refs-title">參考文獻（5 篇）</span><span class="refs-hint">點開查看</span></summary>
+    <ol class="refs">
+    <li id="ref-1">Cheung K, Hume P, Maxwell L. Delayed onset muscle soreness: treatment strategies and performance factors. <i>Sports Med.</i> 2003;33(2):145-64. <a href="https://doi.org/10.2165/00007256-200333020-00005">DOI</a></li>
+    <li id="ref-2">Ünver E, et al. A new approach for classification of stretch-shortening cycle: Beyond 250 ms of ground contact time. <i>J Sports Sci.</i> 2024;42(17):1617-26. <a href="https://doi.org/10.1080/02640414.2024.2403873">DOI</a></li>
+    <li id="ref-3">Potach DH, Chu DA. Program design and technique for plyometric training. In: Haff GG, Triplett NT, eds. <i>Essentials of Strength Training and Conditioning</i>. 4th ed. NSCA; 2015.第 18 章。（轉換期內容另見 <a href="https://hprc-online.org/physical-fitness/training-performance/use-plyometrics-improve-muscular-power-and-military-fitness">HPRC</a> 引用）</li>
+    <li id="ref-4">Radcliffe 的「彈力球 vs. 番茄」比喻：<a href="https://excelsiorgroup.co.uk/?p=1440">Plyometrics and Agility: Jim Radcliffe</a></li>
+    <li id="ref-5">Radcliffe JC, Farentinos RC. <i>High-Powered Plyometrics</i>. Human Kinetics. 第 1 章〈Principles of Plyometric Training〉（含其引用的 Siff &amp; Verkhoshansky 1996）。</li>
   </ol>
-  <p class="refs">期刊文獻經 PubMed 檢索核對。未標號的內容（槓桿分類、力矩公式、收縮型態比較、Margaria-Kalamen 測驗方法）依 NSCA《Essentials of Strength Training and Conditioning》教科書整理；力矩與功率的數字是依公式計算的示範值。教科書引用標示章節而非頁碼，因不同版次、印刷的頁碼會有差異。</p>
+    <p class="refs">期刊文獻經 PubMed 檢索核對。未標號的內容（槓桿分類、力矩公式、收縮型態比較、Margaria-Kalamen 測驗方法）依 NSCA《Essentials of Strength Training and Conditioning》教科書整理；力矩與功率的數字是依公式計算的示範值。教科書引用標示章節而非頁碼，因不同版次、印刷的頁碼會有差異。</p>
+  </details>
 
   <aside class="author" aria-label="關於作者">
     <p><b>LOLO大叔不聽話</b> · 物理治療師</p>
@@ -583,6 +620,65 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
 
   <a class="back" href="../#feed">← 回到所有貼文</a>
 </article>
+<div id="cite-sheet" hidden role="dialog" aria-modal="false" aria-labelledby="cs-label">
+  <div class="cs-card">
+    <div class="cs-head"><span class="cs-label" id="cs-label">文獻</span><button type="button" class="cs-close" aria-label="關閉">×</button></div>
+    <div class="cs-body"></div>
+    <a class="cs-all" href="#refs">查看全部參考文獻 →</a>
+  </div>
+</div>
+<script>
+window.rvInitCite = function initCite() {
+  var KEY = 'slzpt-show-cites';
+  var root = document.documentElement;
+  var sheet = document.getElementById('cite-sheet');
+  var body = sheet.querySelector('.cs-body');
+  var label = sheet.querySelector('.cs-label');
+  var lastTrigger = null;
+  function getPref() { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
+  function setPref(v) { try { localStorage.setItem(KEY, v ? '1' : '0'); } catch (e) {} }
+  function apply(show) {
+    root.classList.toggle('hide-cites', !show);
+    var btns = document.querySelectorAll('.cite-toggle');
+    for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', show ? 'true' : 'false');
+  }
+  function openRefs() { var d = document.getElementById('refs'); if (d) d.open = true; }
+  function closeSheet() {
+    sheet.hidden = true;
+    if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
+  }
+  function openSheet(n, trigger) {
+    var li = document.getElementById('ref-' + n);
+    if (!li) return;
+    body.innerHTML = li.innerHTML;
+    label.textContent = '文獻 ' + n;
+    lastTrigger = trigger;
+    sheet.hidden = false;
+    sheet.querySelector('.cs-close').focus();
+  }
+  function onClick(e) {
+    var t = e.target;
+    var ref = t.closest && t.closest('sup.cref a');
+    if (ref) { e.preventDefault(); openSheet(ref.getAttribute('data-ref'), ref); return; }
+    var tog = t.closest && t.closest('.cite-toggle');
+    if (tog) { var show = tog.getAttribute('aria-pressed') !== 'true'; apply(show); setPref(show); return; }
+    if (t.closest && t.closest('.cs-close')) { closeSheet(); return; }
+    if (t.closest && t.closest('.cs-all')) { openRefs(); closeSheet(); return; }
+    if (!sheet.hidden && !(t.closest && t.closest('.cs-card'))) closeSheet();
+  }
+  function onKey(e) { if (e.key === 'Escape' && !sheet.hidden) closeSheet(); }
+  function onHash() { if (/^#ref-\d+$/.test(location.hash) || location.hash === '#refs') openRefs(); }
+  if (!window.__citeBound) {
+    document.addEventListener('click', onClick);
+    document.addEventListener('keydown', onKey);
+    window.addEventListener('hashchange', onHash);
+    window.__citeBound = true;
+  }
+  apply(getPref());
+  onHash();
+};
+window.rvInitCite();
+</script>
 
 <script>
 (function () {
