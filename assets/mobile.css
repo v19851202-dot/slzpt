@@ -32,20 +32,24 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
   .search input { font-size: 1rem; min-height: 48px; padding: 12px 14px; }
   .side > .muted:not(:first-child), .side > .wx-credit { display: none !important; }
 
-  .top-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 16px; align-items: center; }
-  .top-row .ticker { grid-column: 1 / -1; font-size: clamp(1rem, 0.85rem + 0.8vw, 1.125rem); line-height: 1.6; height: 3.2em; }
-  .clock { gap: 4px; }
-  .fd { width: 18px; height: 28px; font-size: 18px; }
-  .fd .h span { height: 28px; line-height: 28px; }
-  .fc .sep { gap: 5px; }
-  .clock-date { font-size: 0.8125rem; }
-  .wx { gap: 8px; justify-content: flex-end; }
-  .wx-guy { width: 44px; height: 44px; }
-  .wx-text { font-size: 0.8125rem; line-height: 1.45; }
-  .wx-now { font-size: 0.9375rem; }
+  /* 跑馬燈、時鐘、天氣在手機上縮小成輔助資訊，不搶貼文的風采 */
+  .top-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 12px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #eeeeee; }
+  .top-row .ticker { grid-column: 1 / -1; font-size: 0.875rem; line-height: 1.55; height: 3.1em; color: #555555; }
+  .clock { gap: 2px; }
+  .fc { gap: 2px; }
+  .fd { width: 14px; height: 21px; font-size: 13px; font-weight: 500; }
+  .fd .h span { height: 21px; line-height: 21px; }
+  .fd .t { border-radius: 3px 3px 0 0; }
+  .fd .b { border-radius: 0 0 3px 3px; }
+  .fc .sep { gap: 4px; padding: 0 1px; }
+  .fc .sep i { width: 2px; height: 2px; }
+  .clock-date { font-size: 0.75rem; }
+  .wx { gap: 6px; justify-content: flex-end; }
+  .wx-guy { width: 30px; height: 30px; }
+  .wx-text { font-size: 0.75rem; line-height: 1.4; }
+  .wx-now { font-size: 0.8125rem; }
 
-
-  .tabs { margin: 20px 0 8px; gap: 0 4px; flex-wrap: nowrap; }
+  .tabs { margin: 8px 0 8px; gap: 0 4px; flex-wrap: nowrap; }
   .tab { font-size: 1rem; padding: 10px 12px; min-height: 44px; min-width: 44px; }
   .tab:first-child { padding-left: 0; }
   /* 卡片自動換行：每張至少 150px，空間夠就自動多排（RWD 指南的 auto-fill ＋ minmax 寫法） */
