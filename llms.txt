@@ -7,6 +7,7 @@
 ## 專業分享
 
 - [踝關節扭傷與慢性踝關節不穩定：從急性處置到重返運動](https://slzpt.com/notes/ankle-sprain-cai.html)：外側踝扭傷約四成發展成慢性踝關節不穩定（Chronic Ankle Instability, CAI）；急性期以護踝或貼紮加運動治療為主、NSAIDs 謹慎使用；CAI 復健以平衡＋肌力＋徒手治療或乾針效果最好，可依 SEBT 前方、後外、後內缺損分別優先關節鬆動、肌力、本體感覺訓練；解剖性韌帶手術後平均 12.45 週重返運動；Ankle-GO 重返運動評分（滿分 25，傷後 2 個月低於 8 分較難回到傷前水準）含互動計分器；補充 Ottawa 足踝準則與 SEBT 測驗方法；引用 44 篇文獻（Vuurberg 2018、Yang 2025 JOSPT、Picot 2023、Smith 2021 PAASS 等）。
+- [CSCS 身體系統互動筆記：肌絲滑動、肌纖維類型與運動單位徵召](https://slzpt.com/notes/cscs-body-systems.html)：肌小節 HAZIM 口訣（收縮時 H 區與 I 帶變短、A 帶不變、Z 線靠近）、Ca²⁺–肌鈣蛋白–原肌凝蛋白的收縮開關、Type I／IIa／IIx 比較（阻力訓練最一致的是 IIx 轉向 IIa，Type I 與 II 互換仍有爭議）、大小原則（彈震式收縮徵召順序不變、門檻降低，無一致的選擇性快縮徵召）、徵召與放電頻率；含互動圖與考題；引用 Huxley & Niedergerke 1954、Huxley & Hanson 1954、Henneman 1957、Desmedt & Godaux 1977/1978、Staron 1994、Wilson 2012、Enoka & Duchateau 2017、NSCA Essentials 第 1 章。
 - [CSCS 生物力學互動教學：槓桿、力矩、SSC 與爆發力計算](https://slzpt.com/notes/cscs-biomechanics.html)：三類槓桿與機械利益（人體最常見三類槓桿，MA < 1）、力臂隨角度改變（彎舉前臂水平時阻力力矩最大）、離心收縮力量最大但能量成本最低、SSC 轉換期過長彈性能量散失、常用 250 ms 區分快慢 SSC、跳深等衝擊法耦合時間約 0.15 秒以內、兩次增強式訓練間隔 48–72 小時、Margaria-Kalamen 功率 = 體重 × 9.8 × 高度 ÷ 時間；含互動計算器與考題；引用 Cheung 2003、Ünver 2024、NSCA Essentials 第 18 章、Radcliffe & Farentinos《High-Powered Plyometrics》。
 - [CSCS 內分泌適應重點：阻力訓練與睪固酮、生長激素、皮質醇](https://slzpt.com/notes/cscs-endocrine.html)：阻力訓練後的激素反應整理，包含哪種課表讓生長激素升最多（10RM、休息 1 分鐘）、男女激素反應差異、IGF-1 與皮質醇的角色；引用 Kraemer 1990、Kraemer 1991、Kraemer & Ratamess 2005。
 
