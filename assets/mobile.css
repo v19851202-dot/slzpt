@@ -44,9 +44,6 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
   .wx-text { font-size: 0.8125rem; line-height: 1.45; }
   .wx-now { font-size: 0.9375rem; }
 
-  .market { margin-top: 18px; max-width: none; }
-  .market-head h2 { font-size: 0.875rem; }
-  .market-note { font-size: 0.8125rem; }
 
   .tabs { margin: 20px 0 8px; gap: 0 4px; flex-wrap: nowrap; }
   .tab { font-size: 1rem; padding: 10px 12px; min-height: 44px; min-width: 44px; }
