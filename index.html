@@ -97,6 +97,7 @@ main { flex: 999 1 560px; min-width: 0; }
 @keyframes flip-top { to { transform: rotateX(-90deg); } }
 @keyframes flip-bottom { to { transform: rotateX(0deg); } }
 @media (prefers-reduced-motion: reduce) { .fd .ft, .fd .fb { display: none; } }
+.widgets { display: contents; }
 .top-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
 .top-row .ticker { flex: 1 1 320px; min-width: 0; }
 .wx { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
@@ -211,6 +212,7 @@ main { flex: 999 1 560px; min-width: 0; }
   </aside>
 
   <main>
+    <div class="widgets">
     <div class="top-row">
       <section class="ticker" aria-label="大叔語錄">
         <!-- 跑馬燈：句庫在最下方的 LINES，每天依日期自動換一組，每 4 秒換下一句 -->
@@ -243,6 +245,7 @@ main { flex: 999 1 560px; min-width: 0; }
         </script>
       </div>
     </section>
+    </div>
 
     <div id="feed" class="tabs" role="toolbar" aria-label="篩選貼文">
       <button class="tab" type="button" data-filter="all" aria-pressed="true">全部</button>

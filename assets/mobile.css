@@ -25,26 +25,38 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
   .side nav { display: none; }
   .side > .muted:not(:first-child), .side > .wx-credit { display: none !important; }
 
-  .top-row { display: grid; grid-template-columns: auto 1fr; gap: 16px 14px; align-items: center; }
-  .top-row .ticker { grid-column: 1 / -1; font-size: 18px; line-height: 1.6; height: 3.2em; }
-  .clock { gap: 4px; }
-  .fd { width: 18px; height: 28px; font-size: 18px; }
-  .fd .h span { height: 28px; line-height: 28px; }
-  .fc .sep { gap: 5px; }
+  /* 首頁手機版兩欄：左欄跑馬燈、時鐘、天氣、台股（捲動時固定），右欄貼文。左欄 160px 是台股報價不被截斷的最小寬度 */
+  .wrap > main { display: grid; grid-template-columns: 160px minmax(0, 1fr); column-gap: 12px; align-items: start; }
+  .widgets { display: flex; flex-direction: column; gap: 18px; grid-column: 1; grid-row: 1 / span 3; position: sticky; top: 12px; }
+  .tabs { grid-column: 2; grid-row: 1; }
+  .grid { grid-column: 2; grid-row: 2; }
+  .empty { grid-column: 2; grid-row: 3; }
+  .about, .m-foot { grid-column: 1 / -1; }
+
+  .top-row { display: flex; flex-direction: column; align-items: stretch; gap: 18px; }
+  .top-row .ticker { flex: none; font-size: 15px; line-height: 1.55; height: 4.65em; }
+  .clock { align-items: flex-start; gap: 4px; }
+  .fc { gap: 2px; }
+  .fd { width: 17px; height: 26px; font-size: 16px; }
+  .fd .h span { height: 26px; line-height: 26px; }
+  .fc .sep { gap: 4px; padding: 0 1px; }
   .clock-date { font-size: 13px; }
-  .wx { gap: 6px; justify-content: flex-end; }
-  .wx-guy { width: 48px; height: 48px; }
-  .wx-text { font-size: 13px; line-height: 1.45; }
+  .wx { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .wx-guy { width: 44px; height: 44px; }
+  .wx-text { font-size: 13px; line-height: 1.5; }
   .wx-now { font-size: 15px; }
 
-  .market { margin-top: 20px; }
-  .market-head { font-size: 14px; }
-  .market-note { font-size: 13px; }
+  .market { margin: 0; max-width: none; }
+  .market-head { display: block; }
+  .market-head h2 { font-size: 14px; }
+  .market-note { display: block; font-size: 13px; line-height: 1.4; margin-top: 2px; }
 
-  .tabs { margin: 24px 0 8px; gap: 0 4px; }
-  .tab { font-size: 16px; padding: 10px 14px; min-height: 44px; min-width: 44px; }
+  .tabs { margin: 0 0 8px; gap: 0; }
+  .tab { font-size: 15px; padding: 10px 8px; min-height: 44px; min-width: 44px; }
   .tab:first-child { padding-left: 0; }
-  .grid { gap: 10px; }
+  .tabs { flex-wrap: nowrap; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .grid > .notepost { overflow: visible; gap: 10px; } /* 內容放不下時可以長高，不截字 */
   .meta { font-size: 13px; }
   .note-title { font-size: 17px; line-height: 1.4; }
   .note-more { font-size: 14px; }
@@ -103,4 +115,9 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
   .engage-head { font-size: 15px; }
   .engage-head time { font-size: 13px; }
   .engage-text { font-size: 16px; }
+}
+
+@media (max-width: 374px) {
+  .tab { font-size: 14px; padding: 10px 5px; }
+  .wrap > main { column-gap: 10px; }
 }
