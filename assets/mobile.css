@@ -118,3 +118,18 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
 @media (max-width: 374px) {
   .tab { padding: 10px 8px; }
 }
+
+/* ===== 文章表格：手機上每一列變成一張卡片，不用左右滑（欄名來自每格的 data-label） ===== */
+@media (max-width: 600px) {
+  .table-wrap { overflow: visible; margin: 12px 0 16px; }
+  .table-wrap table { min-width: 0; width: 100%; border-collapse: separate; }
+  .table-wrap thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .table-wrap tbody, .table-wrap tr { display: block; }
+  .table-wrap tr { border: 1px solid #e6e6e6; border-radius: 10px; padding: 10px 14px; margin: 0 0 10px; background: #fff; }
+  .table-wrap td { display: grid; grid-template-columns: minmax(5.5em, 36%) minmax(0, 1fr); gap: 10px; border: 0; padding: 6px 0; font-size: 15px; line-height: 1.6; }
+  .table-wrap td::before { content: attr(data-label); color: #6b6b6b; font-size: 13px; font-weight: 600; line-height: 1.7; }
+  .table-wrap td:first-child { display: block; font-size: 16px; font-weight: 700; padding: 0 0 8px; margin-bottom: 4px; border-bottom: 1px solid #eeeeee; }
+  .table-wrap td:first-child::before { content: none; }
+  .table-wrap td:not([data-label])::before { content: none; }
+  .table-wrap td:not([data-label]) { display: block; }
+}
