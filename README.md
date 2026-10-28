@@ -8,7 +8,10 @@
 ```html
 <link rel="stylesheet" href="/assets/engage.css">
 <script src="/assets/engage.js" defer></script>
+<link rel="stylesheet" href="/assets/mobile.css">
 ```
+
+`/assets/mobile.css` 是手機版閱讀優化（600px 以下生效）：內文 17px、次要文字至少 13px、按鈕與連結至少 44px 高、輸入框 16px。要放在 `</head>` 前**最後一行**，才能蓋過頁面內的樣式。
 
 - 區塊會自動放在最後一個「← 回到所有貼文」連結前面；文章要有 `<link rel="canonical">`，留言才能對應到那一篇。
 - 留言 API：`functions/api/comments.js`；資料表：`db/schema.sql`。
