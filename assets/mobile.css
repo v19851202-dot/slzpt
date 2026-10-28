@@ -2,7 +2,8 @@
    依據：
    - WCAG 2.2 2.5.5：重要按鈕與連結的點擊範圍至少 44×44 CSS px；2.5.8 最低 24×24（句子中的連結除外）
    - GOV.UK Design System：內文 19px、最小文字 16px（手機與電腦相同）
-   本站採：內文 17px、次要文字至少 13–14px、按鈕與連結至少 44px 高、輸入框 16px（避免 iPhone 點輸入框時自動放大）
+   - RWD 指南：手機單欄由上而下、600px 斷點、clamp() 讓字體隨螢幕平滑縮放、卡片用 auto-fill＋minmax 自動換行、手機用漢堡選單
+   本站採：內文約 17px（clamp 16–18px）、次要文字至少 13px、按鈕與連結至少 44px 高、輸入框 16px（避免 iPhone 點輸入框時自動放大）
    每個頁面都在 </head> 前最後載入：<link rel="stylesheet" href="/assets/mobile.css"> */
 
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -10,67 +11,63 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
 
 @media (max-width: 600px) {
 
-  /* ===== 首頁 ===== */
-  .wrap { gap: 20px; padding: 16px 16px 40px; }
-  .side { flex: 1 1 100%; max-width: none; display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 12px 12px; font-size: 15px; }
+  /* ===== 首頁（單欄，由上而下：頁首 → 跑馬燈 → 時鐘／天氣 → 台股 → 貼文） ===== */
+  .wrap { gap: 16px; padding: 12px 16px 40px; }
+  .side { flex: 1 1 100%; max-width: none; display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 12px; font-size: 0.9375rem; }
   .side .avatar { width: 44px; height: 44px; grid-column: 1; grid-row: 1; }
   .side > div:nth-of-type(2) { grid-column: 2; grid-row: 1; min-width: 0; line-height: 1.45; }
-  .side > div:nth-of-type(2) > div:first-child { font-size: 17px !important; }
-  .side .muted { font-size: 14px; }
-  .side .ig { grid-column: 3; grid-row: 1; justify-content: center; min-width: 44px; min-height: 44px; }
-  .side .ig span { display: none; }
-  .side .ig svg { width: 24px; height: 24px; }
-  .side .search { grid-column: 1 / -1; grid-row: 2; }
-  .search input { font-size: 16px; min-height: 48px; padding: 12px 14px; }
-  .side nav { display: none; }
+  .side > div:nth-of-type(2) > div:first-child { font-size: 1.0625rem !important; }
+  .side .muted { font-size: 0.875rem; }
+  .menu-btn { display: inline-flex; grid-column: 3; grid-row: 1; }
+  /* 漢堡選單：搜尋、關於、IG 預設收起，點 ≡ 才展開（展開時把下面內容往下推，不蓋住） */
+  .side .search, .side nav, .side .ig { display: none; grid-column: 1 / -1; }
+  .side.is-open .search { display: block; grid-row: 2; }
+  .side.is-open nav { display: flex; flex-direction: column; grid-row: 3; }
+  .side.is-open .ig { display: inline-flex; grid-row: 4; }
+  .side nav a { min-height: 44px; display: flex; align-items: center; font-size: 1rem; padding: 0; }
+  .side .ig { min-height: 44px; align-items: center; font-size: 1rem; padding: 0; }
+  .side.is-open .ig { display: flex; }
+  .side.is-open { row-gap: 4px; }
+  .side.is-open .search { margin: 8px 0 4px; }
+  .search input { font-size: 1rem; min-height: 48px; padding: 12px 14px; }
   .side > .muted:not(:first-child), .side > .wx-credit { display: none !important; }
 
-  /* 首頁手機版兩欄：左欄跑馬燈、時鐘、天氣、台股（捲動時固定），右欄貼文。左欄 160px 是台股報價不被截斷的最小寬度 */
-  .wrap > main { display: grid; grid-template-columns: 160px minmax(0, 1fr); column-gap: 12px; align-items: start; }
-  .widgets { display: flex; flex-direction: column; gap: 18px; grid-column: 1; grid-row: 1 / span 3; position: sticky; top: 12px; }
-  .tabs { grid-column: 2; grid-row: 1; }
-  .grid { grid-column: 2; grid-row: 2; }
-  .empty { grid-column: 2; grid-row: 3; }
-  .about, .m-foot { grid-column: 1 / -1; }
-
-  .top-row { display: flex; flex-direction: column; align-items: stretch; gap: 18px; }
-  .top-row .ticker { flex: none; font-size: 15px; line-height: 1.55; height: 4.65em; }
-  .clock { align-items: flex-start; gap: 4px; }
-  .fc { gap: 2px; }
-  .fd { width: 17px; height: 26px; font-size: 16px; }
-  .fd .h span { height: 26px; line-height: 26px; }
-  .fc .sep { gap: 4px; padding: 0 1px; }
-  .clock-date { font-size: 13px; }
-  .wx { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .top-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 16px; align-items: center; }
+  .top-row .ticker { grid-column: 1 / -1; font-size: clamp(1rem, 0.85rem + 0.8vw, 1.125rem); line-height: 1.6; height: 3.2em; }
+  .clock { gap: 4px; }
+  .fd { width: 18px; height: 28px; font-size: 18px; }
+  .fd .h span { height: 28px; line-height: 28px; }
+  .fc .sep { gap: 5px; }
+  .clock-date { font-size: 0.8125rem; }
+  .wx { gap: 8px; justify-content: flex-end; }
   .wx-guy { width: 44px; height: 44px; }
-  .wx-text { font-size: 13px; line-height: 1.5; }
-  .wx-now { font-size: 15px; }
+  .wx-text { font-size: 0.8125rem; line-height: 1.45; }
+  .wx-now { font-size: 0.9375rem; }
 
-  .market { margin: 0; max-width: none; }
-  .market-head { display: block; }
-  .market-head h2 { font-size: 14px; }
-  .market-note { display: block; font-size: 13px; line-height: 1.4; margin-top: 2px; }
+  .market { margin-top: 18px; max-width: none; }
+  .market-head h2 { font-size: 0.875rem; }
+  .market-note { font-size: 0.8125rem; }
 
-  .tabs { margin: 0 0 8px; gap: 0; }
-  .tab { font-size: 15px; padding: 10px 8px; min-height: 44px; min-width: 44px; }
+  .tabs { margin: 20px 0 8px; gap: 0 4px; flex-wrap: nowrap; }
+  .tab { font-size: 1rem; padding: 10px 12px; min-height: 44px; min-width: 44px; }
   .tab:first-child { padding-left: 0; }
-  .tabs { flex-wrap: nowrap; }
-  .grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-  .grid > .notepost { overflow: visible; gap: 10px; } /* 內容放不下時可以長高，不截字 */
-  .meta { font-size: 13px; }
-  .note-title { font-size: 17px; line-height: 1.4; }
-  .note-more { font-size: 14px; }
-  .imgpost .post-text { font-size: 14px; }
+  /* 卡片自動換行：每張至少 150px，空間夠就自動多排（RWD 指南的 auto-fill ＋ minmax 寫法） */
+  .grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 10px; }
+  .grid > .notepost { overflow: visible; } /* 內容放不下時可以長高，不截字 */
+  .meta { font-size: 0.8125rem; }
+  .note-title { font-size: 1.0625rem; line-height: 1.4; }
+  .note-more { font-size: 0.875rem; }
+  .imgpost .post-text { font-size: 0.875rem; }
   .about { margin-top: 56px; padding-top: 24px; }
-  .about h2 { font-size: 18px; }
-  .about p, .about li { font-size: 17px; line-height: 1.85; }
+  .about h2 { font-size: 1.125rem; }
+  .about p, .about li { font-size: clamp(1rem, 0.85rem + 0.8vw, 1.125rem); line-height: 1.85; }
   .m-foot { display: flex !important; }
-  .post-dialog .post-text { font-size: 17px; }
+  .post-dialog .post-text { font-size: 1.0625rem; }
 
   /* ===== 文章頁 ===== */
-  .page { font-size: 17px; line-height: 1.85; padding-top: 16px; }
-  .page h1 { font-size: 25px; line-height: 1.45; }
-  .page h2 { font-size: 21px; line-height: 1.45; margin-top: 40px; }
+  .page { font-size: clamp(1rem, 0.85rem + 0.8vw, 1.125rem); line-height: 1.85; padding-top: 16px; }
+  .page h1 { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 1.75rem); line-height: 1.45; }
+  .page h2 { font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.375rem); line-height: 1.45; margin-top: 40px; }
   .page h3 { font-size: 18px; line-height: 1.5; }
   .page h4 { font-size: 17px; }
   .back { font-size: 15px; display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
@@ -118,6 +115,5 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
 }
 
 @media (max-width: 374px) {
-  .tab { font-size: 14px; padding: 10px 5px; }
-  .wrap > main { column-gap: 10px; }
+  .tab { padding: 10px 8px; }
 }
