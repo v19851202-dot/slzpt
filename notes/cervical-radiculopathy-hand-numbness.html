@@ -402,6 +402,28 @@ details.refs-box[open] .refs-hint { display: none; }
 .rf-result[data-level="ok"] { border-color: #15803d; background: #f0fdf4; }
 .rf-result[data-level="ok"] b { color: #15803d; }
 .lab-sub { font-size: 13px; color: var(--muted); margin: -6px 0 12px; }
+.derm-wrap { display: grid; grid-template-columns: minmax(0, 280px) 1fr; gap: 16px; align-items: start; }
+@media (max-width: 600px) { .derm-wrap { grid-template-columns: 1fr; } }
+.lab svg.derm-svg { max-width: 280px; margin: 0 auto; }
+.derm path { stroke: #ffffff; stroke-width: 2; cursor: pointer; transition: fill .15s; }
+.derm text { font-size: 13px; font-weight: 700; fill: #3a3a3a; pointer-events: none; }
+.derm:focus { outline: none; }
+.derm:focus-visible path { stroke: var(--ink); stroke-width: 2.5; }
+.derm[data-k="c5"] path { fill: #fde4cf; } .derm[data-k="c5"].on path { fill: #f59e0b; }
+.derm[data-k="c6"] path { fill: #dbeafe; } .derm[data-k="c6"].on path { fill: #3b82f6; }
+.derm[data-k="c7"] path { fill: #dcfce7; } .derm[data-k="c7"].on path { fill: #22c55e; }
+.derm[data-k="c8"] path { fill: #ede9fe; } .derm[data-k="c8"].on path { fill: #8b5cf6; }
+.derm[data-k="t1"] path { fill: #fce7f3; } .derm[data-k="t1"].on path { fill: #ec4899; }
+.derm.na path { fill: #eeeeee; } .derm.na.on path { fill: #a3a3a3; }
+.derm.on text { fill: #ffffff; }
+.derm:hover path { filter: brightness(.95); }
+.dl-side, .dl-top { font-size: 12px; fill: var(--muted); }
+.median { display: none; pointer-events: none; }
+.median path { fill: none; stroke: #232323; stroke-width: 2.2; stroke-dasharray: 5 4; }
+.show-median .median { display: inline; }
+.derm-side .btn { margin-top: 12px; }
+.derm-side .btn[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.derm-side .cite { margin-top: 10px; }
 .nm-out { background: var(--soft); border-radius: 10px; padding: 14px 16px; font-size: 15px; line-height: 1.7; min-height: 56px; }
 .nm-out > b { display: block; font-size: 17px; margin-bottom: 4px; }
 .nm-out .nm-also { margin-top: 6px; font-size: 14px; color: #3a3a3a; }
@@ -479,16 +501,55 @@ details.refs-box[open] .refs-hint { display: none; }
   <h2 id="map">互動：麻在哪裡？</h2>
   <div class="lab" id="nm-lab">
     <div class="lab-tag">互動</div>
-    <div class="lab-title">點選最麻的位置，看看可能和哪條神經有關</div>
+    <div class="lab-title">皮節圖：點手臂上最麻的位置</div>
     <p class="lab-sub">只是整理上面的典型分布，不能用來自我診斷。</p>
-    <div class="seg" role="group" aria-label="麻的位置">
-      <button type="button" data-k="arm" aria-pressed="false">上臂外側</button>
-      <button type="button" data-k="thumb" aria-pressed="false">拇指、食指</button>
-      <button type="button" data-k="middle" aria-pressed="false">中指</button>
-      <button type="button" data-k="little" aria-pressed="false">無名指、小指</button>
-      <button type="button" data-k="ulnarfa" aria-pressed="false">前臂靠小指側</button>
+    <div class="derm-wrap">
+      <svg class="derm-svg" viewBox="0 0 320 545" role="group" aria-label="右手臂皮節示意圖，手掌面朝前，拇指在左" xmlns="http://www.w3.org/2000/svg">
+        <text class="dl-side" x="24" y="244">拇指側</text>
+        <text class="dl-side" x="252" y="244">小指側</text>
+        <text class="dl-top" x="160" y="13" text-anchor="middle">肩膀</text>
+        <g class="derm" data-k="c5" tabindex="0" role="button" aria-label="上臂外側（C5）">
+          <path d="M115 34 Q138 22 160 21 L160 172 L118 172 Z"/>
+          <text x="139" y="102" text-anchor="middle">C5</text>
+        </g>
+        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="上臂內側（表格未列出）">
+          <path d="M160 21 Q184 22 205 34 L202 172 L160 172 Z"/>
+        </g>
+        <g class="derm" data-k="c6" tabindex="0" role="button" aria-label="前臂拇指側、拇指、食指（C6）">
+          <path d="M118 172 L160 172 L160 300 L124 300 Q119 236 118 172 Z"/>
+          <path d="M118 312 Q86 322 72 360 Q64 386 80 394 Q96 400 104 378 L114 352 Z"/>
+          <path d="M114 392 L136 392 L136 486 Q125 500 114 486 Z"/>
+          <text x="140" y="240" text-anchor="middle">C6</text>
+        </g>
+        <g class="derm" data-k="t1" tabindex="0" role="button" aria-label="前臂小指側（T1）">
+          <path d="M160 172 L202 172 Q200 236 196 300 L160 300 Z"/>
+          <text x="180" y="240" text-anchor="middle">T1</text>
+        </g>
+        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="手掌（表格未列出）">
+          <path d="M124 300 L196 300 Q210 340 209 392 L113 392 Q110 340 124 300 Z"/>
+        </g>
+        <g class="derm" data-k="c7" tabindex="0" role="button" aria-label="中指（C7）">
+          <path d="M139 392 L161 392 L161 500 Q150 514 139 500 Z"/>
+          <text x="150" y="532" text-anchor="middle">C7</text>
+        </g>
+        <g class="derm" data-k="c8" tabindex="0" role="button" aria-label="無名指、小指（C8）">
+          <path d="M164 392 L186 392 L186 490 Q175 504 164 490 Z"/>
+          <path d="M189 392 L209 392 L209 466 Q199 478 189 466 Z"/>
+          <text x="188" y="524" text-anchor="middle">C8</text>
+        </g>
+        <g class="median" aria-hidden="true">
+          <path d="M118 312 Q86 322 72 360 Q64 386 80 394 Q96 400 104 378 L114 352 Z"/>
+          <path d="M114 392 L136 392 L136 486 Q125 500 114 486 Z"/>
+          <path d="M139 392 L161 392 L161 500 Q150 514 139 500 Z"/>
+          <path d="M164 392 L175 392 L175 503 Q169 499 164 490 Z"/>
+        </g>
+      </svg>
+      <div class="derm-side">
+        <div class="nm-out" id="nm-out" aria-live="polite"></div>
+        <button type="button" class="btn" id="nm-median" aria-pressed="false">疊上腕隧道（正中神經）的範圍</button>
+        <p class="cite">示意圖依 Iyer 2016 的表格繪製<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>；腕隧道範圍依 Wipperman 2016<sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>。實際界線因人而異，灰色是表格沒有列出的區域。</p>
+      </div>
     </div>
-    <div class="nm-out" id="nm-out" aria-live="polite"></div>
   </div>
 
   <!-- Q2 -->
@@ -702,20 +763,35 @@ window.rvInitCalc = function () {
   if (!lab) return;
   var out = document.getElementById('nm-out');
   var D = {
-    arm: ['第 5 頸神經（C5）', '典型分布是上臂外側；可能合併手臂往側邊抬變無力、二頭肌反射變弱。', ''],
-    thumb: ['第 6 頸神經（C6）', '典型分布是前臂靠拇指那側、拇指和食指；可能合併彎手肘、手腕往上翹變無力。', '也要考慮<b>腕隧道症候群</b>：正中神經的麻在手掌面的拇指、食指、中指和無名指靠拇指那半邊。'],
-    middle: ['第 7 頸神經（C7）', '典型分布是中指；可能合併伸直手肘、手腕往下彎變無力、三頭肌反射變弱。C7 是最常受影響的神經根。', '也要考慮<b>腕隧道症候群</b>：中指也在正中神經的範圍內。'],
-    little: ['第 8 頸神經（C8）', '典型分布是無名指和小指；可能合併手指彎曲（握）變無力。', '也要考慮<b>手肘或其他地方的尺神經受壓</b>。'],
-    ulnarfa: ['第 1 胸神經（T1）', '典型分布是前臂靠小指那側；可能合併手部小肌肉無力。', '']
+    c5: ['第 5 頸神經（C5）', '典型分布是上臂外側；可能合併手臂往側邊抬變無力、二頭肌反射變弱。', ''],
+    c6: ['第 6 頸神經（C6）', '典型分布是前臂靠拇指那側、拇指和食指；可能合併彎手肘、手腕往上翹變無力，肱橈肌反射變弱。', '也要考慮<b>腕隧道症候群</b>：正中神經的麻在手掌面的拇指、食指、中指和無名指靠拇指那半邊。'],
+    c7: ['第 7 頸神經（C7）', '典型分布是中指；可能合併伸直手肘、手腕往下彎變無力、三頭肌反射變弱。C7 是最常受影響的神經根。', '也要考慮<b>腕隧道症候群</b>：中指也在正中神經的範圍內。'],
+    c8: ['第 8 頸神經（C8）', '典型分布是無名指和小指；可能合併手指彎曲（握）變無力。', '也要考慮<b>手肘或其他地方的尺神經受壓</b>。'],
+    t1: ['第 1 胸神經（T1）', '典型分布是前臂靠小指那側；可能合併手部小肌肉無力。', ''],
+    na: ['表格沒有列出這一區', '文中引用的回顧表格，沒有把這個區域列為 C5 到 T1 的典型分布。', '']
   };
-  var btns = lab.querySelectorAll('.seg button');
+  var regs = lab.querySelectorAll('.derm');
+  var med = document.getElementById('nm-median');
+  var svg = lab.querySelector('.derm-svg');
   function show(k) {
-    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-k') === k ? 'true' : 'false'); });
-    if (!k) { out.innerHTML = '點上面的位置看對照。'; return; }
+    regs.forEach(function (r) {
+      var on = r.getAttribute('data-k') === k;
+      r.classList.toggle('on', on);
+      r.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    if (!k) { out.innerHTML = '<b>點手臂上的位置</b>看看它對應哪一條神經根。'; return; }
     var d = D[k];
-    out.innerHTML = '<b>' + d[0] + '</b>' + d[1] + (d[2] ? '<div class="nm-also">' + d[2] + '</div>' : '') + '<div class="nm-also">每個人的分布會有重疊，請由醫療人員評估。</div>';
+    out.innerHTML = '<b>' + d[0] + '</b>' + d[1] + (d[2] ? '<div class="nm-also">' + d[2] + '</div>' : '') + (k !== 'na' ? '<div class="nm-also">每個人的分布會有重疊，請由醫療人員評估。</div>' : '');
   }
-  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-k')); }); });
+  regs.forEach(function (r) {
+    r.addEventListener('click', function () { show(r.getAttribute('data-k')); });
+    r.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(r.getAttribute('data-k')); } });
+  });
+  med.addEventListener('click', function () {
+    var on = med.getAttribute('aria-pressed') !== 'true';
+    med.setAttribute('aria-pressed', on ? 'true' : 'false');
+    svg.classList.toggle('show-median', on);
+  });
   show(null);
 };
 window.rvInitCalc();
