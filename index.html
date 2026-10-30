@@ -150,6 +150,18 @@ main { flex: 999 1 560px; min-width: 0; }
 .tabs { display: flex; flex-wrap: wrap; gap: 0 20px; margin: 48px 0 8px; }
 .tab { font: inherit; font-size: 13px; background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer; color: #767676; }
 .tab:hover, .tab[aria-pressed="true"] { color: #232323; }
+.tab .caret { display: inline-block; margin-left: 3px; font-size: 9px; vertical-align: 1px; transition: transform .2s ease; }
+.tab[aria-pressed="true"] .caret { transform: rotate(180deg); }
+.subtabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; }
+.subtabs[hidden] { display: none !important; }
+.subtab { font: inherit; font-size: 12px; color: #6b6b6b; background: #f4f4f4; border: 1px solid transparent; border-radius: 999px; padding: 6px 12px; min-height: 32px; cursor: pointer; animation: sub-in .2s ease both; }
+.subtab:hover { color: #232323; background: #ececec; }
+.subtab[aria-pressed="true"] { color: #ffffff; background: #232323; }
+.subtab:focus-visible, .tab:focus-visible { outline: 2px solid #232323; outline-offset: 2px; }
+.subtab .n { margin-left: 4px; opacity: .6; font-variant-numeric: tabular-nums; }
+@keyframes sub-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .subtab { animation: none; } .tab .caret { transition: none; } }
+@media (max-width: 600px) { .subtabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px 12px; padding: 0 16px; } .subtabs::-webkit-scrollbar { display: none; } .subtab { flex: 0 0 auto; min-height: 36px; } }
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .tile { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; padding: 16px; }
 .imgpost { background: #ffffff; border: 1px solid #e6e6e6; gap: 10px; cursor: pointer; }
@@ -248,12 +260,13 @@ main { flex: 999 1 560px; min-width: 0; }
 
     <div id="feed" class="tabs" role="toolbar" aria-label="篩選貼文">
       <button class="tab" type="button" data-filter="all" aria-pressed="true">全部</button>
-      <button class="tab" type="button" data-filter="mood" aria-pressed="false">心情</button>
-      <button class="tab" type="button" data-filter="note" aria-pressed="false">專業分享</button>
+      <button class="tab" type="button" data-filter="mood" aria-pressed="false">心情<span class="caret" aria-hidden="true">▾</span></button>
+      <button class="tab" type="button" data-filter="note" aria-pressed="false">專業分享<span class="caret" aria-hidden="true">▾</span></button>
     </div>
+    <div class="subtabs" role="toolbar" aria-label="細項分類" hidden></div>
 
     <div class="grid">
-      <!-- 新貼文放在最上面。data-cat：mood = 心情、note = 專業分享 -->
+      <!-- 新貼文放在最上面。data-cat：mood = 心情、note = 專業分享。細項會依標題與摘要自動分類（規則在下方 CATS）；要指定細項就加 data-sub="代號"。 -->
       <article class="tile imgpost" data-cat="mood" tabindex="0" role="button" aria-haspopup="dialog" aria-label="打開完整貼文">
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIi8+CiAgPCEtLSBmbG9vciAtLT4KICA8cGF0aCBkPSJNNDAgMjY4IEgzNjAiLz4KICA8IS0tIGxlZnQgcGVyc29uOiBjbGllbnQsIHRhbGtpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iMTEyIiByPSIxOCIvPgogIDxwYXRoIGQ9Ik0xMTAgMTMwIFYyMDAiLz4KICA8cGF0aCBkPSJNMTEwIDIwMCBMOTQgMjY2Ii8+CiAgPHBhdGggZD0iTTExMCAyMDAgTDEyNiAyNjYiLz4KICA8cGF0aCBkPSJNMTEwIDE0OCBMODQgMTc2Ii8+CiAgPCEtLSBhcm0gZ2VzdHVyaW5nIHRvd2FyZCBidWJibGUgLS0+CiAgPHBhdGggZD0iTTExMCAxNDggTDEzOCAxMzIgTDE1MCAxMTYiLz4KICA8IS0tIG1vdXRoIG9wZW4gLS0+CiAgPHBhdGggZD0iTTExOCAxMTcgUTEyMiAxMjAgMTE4IDEyMyIvPgogIDwhLS0gc3BlZWNoIGJ1YmJsZSAtLT4KICA8cmVjdCB4PSIxNDYiIHk9IjIwIiB3aWR0aD0iMTI2IiBoZWlnaHQ9IjY4IiByeD0iMjQiLz4KICA8cGF0aCBkPSJNMTY2IDg4IEwxMjYgMTAyIEwxODYgODgiIGZpbGw9IiNmZmZmZmYiLz4KICA8cGF0aCBkPSJNMTY3IDg3IEgxODUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPCEtLSBjcmFja2VkIHZlcnRlYnJhZSBpbnNpZGUgYnViYmxlIC0tPgogIDxyZWN0IHg9IjE2OCIgeT0iMzQiIHdpZHRoPSI0NCIgaGVpZ2h0PSIxMCIgcng9IjQiLz4KICA8cmVjdCB4PSIxNjgiIHk9IjQ5IiB3aWR0aD0iNDQiIGhlaWdodD0iMTAiIHJ4PSI0Ii8+CiAgPHJlY3QgeD0iMTY4IiB5PSI2NCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjEwIiByeD0iNCIvPgogIDxwYXRoIGQ9Ik0xOTAgMzAgTDE4NCA0MCBMMTk0IDUwIEwxODYgNjAgTDE5NiA3MCBMMTg4IDgwIiBzdHJva2U9IiNjMjQxMGMiIHN0cm9rZS13aWR0aD0iMi40Ii8+CiAgPHBhdGggZD0iTTIyMCA0MCBMMjMwIDM0Ii8+CiAgPHBhdGggZD0iTTIyMiA1NiBIMjM0Ii8+CiAgPHBhdGggZD0iTTIyMCA3MiBMMjMwIDc4Ii8+CiAgPCEtLSByaWdodCBwZXJzb246IHRoZXJhcGlzdCwgaGFuZCBvbiBmb3JlaGVhZCAtLT4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIxMTIiIHI9IjE4Ii8+CiAgPHBhdGggZD0iTTMwMCAxMzAgVjIwMCIvPgogIDxwYXRoIGQ9Ik0zMDAgMjAwIEwyODQgMjY2Ii8+CiAgPHBhdGggZD0iTTMwMCAyMDAgTDMxNiAyNjYiLz4KICA8IS0tIGFybSB0byBmb3JlaGVhZCAoZmFjZXBhbG0pIC0tPgogIDxwYXRoIGQ9Ik0zMDAgMTQ4IEwyNzYgMTMyIEwyODggMTA0Ii8+CiAgPCEtLSBvdGhlciBhcm0gb24gaGlwIC0tPgogIDxwYXRoIGQ9Ik0zMDAgMTUwIEwzMjQgMTcwIEwzMTIgMTg2Ii8+CiAgPCEtLSBmbGF0IG1vdXRoIC0tPgogIDxwYXRoIGQ9Ik0yOTYgMTIwIEgzMDYiLz4KICA8IS0tIHF1ZXN0aW9uIG1hcmtzIC0tPgogIDx0ZXh0IHg9IjMwMCIgeT0iODAiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyMzIzMjMiIHN0cm9rZT0ibm9uZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Pz8/PC90ZXh0PgogIDwhLS0gc3dlYXQgZHJvcCAtLT4KICA8cGF0aCBkPSJNMzIyIDk4IFEzMjYgMTA2IDMyMiAxMTAgUTMxOCAxMDYgMzIyIDk4IFoiLz4KPC9zdmc+Cg==" alt="線條人插圖：客人轉述教練說脊椎會裂掉，對話框裡畫著裂開的脊椎；旁邊的治療師扶著額頭，頭上三個問號">
         <div>
@@ -341,31 +354,128 @@ main { flex: 999 1 560px; min-width: 0; }
 </div>
 <script>
 (function () {
+  // ===== 分類設定 =====
+  // 大分類：mood = 心情、note = 專業分享。
+  // 細項：依貼文的標題與摘要文字比對關鍵字（標 first 的先比，其餘由上往下），第一個符合的就是它的細項；都不符合就歸到最後一項。
+  // 陣列順序也是細項按鈕的顯示順序。
+  // 想新增細項，在對應的陣列加一行 { id, name, re } 即可；要強制指定，在貼文加 data-sub="id"。
+  var CATS = {
+    note: [
+      { id: 'postop',   name: '術後復健',    re: /術後|開刀|手術|置換|重建/ },
+      { id: 'spine',    name: '頸肩・背痛',  re: /肩頸|頸部|頸椎|脖子|落枕|背痛|下背|腰痛|腰椎|脊椎|椎間盤|坐骨/ },
+      { id: 'upper',    name: '肩・肘・手',  re: /肩膀|肩關節|五十肩|旋轉肌|手肘|網球肘|高爾夫球肘|手腕|腕隧道|手指|板機指|媽媽手/ },
+      { id: 'lower',    name: '髖・膝・踝',  re: /髖|膝|十字韌帶|半月板|踝|腳跟|足底|阿基里斯|跟腱|小腿|大腿|鼠蹊|跑者/ },
+      { id: 'training', name: '運動訓練',    re: /肌力|阻力訓練|重訓|訓練|體能|ACSM|NSCA|有氧|伸展|暖身/i },
+      { id: 'cscs',     name: 'CSCS 筆記',   re: /CSCS/i, first: true },
+      { id: 'other',    name: '其他',        re: null }
+    ],
+    mood: [
+      { id: 'ride',     name: '騎車',        re: /騎車|單車|公路車|自行車|車友|踩踏/ },
+      { id: 'outdoor',  name: '爬山・露營',  re: /爬山|登山|健行|百岳|露營|山屋|步道/ },
+      { id: 'work',     name: '工作日常',    re: /客人|個案|病人|教練|治療|診所|居家|臨床/ },
+      { id: 'life',     name: '生活碎念',    re: null }
+    ]
+  };
+
   var tabs = document.querySelectorAll('.tab');
+  var subbar = document.querySelector('.subtabs');
   var posts = document.querySelectorAll('.grid > [data-cat]');
   var empty = document.querySelector('.empty');
   var q = document.getElementById('q');
-  var current = 'all';
+  var current = 'all', currentSub = 'all';
+
+  function textOf(p) {
+    var t = p.querySelector('.note-title, .post-text');
+    var d = p.querySelector('.note-sub');
+    return (t ? t.textContent : '') + ' ' + (d ? d.textContent : '');
+  }
+  function find(cat, id) {
+    var list = CATS[cat] || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    return null;
+  }
+  // 自動分類，並把細項名稱補進日期前面
+  posts.forEach(function (p) {
+    var cat = p.getAttribute('data-cat'), list = CATS[cat];
+    if (!list) return;
+    var sub = find(cat, p.getAttribute('data-sub'));
+    if (!sub) {
+      var txt = textOf(p);
+      var order = list.filter(function (c) { return c.first; }).concat(list.filter(function (c) { return !c.first; }));
+      for (var i = 0; i < order.length; i++) {
+        if (!order[i].re || order[i].re.test(txt)) { sub = order[i]; break; }
+      }
+    }
+    p.setAttribute('data-sub', sub.id);
+    var meta = p.querySelector('.meta');
+    if (meta && meta.textContent.indexOf(sub.name) < 0) {
+      meta.textContent = meta.textContent.replace(' · ', ' · ' + sub.name + ' · ');
+    }
+  });
+
+  function buildSubs(cat) {
+    subbar.innerHTML = '';
+    var list = CATS[cat];
+    if (!list) { subbar.hidden = true; return; }
+    var items = [{ id: 'all', name: '全部' }];
+    var total = 0;
+    list.forEach(function (c) {
+      var n = document.querySelectorAll('.grid > [data-cat="' + cat + '"][data-sub="' + c.id + '"]').length;
+      total += n;
+      if (n) items.push({ id: c.id, name: c.name, n: n });
+    });
+    items[0].n = total;
+    items.forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'subtab';
+      b.setAttribute('data-sub', c.id);
+      b.setAttribute('aria-pressed', c.id === currentSub ? 'true' : 'false');
+      b.innerHTML = '';
+      b.appendChild(document.createTextNode(c.name));
+      var n = document.createElement('span'); n.className = 'n'; n.textContent = c.n;
+      b.appendChild(n);
+      b.addEventListener('click', function () { currentSub = c.id; apply(current); });
+      subbar.appendChild(b);
+    });
+    subbar.hidden = items.length < 3; // 只有一個細項時不必顯示
+  }
+
   function apply(filter) {
+    if (filter !== current) currentSub = 'all';
     current = filter;
     var term = q.value.trim().toLowerCase();
     var shown = 0;
     posts.forEach(function (p) {
       var on = (filter === 'all' || p.getAttribute('data-cat') === filter) &&
+        (currentSub === 'all' || p.getAttribute('data-sub') === currentSub) &&
         (!term || p.textContent.toLowerCase().indexOf(term) >= 0);
       p.hidden = !on;
       if (on) shown++;
     });
     tabs.forEach(function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-filter') === filter ? 'true' : 'false'); });
-    empty.textContent = term ? '找不到「' + q.value.trim() + '」相關的貼文。' : '還沒有貼文。';
+    buildSubs(filter);
+    empty.textContent = term ? '找不到「' + q.value.trim() + '」相關的貼文。' : '這個分類還沒有貼文。';
     empty.hidden = shown > 0;
+    try {
+      var h = filter === 'all' ? '' : '#' + filter + (currentSub !== 'all' ? '/' + currentSub : '');
+      if (location.hash !== h && (h || location.hash.match(/^#(mood|note)/))) history.replaceState(null, '', h || location.pathname + location.search);
+    } catch (e) {}
   }
   q.addEventListener('input', function () {
     apply(current);
     if (q.value.trim()) document.getElementById('feed').scrollIntoView({ block: 'nearest' });
   });
-  tabs.forEach(function (t) { t.addEventListener('click', function () { apply(t.getAttribute('data-filter')); }); });
-  apply('all');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var f = t.getAttribute('data-filter');
+      // 再點一次已選的大分類 = 收起細項、回到全部
+      apply(f === current && f !== 'all' ? 'all' : f);
+    });
+  });
+  // 網址可直接指定分類，例如 slzpt.com/#note/spine
+  var m = location.hash.match(/^#(mood|note)(?:\/([\w-]+))?$/);
+  if (m) { current = m[1]; currentSub = (m[2] && find(m[1], m[2])) ? m[2] : 'all'; apply(m[1]); }
+  else apply('all');
 })();
 (function () {
   // ===== 跑馬燈句庫：每天依日期挑 8 句，想加句子就加在這裡 =====
