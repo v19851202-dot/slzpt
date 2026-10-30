@@ -12,14 +12,14 @@
 <meta property="og:site_name" content="LOLO大叔不聽話">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:title" content="手會麻，是頸椎壓到神經嗎？怎麼分辨、會不會好、要不要開刀">
-<meta property="og:description" content="頸神經根病變怎麼分辨、會不會自己好、物理治療有沒有用、什麼時候才需要開刀。附「麻在哪裡」互動對照。">
+<meta property="og:description" content="頸神經根病變怎麼分辨、會不會自己好、物理治療有沒有用、什麼時候才需要開刀。附上半身皮節互動圖。">
 <meta property="og:url" content="https://slzpt.com/notes/cervical-radiculopathy-hand-numbness.html">
 <meta property="article:published_time" content="2026-10-31">
 <meta property="article:modified_time" content="2026-10-31">
 <meta property="article:section" content="專業分享">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手會麻，是頸椎壓到神經嗎？怎麼分辨、會不會好、要不要開刀">
-<meta name="twitter:description" content="頸神經根病變怎麼分辨、會不會自己好、物理治療有沒有用、什麼時候才需要開刀。附「麻在哪裡」互動對照。">
+<meta name="twitter:description" content="頸神經根病變怎麼分辨、會不會自己好、物理治療有沒有用、什麼時候才需要開刀。附上半身皮節互動圖。">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -148,6 +148,16 @@
     },
     {
      "@type": "ScholarlyArticle",
+     "name": "An evidence-based approach to human dermatomes",
+     "isPartOf": {
+      "@type": "Periodical",
+      "name": "Clin Anat"
+     },
+     "datePublished": "2008",
+     "url": "https://doi.org/10.1002/ca.20636"
+    },
+    {
+     "@type": "ScholarlyArticle",
      "name": "Nonoperative management of cervical radiculopathy",
      "isPartOf": {
       "@type": "Periodical",
@@ -165,6 +175,16 @@
      },
      "datePublished": "2026",
      "url": "https://doi.org/10.1186/s12891-026-09551-0"
+    },
+    {
+     "@type": "ScholarlyArticle",
+     "name": "International Standards for Neurological Classification of Spinal Cord Injury: revised 2019",
+     "isPartOf": {
+      "@type": "Periodical",
+      "name": "Top Spinal Cord Inj Rehabil"
+     },
+     "datePublished": "2021",
+     "url": "https://doi.org/10.46292/sci2702-1"
     },
     {
      "@type": "ScholarlyArticle",
@@ -402,31 +422,49 @@ details.refs-box[open] .refs-hint { display: none; }
 .rf-result[data-level="ok"] { border-color: #15803d; background: #f0fdf4; }
 .rf-result[data-level="ok"] b { color: #15803d; }
 .lab-sub { font-size: 13px; color: var(--muted); margin: -6px 0 12px; }
-.derm-wrap { display: grid; grid-template-columns: minmax(0, 280px) 1fr; gap: 16px; align-items: start; }
-@media (max-width: 600px) { .derm-wrap { grid-template-columns: 1fr; } }
-.lab svg.derm-svg { max-width: 280px; margin: 0 auto; }
-.derm path { stroke: #ffffff; stroke-width: 2; cursor: pointer; transition: fill .15s; }
-.derm text { font-size: 13px; font-weight: 700; fill: #3a3a3a; pointer-events: none; }
-.derm:focus { outline: none; }
-.derm:focus-visible path { stroke: var(--ink); stroke-width: 2.5; }
+.derm-wrap { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 20px; align-items: start; }
+@media (max-width: 640px) { .derm-wrap { grid-template-columns: 1fr; } }
+.lab svg.derm-svg { max-width: 300px; margin: 0 auto; }
+.derm-svg .skin { fill: #f4f4f4; stroke: #cfcfcf; stroke-width: 1.5; }
+.derm-svg .mcl { stroke: #c9c9c9; stroke-width: 1; stroke-dasharray: 3 4; }
+.derm-svg .navel { fill: #bdbdbd; }
+.derm path { stroke: #ffffff; stroke-width: 1.5; cursor: pointer; transition: fill .15s; }
+.derm:focus, .kp:focus { outline: none; }
+.derm:focus-visible path { stroke: var(--ink); stroke-width: 2; }
 .derm[data-k="c5"] path { fill: #fde4cf; } .derm[data-k="c5"].on path { fill: #f59e0b; }
 .derm[data-k="c6"] path { fill: #dbeafe; } .derm[data-k="c6"].on path { fill: #3b82f6; }
 .derm[data-k="c7"] path { fill: #dcfce7; } .derm[data-k="c7"].on path { fill: #22c55e; }
 .derm[data-k="c8"] path { fill: #ede9fe; } .derm[data-k="c8"].on path { fill: #8b5cf6; }
 .derm[data-k="t1"] path { fill: #fce7f3; } .derm[data-k="t1"].on path { fill: #ec4899; }
-.derm.na path { fill: #eeeeee; } .derm.na.on path { fill: #a3a3a3; }
-.derm.on text { fill: #ffffff; }
+.derm.na path { fill: #e4e4e4; } .derm.na.on path { fill: #a3a3a3; }
 .derm:hover path { filter: brightness(.95); }
-.dl-side, .dl-top { font-size: 12px; fill: var(--muted); }
+.rl { font-size: 10px; font-weight: 700; fill: #3a3a3a; pointer-events: none; }
+.kp { cursor: pointer; }
+.kp .hit { fill: transparent; }
+.kp .dot { fill: #232323; stroke: #fff; stroke-width: 1.5; transition: r .15s; }
+.kp.back .dot { fill: #fff; stroke: #232323; stroke-width: 1.8; }
+.kp.on .dot { fill: var(--accent); stroke: #fff; r: 6.5; }
+.kp.back.on .dot { fill: #fff; stroke: var(--accent); stroke-width: 3; }
+.kp:focus-visible .dot { stroke: var(--accent); stroke-width: 3; }
+.dl-side { font-size: 11px; fill: var(--muted); }
 .median { display: none; pointer-events: none; }
-.median path { fill: none; stroke: #232323; stroke-width: 2.2; stroke-dasharray: 5 4; }
+.median path { fill: none; stroke: #232323; stroke-width: 1.6; stroke-dasharray: 3 3; }
 .show-median .median { display: inline; }
+.seg.lv { gap: 6px; margin: 12px 0 0; }
+.seg.lv button { min-width: 44px; min-height: 36px; padding: 4px 8px; font-size: 13px; font-variant-numeric: tabular-nums; }
 .derm-side .btn { margin-top: 12px; }
 .derm-side .btn[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.legend { list-style: none; padding: 0; margin: 12px 0 0; font-size: 13px; color: #3a3a3a; }
+.legend li { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.lg { flex: none; display: inline-block; }
+.lg.sw { width: 18px; height: 12px; border-radius: 3px; background: linear-gradient(90deg, #fde4cf 0 20%, #dbeafe 20% 40%, #dcfce7 40% 60%, #ede9fe 60% 80%, #fce7f3 80%); }
+.lg.dot { width: 10px; height: 10px; border-radius: 50%; background: #232323; margin: 0 4px; }
+.lg.hollow { width: 10px; height: 10px; border-radius: 50%; border: 2px solid #232323; margin: 0 4px; }
 .derm-side .cite { margin-top: 10px; }
 .nm-out { background: var(--soft); border-radius: 10px; padding: 14px 16px; font-size: 15px; line-height: 1.7; min-height: 56px; }
 .nm-out > b { display: block; font-size: 17px; margin-bottom: 4px; }
 .nm-out .nm-also { margin-top: 6px; font-size: 14px; color: #3a3a3a; }
+.nm-out .nm-kp { margin-top: 6px; font-size: 14px; }
 </style>
 <link rel="stylesheet" href="/assets/engage.css">
 <script src="/assets/engage.js" defer></script>
@@ -460,7 +498,7 @@ details.refs-box[open] .refs-hint { display: none; }
     <b>目錄</b>
     <ol>
       <li><a href="#feature">頸椎造成的手麻，有什麼特徵？</a></li>
-      <li><a href="#map">互動：麻在哪裡？</a></li>
+      <li><a href="#map">互動：上半身皮節圖</a></li>
       <li><a href="#other">手麻一定是頸椎嗎？</a></li>
       <li><a href="#mri">要照 MRI 嗎？</a></li>
       <li><a href="#course">會自己好嗎？要多久？</a></li>
@@ -474,7 +512,7 @@ details.refs-box[open] .refs-hint { display: none; }
   <!-- Q1 -->
   <h2 id="feature">1. 頸椎造成的手麻，有什麼特徵？</h2>
   <p class="pivot">麻、痛常沿著「同一條路線」，從脖子一路往下到手指。</p>
-  <p>頸椎每一節都有神經根出來，各自負責手臂和手指的一塊區域。哪一條被壓到，麻的位置、變弱的動作、反射的變化就不一樣<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>：</p>
+  <p>頸椎每一節都有神經根出來，各自負責一塊皮膚區域，叫做「皮節」；相鄰的皮節會重疊，分布也因人而異<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。哪一條被壓到，麻的位置、變弱的動作、反射的變化就不一樣<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>：</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>神經根</th><th>麻或感覺變差的位置</th><th>可能變弱的動作</th><th>可能變弱的反射</th></tr></thead>
@@ -490,64 +528,76 @@ details.refs-box[open] .refs-hint { display: none; }
   <p>幾個常見的特點：</p>
   <ul>
     <li><b>不只是手麻</b>：肩胛、肩膀一帶的痛，常常是頸神經根病變最早出現的症狀<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
-    <li><b>最常見的反射變化</b>是三頭肌反射變弱<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。</li>
-    <li><b>頭往後仰、轉向痛的那一側時症狀被誘發</b>：這是醫療人員常用的 Spurling 測試。結果是陽性時，支持是頸神經根的問題；但陰性時不能排除，因為不同研究的敏感度落差很大（0.38 到 0.98），特異度則較高（0.84 到 1.00）<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。</li>
-    <li><b>把手放到頭上，症狀反而減輕</b>：這叫「肩外展緩解測試」，原理是讓神經放鬆<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。統合分析中它的敏感度約 0.49、特異度約 0.76，證據確定性低<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。</li>
+    <li><b>最常見的反射變化</b>是三頭肌反射變弱<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。</li>
+    <li><b>頭往後仰、轉向痛的那一側時症狀被誘發</b>：這是醫療人員常用的 Spurling 測試。結果是陽性時，支持是頸神經根的問題；但陰性時不能排除，因為不同研究的敏感度落差很大（0.38 到 0.98），特異度則較高（0.84 到 1.00）<sup class="cref"><a href="#ref-10" data-ref="10" aria-label="文獻 10">10</a></sup>。</li>
+    <li><b>把手放到頭上，症狀反而減輕</b>：這叫「肩外展緩解測試」，原理是讓神經放鬆<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。統合分析中它的敏感度約 0.49、特異度約 0.76，證據確定性低<sup class="cref"><a href="#ref-10" data-ref="10" aria-label="文獻 10">10</a></sup>。</li>
   </ul>
-  <div class="trap"><b>要知道的限制</b>：上表是典型分布，實際上每個人會有重疊。研究發現，不同檢查者做肌力和感覺測試，一致性只有中等程度<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>；各種身體檢查測試的診斷證據也都不多，確定性很低<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。所以診斷要把病史、檢查和必要時的影像放在一起看。</div>
+  <div class="trap"><b>要知道的限制</b>：上表是典型分布，實際上每個人會有重疊。研究發現，不同檢查者做肌力和感覺測試，一致性只有中等程度<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>；各種身體檢查測試的診斷證據也都不多，確定性很低<sup class="cref"><a href="#ref-10" data-ref="10" aria-label="文獻 10">10</a></sup>。所以診斷要把病史、檢查和必要時的影像放在一起看。</div>
   <p>原因方面，美國明尼蘇達州的族群研究發現，68.4% 和頸椎退化、椎間盤或兩者有關，確認是椎間盤突出的佔 21.9%；發生率最高的年齡層是 50 到 54 歲<sup class="cref"><a href="#ref-1" data-ref="1" aria-label="文獻 1">1</a></sup>。</p>
 
   <!-- 互動 -->
-  <h2 id="map">互動：麻在哪裡？</h2>
+  <h2 id="map">互動：上半身皮節圖</h2>
   <div class="lab" id="nm-lab">
     <div class="lab-tag">互動</div>
-    <div class="lab-title">皮節圖：點手臂上最麻的位置</div>
-    <p class="lab-sub">只是整理上面的典型分布，不能用來自我診斷。</p>
+    <div class="lab-title">上半身皮節圖：點身上或手臂的位置，或直接選神經節</div>
+    <p class="lab-sub">只是整理文獻上的典型分布與檢查點，不能用來自我診斷。</p>
     <div class="derm-wrap">
-      <svg class="derm-svg" viewBox="0 0 320 545" role="group" aria-label="右手臂皮節示意圖，手掌面朝前，拇指在左" xmlns="http://www.w3.org/2000/svg">
-        <text class="dl-side" x="24" y="244">拇指側</text>
-        <text class="dl-side" x="252" y="244">小指側</text>
-        <text class="dl-top" x="160" y="13" text-anchor="middle">肩膀</text>
-        <g class="derm" data-k="c5" tabindex="0" role="button" aria-label="上臂外側（C5）">
-          <path d="M115 34 Q138 22 160 21 L160 172 L118 172 Z"/>
-          <text x="139" y="102" text-anchor="middle">C5</text>
-        </g>
-        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="上臂內側（表格未列出）">
-          <path d="M160 21 Q184 22 205 34 L202 172 L160 172 Z"/>
-        </g>
-        <g class="derm" data-k="c6" tabindex="0" role="button" aria-label="前臂拇指側、拇指、食指（C6）">
-          <path d="M118 172 L160 172 L160 300 L124 300 Q119 236 118 172 Z"/>
-          <path d="M118 312 Q86 322 72 360 Q64 386 80 394 Q96 400 104 378 L114 352 Z"/>
-          <path d="M114 392 L136 392 L136 486 Q125 500 114 486 Z"/>
-          <text x="140" y="240" text-anchor="middle">C6</text>
-        </g>
-        <g class="derm" data-k="t1" tabindex="0" role="button" aria-label="前臂小指側（T1）">
-          <path d="M160 172 L202 172 Q200 236 196 300 L160 300 Z"/>
-          <text x="180" y="240" text-anchor="middle">T1</text>
-        </g>
-        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="手掌（表格未列出）">
-          <path d="M124 300 L196 300 Q210 340 209 392 L113 392 Q110 340 124 300 Z"/>
-        </g>
-        <g class="derm" data-k="c7" tabindex="0" role="button" aria-label="中指（C7）">
-          <path d="M139 392 L161 392 L161 500 Q150 514 139 500 Z"/>
-          <text x="150" y="532" text-anchor="middle">C7</text>
-        </g>
-        <g class="derm" data-k="c8" tabindex="0" role="button" aria-label="無名指、小指（C8）">
-          <path d="M164 392 L186 392 L186 490 Q175 504 164 490 Z"/>
-          <path d="M189 392 L209 392 L209 466 Q199 478 189 466 Z"/>
-          <text x="188" y="524" text-anchor="middle">C8</text>
-        </g>
-        <g class="median" aria-hidden="true">
-          <path d="M118 312 Q86 322 72 360 Q64 386 80 394 Q96 400 104 378 L114 352 Z"/>
-          <path d="M114 392 L136 392 L136 486 Q125 500 114 486 Z"/>
-          <path d="M139 392 L161 392 L161 500 Q150 514 139 500 Z"/>
-          <path d="M164 392 L175 392 L175 503 Q169 499 164 490 Z"/>
-        </g>
-      </svg>
+      <svg class="derm-svg" viewBox="60 8 280 562" role="group" aria-label="上半身皮節示意圖，正面、手掌朝前" xmlns="http://www.w3.org/2000/svg">
+        <path class="skin" d="M200 26 Q232 26 234 62 Q234 92 214 100 L214 116 Q240 122 262 132 Q270 136 261 150 L258 300 Q262 370 256 430 L144 430 Q138 370 142 300 L139 150 Q130 136 138 132 Q160 122 186 116 L186 100 Q166 92 166 62 Q168 26 200 26 Z"/>
+        <line class="mcl" x1="230" y1="118" x2="230" y2="428"/>
+        <g class="derm" data-k="c5" tabindex="0" role="button" aria-label="右手上臂外側（C5）"><path d="M101 150 Q108 138 120 136 L120 300 L103 300 Z"/></g>
+        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="右手上臂內側（表格未列出）"><path d="M120 136 Q132 138 139 150 L138 300 L120 300 Z"/></g>
+        <g class="derm" data-k="c6" tabindex="0" role="button" aria-label="右手前臂拇指側、拇指、食指（C6）"><path d="M103 300 L120 300 L118 440 L98 440 Q99 370 103 300 Z"/><path d="M97 452 Q80 462 76 486 Q74 502 84 504 Q92 504 94 490 L96 474 Z"/><path d="M95 500 L106 500 L106 545 Q100.5 552 95 545 Z"/></g>
+        <g class="derm" data-k="t1" tabindex="0" role="button" aria-label="右手前臂小指側（T1）"><path d="M120 300 L138 300 Q138 370 136 440 L118 440 Z"/></g>
+        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="右手手掌（表格未列出）"><path d="M98 440 L136 440 Q142 470 140 500 L94 500 Q92 470 98 440 Z"/></g>
+        <g class="derm" data-k="c7" tabindex="0" role="button" aria-label="右手中指（C7）"><path d="M107 500 L118 500 L118 553 Q112.5 560 107 553 Z"/></g>
+        <g class="derm" data-k="c8" tabindex="0" role="button" aria-label="右手無名指、小指（C8）"><path d="M119 500 L130 500 L130 547 Q124.5 554 119 547 Z"/><path d="M131 500 L140 500 L140 534 Q135.5 540 131 534 Z"/></g>
+        <g class="derm" data-k="c5" tabindex="0" role="button" aria-label="左手上臂外側（C5）"><path d="M 299 150 Q 292 138 280 136 L 280 300 L 297 300 Z"/></g>
+        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="左手上臂內側（表格未列出）"><path d="M 280 136 Q 268 138 261 150 L 262 300 L 280 300 Z"/></g>
+        <g class="derm" data-k="c6" tabindex="0" role="button" aria-label="左手前臂拇指側、拇指、食指（C6）"><path d="M 297 300 L 280 300 L 282 440 L 302 440 Q 301 370 297 300 Z"/><path d="M 303 452 Q 320 462 324 486 Q 326 502 316 504 Q 308 504 306 490 L 304 474 Z"/><path d="M 305 500 L 294 500 L 294 545 Q 299.5 552 305 545 Z"/></g>
+        <g class="derm" data-k="t1" tabindex="0" role="button" aria-label="左手前臂小指側（T1）"><path d="M 280 300 L 262 300 Q 262 370 264 440 L 282 440 Z"/></g>
+        <g class="derm na" data-k="na" tabindex="0" role="button" aria-label="左手手掌（表格未列出）"><path d="M 302 440 L 264 440 Q 258 470 260 500 L 306 500 Q 308 470 302 440 Z"/></g>
+        <g class="derm" data-k="c7" tabindex="0" role="button" aria-label="左手中指（C7）"><path d="M 293 500 L 282 500 L 282 553 Q 287.5 560 293 553 Z"/></g>
+        <g class="derm" data-k="c8" tabindex="0" role="button" aria-label="左手無名指、小指（C8）"><path d="M 281 500 L 270 500 L 270 547 Q 275.5 554 281 547 Z"/><path d="M 269 500 L 260 500 L 260 534 Q 264.5 540 269 534 Z"/></g>
+        <text class="rl" x="111" y="228" text-anchor="middle">C5</text>
+        <text class="rl" x="109" y="372" text-anchor="middle">C6</text>
+        <text class="rl" x="129" y="372" text-anchor="middle">T1</text>
+        <text class="rl" x="112.5" y="568" text-anchor="middle">C7</text>
+        <text class="rl" x="131" y="566" text-anchor="middle">C8</text>
+        <g class="median" aria-hidden="true"><path d="M97 452 Q80 462 76 486 Q74 502 84 504 Q92 504 94 490 L96 474 Z"/><path d="M95 500 L106 500 L106 545 Q100.5 552 95 545 Z"/><path d="M107 500 L118 500 L118 553 Q112.5 560 107 553 Z"/><path d="M119 500 L124.5 500 L124.5 553 Q121.5 551 119 547 Z"/><path d="M 303 452 Q 320 462 324 486 Q 326 502 316 504 Q 308 504 306 490 L 304 474 Z"/><path d="M 305 500 L 294 500 L 294 545 Q 299.5 552 305 545 Z"/><path d="M 293 500 L 282 500 L 282 553 Q 287.5 560 293 553 Z"/><path d="M 281 500 L 275.5 500 L 275.5 553 Q 278.5 551 281 547 Z"/></g>
+        <text class="dl-side" x="64" y="20">右手</text><text class="dl-side" x="336" y="20" text-anchor="end">左手</text>
+        <text class="dl-side" x="230" y="446" text-anchor="middle">鎖骨中線</text>
+        <g class="kp back" data-k="c2" tabindex="0" role="button" aria-label="C2 感覺檢查點"><circle class="hit" cx="228" cy="58" r="9"/><circle class="dot" cx="228" cy="58" r="4"/></g>
+        <g class="kp" data-k="c3" tabindex="0" role="button" aria-label="C3 感覺檢查點"><circle class="hit" cx="230" cy="124" r="9"/><circle class="dot" cx="230" cy="124" r="4"/></g>
+        <g class="kp" data-k="c4" tabindex="0" role="button" aria-label="C4 感覺檢查點"><circle class="hit" cx="262" cy="131" r="9"/><circle class="dot" cx="262" cy="131" r="4"/></g>
+        <g class="kp" data-k="c5" tabindex="0" role="button" aria-label="C5 感覺檢查點"><circle class="hit" cx="296" cy="294" r="9"/><circle class="dot" cx="296" cy="294" r="4"/></g>
+        <g class="kp" data-k="t1" tabindex="0" role="button" aria-label="T1 感覺檢查點"><circle class="hit" cx="265" cy="294" r="9"/><circle class="dot" cx="265" cy="294" r="4"/></g>
+        <g class="kp back" data-k="c6" tabindex="0" role="button" aria-label="C6 感覺檢查點"><circle class="hit" cx="316" cy="490" r="9"/><circle class="dot" cx="316" cy="490" r="4"/></g>
+        <g class="kp back" data-k="c7" tabindex="0" role="button" aria-label="C7 感覺檢查點"><circle class="hit" cx="287.5" cy="514" r="9"/><circle class="dot" cx="287.5" cy="514" r="4"/></g>
+        <g class="kp back" data-k="c8" tabindex="0" role="button" aria-label="C8 感覺檢查點"><circle class="hit" cx="264.5" cy="512" r="9"/><circle class="dot" cx="264.5" cy="512" r="4"/></g>
+        <g class="kp" data-k="t2" tabindex="0" role="button" aria-label="T2 感覺檢查點"><circle class="hit" cx="252" cy="160" r="9"/><circle class="dot" cx="252" cy="160" r="4"/></g>
+        <g class="kp" data-k="t3" tabindex="0" role="button" aria-label="T3 感覺檢查點"><circle class="hit" cx="230" cy="178" r="9"/><circle class="dot" cx="230" cy="178" r="4"/></g>
+        <g class="kp" data-k="t4" tabindex="0" role="button" aria-label="T4 感覺檢查點"><circle class="hit" cx="230" cy="200" r="9"/><circle class="dot" cx="230" cy="200" r="4"/></g>
+        <g class="kp" data-k="t5" tabindex="0" role="button" aria-label="T5 感覺檢查點"><circle class="hit" cx="230" cy="222" r="9"/><circle class="dot" cx="230" cy="222" r="4"/></g>
+        <g class="kp" data-k="t6" tabindex="0" role="button" aria-label="T6 感覺檢查點"><circle class="hit" cx="230" cy="244" r="9"/><circle class="dot" cx="230" cy="244" r="4"/></g>
+        <g class="kp" data-k="t7" tabindex="0" role="button" aria-label="T7 感覺檢查點"><circle class="hit" cx="230" cy="266" r="9"/><circle class="dot" cx="230" cy="266" r="4"/></g>
+        <g class="kp" data-k="t8" tabindex="0" role="button" aria-label="T8 感覺檢查點"><circle class="hit" cx="230" cy="288" r="9"/><circle class="dot" cx="230" cy="288" r="4"/></g>
+        <g class="kp" data-k="t9" tabindex="0" role="button" aria-label="T9 感覺檢查點"><circle class="hit" cx="230" cy="310" r="9"/><circle class="dot" cx="230" cy="310" r="4"/></g>
+        <g class="kp" data-k="t10" tabindex="0" role="button" aria-label="T10 感覺檢查點"><circle class="hit" cx="230" cy="332" r="9"/><circle class="dot" cx="230" cy="332" r="4"/></g>
+        <g class="kp" data-k="t11" tabindex="0" role="button" aria-label="T11 感覺檢查點"><circle class="hit" cx="230" cy="376" r="9"/><circle class="dot" cx="230" cy="376" r="4"/></g>
+        <g class="kp" data-k="t12" tabindex="0" role="button" aria-label="T12 感覺檢查點"><circle class="hit" cx="230" cy="420" r="9"/><circle class="dot" cx="230" cy="420" r="4"/></g>
+        <circle class="navel" cx="200" cy="332" r="2.5"/>
+        </svg>
       <div class="derm-side">
         <div class="nm-out" id="nm-out" aria-live="polite"></div>
+        <div class="seg lv" role="group" aria-label="選擇神經節"><button type="button" data-k="c2" aria-pressed="false">C2</button><button type="button" data-k="c3" aria-pressed="false">C3</button><button type="button" data-k="c4" aria-pressed="false">C4</button><button type="button" data-k="c5" aria-pressed="false">C5</button><button type="button" data-k="c6" aria-pressed="false">C6</button><button type="button" data-k="c7" aria-pressed="false">C7</button><button type="button" data-k="c8" aria-pressed="false">C8</button><button type="button" data-k="t1" aria-pressed="false">T1</button><button type="button" data-k="t2" aria-pressed="false">T2</button><button type="button" data-k="t3" aria-pressed="false">T3</button><button type="button" data-k="t4" aria-pressed="false">T4</button><button type="button" data-k="t5" aria-pressed="false">T5</button><button type="button" data-k="t6" aria-pressed="false">T6</button><button type="button" data-k="t7" aria-pressed="false">T7</button><button type="button" data-k="t8" aria-pressed="false">T8</button><button type="button" data-k="t9" aria-pressed="false">T9</button><button type="button" data-k="t10" aria-pressed="false">T10</button><button type="button" data-k="t11" aria-pressed="false">T11</button><button type="button" data-k="t12" aria-pressed="false">T12</button></div>
         <button type="button" class="btn" id="nm-median" aria-pressed="false">疊上腕隧道（正中神經）的範圍</button>
-        <p class="cite">示意圖依 Iyer 2016 的表格繪製<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>；腕隧道範圍依 Wipperman 2016<sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>。實際界線因人而異，灰色是表格沒有列出的區域。</p>
+        <ul class="legend">
+          <li><span class="lg sw"></span>手臂色塊：C5 到 T1 的典型分布<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup></li>
+          <li><span class="lg dot"></span>圓點：國際脊髓損傷神經學分類標準的感覺檢查點<sup class="cref"><a href="#ref-11" data-ref="11" aria-label="文獻 11">11</a></sup></li>
+          <li><span class="lg hollow"></span>空心點在身體背面：C2 在後腦、C6 到 C8 在手指背面<sup class="cref"><a href="#ref-11" data-ref="11" aria-label="文獻 11">11</a></sup></li>
+        </ul>
+        <p class="cite">檢查點畫在左半身，右半身相同。皮節的分布因人而異，相鄰皮節會重疊<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>；腕隧道範圍依 Wipperman 2016<sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>。灰色是表格沒有列出的區域。</p>
       </div>
     </div>
   </div>
@@ -561,13 +611,13 @@ details.refs-box[open] .refs-hint { display: none; }
     <li><b>胸廓出口症候群、肩膀本身的問題</b>：也在需要鑑別的名單上<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
     <li><b>兩處同時有問題</b>：頸神經根和手腕的神經同時受壓，叫做「雙重壓迫」（double crush）<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
   </ul>
-  <p>要分清楚時，<b>肌電圖和神經傳導檢查</b>可以幫忙區分是周邊神經被卡住，還是頸神經根的問題<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>；但它也會有偽陽性和偽陰性，單獨用來定位的準確度不高<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。如果診斷已經很明確，就不一定需要做<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。</p>
+  <p>要分清楚時，<b>肌電圖和神經傳導檢查</b>可以幫忙區分是周邊神經被卡住，還是頸神經根的問題<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>；但它也會有偽陽性和偽陰性，單獨用來定位的準確度不高<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。如果診斷已經很明確，就不一定需要做<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。</p>
   <p>另外要記得：頸部<b>脊髓</b>受壓（脊髓病變）也常先被當成腕隧道症候群處理<sup class="cref"><a href="#ref-7" data-ref="7" aria-label="文獻 7">7</a></sup>。如果除了手麻，還有手變笨拙、走路不穩，請看<a href="#urgent">第 8 段</a>。</p>
 
   <!-- Q3 -->
   <h2 id="mri">3. 要照 MRI 嗎？</h2>
   <p class="pivot">多數一開始不需要。</p>
-  <p>沒有外傷、沒有懷疑腫瘤、脊髓病變或感染膿瘍的警訊，症狀也還沒持續很久時，不需要先照影像<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。如果治療 <b>4 到 6 週</b>後症狀仍持續，或出現警訊，MRI 可以找出是否有適合打針或手術處理的問題<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。</p>
+  <p>沒有外傷、沒有懷疑腫瘤、脊髓病變或感染膿瘍的警訊，症狀也還沒持續很久時，不需要先照影像<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。如果治療 <b>4 到 6 週</b>後症狀仍持續，或出現警訊，MRI 可以找出是否有適合打針或手術處理的問題<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。</p>
   <p>報告上的「骨刺」「退化」，沒有症狀的人也常看得到，要和症狀、檢查一起判斷（詳見<a href="neck-pain-red-flags.html#imaging">系列第 1 篇</a>）。</p>
 
   <!-- Q4 -->
@@ -576,7 +626,7 @@ details.refs-box[open] .refs-hint { display: none; }
   <ul>
     <li><b>長期追蹤</b>：明尼蘇達州 561 人的族群研究，中位數追蹤 4.9 年，31.7% 曾經復發、26% 因此開刀；最後 <b>90% 沒有症狀或只有輕微影響</b><sup class="cref"><a href="#ref-1" data-ref="1" aria-label="文獻 1">1</a></sup>。</li>
     <li><b>改善的時間</b>：一篇回顧整理的文獻顯示，多數人在 <b>4 到 6 個月</b>內明顯改善，而且在 2 到 3 年內大致維持<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
-    <li><b>不論哪種治療</b>：美國家庭醫師學會的回顧指出，應該讓病人知道多數情況不論接受哪種治療都會緩解<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。</li>
+    <li><b>不論哪種治療</b>：美國家庭醫師學會的回顧指出，應該讓病人知道多數情況不論接受哪種治療都會緩解<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。</li>
   </ul>
   <h3 id="weak">手已經沒力了，還會恢復嗎？</h3>
   <p>韓國一項研究追蹤 52 位因頸神經根病變而肌力變弱的病人，一開始都先保守治療<sup class="cref"><a href="#ref-4" data-ref="4" aria-label="文獻 4">4</a></sup>：</p>
@@ -598,16 +648,16 @@ details.refs-box[open] .refs-hint { display: none; }
   <p class="cite">效果量（標準化平均差）：神經鬆動 −1.45、關節治療 −0.72、頸椎牽引 −0.66、乾針 −3.40；負值代表疼痛下降，絕對值愈大效果愈明顯<sup class="cref"><a href="#ref-5" data-ref="5" aria-label="文獻 5">5</a></sup>。</p>
   <p>兩個個別研究的例子：</p>
   <ul>
-    <li><b>神經鬆動</b>：巴基斯坦一項 88 人的隨機試驗，兩組都有進步；神經鬆動組在疼痛和頸部失能的改善比一般治療組多，頸部活動度則沒有差別<sup class="cref"><a href="#ref-10" data-ref="10" aria-label="文獻 10">10</a></sup>。</li>
-    <li><b>密集牽引</b>：法國一項 36 人的觀察研究，每次牽引 30 分鐘、一天 2 次、連續 5 天；3 個月時 48.3% 的人頸部失能分數改善超過病人感受得到的程度<sup class="cref"><a href="#ref-11" data-ref="11" aria-label="文獻 11">11</a></sup>。這個研究<b>沒有對照組</b>，無法排除自然好轉的影響。</li>
+    <li><b>神經鬆動</b>：巴基斯坦一項 88 人的隨機試驗，兩組都有進步；神經鬆動組在疼痛和頸部失能的改善比一般治療組多，頸部活動度則沒有差別<sup class="cref"><a href="#ref-12" data-ref="12" aria-label="文獻 12">12</a></sup>。</li>
+    <li><b>密集牽引</b>：法國一項 36 人的觀察研究，每次牽引 30 分鐘、一天 2 次、連續 5 天；3 個月時 48.3% 的人頸部失能分數改善超過病人感受得到的程度<sup class="cref"><a href="#ref-13" data-ref="13" aria-label="文獻 13">13</a></sup>。這個研究<b>沒有對照組</b>，無法排除自然好轉的影響。</li>
   </ul>
   <div class="trap"><b>要知道的限制</b>：一篇回顧提到，物理治療在短期內可能對頸痛和握力有中等程度的幫助，但這些差異在 6 個月到 1 年後就不明顯了；也有學者認為物理治療不會改變神經根病變的自然病程<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。所以物理治療的角色，主要是讓這段恢復期比較舒服、功能維持得比較好。</div>
 
   <!-- Q6 -->
   <h2 id="meds">6. 吃藥、打針有用嗎？</h2>
   <ul>
-    <li><b>藥物</b>：非手術治療常包含非類固醇消炎止痛藥、肌肉鬆弛劑<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。用藥請遵照醫師處方。</li>
-    <li><b>硬脊膜外類固醇注射</b>：可能有幫助，但發生嚴重併發症的風險較高<sup class="cref"><a href="#ref-8" data-ref="8" aria-label="文獻 8">8</a></sup>。支持常規使用的證據不多；多數試驗中，類固醇注射沒有比只打局部麻醉藥更好<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
+    <li><b>藥物</b>：非手術治療常包含非類固醇消炎止痛藥、肌肉鬆弛劑<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。用藥請遵照醫師處方。</li>
+    <li><b>硬脊膜外類固醇注射</b>：可能有幫助，但發生嚴重併發症的風險較高<sup class="cref"><a href="#ref-9" data-ref="9" aria-label="文獻 9">9</a></sup>。支持常規使用的證據不多；多數試驗中，類固醇注射沒有比只打局部麻醉藥更好<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
   </ul>
 
   <!-- Q7 -->
@@ -672,7 +722,7 @@ details.refs-box[open] .refs-hint { display: none; }
   </dl>
 
   <details class="refs-box" id="refs">
-    <summary><span class="refs-title">參考文獻（11 篇）</span><span class="refs-hint">點開查看</span></summary>
+    <summary><span class="refs-title">參考文獻（13 篇）</span><span class="refs-hint">點開查看</span></summary>
     <ol class="refs">
     <li id="ref-1">Radhakrishnan K, Litchy WJ, O'Fallon WM, Kurland LT. Epidemiology of cervical radiculopathy: a population-based study from Rochester, Minnesota, 1976 through 1990. <i>Brain.</i> 1994;117(Pt 2):325-35. <a href="https://doi.org/10.1093/brain/117.2.325">DOI</a></li>
     <li id="ref-2">Iyer S, Kim HJ. Cervical radiculopathy. <i>Curr Rev Musculoskelet Med.</i> 2016;9(3):272-80. <a href="https://doi.org/10.1007/s12178-016-9349-4">DOI</a></li>
@@ -681,10 +731,12 @@ details.refs-box[open] .refs-hint { display: none; }
     <li id="ref-5">Núñez de Arenas-Arroyo S, et al. What components and formats of rehabilitation interventions are more effective to reduce pain in patients with cervical radiculopathy? A systematic review and component network meta-analysis. <i>Clin Rehabil.</i> 2025;39(10):1296-1310. <a href="https://doi.org/10.1177/02692155251365193">DOI</a></li>
     <li id="ref-6">Taso M, et al. Surgical versus nonsurgical treatment for cervical radiculopathy. <i>NEJM Evid.</i> 2025;4(4):EVIDoa2400404. <a href="https://doi.org/10.1056/EVIDoa2400404">DOI</a></li>
     <li id="ref-7">Davies BM, et al. Degenerative cervical myelopathy. <i>BMJ.</i> 2018;360:k186. <a href="https://doi.org/10.1136/bmj.k186">DOI</a></li>
-    <li id="ref-8">Childress MA, Becker BA. Nonoperative management of cervical radiculopathy. <i>Am Fam Physician.</i> 2016;93(9):746-54. <a href="https://pubmed.ncbi.nlm.nih.gov/27175952/">PubMed</a></li>
-    <li id="ref-9">Thoomes EJ, et al. Diagnostic accuracy of physical examination tests for painful cervical radiculopathy: update of a systematic review and meta-analysis. <i>BMC Musculoskelet Disord.</i> 2026;27(1). <a href="https://doi.org/10.1186/s12891-026-09551-0">DOI</a></li>
-    <li id="ref-10">Rafiq S, et al. Comparison of neural mobilization and conservative treatment on pain, range of motion, and disability in cervical radiculopathy: a randomized controlled trial. <i>PLoS One.</i> 2022;17(12):e0278177. <a href="https://doi.org/10.1371/journal.pone.0278177">DOI</a></li>
-    <li id="ref-11">Rulleau T, et al. Effect of an intensive cervical traction protocol on mid-term disability and pain in patients with cervical radiculopathy: an exploratory, prospective, observational pilot study. <i>PLoS One.</i> 2021;16(8):e0255998. <a href="https://doi.org/10.1371/journal.pone.0255998">DOI</a></li>
+    <li id="ref-8">Lee MW, McPhee RW, Stringer MD. An evidence-based approach to human dermatomes. <i>Clin Anat.</i> 2008;21(5):363-73. <a href="https://doi.org/10.1002/ca.20636">DOI</a></li>
+    <li id="ref-9">Childress MA, Becker BA. Nonoperative management of cervical radiculopathy. <i>Am Fam Physician.</i> 2016;93(9):746-54. <a href="https://pubmed.ncbi.nlm.nih.gov/27175952/">PubMed</a></li>
+    <li id="ref-10">Thoomes EJ, et al. Diagnostic accuracy of physical examination tests for painful cervical radiculopathy: update of a systematic review and meta-analysis. <i>BMC Musculoskelet Disord.</i> 2026;27(1). <a href="https://doi.org/10.1186/s12891-026-09551-0">DOI</a></li>
+    <li id="ref-11">Rupp R, et al. International Standards for Neurological Classification of Spinal Cord Injury: revised 2019. <i>Top Spinal Cord Inj Rehabil.</i> 2021;27(2):1-22. <a href="https://doi.org/10.46292/sci2702-1">DOI</a></li>
+    <li id="ref-12">Rafiq S, et al. Comparison of neural mobilization and conservative treatment on pain, range of motion, and disability in cervical radiculopathy: a randomized controlled trial. <i>PLoS One.</i> 2022;17(12):e0278177. <a href="https://doi.org/10.1371/journal.pone.0278177">DOI</a></li>
+    <li id="ref-13">Rulleau T, et al. Effect of an intensive cervical traction protocol on mid-term disability and pain in patients with cervical radiculopathy: an exploratory, prospective, observational pilot study. <i>PLoS One.</i> 2021;16(8):e0255998. <a href="https://doi.org/10.1371/journal.pone.0255998">DOI</a></li>
     </ol>
     <p class="refs">文獻資料經 PubMed 檢索核對。本文為衛教整理，不能取代個別的醫療評估。</p>
   </details>
@@ -762,31 +814,49 @@ window.rvInitCalc = function () {
   var lab = document.getElementById('nm-lab');
   if (!lab) return;
   var out = document.getElementById('nm-out');
-  var D = {
-    c5: ['第 5 頸神經（C5）', '典型分布是上臂外側；可能合併手臂往側邊抬變無力、二頭肌反射變弱。', ''],
-    c6: ['第 6 頸神經（C6）', '典型分布是前臂靠拇指那側、拇指和食指；可能合併彎手肘、手腕往上翹變無力，肱橈肌反射變弱。', '也要考慮<b>腕隧道症候群</b>：正中神經的麻在手掌面的拇指、食指、中指和無名指靠拇指那半邊。'],
-    c7: ['第 7 頸神經（C7）', '典型分布是中指；可能合併伸直手肘、手腕往下彎變無力、三頭肌反射變弱。C7 是最常受影響的神經根。', '也要考慮<b>腕隧道症候群</b>：中指也在正中神經的範圍內。'],
-    c8: ['第 8 頸神經（C8）', '典型分布是無名指和小指；可能合併手指彎曲（握）變無力。', '也要考慮<b>手肘或其他地方的尺神經受壓</b>。'],
-    t1: ['第 1 胸神經（T1）', '典型分布是前臂靠小指那側；可能合併手部小肌肉無力。', ''],
-    na: ['表格沒有列出這一區', '文中引用的回顧表格，沒有把這個區域列為 C5 到 T1 的典型分布。', '']
+  var NAME = { c: '頸神經', t: '胸神經' };
+  var AREA = {
+    c5: ['上臂外側', '手臂往側邊抬（三角肌）變無力、二頭肌反射變弱', ''],
+    c6: ['前臂靠拇指那側、拇指和食指', '彎手肘、手腕往上翹變無力，肱橈肌反射變弱', '也要考慮<b>腕隧道症候群</b>：正中神經的麻在手掌面的拇指、食指、中指和無名指靠拇指那半邊。'],
+    c7: ['中指', '伸直手肘、手腕往下彎變無力，三頭肌反射變弱。C7 是最常受影響的神經根', '也要考慮<b>腕隧道症候群</b>：中指也在正中神經的範圍內。'],
+    c8: ['無名指和小指', '手指彎曲（握）變無力', '也要考慮<b>手肘或其他地方的尺神經受壓</b>。'],
+    t1: ['前臂靠小指那側', '手部小肌肉無力', '']
+  };
+  var KP = {
+    c2: '後腦：枕骨突起外側至少 1 公分（或耳後 3 公分）', c3: '鎖骨上窩（鎖骨後方），鎖骨中線上', c4: '肩鎖關節上方',
+    c5: '手肘前側凹窩的外側（拇指側），肘橫紋稍上方', c6: '拇指背面，近端指節', c7: '中指背面，近端指節', c8: '小指背面，近端指節',
+    t1: '手肘前側凹窩的內側（小指側），肱骨內上髁稍上方', t2: '腋窩頂端',
+    t3: '鎖骨中線，第 3 肋間', t4: '鎖骨中線，第 4 肋間（乳頭高度）', t5: '鎖骨中線，第 5 肋間（T4 和 T6 中間）',
+    t6: '鎖骨中線，第 6 肋間（劍突高度）', t7: '鎖骨中線，第 7 肋間（T6 和 T8 中間）', t8: '鎖骨中線，第 8 肋間（T6 和 T10 中間）',
+    t9: '鎖骨中線，第 9 肋間（T8 和 T10 中間）', t10: '鎖骨中線，第 10 肋間（肚臍高度）', t11: '鎖骨中線，第 11 肋間（T10 和 T12 中間）',
+    t12: '鎖骨中線，腹股溝韌帶中點'
   };
   var regs = lab.querySelectorAll('.derm');
+  var kps = lab.querySelectorAll('.kp');
+  var btns = lab.querySelectorAll('.seg.lv button');
   var med = document.getElementById('nm-median');
   var svg = lab.querySelector('.derm-svg');
+  function title(k) { return '第 ' + k.slice(1) + ' ' + NAME[k[0]] + '（' + k.toUpperCase() + '）'; }
   function show(k) {
-    regs.forEach(function (r) {
-      var on = r.getAttribute('data-k') === k;
-      r.classList.toggle('on', on);
-      r.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-    if (!k) { out.innerHTML = '<b>點手臂上的位置</b>看看它對應哪一條神經根。'; return; }
-    var d = D[k];
-    out.innerHTML = '<b>' + d[0] + '</b>' + d[1] + (d[2] ? '<div class="nm-also">' + d[2] + '</div>' : '') + (k !== 'na' ? '<div class="nm-also">每個人的分布會有重疊，請由醫療人員評估。</div>' : '');
+    function mark(list) { list.forEach(function (el) { var on = el.getAttribute('data-k') === k; el.classList.toggle('on', on); el.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }
+    mark(regs); mark(kps); mark(btns);
+    if (!k) { out.innerHTML = '<b>點身上或手臂的位置</b>或用下面的按鈕選一個神經節。'; return; }
+    if (k === 'na') { out.innerHTML = '<b>表格沒有列出這一區</b>文中引用的回顧表格，沒有把這個區域列為 C5 到 T1 的典型分布。'; return; }
+    var h = '<b>' + title(k) + '</b>';
+    var a = AREA[k];
+    if (a) h += '手臂上的典型分布：' + a[0] + '；可能合併' + a[1] + '。';
+    h += '<div class="nm-kp"><b style="display:inline;font-size:14px">感覺檢查點：</b>' + KP[k] + '</div>';
+    if (a && a[2]) h += '<div class="nm-also">' + a[2] + '</div>';
+    if (!a) h += '<div class="nm-also">' + (k === 'c2' || k === 'c3' || k === 'c4' ? '頸部上段的神經根，負責頭頸、肩膀一帶。' : '胸段的神經根，負責軀幹的一圈皮膚；手麻通常不是來自這裡。') + '</div>';
+    h += '<div class="nm-also">每個人的分布會有重疊，請由醫療人員評估。</div>';
+    out.innerHTML = h;
   }
-  regs.forEach(function (r) {
-    r.addEventListener('click', function () { show(r.getAttribute('data-k')); });
-    r.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(r.getAttribute('data-k')); } });
-  });
+  function bind(el) {
+    el.addEventListener('click', function () { show(el.getAttribute('data-k')); });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(el.getAttribute('data-k')); } });
+  }
+  regs.forEach(bind); kps.forEach(bind);
+  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-k')); }); });
   med.addEventListener('click', function () {
     var on = med.getAttribute('aria-pressed') !== 'true';
     med.setAttribute('aria-pressed', on ? 'true' : 'false');
