@@ -273,6 +273,9 @@ ul, ol { padding-left: 1.3em; }
 .toc a { text-decoration: none; }
 .toc a:hover { text-decoration: underline; }
 .trap { background: var(--soft); border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 15px; }
+.contact-box { border: 1px solid var(--line, #e6e6e6); border-radius: 10px; padding: 12px 16px; margin: 12px 0 20px; font-size: 15px; }
+.contact-box p { margin: 2px 0; }
+.contact-box .cb-name { font-size: 16px; }
 .table-wrap { overflow-x: auto; margin: 16px 0; }
 table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
 th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
@@ -516,9 +519,16 @@ details.refs-box[open] .refs-hint { display: none; }
   <h2 id="next">5. 沒有警訊，接下來怎麼做？</h2>
   <ul>
     <li><b>保持活動</b>：指引強調大多數肩頸痛是良性、會自己慢慢好的，維持活動很重要<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
-    <li><b>給它一點時間，但也別放著不管</b>：非外傷性的肩頸痛，近一半的人會持續或反覆出現症狀<sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>。如果症狀反覆，可以找醫師或物理治療師評估。</li>
+    <li><b>給它一點時間，但也別放著不管</b>：非外傷性的肩頸痛，近一半的人會持續或反覆出現症狀<sup class="cref"><a href="#ref-3" data-ref="3" aria-label="文獻 3">3</a></sup>。如果症狀反覆或影響生活，可以找醫師或物理治療師評估。</li>
     <li><b>隨時注意變化</b>：症狀變嚴重、出現新的身體或心理症狀，就要回去找醫師<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>。</li>
   </ul>
+  <h3 id="pt">物理治療師能幫什麼？</h3>
+  <p>評估你的頸部活動、姿勢與日常負荷，並依照指引<sup class="cref"><a href="#ref-2" data-ref="2" aria-label="文獻 2">2</a></sup>提供衛教和運動計畫。若評估後需要治療性處置，或發現需要醫師處理的問題，會請你先就醫，或配合醫師的轉介與醫囑。</p>
+  <div class="contact-box">
+    <p class="cb-name"><b>孔士硯</b> 物理治療師</p>
+    <p>電話：<a href="tel:0968553888">0968-553-888</a></p>
+    <p>服務地區：龜山、林口</p>
+  </div>
   <p>肩頸痠痛系列接下來會談：肩頸痛要做什麼運動、按摩和徒手治療有沒有用、辦公環境怎麼調。</p>
 
   <!-- 結論 -->
@@ -637,7 +647,7 @@ window.rvInitCite();
     boxes.forEach(function (b) { if (b.checked) { if (b.getAttribute('data-level') === 'er') er++; else doc++; } });
     if (er) { out.setAttribute('data-level', 'er'); out.innerHTML = '<b>請立即就醫（急診）</b>你勾選的情況需要先排除心臟或血管的急症，不要等、也不要先按摩或拉筋。'; }
     else if (doc) { out.setAttribute('data-level', 'doc'); out.innerHTML = '<b>建議先就醫評估</b>你勾選的情況需要醫師先排除嚴重問題，再考慮運動或徒手治療。'; }
-    else { out.setAttribute('data-level', 'ok'); out.innerHTML = '<b>目前沒有勾選警訊</b>多數肩頸痛是良性的，可以先保持活動、觀察。但沒有警訊不代表百分之百沒事，症狀變嚴重或出現新症狀，請就醫。'; }
+    else { out.setAttribute('data-level', 'ok'); out.innerHTML = '<b>目前沒有勾選警訊</b>多數肩頸痛是良性的，可以先保持活動、觀察。但沒有警訊不代表百分之百沒事，症狀變嚴重或出現新症狀，請就醫。若症狀反覆或影響生活，可以找物理治療師評估（<a href="#pt">看第 5 段</a>）。'; }
   }
   boxes.forEach(function (b) { b.addEventListener('change', update); });
   update();
