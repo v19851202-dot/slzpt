@@ -239,16 +239,12 @@ main { flex: 999 1 560px; min-width: 0; }
   .top-row { gap: 12px 24px; }
 }
 @media (max-width: 600px) {
-  /* 手機版 A：單欄。專業文章是橫向文字卡（標題、摘要、入口），心情貼文的圖不再撐成正方形 */
-  .grid { grid-template-columns: minmax(0, 1fr) !important; gap: 10px; }
-  .imgpost { aspect-ratio: auto; }
-  .imgpost img { flex: 0 0 auto; aspect-ratio: 4 / 3; height: auto; max-height: 240px; }
-  .notepost { min-height: 0; padding: 16px; }
-  .note-title { font-size: 1.1875rem !important; }
-  .note-sub { display: block !important; font-size: 0.9375rem; line-height: 1.6; margin-top: 6px; }
-  .notepost .note-more { padding-top: 4px; }
+  /* 手機版 B：保留兩欄。卡片高度隨內容，標題不截字，閱讀入口固定留間距 */
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px; }
+  .notepost { min-height: 0; padding: 12px; gap: 12px; }
+  .note-title { font-size: 1rem !important; line-height: 1.45; }
+  .notepost .note-more { padding-top: 0; }
   .ticker-wrap { grid-column: 1 / -1; }
-  .grid .imgpost .post-text { font-size: 0.9375rem; -webkit-line-clamp: 2; line-clamp: 2; }
 }
 @media (max-width: 480px) { .tile { padding: 12px; } .post-text { font-size: 14px; } .imgpost { gap: 6px; } .imgpost .post-text { font-size: 12px; -webkit-line-clamp: 1; line-clamp: 1; } }
 </style>
