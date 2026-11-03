@@ -90,6 +90,8 @@
   trap.appendChild(el('input', { id: 'engage-website', name: 'website', type: 'text', tabindex: '-1', autocomplete: 'off' }));
   var note = el('p', { class: 'engage-note' },
     '留言會公開顯示暱稱與內容，請不要留下電話、病歷等個人資料。這裡無法提供個別的醫療建議。廣告與無關留言會被自動過濾。');
+  note.appendChild(document.createTextNode(' '));
+  note.appendChild(el('a', { href: '/privacy' }, '留言與資料說明'));
   var send = el('button', { type: 'submit', class: 'engage-btn engage-primary' }, '送出留言');
   var msg = el('p', { class: 'engage-msg', role: 'status', 'aria-live': 'polite' });
   form.appendChild(nameWrap);

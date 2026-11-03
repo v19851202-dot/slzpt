@@ -4,28 +4,39 @@ Allow: /
 Disallow: /api/
 
 # AI 搜尋與回答引擎
+# 注意：特定 User-agent 群組不會繼承上面 * 的規則，所以每組都要各寫一次 Disallow: /api/。
+# 依 OpenAI 官方說明：OAI-SearchBot 用於搜尋，GPTBot 的抓取可能用於模型訓練，兩者可分開設定。
+# 其他代理的用途以各公司官方說明為準。要不要開放訓練，可以和搜尋分開決定（該組改成 Disallow: / 即可）。
 User-agent: GPTBot
 Allow: /
+Disallow: /api/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /api/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /api/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /api/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /api/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /api/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /api/
 
 Sitemap: https://slzpt.com/sitemap.xml

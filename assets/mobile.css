@@ -16,7 +16,8 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
   .side { flex: 1 1 100%; max-width: none; display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 12px; font-size: 0.9375rem; }
   .side .avatar { width: 44px; height: 44px; grid-column: 1; grid-row: 1; }
   .side > div:nth-of-type(2) { grid-column: 2; grid-row: 1; min-width: 0; line-height: 1.45; }
-  .side > div:nth-of-type(2) > div:first-child { font-size: 1.0625rem !important; }
+  .side > div:nth-of-type(2) > .brand { font-size: 1.0625rem; }
+  .side > div:nth-of-type(2) > .muted:nth-child(2) { display: none; } /* 手機頁首只留一句標語 */
   .side .muted { font-size: 0.875rem; }
   .menu-btn { display: inline-flex; grid-column: 3; grid-row: 1; }
   /* 漢堡選單：搜尋、關於、IG 預設收起，點 ≡ 才展開（展開時把下面內容往下推，不蓋住） */
@@ -34,7 +35,8 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
 
   /* 跑馬燈、時鐘、天氣在手機上縮小成輔助資訊，不搶貼文的風采 */
   .top-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 12px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #eeeeee; }
-  .top-row .ticker { grid-column: 1 / -1; font-size: 0.875rem; line-height: 1.55; height: 3.1em; color: #555555; }
+  .top-row .ticker { font-size: 0.875rem; line-height: 1.55; height: 3.1em; color: #555555; }
+  .top-row .ticker-wrap { grid-column: 1 / -1; }
   .clock { gap: 2px; }
   .fc { gap: 2px; }
   .fd { width: 14px; height: 21px; font-size: 13px; font-weight: 500; }

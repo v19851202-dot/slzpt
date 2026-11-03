@@ -7,7 +7,8 @@ function json(body, status, cache) {
     status: status,
     headers: {
       'content-type': 'application/json; charset=utf-8',
-      'cache-control': cache || 'no-store'
+      'cache-control': cache || 'no-store',
+      'x-content-type-options': 'nosniff'
     }
   });
 }

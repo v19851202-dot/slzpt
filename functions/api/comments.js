@@ -34,7 +34,7 @@ const SPAM_WORDS = [
 function json(body, status) {
   return new Response(JSON.stringify(body), {
     status: status || 200,
-    headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' }
+    headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' }
   });
 }
 
@@ -73,7 +73,7 @@ async function pageInfo(env, request, page) {
     const res = await env.ASSETS.fetch(new URL(page, request.url));
     if (!res.ok) return null;
     const html = await res.text();
-    // 找不到的網址會被導回首頁，所以要確認這真的是那篇文章（看 canonical 網址）
+    // 確認這真的是那篇文章（看 canonical 網址）；網站有 404.html 後，不存在的網址會回 404
     const canon = (html.match(/<link\s+rel="canonical"\s+href="([^"]*)"/i) || [])[1] || '';
     let canonPath = '';
     try { canonPath = normPage(new URL(canon).pathname); } catch (e) {}

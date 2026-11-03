@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>留言與資料說明｜LOLO大叔不聽話</title>
+<meta name="description" content="LOLO大叔不聽話網站會處理哪些資料：留言存了什麼、怎麼過濾、天氣與字型由哪些服務提供，以及怎麼申請刪除留言。">
+<link rel="canonical" href="https://slzpt.com/privacy">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LOLO大叔不聽話">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="留言與資料說明｜LOLO大叔不聽話">
+<meta property="og:url" content="https://slzpt.com/privacy">
+<meta property="og:image" content="https://slzpt.com/assets/img/og-cover.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #ffffff; color: #232323; font-family: Inter, "Noto Sans TC", system-ui, sans-serif; font-size: 16px; line-height: 1.8; }
+a { color: #232323; text-underline-offset: 3px; }
+.page { max-width: 40em; margin: 0 auto; padding: 32px 24px 72px; }
+.back { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+h1 { font-size: 28px; line-height: 1.4; margin: 16px 0 8px; }
+.meta { font-size: 13px; color: #6b6b6b; margin: 0 0 32px; }
+h2 { font-size: 19px; line-height: 1.5; margin: 40px 0 12px; }
+p, li { margin: 0 0 12px; }
+ul { padding-left: 1.2em; margin: 0 0 16px; }
+.box { background: #f6f6f6; border-radius: 8px; padding: 16px 18px; margin: 0 0 16px; }
+code { font-size: .9em; background: #f2f2f2; border-radius: 4px; padding: 1px 5px; }
+</style>
+<link rel="stylesheet" href="/assets/mobile.css">
+</head>
+<body>
+<main class="page">
+  <a class="back" href="/">← 回到首頁</a>
+  <h1>留言與資料說明</h1>
+  <p class="meta"><time datetime="2026-11-03">2026.11.03</time> 更新</p>
+
+  <div class="box">
+    <p>簡單說：這個網站不用註冊、沒有會員。只有你<b>自己按下「送出留言」</b>時，才會把你填的暱稱和留言存起來；其他功能（天氣、字型）會經過第三方服務，下面逐項說明。</p>
+  </div>
+
+  <h2>留言會存什麼？</h2>
+  <p>你送出留言時，網站會存下：</p>
+  <ul>
+    <li>你填的<b>暱稱</b>與<b>留言內容</b>（會公開顯示在那篇文章下面）</li>
+    <li>留言的文章、時間</li>
+    <li>自動過濾的結果（通過或被擋下，以及判斷原因）</li>
+    <li>一組由「IP 位址＋當天日期」計算出來的<b>雜湊值</b>，只用來限制洗版（例如 10 分鐘內最多 3 則）。網站<b>不儲存原始 IP 位址</b>。</li>
+  </ul>
+  <p>請不要在留言裡寫電話、病歷、身分證字號等個人資料。為了保護隱私，含電話號碼或網址的留言會被直接拒收。</p>
+
+  <h2>留言怎麼過濾？</h2>
+  <p>先用規則檢查（廣告關鍵字、連結、電話、重複洗版），再把<b>暱稱、留言內容與該篇文章的標題摘要</b>交給 Cloudflare 的 Workers AI 模型判斷是不是廣告、無關或攻擊性內容。被擋下的留言會保留紀錄但<b>不會公開</b>。</p>
+  <p>如果覺得被誤擋，可以到 Instagram <a href="https://www.instagram.com/hi_ptkong/" target="_blank" rel="noopener">@hi_ptkong</a> 告訴我。</p>
+
+  <h2>留言會保留多久？可以刪掉嗎？</h2>
+  <p>目前沒有設定自動刪除。想刪除自己的公開留言，請透過 Instagram <a href="https://www.instagram.com/hi_ptkong/" target="_blank" rel="noopener">@hi_ptkong</a> 告訴我是哪一篇文章、暱稱與大約留言時間，我確認後會處理。</p>
+
+  <h2>你的瀏覽器會記住什麼？</h2>
+  <p>留言成功後，你的<b>暱稱</b>會存在你自己瀏覽器的 <code>localStorage</code>（名稱 <code>engage-name</code>），下次留言時自動帶入。這份資料只在你的裝置上，不會送回網站；清除瀏覽器的網站資料就會刪掉。</p>
+
+  <h2>首頁的天氣</h2>
+  <p>首頁天氣使用 Cloudflare 依連線推估的<b>大略位置</b>（城市與大約座標，不會跳出定位授權），由網站伺服器把四捨五入到小數點後兩位的座標送給 <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> 查詢天氣。網站不儲存這些位置資料。</p>
+
+  <h2>其他第三方服務</h2>
+  <ul>
+    <li><b>Cloudflare</b>：網站架設在 Cloudflare Pages，所有連線都會經過 Cloudflare，並適用 Cloudflare 的隱私政策。</li>
+    <li><b>Google Fonts</b>：網站字型（Inter、Noto Sans TC）從 Google 的伺服器載入，你的瀏覽器會因此連線到 Google，適用 Google 的隱私政策。</li>
+    <li><b>分享按鈕</b>：只是連結。按下後才會開啟 Facebook、Threads、LINE 等網站，之後適用各網站的政策。</li>
+  </ul>
+
+  <h2>醫療內容提醒</h2>
+  <p>文章是衛教與學習筆記，不能取代面對面的評估與診斷。留言區無法提供個別的醫療建議。</p>
+</main>
+</body>
+</html>
