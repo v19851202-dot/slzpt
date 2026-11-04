@@ -127,7 +127,7 @@
     var li = el('li', { class: 'engage-item' + (c.is_owner ? ' is-owner' : '') + (highlight ? ' is-new' : '') });
     var head = el('div', { class: 'engage-head' });
     head.appendChild(el('b', null, c.name));
-    if (c.is_owner) head.appendChild(el('span', { class: 'engage-badge' }, '大叔'));
+    if (c.is_owner) head.appendChild(el('span', { class: 'engage-badge' }, '孔哥'));
     head.appendChild(el('time', { datetime: c.created_at }, fmt(c.created_at)));
     li.appendChild(head);
     li.appendChild(el('p', { class: 'engage-text' }, c.body));

@@ -101,7 +101,7 @@ a { color: var(--ink); }
   .hc, .hnav { left: 24px; right: 24px; }
 }
 
-/* 首頁「關於」：只留一句簡介，自我介紹收進「看大叔的自我介紹」，不搶文章版面 */
+/* 首頁「關於」：只留一句簡介，自我介紹收進「看孔哥的自我介紹」，不搶文章版面 */
 .about { margin-top: 56px; padding-top: 20px; max-width: 40em; }
 .about h2 { font-size: 15px; margin-bottom: 8px; }
 .about p.about-lead { font-size: 14px; line-height: 1.7; color: var(--ink-2); margin: 0 0 6px; }

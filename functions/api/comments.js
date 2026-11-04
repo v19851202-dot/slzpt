@@ -19,7 +19,7 @@ const AI_FALLBACK_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast';
 // 直接拒收（不儲存）：請留言者修改後再送
 const LINK_RE = /(https?:\/\/|www\.|\b[a-z0-9-]+\.(com|net|org|tw|cn|hk|io|xyz|top|vip|cc|me|ly|info|site|shop|club|app)\b|t\.me\/|bit\.ly|lin\.ee|line\.me)/i;
 const PHONE_RE = /(09\d{2}[-\s]?\d{3}[-\s]?\d{3}|\+?886[-\s]?9\d{2}[-\s]?\d{3}[-\s]?\d{3})/;
-const RESERVED_NAME_RE = /(lolo|大叔不聽話|站長|版主|管理員|admin)/i;
+const RESERVED_NAME_RE = /(lolo|大叔不聽話|孔哥|站長|版主|管理員|admin)/i;
 
 // 自動擋下（會儲存成 blocked，站長之後可以查）
 const SPAM_WORDS = [
@@ -100,10 +100,10 @@ function aiText(out) {
 async function aiCheck(env, info, name, body) {
   if (!env.AI) return { verdict: 'ok', source: 'no-ai' };
   const system =
-    '你是個人部落格的留言審核員。網站是物理治療師「LOLO大叔不聽話」的部落格，主題包含物理治療、運動傷害與復健、' +
+    '你是個人部落格的留言審核員。網站是物理治療師「孔哥不聽話」的部落格，主題包含物理治療、運動傷害與復健、' +
     '肌力與體能訓練（CSCS）、騎單車、爬山、露營，以及作者的生活心情。\n' +
     '請判斷一則留言能不能公開顯示，只回答 JSON：{"verdict":"ok"} 或 {"verdict":"spam"} 或 {"verdict":"offtopic"} 或 {"verdict":"abuse"}。\n' +
-    'ok：跟文章或網站主題有關的心得、提問、補充、不同意見、打招呼、感謝、鼓勵、聊騎車爬山露營或生活，就算很短（例如「謝謝分享」「大叔加油」）也算 ok；有禮貌的批評也算 ok。\n' +
+    'ok：跟文章或網站主題有關的心得、提問、補充、不同意見、打招呼、感謝、鼓勵、聊騎車爬山露營或生活，就算很短（例如「謝謝分享」「孔哥加油」）也算 ok；有禮貌的批評也算 ok。\n' +
     'spam：廣告、推銷、導流、詐騙、招募、要人加好友或留聯絡方式、SEO 垃圾文。\n' +
     'offtopic：跟文章、網站主題與作者完全無關的內容，例如政治口水、其他商品討論、亂碼、無意義字串、測試洗版。\n' +
     'abuse：人身攻擊、辱罵、仇恨、色情、威脅。\n' +
@@ -206,7 +206,7 @@ export async function onRequestPost({ request, env }) {
     return json({
       ok: false,
       blocked: true,
-      message: '這則留言沒有通過自動過濾（可能被判斷為廣告或與文章無關）。如果覺得判斷錯了，可以到 IG @hi_ptkong 跟大叔說。'
+      message: '這則留言沒有通過自動過濾（可能被判斷為廣告或與文章無關）。如果覺得判斷錯了，可以到 IG @hi_ptkong 跟孔哥說。'
     });
   }
   return json({
