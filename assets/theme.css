@@ -116,7 +116,3 @@ a { color: var(--ink); }
 .about p.about-link { font-size: 14px; margin: 4px 0 0; }
 .about-link a { border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
 
-/* 頂端導覽的 logo：黑底已轉成透明，疊在照片上只留下藍色光弧 */
-.tn-brand { gap: 10px; }
-.tn-brand img { height: 32px; width: auto; }
-@media (max-width: 600px) { .tn-brand img { height: 26px; } }
