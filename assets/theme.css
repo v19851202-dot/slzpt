@@ -100,3 +100,18 @@ a { color: var(--ink); }
   .topnav { padding: 8px 24px; }
   .hc, .hnav { left: 24px; right: 24px; }
 }
+
+/* 首頁「關於」：只留一句簡介，自我介紹收進「看大叔的自我介紹」，不搶文章版面 */
+.about { margin-top: 56px; padding-top: 20px; max-width: 40em; }
+.about h2 { font-size: 15px; margin-bottom: 8px; }
+.about p.about-lead { font-size: 14px; line-height: 1.7; color: var(--ink-2); margin: 0 0 6px; }
+.about-more { font-size: 14px; }
+.about-more summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--ink); border-bottom: 1px solid transparent; }
+.about-more summary::-webkit-details-marker { display: none; }
+.about-more summary::after { content: "+"; font-family: var(--mono); color: var(--ink-3); }
+.about-more[open] summary::after { content: "−"; }
+.about-more summary:hover { color: var(--ink-2); }
+.about-more summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.about-more p, .about-more li { font-size: 14px; line-height: 1.8; color: var(--ink-2); }
+.about p.about-link { font-size: 14px; margin: 4px 0 0; }
+.about-link a { border-bottom: 1px solid var(--ink); padding-bottom: 1px; }

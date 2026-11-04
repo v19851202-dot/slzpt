@@ -12,4 +12,7 @@
   .hnav { left: 16px; right: 16px; gap: 0 10px; bottom: 8px; }
   .hn { font-size: 11px; }
   .wrap { padding-top: 20px; }
+  .about { margin-top: 32px; padding-top: 16px; }
+  .about h2 { font-size: 1rem; }
+  .about p.about-lead, .about-more summary, .about p.about-link { font-size: 1rem; }
 }
