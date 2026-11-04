@@ -1,0 +1,88 @@
+/* ===== 2026-11 黑白極簡主題（參考 maurten.com 的配色與排版） =====
+   參考網站實測的樣式（2026-11-04 以瀏覽器讀取 computed style）：
+   - 文字近黑 #050505、底色 #FAFAFA／#FFFFFF、次要文字 #666 / #767676、分隔線與底欄 #E6E6E6
+   - 字重一律 400，大標 24–32px、略收字距；按鈕不填色，用「文字＋1px 底線＋→」
+   - 直角、細線分隔，少量等寬字體點綴
+   本站改動：不用大型輪播照片與動畫；背景改用 Hilux 照片（黑白、壓淡）。
+   背景照片放在 /assets/img/hilux-bg.webp，檔案不存在時自動退回純淺灰底。 */
+
+:root {
+  --ink: #050505;
+  --ink-2: #666666;
+  --ink-3: #767676;
+  --paper: #fafafa;
+  --line: #e6e6e6;
+  --card: rgba(255, 255, 255, .86);
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+body { background: var(--paper); color: var(--ink); font-size: 15px; letter-spacing: 0; }
+a { color: var(--ink); }
+.muted, .meta, .note-sub, .clock-date, .wx-credit { color: var(--ink-2); }
+
+/* 背景：Hilux 照片，固定不捲動、黑白、上面蓋一層淺灰讓文字好讀 */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(rgba(250, 250, 250, .82), rgba(250, 250, 250, .90)),
+    url("/assets/img/hilux-bg.webp") center 60% / cover no-repeat;
+  filter: grayscale(1);
+}
+
+/* 頁首與側欄：細字、不加粗 */
+.brand { font-size: 15px; font-weight: 400; letter-spacing: -.01em; }
+.side { font-size: 14px; }
+.side a:hover, .ig:hover span { text-decoration: none; }
+.side nav a, .ig span { border-bottom: 1px solid transparent; }
+.side nav a:hover, .ig:hover span { border-bottom-color: var(--ink); }
+.avatar { border-radius: 0; background: var(--line); }
+.search input { border-radius: 0; background: rgba(255, 255, 255, .7); border: 0; border-bottom: 1px solid var(--line); padding-left: 0; padding-right: 0; }
+.search input:focus { background: transparent; border-bottom-color: var(--ink); }
+
+/* 語錄、時鐘、天氣：當成一條細資訊列 */
+.top-row { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.ticker { font-size: 22px; letter-spacing: -.01em; }
+.fd { font-weight: 400; font-family: var(--mono); color: var(--ink); }
+.fd .h { background: transparent; }
+.fd::after { display: none; }
+.clock-date, .wx-text { font-family: var(--mono); font-size: 11px; letter-spacing: .02em; }
+.wx-now { font-weight: 400; }
+
+/* 分類：文字頁籤＋細底線，細項改成直角小方塊 */
+.tabs { gap: 0 28px; margin-top: 40px; border-bottom: 1px solid var(--line); }
+.tab { font-size: 14px; color: var(--ink-3); border-bottom: 1px solid transparent; margin-bottom: -1px; }
+.tab:hover, .tab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.subtabs { margin-top: 12px; }
+.subtab { border-radius: 0; background: transparent; border: 1px solid var(--line); color: var(--ink-2); }
+.subtab:hover { background: rgba(255, 255, 255, .8); color: var(--ink); border-color: #cccccc; }
+.subtab[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #ffffff; }
+
+/* 貼文卡：直角、半透明白底、細框；標題細字大一點 */
+.grid { gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.tile { border-radius: 0; }
+.imgpost, .notepost { background: var(--card); border: 0; }
+.imgpost:hover, .notepost:hover { background: #ffffff; border-color: transparent; }
+.imgpost img { filter: grayscale(1); }
+.meta { font-family: var(--mono); font-size: 11px; letter-spacing: .02em; text-transform: uppercase; }
+.note-title { font-size: 22px; font-weight: 400; line-height: 1.35; letter-spacing: -.01em; }
+.note-sub { font-size: 14px; }
+.note-more { align-self: flex-start; padding-bottom: 1px; border-bottom: 1px solid var(--ink); }
+.notepost .note-more { padding-top: 0; margin-top: auto; }
+.notepost:hover .note-more { color: var(--ink-2); border-bottom-color: var(--ink-2); }
+
+/* 關於 */
+.about { border-top: 1px solid var(--line); }
+.about h2 { font-size: 24px; font-weight: 400; letter-spacing: -.01em; }
+.about strong { font-weight: 500; }
+.m-foot { border-top-color: var(--line); }
+
+/* 跳出的完整貼文 */
+.post-dialog { border-radius: 0; color: var(--ink); }
+.post-dialog .pd-close { border-radius: 0; background: rgba(255, 255, 255, .95); }
+
+/* 減少動畫：天氣小人改成靜態、細項按鈕不做進場動畫、時鐘只換數字不翻頁 */
+.wx-guy * { animation: none !important; }
+.subtab { animation: none; }
+.fd .ft, .fd .fb, .fd .b { display: none; }
+.fd .t { height: 100%; }
+.tab .caret { transition: none; }
