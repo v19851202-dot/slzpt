@@ -94,17 +94,15 @@ a { color: var(--ink); }
 @keyframes hn-fill { to { transform: scaleX(1); } }
 .hn:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
 .hn span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.hero-toggle, .hero-skip { position: absolute; z-index: 4; right: 48px; min-height: 44px; display: inline-flex; align-items: center; color: #fff; font: inherit; font-size: 14px; }
-.hero-toggle { top: 82px; padding: 0 12px; background: rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.7); cursor: pointer; }
-.hero-toggle[hidden] { display: none; }
+.hero-skip { position: absolute; z-index: 4; right: 48px; min-height: 44px; display: inline-flex; align-items: center; color: #fff; font: inherit; font-size: 14px; }
 .hero-skip { bottom: 76px; text-underline-offset: 5px; }
-.hero-toggle:focus-visible, .hero-skip:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.hero-skip:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .wrap { padding-top: 56px; }
 @media (prefers-reduced-motion: reduce) { .slide, .slide.is-on { transition: none; } .hn.run i::after { animation: none; transform: scaleX(1); } }
 @media (max-width: 900px) {
   .topnav { padding: 8px 24px; }
   .hc, .hnav { left: 24px; right: 24px; }
-  .hero-toggle, .hero-skip { right: 24px; }
+  .hero-skip { right: 24px; }
 }
 
 /* 首頁「關於」：只留一句簡介，自我介紹收進「看孔哥的自我介紹」，不搶文章版面 */

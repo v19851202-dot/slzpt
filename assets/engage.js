@@ -71,9 +71,6 @@
   var empty = el('p', { class: 'engage-empty' }, '還沒有人留言，搶頭香吧！');
   box.appendChild(list);
   box.appendChild(empty);
-  var more = el('button', { type: 'button', class: 'engage-btn' }, '載入更多留言');
-  more.hidden = true;
-  box.appendChild(more);
 
   var form = el('form', { class: 'engage-form', novalidate: '' });
   var nameWrap = el('div', { class: 'engage-field' });
@@ -92,7 +89,7 @@
   trap.appendChild(el('label', { for: 'engage-website' }, '網站（請留空）'));
   trap.appendChild(el('input', { id: 'engage-website', name: 'website', type: 'text', tabindex: '-1', autocomplete: 'off' }));
   var note = el('p', { class: 'engage-note' },
-    '留言通過審核後會公開暱稱與內容，請不要留下電話、病歷等個人資料。這裡無法提供個別的醫療建議。審核服務忙碌時，留言會先保留待審。');
+    '留言會公開顯示暱稱與內容，請不要留下電話、病歷等個人資料。這裡無法提供個別的醫療建議。廣告與無關留言會被自動過濾。');
   note.appendChild(document.createTextNode(' '));
   note.appendChild(el('a', { href: '/privacy' }, '留言與資料說明'));
   var send = el('button', { type: 'submit', class: 'engage-btn engage-primary' }, '送出留言');
@@ -122,51 +119,27 @@
       String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
   }
   var count = 0;
-  var seen = new Set();
   function setCount() {
     h.textContent = count ? '留言（' + count + '）' : '留言';
     empty.hidden = count > 0;
   }
   function add(c, highlight) {
-    if (seen.has(c.id)) return;
-    seen.add(c.id);
     var li = el('li', { class: 'engage-item' + (c.is_owner ? ' is-owner' : '') + (highlight ? ' is-new' : '') });
-    li.dataset.commentId = c.id;
     var head = el('div', { class: 'engage-head' });
     head.appendChild(el('b', null, c.name));
     if (c.is_owner) head.appendChild(el('span', { class: 'engage-badge' }, '孔哥'));
     head.appendChild(el('time', { datetime: c.created_at }, fmt(c.created_at)));
     li.appendChild(head);
     li.appendChild(el('p', { class: 'engage-text' }, c.body));
-    var before = Array.from(list.children).find(function (item) { return Number(item.dataset.commentId) > c.id; });
-    list.insertBefore(li, before || null);
+    list.appendChild(li);
     count++;
     setCount();
   }
 
-  var nextCursor = null;
-  function loadComments() {
-    more.disabled = true;
-    more.textContent = '載入中…';
-    fetch('/api/comments?page=' + enc(page) + (nextCursor ? '&after=' + nextCursor : ''), { headers: { accept: 'application/json' } })
-      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function (d) {
-        (d.comments || []).forEach(function (c) { add(c); });
-        nextCursor = d.nextCursor || null;
-        setCount();
-        empty.textContent = '還沒有人留言，搶頭香吧！';
-        more.hidden = !nextCursor;
-        more.textContent = '載入更多留言';
-      })
-      .catch(function () {
-        if (!count) empty.textContent = '留言暫時載入不了，稍後再試。';
-        more.hidden = false;
-        more.textContent = '重新載入留言';
-      })
-      .then(function () { more.disabled = false; });
-  }
-  more.addEventListener('click', loadComments);
-  loadComments();
+  fetch('/api/comments?page=' + enc(page), { headers: { accept: 'application/json' } })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (d) { (d.comments || []).forEach(function (c) { add(c); }); setCount(); })
+    .catch(function () { empty.textContent = '留言暫時載入不了，稍後再試。'; });
 
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
@@ -185,11 +158,11 @@
     })
       .then(function (r) { return r.json().catch(function () { return {}; }); })
       .then(function (d) {
-        if (d.ok && (d.comment || d.pending)) {
-          if (d.comment) add(d.comment, true);
+        if (d.ok && d.comment) {
+          add(d.comment, true);
           bodyIn.value = '';
           counter.textContent = '0/500';
-          msg.textContent = d.pending ? d.message : '留言成功，謝謝你！';
+          msg.textContent = '留言成功，謝謝你！';
           msg.className = 'engage-msg is-ok';
           try { localStorage.setItem('engage-name', name); } catch (e) {}
         } else {

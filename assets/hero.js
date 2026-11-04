@@ -3,13 +3,10 @@
   if (!hero) return;
   var slides = Array.from(hero.querySelectorAll('.slide'));
   var tabs = Array.from(hero.querySelectorAll('.hn'));
-  var toggle = hero.querySelector('.hero-toggle');
   var reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  var mobile = matchMedia('(max-width: 900px)');
-  var connection = navigator.connection;
-  var current = 0, timer = 0, inView = false, focused = false, hovered = false, stopped = false;
-  function quiet() { return reduced.matches || mobile.matches || Boolean(connection && connection.saveData); }
-  function running() { return !quiet() && !document.hidden && inView && !focused && !hovered && !stopped; }
+  var current = 0, timer = 0;
+  // 手機與電腦都自動輪播、播放影片；只有分頁在背景或系統設定「減少動態效果」時才停。
+  function running() { return !reduced.matches && !document.hidden; }
   function stopMedia() {
     clearTimeout(timer);
     slides.forEach(function (slide) { var video = slide.querySelector('video'); if (video) video.pause(); });
@@ -17,13 +14,11 @@
   }
   function refresh() {
     stopMedia();
-    toggle.hidden = quiet();
-    toggle.textContent = stopped ? '播放輪播' : '暫停輪播';
     if (!running()) return;
     var slide = slides[current], video = slide.querySelector('video');
     if (video) {
       var source = video.querySelector('source');
-      // 未允許播放前，不提供 MP4 src，手機及省流量模式只載入封面。
+      // 輪到這張時才載入 MP4，先顯示封面圖。
       if (!source.hasAttribute('src')) { source.src = source.dataset.src; video.load(); }
       video.preload = 'auto';
       var result = video.play();
@@ -62,19 +57,8 @@
       event.preventDefault(); select(next); tabs[next].focus();
     });
   });
-  toggle.addEventListener('click', function () { stopped = !stopped; refresh(); });
-  hero.addEventListener('focusin', function () { focused = true; refresh(); });
-  hero.addEventListener('focusout', function (event) { focused = hero.contains(event.relatedTarget); refresh(); });
-  hero.addEventListener('mouseenter', function () { hovered = true; refresh(); });
-  hero.addEventListener('mouseleave', function () { hovered = false; refresh(); });
   document.addEventListener('visibilitychange', refresh);
   reduced.addEventListener('change', refresh);
-  mobile.addEventListener('change', refresh);
-  if (connection && connection.addEventListener) connection.addEventListener('change', refresh);
-  if ('IntersectionObserver' in window) {
-    // 至少一半仍在視窗內才自動播放，避免只剩一小角時繼續耗電。
-    new IntersectionObserver(function (entries) { inView = entries[0].intersectionRatio >= 0.5; refresh(); }, { threshold: 0.5 }).observe(hero);
-  } // 不支援 IntersectionObserver 時維持靜態封面，手動切換仍可用。
   select(0);
 
   document.querySelectorAll('.topnav [data-go]').forEach(function (link) {
