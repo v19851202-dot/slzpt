@@ -1,26 +1,25 @@
-# Cloudflare Pages 靜態檔案回應標頭（不會套用到 functions/ 產生的 API 回應；API 標頭寫在 functions 程式裡）
-# 說明：https://developers.cloudflare.com/pages/configuration/headers/
-#
-# CSP 分兩層：
-# 1. Content-Security-Policy（強制）：只放不會影響現有功能的規則——禁止被其他網站嵌入、禁止 <object>、限制 <base> 與表單送出目標。
-# 2. Content-Security-Policy-Report-Only（只監測）：完整來源白名單。違規只會出現在瀏覽器主控台，不會擋任何東西。
-#    觀察一段時間確認沒有誤擋後，再把第 2 行的規則合併進第 1 行。
-#    頁面有 inline <script> 與 <style>，所以目前必須保留 'unsafe-inline'；日後把 inline 程式搬到外部檔案才能拿掉。
-#
-# HSTS：先用 1 天（86400 秒）觀察，確認 slzpt.com 憑證與轉址都正常後，再逐步拉長（例如 1 週 → 1 個月 → 1 年）。
-#       刻意不加 includeSubDomains 與 preload。
-
+# 靜態頁強制 CSP；執行程式已移至同源外部檔案，不允許 inline JS 或 eval。
+# 樣式仍有 inline style，保留 style-src unsafe-inline，不放寬 script-src。
+# Functions 另外在程式回應設定適用標頭。HSTS 維持觀察期 1 天。
 /*
   Strict-Transport-Security: max-age=86400
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
-  Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'inline-speculation-rules' https://static.cloudflareinsights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://cloudflareinsights.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests
 
 /assets/*
   Cache-Control: public, max-age=3600
 
 /assets/img/*
   Cache-Control: public, max-age=604800
+
+/assets/scripts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+https://slzpt.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.slzpt.pages.dev/*
+  X-Robots-Tag: noindex

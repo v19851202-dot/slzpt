@@ -372,7 +372,7 @@ details.refs-box[open] .refs-hint { display: none; }
 .related .cur::after { content: "（本篇）"; font-size: 13px; margin-left: 2px; white-space: nowrap; }
 </style>
 <link rel="stylesheet" href="/assets/engage.css">
-<script src="/assets/engage.js" defer></script>
+<script src="/assets/engage.js?v=20261104-security1" defer></script>
 <link rel="stylesheet" href="/assets/mobile.css">
 </head>
 <body>
@@ -589,77 +589,8 @@ details.refs-box[open] .refs-hint { display: none; }
     <a class="cs-all" href="#refs">查看全部參考文獻 →</a>
   </div>
 </div>
-<script>
-window.rvInitCite = function initCite() {
-  var KEY = 'slzpt-show-cites';
-  var root = document.documentElement;
-  var sheet = document.getElementById('cite-sheet');
-  var body = sheet.querySelector('.cs-body');
-  var label = sheet.querySelector('.cs-label');
-  var lastTrigger = null;
-  function getPref() { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
-  function setPref(v) { try { localStorage.setItem(KEY, v ? '1' : '0'); } catch (e) {} }
-  function apply(show) {
-    root.classList.toggle('hide-cites', !show);
-    var btns = document.querySelectorAll('.cite-toggle');
-    for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', show ? 'true' : 'false');
-  }
-  function openRefs() { var d = document.getElementById('refs'); if (d) d.open = true; }
-  function closeSheet() {
-    sheet.hidden = true;
-    if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
-  }
-  function openSheet(n, trigger) {
-    var li = document.getElementById('ref-' + n);
-    if (!li) return;
-    body.innerHTML = li.innerHTML;
-    label.textContent = '文獻 ' + n;
-    lastTrigger = trigger;
-    sheet.hidden = false;
-    sheet.querySelector('.cs-close').focus();
-  }
-  function onClick(e) {
-    var t = e.target;
-    var ref = t.closest && t.closest('sup.cref a');
-    if (ref) { e.preventDefault(); openSheet(ref.getAttribute('data-ref'), ref); return; }
-    var tog = t.closest && t.closest('.cite-toggle');
-    if (tog) { var show = tog.getAttribute('aria-pressed') !== 'true'; apply(show); setPref(show); return; }
-    if (t.closest && t.closest('.cs-close')) { closeSheet(); return; }
-    if (t.closest && t.closest('.cs-all')) { openRefs(); closeSheet(); return; }
-    if (!sheet.hidden && !(t.closest && t.closest('.cs-card'))) closeSheet();
-  }
-  function onKey(e) { if (e.key === 'Escape' && !sheet.hidden) closeSheet(); }
-  function onHash() { if (/^#ref-\d+$/.test(location.hash) || location.hash === '#refs') openRefs(); }
-  if (!window.__citeBound) {
-    document.addEventListener('click', onClick);
-    document.addEventListener('keydown', onKey);
-    window.addEventListener('hashchange', onHash);
-    window.__citeBound = true;
-  }
-  apply(getPref());
-  onHash();
-};
-window.rvInitCite();
-</script>
+<script src="/assets/scripts/references-fcb381a469bc.js"></script>
 
-<script>
-(function () {
-  var lab = document.getElementById('cmp-lab');
-  var table = document.getElementById('cmp-table');
-  if (!lab || !table) return;
-  var btns = lab.querySelectorAll('[data-goal]');
-  function show(goal) {
-    var row = table.querySelector('tr[data-goal="' + goal + '"]');
-    if (!row) return;
-    var td = row.querySelectorAll('td');
-    document.getElementById('vs-acsm').textContent = td[1].textContent.trim();
-    document.getElementById('vs-nsca').textContent = td[2].textContent.trim();
-    table.querySelectorAll('tbody tr').forEach(function (r) { r.classList.toggle('is-on', r === row); });
-    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-goal') === goal ? 'true' : 'false'); });
-  }
-  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-goal')); }); });
-  show('strength');
-})();
-</script>
+<script src="/assets/scripts/acsm-vs-nsca-resistance-training-2-8d403c89de47.js"></script>
 </body>
 </html>

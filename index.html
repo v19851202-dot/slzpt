@@ -73,188 +73,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
-<style>
-*, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: #ffffff; color: #232323; font-family: Inter, "Noto Sans TC", system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
-a { color: #232323; text-decoration: none; }
-img { display: block; }
-.wrap { display: flex; flex-wrap: wrap; gap: 40px 48px; padding: 32px 24px 48px; max-width: 1440px; margin: 0 auto; }
-.side { flex: 1 1 200px; max-width: 240px; display: flex; flex-direction: column; gap: 20px; font-size: 13px; }
-.side nav { display: flex; flex-direction: column; }
-.side nav a { padding: 4px 0; }
-.side a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: #f2f2f2; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
-.muted { color: #6b6b6b; }
-main { flex: 999 1 560px; min-width: 0; }
-.clock { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 0 auto; }
-.clock-date { font-size: 12px; }
-.fc { display: inline-flex; align-items: center; gap: 3px; }
-.fc .sep { display: inline-flex; flex-direction: column; gap: 6px; padding: 0 2px; }
-.fc .sep i { width: 3px; height: 3px; border-radius: 50%; background: #9a9a9a; }
-.fd { position: relative; width: 22px; height: 32px; perspective: 120px; font-family: Inter, system-ui, sans-serif; font-size: 21px; font-weight: 600; color: #232323; font-variant-numeric: tabular-nums; }
-.fd .h { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; background: #f0f0f0; backface-visibility: hidden; }
-.fd .h span { position: absolute; left: 0; right: 0; height: 32px; line-height: 32px; text-align: center; }
-.fd .t { top: 0; border-radius: 4px 4px 0 0; }
-.fd .t span { top: 0; }
-.fd .b { bottom: 0; border-radius: 0 0 4px 4px; }
-.fd .b span { bottom: 0; }
-.fd::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #ffffff; z-index: 4; }
-.fd .ft { z-index: 3; transform-origin: 50% 100%; }
-.fd .fb { z-index: 3; transform-origin: 50% 0; transform: rotateX(90deg); }
-.fd.go .ft { animation: flip-top .22s ease-in forwards; background: #e9e9e9; }
-.fd.go .fb { animation: flip-bottom .22s ease-out .22s forwards; }
-@keyframes flip-top { to { transform: rotateX(-90deg); } }
-@keyframes flip-bottom { to { transform: rotateX(0deg); } }
-@media (prefers-reduced-motion: reduce) { .fd .ft, .fd .fb { display: none; } }
-.widgets { display: contents; }
-.menu-btn { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 8px; background: none; color: #232323; cursor: pointer; }
-.menu-btn:hover { background: #f2f2f2; }
-.menu-btn:focus-visible { outline: 2px solid #232323; outline-offset: 2px; }
-.menu-btn .mb-close { display: none; }
-.side.is-open .menu-btn .mb-open { display: none; }
-.side.is-open .menu-btn .mb-close { display: block; }
-.top-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
-.top-row .ticker { flex: 1 1 320px; min-width: 0; }
-.wx { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-.wx-guy { color: #232323; overflow: visible; }
-.wx-text { font-size: 12px; line-height: 1.5; }
-.wx-now { font-size: 13px; font-weight: 500; }
-.wx-mood { color: #232323; }
-.wx-credit { font-size: 11px; color: #767676; }
-.m-foot { display: none; flex-direction: column; gap: 4px; margin-top: 40px; padding-top: 16px; border-top: 1px solid #e6e6e6; font-size: 13px; color: #6b6b6b; }
-.m-foot .wx-credit { font-size: 13px; }
-.wx-credit a { color: #767676; text-decoration: underline; text-underline-offset: 2px; }
-.wx-guy .bob { animation: wx-bob 2.4s ease-in-out infinite; transform-origin: 32px 58px; }
-.wx-guy .wave { animation: wx-wave 1.2s ease-in-out infinite; transform-origin: 32px 28px; }
-.wx-guy .fan { animation: wx-wave .5s ease-in-out infinite; transform-origin: 32px 28px; }
-.wx-guy .shake { animation: wx-shake .25s linear infinite; transform-origin: 32px 40px; }
-.wx-guy .shiver { animation: wx-shiver .18s linear infinite; }
-.wx-guy .fall { animation: wx-fall 1s linear infinite; }
-.wx-guy .fall.d2 { animation-delay: .33s; } .wx-guy .fall.d3 { animation-delay: .66s; }
-.wx-guy .flash { animation: wx-flash 1.6s steps(1) infinite; }
-.wx-guy .drift { animation: wx-drift 3s ease-in-out infinite; }
-.wx-guy .float { animation: wx-float 2.4s ease-in-out infinite; }
-.wx-guy .drip { animation: wx-drip 1.4s ease-in infinite; }
-.wx-guy .spin { animation: wx-spin 8s linear infinite; transform-origin: 54px 10px; }
-@keyframes wx-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
-@keyframes wx-wave { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg); } }
-@keyframes wx-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-1px); } 75% { transform: translateX(1px); } }
-@keyframes wx-shiver { 0%,100% { transform: translateX(0); } 50% { transform: translateX(.8px); } }
-@keyframes wx-fall { from { transform: translateY(-6px); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(14px); opacity: 0; } }
-@keyframes wx-flash { 0%,60% { opacity: 1; } 61%,100% { opacity: .15; } }
-@keyframes wx-drift { 0%,100% { transform: translateX(-2px); } 50% { transform: translateX(3px); } }
-@keyframes wx-float { 0% { transform: translateY(2px); opacity: .2; } 50% { opacity: 1; } 100% { transform: translateY(-6px); opacity: 0; } }
-@keyframes wx-drip { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
-@keyframes wx-spin { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .wx-guy * { animation: none !important; } }
-.ticker { position: relative; height: 1.7em; font-size: 17px; line-height: 1.7; overflow: hidden; }
-.ticker ul { list-style: none; margin: 0; padding: 0; }
-.ticker li { position: absolute; left: 0; right: 0; top: 0; opacity: 0; transform: translateY(-100%); transition: transform .6s ease, opacity .6s ease; }
-.ticker li.is-on { opacity: 1; transform: translateY(0); }
-.ticker li.is-out { opacity: 0; transform: translateY(100%); }
-@media (max-width: 600px) { .ticker { height: 3.4em; } }
-@media (prefers-reduced-motion: reduce) { .ticker li { transition: none; } }
-.tabs { display: flex; flex-wrap: wrap; gap: 0 20px; margin: 48px 0 8px; }
-.tab { font: inherit; font-size: 13px; background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer; color: #767676; }
-.tab:hover, .tab[aria-pressed="true"] { color: #232323; }
-.tab .caret { display: inline-block; margin-left: 3px; font-size: 9px; vertical-align: 1px; transition: transform .2s ease; }
-.tab[aria-pressed="true"] .caret { transform: rotate(180deg); }
-.subtabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; }
-.subtabs[hidden] { display: none !important; }
-.subtab { font: inherit; font-size: 12px; color: #6b6b6b; background: #f4f4f4; border: 1px solid transparent; border-radius: 999px; padding: 6px 12px; min-height: 32px; cursor: pointer; animation: sub-in .2s ease both; }
-.subtab:hover { color: #232323; background: #ececec; }
-.subtab[aria-pressed="true"] { color: #ffffff; background: #232323; }
-.subtab:focus-visible, .tab:focus-visible { outline: 2px solid #232323; outline-offset: 2px; }
-.subtab .n { margin-left: 4px; opacity: .6; font-variant-numeric: tabular-nums; }
-@keyframes sub-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .subtab { animation: none; } .tab .caret { transition: none; } }
-@media (max-width: 600px) { .subtabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px 12px; padding: 0 16px; } .subtabs::-webkit-scrollbar { display: none; } .subtab { flex: 0 0 auto; min-height: 36px; } }
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.tile { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; padding: 16px; }
-.imgpost { background: #ffffff; border: 1px solid #e6e6e6; gap: 10px; cursor: pointer; }
-.imgpost:hover { border-color: #cfcfcf; }
-.imgpost:focus-visible { outline: 2px solid #232323; outline-offset: 2px; }
-.imgpost img { width: 100%; flex: 1 1 auto; min-height: 0; object-fit: contain; }
-.imgpost .post-text { font-size: 14px; line-height: 1.6; margin: 4px 0 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
-.post-dialog { border: 0; border-radius: 12px; padding: 0; width: min(560px, calc(100% - 32px)); max-height: calc(100% - 32px); color: #232323; }
-.post-dialog::backdrop { background: rgba(20, 20, 20, .55); }
-.post-dialog .pd-body { padding: 20px 20px 24px; }
-.post-dialog img { display: block; width: 100%; height: auto; background: #ffffff; }
-.post-dialog .post-text { font-size: 15px; line-height: 1.8; }
-.post-dialog .pd-close { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); font-size: 22px; line-height: 1; cursor: pointer; color: #232323; }
-.post-dialog .pd-close:focus-visible { outline: 2px solid #232323; }
-.meta { font-size: 12px; color: #6b6b6b; }
-.post-text { font-size: 15px; line-height: 1.7; margin: 8px 0 0; }
-.notepost { background: #f6f6f6; justify-content: space-between; color: #232323; }
-.notepost:hover { background: #efefef; }
-.note-title { font-size: 20px; line-height: 1.4; font-weight: 700; margin: 0; }
-.note-sub { font-size: 13px; color: #6b6b6b; margin: 8px 0 0; }
-.note-more { font-size: 13px; }
-@media (max-width: 480px) { .note-title { font-size: 16px; } .note-sub { display: none; } }
-.search input { width: 100%; font: inherit; font-size: 13px; color: #232323; background: #f5f5f5; border: 1px solid transparent; border-radius: 8px; padding: 10px 12px; min-height: 44px; }
-.search input::placeholder { color: #767676; }
-.search input:focus { outline: none; border-color: #232323; background: #ffffff; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.about { max-width: 36em; margin: 96px 0 0; padding-top: 32px; border-top: 1px solid #e6e6e6; scroll-margin-top: 24px; }
-.about h2 { font-size: 15px; font-weight: 600; margin: 0 0 20px; }
-.about p, .about li { font-size: 15px; line-height: 1.85; }
-.about p { margin: 0 0 16px; }
-.about ul { margin: 0 0 16px; padding-left: 1.2em; }
-.about li { margin-bottom: 6px; }
-.about strong { font-weight: 600; }
-.ig { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; align-self: flex-start; }
-.ig:hover span { text-decoration: underline; text-underline-offset: 3px; }
-.empty { font-size: 13px; color: #6b6b6b; padding: 48px 0; }
-[hidden] { display: none !important; }
-@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-/* ===== 2026-11 稽核修正 ===== */
-.brand { font-size: 14px; font-weight: 600; line-height: 1.5; margin: 0; }
-.side .copy { font-size: 12px; }
-.ticker-wrap { display: flex; align-items: center; gap: 8px; flex: 1 1 320px; min-width: 0; }
-.ticker-wrap .ticker { flex: 1 1 auto; min-width: 0; }
-.ticker-pause { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%; background: none; color: #9a9a9a; cursor: pointer; }
-.ticker-pause:hover { color: #232323; background: #f2f2f2; }
-.ticker-pause:focus-visible { outline: 2px solid #232323; outline-offset: 2px; }
-.ticker-pause .tp-play { display: none; }
-.ticker-pause[aria-pressed="true"] .tp-pause { display: none; }
-.ticker-pause[aria-pressed="true"] .tp-play { display: block; }
-/* 細分類：14px、44px 高 */
-.subtab { font-size: 14px; min-height: 44px; padding: 8px 14px; }
-/* 專業文章卡：不再固定正方形；標題、摘要、閱讀入口上下排，入口固定留 14px 間距 */
-.notepost { aspect-ratio: auto; min-height: 220px; gap: 14px; }
-.notepost .note-more { margin-top: auto; padding-top: 14px; }
-/* 平板 601–900px：側欄改成橫向緊湊頁首，內容直接接在下面 */
-@media (min-width: 601px) and (max-width: 900px) {
-  .wrap { gap: 20px; padding: 20px 24px 48px; }
-  .side { flex: 1 1 100%; max-width: none; display: grid; grid-template-columns: 48px minmax(0, 1fr) minmax(200px, 260px); grid-template-rows: auto auto; column-gap: 14px; row-gap: 4px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid #eeeeee; }
-  .side .avatar { grid-column: 1; grid-row: 1 / span 2; }
-  .side > div:nth-of-type(2) { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
-  .side .search { grid-column: 3; grid-row: 1; }
-  .side nav { grid-column: 3; grid-row: 2; flex-direction: row; flex-wrap: wrap; gap: 0 14px; }
-  .side nav a { padding: 6px 0; min-height: 32px; display: inline-flex; align-items: center; }
-  .side .ig, .side .copy, .side > .wx-credit { display: none !important; }
-  .m-foot { display: flex !important; }
-  .tabs { margin-top: 20px; }
-  .top-row { gap: 12px 24px; }
-}
-@media (max-width: 600px) {
-  /* 手機版 A：單欄。專業文章是橫向文字卡（標題、摘要、入口），心情貼文的圖不再撐成正方形 */
-  .grid { grid-template-columns: minmax(0, 1fr) !important; gap: 10px; }
-  .imgpost { aspect-ratio: auto; }
-  .imgpost img { flex: 0 0 auto; aspect-ratio: 4 / 3; height: auto; max-height: 240px; }
-  .notepost { min-height: 0; padding: 16px; }
-  .note-title { font-size: 1.1875rem !important; }
-  .note-sub { display: block !important; font-size: 0.9375rem; line-height: 1.6; margin-top: 6px; }
-  .notepost .note-more { padding-top: 4px; }
-  .ticker-wrap { grid-column: 1 / -1; }
-  .grid .imgpost .post-text { font-size: 0.9375rem; -webkit-line-clamp: 2; line-clamp: 2; }
-}
-@media (max-width: 480px) { .tile { padding: 12px; } .post-text { font-size: 14px; } .imgpost { gap: 6px; } .imgpost .post-text { font-size: 12px; -webkit-line-clamp: 1; line-clamp: 1; } }
-</style>
-<link rel="stylesheet" href="/assets/theme.css?v=20261104e">
+<link rel="stylesheet" href="/assets/home-base.css?v=20261104-security1">
+<link rel="stylesheet" href="/assets/theme.css?v=20261104-security1">
 <link rel="stylesheet" href="/assets/mobile.css">
-<link rel="stylesheet" href="/assets/theme-m.css?v=20261104e">
+<link rel="stylesheet" href="/assets/theme-m.css?v=20261104-security1">
 </head>
 <body>
 <header class="topnav" aria-label="網站導覽">
@@ -273,7 +95,7 @@ main { flex: 999 1 560px; min-width: 0; }
 <!-- 首頁大圖輪播：影片與照片都放在 /assets/hero/。每張投影片一個 .slide，底下的 .hn 按鈕順序要一致 -->
 <section class="hero" aria-label="精選內容" aria-roledescription="輪播">
   <div class="slide is-on" data-dur="9000">
-    <video class="hm" muted playsinline loop preload="metadata" poster="/assets/hero/beach.webp?v=2" aria-hidden="true"><source src="/assets/hero/beach.mp4?v=2" type="video/mp4"></video>
+    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/beach.webp?v=2" aria-hidden="true"><source data-src="/assets/hero/beach.mp4?v=2" type="video/mp4"></video>
     <div class="hc">
       <h2>物理治療師的復健、運動傷害與 CSCS 筆記</h2>
       <a href="#feed">看所有貼文 <span aria-hidden="true">→</span></a>
@@ -287,24 +109,26 @@ main { flex: 999 1 560px; min-width: 0; }
     </div>
   </div>
   <div class="slide" data-dur="9000">
-    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/forest.webp?v=2" aria-hidden="true"><source src="/assets/hero/forest.mp4?v=2" type="video/mp4"></video>
+    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/forest.webp?v=2" aria-hidden="true"><source data-src="/assets/hero/forest.mp4?v=2" type="video/mp4"></video>
     <div class="hc">
       <h2>扭到腳踝，能走路就算好了嗎？</h2>
       <a href="/notes/ankle-sprain-cai">扭傷 10 個常見問題 <span aria-hidden="true">→</span></a>
     </div>
   </div>
   <div class="slide" data-dur="5500">
-    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/ridge.webp?v=2" aria-hidden="true"><source src="/assets/hero/ridge.mp4?v=2" type="video/mp4"></video>
+    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/ridge.webp?v=2" aria-hidden="true"><source data-src="/assets/hero/ridge.mp4?v=2" type="video/mp4"></video>
     <div class="hc">
       <h2>ACSM 和 NSCA 的肌力訓練建議，差在哪？</h2>
       <a href="/notes/acsm-vs-nsca-resistance-training">負荷、組數、休息怎麼選 <span aria-hidden="true">→</span></a>
     </div>
   </div>
+  <button class="hero-toggle" type="button" hidden>暫停輪播</button>
+  <a class="hero-skip" href="#feed">直接看文章 ↓</a>
   <div class="hnav" role="tablist" aria-label="切換精選">
     <button class="hn" type="button" role="tab" aria-selected="true"><i></i><span>孔哥不聽話</span></button>
     <button class="hn" type="button" role="tab" aria-selected="false"><i></i><span>肩頸痠痛</span></button>
     <button class="hn" type="button" role="tab" aria-selected="false"><i></i><span>腳踝扭傷</span></button>
-    <button class="hn" type="button" role="tab" aria-selected="false"><i></i><span>ACSM vs NSCA</span></button>
+    <button class="hn" type="button" role="tab" aria-selected="false" aria-label="ACSM 與 NSCA 訓練比較"><i></i><span>訓練比較</span></button>
   </div>
 </section>
 
@@ -434,218 +258,12 @@ main { flex: 999 1 560px; min-width: 0; }
     </footer>
   </main>
 </div>
-<script>
-(function () {
-  // ===== 分類設定 =====
-  // 大分類：mood = 心情、note = 專業分享。
-  // 細項：依貼文的標題與摘要文字比對關鍵字（標 first 的先比，其餘由上往下），第一個符合的就是它的細項；都不符合就歸到最後一項。
-  // 陣列順序也是細項按鈕的顯示順序。
-  // 想新增細項，在對應的陣列加一行 { id, name, re } 即可；要強制指定，在貼文加 data-sub="id"。
-  var CATS = {
-    note: [
-      { id: 'postop',   name: '術後復健',    re: /術後|開刀|手術|置換|重建/ },
-      { id: 'spine',    name: '頸肩・背痛',  re: /肩頸|頸部|頸椎|脖子|落枕|背痛|下背|腰痛|腰椎|脊椎|椎間盤|坐骨/ },
-      { id: 'upper',    name: '肩・肘・手',  re: /肩膀|肩關節|五十肩|旋轉肌|手肘|網球肘|高爾夫球肘|手腕|腕隧道|手指|板機指|媽媽手/ },
-      { id: 'lower',    name: '髖・膝・踝',  re: /髖|膝|十字韌帶|半月板|踝|腳跟|足底|阿基里斯|跟腱|小腿|大腿|鼠蹊|跑者/ },
-      { id: 'training', name: '運動訓練',    re: /肌力|阻力訓練|重訓|訓練|體能|ACSM|NSCA|有氧|伸展|暖身/i },
-      { id: 'cscs',     name: 'CSCS 筆記',   re: /CSCS/i, first: true },
-      { id: 'other',    name: '其他',        re: null }
-    ],
-    mood: [
-      { id: 'ride',     name: '騎車',        re: /騎車|單車|公路車|自行車|車友|踩踏/ },
-      { id: 'outdoor',  name: '爬山・露營',  re: /爬山|登山|健行|百岳|露營|山屋|步道/ },
-      { id: 'work',     name: '工作日常',    re: /客人|個案|病人|教練|治療|診所|居家|臨床/ },
-      { id: 'life',     name: '生活碎念',    re: null }
-    ]
-  };
-
-  var tabs = document.querySelectorAll('.tab');
-  var subbar = document.querySelector('.subtabs');
-  var posts = document.querySelectorAll('.grid > [data-cat]');
-  var empty = document.querySelector('.empty');
-  var q = document.getElementById('q');
-  var current = 'all', currentSub = 'all';
-
-  function textOf(p) {
-    var t = p.querySelector('.note-title, .post-text');
-    var d = p.querySelector('.note-sub');
-    return (t ? t.textContent : '') + ' ' + (d ? d.textContent : '');
-  }
-  function find(cat, id) {
-    var list = CATS[cat] || [];
-    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
-    return null;
-  }
-  // 自動分類，並把細項名稱補進日期前面
-  posts.forEach(function (p) {
-    var cat = p.getAttribute('data-cat'), list = CATS[cat];
-    if (!list) return;
-    var sub = find(cat, p.getAttribute('data-sub'));
-    if (!sub) {
-      var txt = textOf(p);
-      var order = list.filter(function (c) { return c.first; }).concat(list.filter(function (c) { return !c.first; }));
-      for (var i = 0; i < order.length; i++) {
-        if (!order[i].re || order[i].re.test(txt)) { sub = order[i]; break; }
-      }
-    }
-    p.setAttribute('data-sub', sub.id);
-    var meta = p.querySelector('.meta');
-    if (meta && meta.textContent.indexOf(sub.name) < 0) {
-      meta.textContent = meta.textContent.replace(' · ', ' · ' + sub.name + ' · ');
-    }
-  });
-
-  function buildSubs(cat) {
-    subbar.innerHTML = '';
-    var list = CATS[cat];
-    if (!list) { subbar.hidden = true; return; }
-    var items = [{ id: 'all', name: '全部' }];
-    var total = 0;
-    list.forEach(function (c) {
-      var n = document.querySelectorAll('.grid > [data-cat="' + cat + '"][data-sub="' + c.id + '"]').length;
-      total += n;
-      if (n) items.push({ id: c.id, name: c.name, n: n });
-    });
-    items[0].n = total;
-    items.forEach(function (c) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'subtab';
-      b.setAttribute('data-sub', c.id);
-      b.setAttribute('aria-pressed', c.id === currentSub ? 'true' : 'false');
-      b.innerHTML = '';
-      b.appendChild(document.createTextNode(c.name));
-      var n = document.createElement('span'); n.className = 'n'; n.textContent = c.n;
-      b.appendChild(n);
-      b.addEventListener('click', function () { currentSub = c.id; apply(current); });
-      subbar.appendChild(b);
-    });
-    subbar.hidden = items.length < 3; // 只有一個細項時不必顯示
-  }
-
-  function apply(filter) {
-    if (filter !== current) currentSub = 'all';
-    current = filter;
-    var term = q.value.trim().toLowerCase();
-    var shown = 0;
-    posts.forEach(function (p) {
-      var on = (filter === 'all' || p.getAttribute('data-cat') === filter) &&
-        (currentSub === 'all' || p.getAttribute('data-sub') === currentSub) &&
-        (!term || p.textContent.toLowerCase().indexOf(term) >= 0);
-      p.hidden = !on;
-      if (on) shown++;
-    });
-    tabs.forEach(function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-filter') === filter ? 'true' : 'false'); });
-    buildSubs(filter);
-    empty.textContent = term ? '找不到「' + q.value.trim() + '」相關的貼文。' : '這個分類還沒有貼文。';
-    empty.hidden = shown > 0;
-    try {
-      var h = filter === 'all' ? '' : '#' + filter + (currentSub !== 'all' ? '/' + currentSub : '');
-      if (location.hash !== h && (h || location.hash.match(/^#(mood|note)/))) history.replaceState(null, '', h || location.pathname + location.search);
-    } catch (e) {}
-  }
-  q.addEventListener('input', function () {
-    apply(current);
-    if (q.value.trim()) document.getElementById('feed').scrollIntoView({ block: 'nearest' });
-  });
-  tabs.forEach(function (t) {
-    t.addEventListener('click', function () {
-      var f = t.getAttribute('data-filter');
-      // 再點一次已選的大分類 = 收起細項、回到全部
-      apply(f === current && f !== 'all' ? 'all' : f);
-    });
-  });
-  // 網址可直接指定分類，例如 slzpt.com/#note/spine
-  var m = location.hash.match(/^#(mood|note)(?:\/([\w-]+))?$/);
-  if (m) { current = m[1]; currentSub = (m[2] && find(m[1], m[2])) ? m[2] : 'all'; apply(m[1]); }
-  else apply('all');
-})();
-(function () {
-  // ===== 首頁大圖輪播（仿 Maurten：底部四格進度條，自動換下一張；可點選切換） =====
-  var hero = document.querySelector('.hero');
-  if (!hero) return;
-  var slides = [].slice.call(hero.querySelectorAll('.slide'));
-  var btns = [].slice.call(hero.querySelectorAll('.hn'));
-  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var cur = 0, timer = 0;
-  function play(n) {
-    slides.forEach(function (s, k) {
-      var on = k === n, v = s.querySelector('video');
-      s.classList.toggle('is-on', on);
-      s.setAttribute('aria-hidden', on ? 'false' : 'true');
-      btns[k].setAttribute('aria-selected', on ? 'true' : 'false');
-      btns[k].classList.remove('run');
-      if (v) { if (on && !still) { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }
-    });
-    cur = n;
-    clearTimeout(timer);
-    if (still) return;
-    var dur = +slides[n].getAttribute('data-dur') || 7000;
-    var b = btns[n]; b.style.setProperty('--dur', dur + 'ms'); void b.offsetWidth; b.classList.add('run');
-    timer = setTimeout(function () { play((cur + 1) % slides.length); }, dur);
-  }
-  btns.forEach(function (b, k) { b.addEventListener('click', function () { play(k); }); });
-  document.addEventListener('visibilitychange', function () { if (document.hidden) { clearTimeout(timer); var v = slides[cur].querySelector('video'); if (v) v.pause(); } else play(cur); });
-  play(0);
-  // 頂端導覽：心情／專業分享直接切換分類，搜尋跳到搜尋框
-  document.querySelectorAll('.topnav [data-go]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var go = a.getAttribute('data-go');
-      e.preventDefault();
-      if (go === 'search') { var q = document.getElementById('q'); if (!q.offsetParent) { var mb = document.querySelector('.menu-btn'); if (mb) mb.click(); } q.scrollIntoView({ block: 'center' }); q.focus({ preventScroll: true }); return; }
-      var t = document.querySelector('.tab[data-filter="' + go + '"]');
-      if (t && t.getAttribute('aria-pressed') !== 'true') t.click();
-      document.getElementById('feed').scrollIntoView({ behavior: still ? 'auto' : 'smooth' });
-    });
-  });
-})();
-</script>
+<script src="/assets/scripts/index-1-6b61215986a6.js"></script>
 <dialog class="post-dialog" aria-label="完整貼文">
   <button type="button" class="pd-close" aria-label="關閉">×</button>
   <div class="pd-content"></div>
 </dialog>
-<script>
-(function () {
-  // 手機版漢堡選單：點 ≡ 展開搜尋、關於、IG
-  var side = document.querySelector('.side');
-  var btn = side && side.querySelector('.menu-btn');
-  if (!btn) return;
-  function set(open) {
-    side.classList.toggle('is-open', open);
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
-  }
-  btn.addEventListener('click', function () { set(!side.classList.contains('is-open')); });
-  side.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && side.classList.contains('is-open')) { set(false); btn.focus(); } });
-})();
-(function () {
-  // 點心情貼文：用彈出視窗看完整內容（方格裡只顯示前兩行）
-  var dlg = document.querySelector('.post-dialog');
-  if (!dlg || typeof dlg.showModal !== 'function') return;
-  var box = dlg.querySelector('.pd-content');
-  var last = null;
-  function open(tile) {
-    last = tile;
-    box.innerHTML = '';
-    var img = tile.querySelector('img');
-    if (img) box.appendChild(img.cloneNode(true));
-    var body = document.createElement('div');
-    body.className = 'pd-body';
-    var rest = tile.querySelector('img') ? tile.querySelector('img').nextElementSibling : tile.firstElementChild;
-    if (rest) body.appendChild(rest.cloneNode(true));
-    box.appendChild(body);
-    dlg.showModal();
-  }
-  document.querySelectorAll('.imgpost').forEach(function (tile) {
-    tile.addEventListener('click', function () { open(tile); });
-    tile.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(tile); }
-    });
-  });
-  dlg.querySelector('.pd-close').addEventListener('click', function () { dlg.close(); });
-  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-  dlg.addEventListener('close', function () { if (last) last.focus(); });
-})();
-</script>
+<script src="/assets/scripts/index-2-da7160acc9fc.js"></script>
+<script src="/assets/hero.js?v=20261104-security1"></script>
 </body>
 </html>

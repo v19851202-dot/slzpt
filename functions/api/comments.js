@@ -4,7 +4,7 @@
 //
 // 需要的綁定（Cloudflare 後台 → slzpt → 設定 → 繫結）：
 //   DB = D1 資料庫（正式站 slzpt-comments、預覽站 slzpt-comments-preview）
-//   AI = Workers AI（用來判斷廣告、無關與攻擊性留言；沒有綁定時只用規則過濾）
+//   AI = Workers AI（沒有綁定或審核失敗時，留言留在 pending，不公開）
 // 不存原始 IP，只存「IP＋當天日期」的雜湊，用來限制洗版。
 
 const PAGE_RE = /^\/notes\/[a-z0-9-]+$/;
@@ -12,6 +12,8 @@ const NAME_MAX = 20;
 const BODY_MIN = 2;
 const BODY_MAX = 500;
 const MIN_FILL_MS = 3000; // 表單打開到送出至少 3 秒，太快通常是機器人
+const REQUEST_MAX_BYTES = 8192;
+const PAGE_SIZE = 50;
 
 const AI_MODEL = '@cf/google/gemma-4-26b-a4b-it';
 const AI_FALLBACK_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast';
@@ -34,7 +36,11 @@ const SPAM_WORDS = [
 function json(body, status) {
   return new Response(JSON.stringify(body), {
     status: status || 200,
-    headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' }
+    headers: {
+      'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store',
+      'x-content-type-options': 'nosniff', 'strict-transport-security': 'max-age=86400',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    }
   });
 }
 
@@ -98,7 +104,7 @@ function aiText(out) {
 }
 
 async function aiCheck(env, info, name, body) {
-  if (!env.AI) return { verdict: 'ok', source: 'no-ai' };
+  if (!env.AI) return { verdict: 'pending', source: 'no-ai' };
   const system =
     '你是個人部落格的留言審核員。網站是物理治療師「孔哥不聽話」的部落格，主題包含物理治療、運動傷害與復健、' +
     '肌力與體能訓練（CSCS）、騎單車、爬山、露營，以及作者的生活心情。\n' +
@@ -117,38 +123,86 @@ async function aiCheck(env, info, name, body) {
     const input = { messages, max_tokens: 40, temperature: 0 };
     // 判斷很簡單，關掉推理模式讓回應快一點
     if (model === AI_MODEL) input.chat_template_kwargs = { enable_thinking: false };
+    let timer;
     try {
       const out = await Promise.race([
         env.AI.run(model, input),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), model === AI_MODEL ? 5000 : 4000))
+        new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('timeout')), model === AI_MODEL ? 5000 : 4000); })
       ]);
       const m = aiText(out).match(/"verdict"\s*:\s*"(ok|spam|offtopic|abuse)"/i);
       if (m) return { verdict: m[1].toLowerCase(), source: model };
     } catch (e) {
       // 換下一個模型
+    } finally {
+      clearTimeout(timer);
     }
   }
-  return { verdict: 'ok', source: 'ai-failed' };
+  return { verdict: 'pending', source: 'ai-failed' };
 }
 
 export async function onRequestGet({ request, env }) {
   if (!env.DB) return json({ error: 'not-configured' }, 503);
-  const page = normPage(new URL(request.url).searchParams.get('page'));
+  const params = new URL(request.url).searchParams;
+  const page = normPage(params.get('page'));
   if (!PAGE_RE.test(page)) return json({ error: 'bad-page' }, 400);
-  const { results } = await env.DB.prepare(
-    "SELECT id, name, body, created_at, is_owner FROM comments WHERE page = ? AND status = 'visible' ORDER BY created_at ASC, id ASC LIMIT 300"
-  ).bind(page).all();
-  return json({ comments: results || [] });
+  const cursor = params.get('after') || '0';
+  if (!/^\d+$/.test(cursor) || !Number.isSafeInteger(Number(cursor))) return json({ error: 'bad-cursor' }, 400);
+  try {
+    const { results = [] } = await env.DB.prepare(
+      "SELECT id, name, body, created_at, is_owner FROM comments WHERE page = ? AND status = 'visible' AND id > ? ORDER BY id ASC LIMIT ?"
+    ).bind(page, Number(cursor), PAGE_SIZE + 1).all();
+    const comments = results.slice(0, PAGE_SIZE);
+    return json({ comments, nextCursor: results.length > PAGE_SIZE ? comments[comments.length - 1].id : null });
+  } catch (e) {
+    console.error('comments-read-failed');
+    return json({ error: 'unavailable', message: '留言暫時載入不了，稍後再試。' }, 503);
+  }
 }
 
-export async function onRequestPost({ request, env }) {
+// 以實際讀取的位元組數限制大小，不能只相信 Content-Length。
+async function readInput(request) {
+  if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') || '')) {
+    throw Object.assign(new Error('content-type'), { status: 415 });
+  }
+  if (Number(request.headers.get('content-length')) > REQUEST_MAX_BYTES) {
+    throw Object.assign(new Error('too-large'), { status: 413 });
+  }
+  if (!request.body) throw new Error('empty');
+  const reader = request.body.getReader();
+  const chunks = [];
+  let size = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > REQUEST_MAX_BYTES) {
+        reader.cancel().catch(() => {});
+        throw Object.assign(new Error('too-large'), { status: 413 });
+      }
+      chunks.push(value);
+    }
+  } finally { reader.releaseLock(); }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+  const data = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
+  if (!data || typeof data !== 'object' || Array.isArray(data) ||
+      !['page', 'name', 'body'].every((key) => typeof data[key] === 'string') ||
+      typeof data.t !== 'number' || !Number.isFinite(data.t) || data.t <= 0 ||
+      (data.website !== undefined && typeof data.website !== 'string')) throw new Error('shape');
+  return data;
+}
+
+async function createComment({ request, env }) {
   if (!env.DB) return json({ error: 'not-configured', message: '留言功能暫時無法使用。' }, 503);
 
   let data;
   try {
-    data = await request.json();
+    data = await readInput(request);
   } catch (e) {
-    return json({ error: 'bad-request', message: '資料格式錯誤，請重新整理後再試。' }, 400);
+    const status = e.status || 400;
+    return json({ error: 'bad-request', message: status === 413 ? '送出的資料太大，請縮短後再試。' : '資料格式錯誤，請重新整理後再試。' }, status);
   }
 
   // 機器人陷阱：隱藏欄位有填、或送出太快
@@ -175,34 +229,51 @@ export async function onRequestPost({ request, env }) {
 
   const now = new Date();
   const ip = request.headers.get('CF-Connecting-IP') || '';
-  const ipHash = await sha256(ip + '|' + now.toISOString().slice(0, 10) + '|slzpt-comments');
-
-  // 洗版限制：10 分鐘內最多 3 則、一天最多 15 則、同一天不能重複貼一樣的內容
+  const createdAt = now.toISOString();
   const tenMinAgo = new Date(now.getTime() - 10 * 60 * 1000).toISOString();
   const dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
-  const recent = await env.DB.prepare(
-    'SELECT SUM(created_at > ?) AS short, COUNT(*) AS day, SUM(body = ?) AS dup FROM comments WHERE ip_hash = ? AND created_at > ?'
-  ).bind(tenMinAgo, body, ipHash, dayAgo).first();
-  if (recent && recent.dup > 0) return json({ error: 'duplicate', message: '這則留言已經送過了。' }, 409);
-  if (recent && (recent.short >= 3 || recent.day >= 15)) {
+  // 同時查當日與前日的雜湊，讓滾動 24 小時限制跨 UTC 日界仍連續。
+  const [ipHash, previousHash] = await Promise.all([createdAt, dayAgo].map((date) =>
+    sha256(ip + '|' + date.slice(0, 10) + '|slzpt-comments')));
+
+  // 單一 INSERT ... SELECT 原子地檢查並預留配額；pending 也計入額度。
+  // 不需要新增資料表或改動既有留言；AI 執行期間，其他請求已看得到此筆預留。
+  const reservation = await env.DB.prepare(`
+    INSERT INTO comments (page, name, body, created_at, status, reason, ip_hash)
+    SELECT ?, ?, ?, ?, 'pending', 'moderating', ? FROM (
+      SELECT COALESCE(SUM(created_at > ?), 0) AS short, COUNT(*) AS day,
+             COALESCE(SUM(body = ?), 0) AS dup
+      FROM comments WHERE ip_hash IN (?, ?) AND created_at > ?
+    ) WHERE short < 3 AND day < 15 AND dup = 0
+  `).bind(page, name, body, createdAt, ipHash, tenMinAgo, body, ipHash, previousHash, dayAgo).run();
+  if (!reservation.meta || reservation.meta.changes !== 1) {
+    const duplicate = await env.DB.prepare(
+      'SELECT id FROM comments WHERE ip_hash IN (?, ?) AND created_at > ? AND body = ? LIMIT 1'
+    ).bind(ipHash, previousHash, dayAgo, body).first();
+    if (duplicate) return json({ error: 'duplicate', message: '這則留言已經收到，請不要重複送出。' }, 409);
     return json({ error: 'rate', message: '留言有點太快了，休息一下再來。' }, 429);
   }
-
+  const id = reservation.meta.last_row_id;
+  if (!Number.isSafeInteger(id) || id <= 0) throw new Error('invalid-reservation-id');
   let reason = ruleCheck(name, body);
   let source = 'rules';
+  let status = reason ? 'blocked' : 'pending';
   if (!reason) {
     const ai = await aiCheck(env, info, name, body);
     source = ai.source;
-    if (ai.verdict !== 'ok') reason = 'ai:' + ai.verdict;
+    status = ai.verdict === 'ok' ? 'visible' : ai.verdict === 'pending' ? 'pending' : 'blocked';
+    reason = ai.verdict === 'ok' ? 'ok' : 'ai:' + ai.verdict;
   }
-  const status = reason ? 'blocked' : 'visible';
-  const createdAt = now.toISOString();
+  const finalized = await env.DB.prepare(
+    "UPDATE comments SET status = ?, reason = ? WHERE id = ? AND status = 'pending'"
+  ).bind(status, reason + ' (' + source + ')', id).run();
+  if (!finalized.meta || finalized.meta.changes !== 1) throw new Error('reservation-not-finalized');
 
-  const res = await env.DB.prepare(
-    'INSERT INTO comments (page, name, body, created_at, status, reason, ip_hash) VALUES (?, ?, ?, ?, ?, ?, ?)'
-  ).bind(page, name, body, createdAt, status, (reason || 'ok') + ' (' + source + ')', ipHash).run();
-
-  if (reason) {
+  if (status === 'pending') {
+    console.warn('comments-moderation-pending:' + source);
+    return json({ ok: true, pending: true, message: '已收到留言，目前等待審核，通過後才會公開；不用重複送出。' }, 202);
+  }
+  if (status === 'blocked') {
     return json({
       ok: false,
       blocked: true,
@@ -211,6 +282,14 @@ export async function onRequestPost({ request, env }) {
   }
   return json({
     ok: true,
-    comment: { id: res.meta && res.meta.last_row_id, name, body, created_at: createdAt, is_owner: 0 }
+    comment: { id, name, body, created_at: createdAt, is_owner: 0 }
   });
+}
+
+export async function onRequestPost(context) {
+  try { return await createComment(context); }
+  catch (e) {
+    console.error('comments-write-failed');
+    return json({ error: 'unavailable', message: '留言服務暫時無法使用，請稍後再試。' }, 503);
+  }
 }

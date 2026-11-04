@@ -410,7 +410,7 @@ details.refs-box[open] .refs-hint { display: none; }
 .related .cur::after { content: "（本篇）"; font-size: 13px; margin-left: 2px; white-space: nowrap; }
 </style>
 <link rel="stylesheet" href="/assets/engage.css">
-<script src="/assets/engage.js" defer></script>
+<script src="/assets/engage.js?v=20261104-security1" defer></script>
 <link rel="stylesheet" href="/assets/mobile.css">
 </head>
 <body>
@@ -607,75 +607,8 @@ details.refs-box[open] .refs-hint { display: none; }
     <a class="cs-all" href="#refs">查看全部參考文獻 →</a>
   </div>
 </div>
-<script>
-window.rvInitCite = function initCite() {
-  var KEY = 'slzpt-show-cites';
-  var root = document.documentElement;
-  var sheet = document.getElementById('cite-sheet');
-  var body = sheet.querySelector('.cs-body');
-  var label = sheet.querySelector('.cs-label');
-  var lastTrigger = null;
-  function getPref() { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
-  function setPref(v) { try { localStorage.setItem(KEY, v ? '1' : '0'); } catch (e) {} }
-  function apply(show) {
-    root.classList.toggle('hide-cites', !show);
-    var btns = document.querySelectorAll('.cite-toggle');
-    for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', show ? 'true' : 'false');
-  }
-  function openRefs() { var d = document.getElementById('refs'); if (d) d.open = true; }
-  function closeSheet() {
-    sheet.hidden = true;
-    if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
-  }
-  function openSheet(n, trigger) {
-    var li = document.getElementById('ref-' + n);
-    if (!li) return;
-    body.innerHTML = li.innerHTML;
-    label.textContent = '文獻 ' + n;
-    lastTrigger = trigger;
-    sheet.hidden = false;
-    sheet.querySelector('.cs-close').focus();
-  }
-  function onClick(e) {
-    var t = e.target;
-    var ref = t.closest && t.closest('sup.cref a');
-    if (ref) { e.preventDefault(); openSheet(ref.getAttribute('data-ref'), ref); return; }
-    var tog = t.closest && t.closest('.cite-toggle');
-    if (tog) { var show = tog.getAttribute('aria-pressed') !== 'true'; apply(show); setPref(show); return; }
-    if (t.closest && t.closest('.cs-close')) { closeSheet(); return; }
-    if (t.closest && t.closest('.cs-all')) { openRefs(); closeSheet(); return; }
-    if (!sheet.hidden && !(t.closest && t.closest('.cs-card'))) closeSheet();
-  }
-  function onKey(e) { if (e.key === 'Escape' && !sheet.hidden) closeSheet(); }
-  function onHash() { if (/^#ref-\d+$/.test(location.hash) || location.hash === '#refs') openRefs(); }
-  if (!window.__citeBound) {
-    document.addEventListener('click', onClick);
-    document.addEventListener('keydown', onKey);
-    window.addEventListener('hashchange', onHash);
-    window.__citeBound = true;
-  }
-  apply(getPref());
-  onHash();
-};
-window.rvInitCite();
-</script>
+<script src="/assets/scripts/references-fcb381a469bc.js"></script>
 
-<script>
-(function () {
-  var lab = document.getElementById('rf-lab');
-  if (!lab) return;
-  var boxes = lab.querySelectorAll('input[type="checkbox"]');
-  var out = document.getElementById('rf-result');
-  function update() {
-    var er = 0, doc = 0;
-    boxes.forEach(function (b) { if (b.checked) { if (b.getAttribute('data-level') === 'er') er++; else doc++; } });
-    if (er) { out.setAttribute('data-level', 'er'); out.innerHTML = '<b>請立即就醫（急診）</b>你勾選的情況需要先排除心臟或血管的急症，不要等、也不要先按摩或拉筋。'; }
-    else if (doc) { out.setAttribute('data-level', 'doc'); out.innerHTML = '<b>建議先就醫評估</b>你勾選的情況需要醫師先排除嚴重問題，再考慮運動或徒手治療。'; }
-    else { out.setAttribute('data-level', 'ok'); out.innerHTML = '<b>目前沒有勾選警訊</b>多數肩頸痛是良性的，可以先保持活動、觀察。但沒有警訊不代表百分之百沒事，症狀變嚴重或出現新症狀，請就醫。若症狀反覆或影響生活，可以找物理治療師評估（<a href="#pt">看第 5 段</a>）。'; }
-  }
-  boxes.forEach(function (b) { b.addEventListener('change', update); });
-  update();
-})();
-</script>
+<script src="/assets/scripts/neck-pain-red-flags-2-e3df3c4a0744.js"></script>
 </body>
 </html>
