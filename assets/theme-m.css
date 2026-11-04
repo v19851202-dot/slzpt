@@ -1,7 +1,7 @@
 /* 黑白主題的手機版補充：要放在 mobile.css 之後載入，才能蓋過它的灰色與字級 */
 @media (max-width: 600px) {
   .ticker, .top-row .ticker { font-size: 0.9375rem; color: var(--ink); }
-  .grid { gap: 1px !important; }
+  .grid { gap: 0 !important; }
   .note-title { font-size: 1.1875rem !important; }
   .tabs { margin-top: 4px; }
   .top-row { border-bottom-color: var(--line); }
