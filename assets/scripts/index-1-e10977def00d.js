@@ -54,7 +54,9 @@
     p.setAttribute('data-sub', sub.id);
     var meta = p.querySelector('.meta');
     if (meta && meta.textContent.indexOf(sub.name) < 0) {
-      meta.textContent = meta.textContent.replace(' · ', ' · ' + sub.name + ' · ');
+      var tag = document.createElement('span');
+      tag.textContent = sub.name;
+      meta.insertBefore(tag, meta.querySelector('time'));
     }
   });
 
