@@ -100,7 +100,7 @@ function aiText(out) {
 async function aiCheck(env, info, name, body) {
   if (!env.AI) return { verdict: 'ok', source: 'no-ai' };
   const system =
-    '你是個人部落格的留言審核員。網站是物理治療師「孔哥不聽話」的部落格，主題包含物理治療、運動傷害與復健、' +
+    '你是個人部落格的留言審核員。網站是物理治療師兼肌力教練「孔哥 Rehab & Strength」的部落格，主題包含物理治療、運動傷害與復健、' +
     '肌力與體能訓練（CSCS）、騎單車、爬山、露營，以及作者的生活心情。\n' +
     '請判斷一則留言能不能公開顯示，只回答 JSON：{"verdict":"ok"} 或 {"verdict":"spam"} 或 {"verdict":"offtopic"} 或 {"verdict":"abuse"}。\n' +
     'ok：跟文章或網站主題有關的心得、提問、補充、不同意見、打招呼、感謝、鼓勵、聊騎車爬山露營或生活，就算很短（例如「謝謝分享」「孔哥加油」）也算 ok；有禮貌的批評也算 ok。\n' +
