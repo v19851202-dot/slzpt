@@ -23,7 +23,3 @@ https://slzpt.pages.dev/*
 
 https://:version.slzpt.pages.dev/*
   X-Robots-Tag: noindex
-
-/admin/*
-  X-Robots-Tag: noindex, nofollow
-  Cache-Control: no-store
