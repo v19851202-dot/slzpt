@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>網站後台</title>
+<style>
+body { font-family: "Noto Sans TC", system-ui, sans-serif; margin: 0; background: #f5f5f5; color: #111; }
+main { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 22px; } h2 { font-size: 18px; margin-top: 32px; }
+form, .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 16px; }
+label { display: block; font-size: 14px; color: #444; margin-bottom: 14px; }
+input, textarea { display: block; width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 10px; margin-top: 6px; border: 1px solid #bbb; border-radius: 6px; }
+button { font: inherit; font-size: 16px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 6px; background: #111; color: #fff; cursor: pointer; }
+ul#news-list { list-style: none; padding: 0; }
+#news-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #eee; }
+#news-list button { background: #b00020; min-height: 36px; }
+.top { display: flex; justify-content: space-between; align-items: center; }
+.top button { background: #666; }
+.msg { font-size: 14px; } .ok { color: #1b5e20; } .err { color: #b00020; }
+</style>
+<script src="/assets/scripts/admin-4509fed7ac40.js" defer></script>
+</head>
+<body>
+<main>
+  <section id="login">
+    <h1>網站後台登入</h1>
+    <form id="login-form">
+      <label>帳號（Email）<input id="email" type="email" autocomplete="username" required></label>
+      <label>密碼<input id="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit">登入</button>
+      <p id="login-msg" class="msg"></p>
+    </form>
+  </section>
+
+  <section id="editor" hidden>
+    <div class="top"><h1>網站後台</h1><button id="logout" type="button">登出</button></div>
+    <p class="msg">登入帳號：<span id="who"></span>　·　<a href="/about" target="_blank" rel="noopener">開啟「關於我」頁</a></p>
+
+    <h2>「關於我」頁的文字</h2>
+    <form id="content-form">
+      <div id="fields"></div>
+      <button type="submit">儲存</button>
+      <p id="content-msg" class="msg"></p>
+    </form>
+
+    <h2>最新公告</h2>
+    <form id="news-form">
+      <label>標題<input id="news-title" maxlength="60" required></label>
+      <label>內容<textarea id="news-body" rows="4" maxlength="1000" required></textarea></label>
+      <button type="submit">發布公告</button>
+      <p id="news-msg" class="msg"></p>
+    </form>
+    <div class="card"><ul id="news-list"></ul></div>
+  </section>
+</main>
+</body>
+</html>
