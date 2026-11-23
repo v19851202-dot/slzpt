@@ -41,8 +41,23 @@ p { margin: 0 0 12px; }
 .note { font-size: 14px; color: #6b6b6b; }
 </style>
 <link rel="stylesheet" href="/assets/mobile.css">
+<link rel="stylesheet" href="/assets/clinic.css?v=20261123b">
 </head>
-<body>
+<body class="has-chrome">
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><span class="site-mark" aria-hidden="true">硯</span><span>阿硯物理治療師</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="網站導覽">
+      <a href="/#services">服務</a>
+      <a href="/#process">進行方式</a>
+      <a href="/#feed">筆記</a>
+      <a href="/about">關於</a>
+      <a class="nav-cta" href="/book">預約</a>
+    </nav>
+  </div>
+</header>
+
 <main class="page">
   <a class="back" href="/">← 回到首頁</a>
   <h1>預約物理治療</h1>
@@ -63,5 +78,33 @@ p { margin: 0 0 12px; }
 
   <p class="note">請不要在網站留言區留下電話或病歷；個別狀況請用 LINE 聯絡。有胸痛、突然無力或麻木擴大等警訊，請先就醫。</p>
 </main>
+<footer class="site-footer">
+  <div class="foot-grid">
+    <div>
+      <p class="foot-brand">阿硯物理治療師</p>
+      <p>仁士居家物理治療所</p>
+      <p>物理治療師出身的肌力教練。臨床將近二十年。</p>
+    </div>
+    <div>
+      <p class="foot-h">網站</p>
+      <a href="/">首頁</a>
+      <a href="/about">關於作者</a>
+      <a href="/#feed">專業分享</a>
+      <a href="/book">預約</a>
+      <a href="/privacy">留言與資料說明</a>
+    </div>
+    <div>
+      <p class="foot-h">聯絡</p>
+      <a href="https://line.me/R/ti/p/@emmsc" rel="noopener" target="_blank">LINE @emmsc</a>
+      <a href="https://www.instagram.com/hi_ptkong/" rel="noopener" target="_blank">Instagram @hi_ptkong</a>
+      <p>服務地區：龜山、林口</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 阿硯物理治療師</span>
+    <span>文章是衛教，不能取代面對面的評估。</span>
+  </div>
+</footer>
+<script src="/assets/clinic.js"></script>
 </body>
 </html>

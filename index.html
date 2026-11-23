@@ -32,9 +32,7 @@
    "url": "https://slzpt.com/",
    "inLanguage": "zh-Hant",
    "description": "物理治療師出身的肌力教練，從復健練到變強；實證復健、運動傷害與肌力體能筆記，還有騎車、爬山的生活紀錄。",
-   "publisher": {
-    "@id": "https://slzpt.com/#author"
-   }
+   "publisher": { "@id": "https://slzpt.com/#author" }
   },
   {
    "@type": "Person",
@@ -44,16 +42,16 @@
    "jobTitle": "物理治療師、肌力教練",
    "url": "https://slzpt.com/about",
    "image": "https://slzpt.com/assets/img/avatar.webp",
-   "sameAs": [
-    "https://www.instagram.com/hi_ptkong/"
-   ],
-   "knowsAbout": [
-    "物理治療",
-    "骨科徒手治療",
-    "術後復健",
-    "運動傷害",
-    "肌力與體能訓練"
-   ]
+   "sameAs": ["https://www.instagram.com/hi_ptkong/"],
+   "knowsAbout": ["物理治療","骨科徒手治療","術後復健","運動傷害","肌力與體能訓練"],
+   "worksFor": { "@id": "https://slzpt.com/#clinic" }
+  },
+  {
+   "@type": "MedicalClinic",
+   "@id": "https://slzpt.com/#clinic",
+   "name": "仁士居家物理治療所",
+   "url": "https://slzpt.com/",
+   "employee": { "@id": "https://slzpt.com/#author" }
   },
   {
    "@type": "ItemList",
@@ -73,208 +71,312 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/assets/home-base.css?v=20261104-security1">
-<link rel="stylesheet" href="/assets/theme.css?v=20261113">
-<link rel="stylesheet" href="/assets/mobile.css">
-<link rel="stylesheet" href="/assets/theme-m.css?v=20261104-auto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+<link rel="stylesheet" href="/assets/clinic.css?v=20261123b">
 </head>
-<body>
-<header class="topnav" aria-label="網站導覽">
-  <a class="tn-brand" href="/">阿硯物理治療師</a>
-  <nav class="tn-mid" aria-label="分類">
-    <a href="/#mood" data-go="mood">心情</a>
-    <a href="/#note" data-go="note">專業分享</a>
-    <a href="#about">關於</a>
-  </nav>
-  <div class="tn-end">
-    <a href="/book">預約</a>
-    <a href="https://www.instagram.com/hi_ptkong/" target="_blank" rel="noopener">Instagram</a>
-    <a href="#q" data-go="search">搜尋</a>
+<body class="home has-chrome">
+<a class="skip" href="#main">跳到內容</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><span class="site-mark" aria-hidden="true">硯</span><span>阿硯物理治療師</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="網站導覽">
+      <a href="#services">服務</a>
+      <a href="#process">進行方式</a>
+      <a href="#feed">筆記</a>
+      <a href="/about">關於</a>
+      <a class="nav-cta" href="/book">預約</a>
+    </nav>
   </div>
 </header>
-
-<!-- 首頁大圖輪播：影片與照片都放在 /assets/hero/。每張投影片一個 .slide，底下的 .hn 按鈕順序要一致 -->
-<section class="hero" aria-label="精選內容" aria-roledescription="輪播">
-  <div class="slide is-on" data-dur="9000">
-    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/beach.webp?v=3" aria-hidden="true"><source data-src="/assets/hero/beach.mp4?v=3" type="video/mp4"></video>
-    <div class="hc">
-      <h2>物理治療師的肌力教練，<br>從復健練到變強</h2>
-      <a href="#feed">看所有貼文</a>
-    </div>
-  </div>
-  <div class="slide" data-dur="6000">
-    <img class="hm" style="object-position: 64% 50%" src="/assets/hero/hilux-beach.webp?v=3" alt="" decoding="async">
-    <div class="hc">
-      <h2>肩頸痠痛是哪裡出了問題？</h2>
-      <a href="/notes/neck-pain-red-flags">什麼情況要先看醫師</a>
-    </div>
-  </div>
-  <div class="slide" data-dur="9000">
-    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/forest.webp?v=3" aria-hidden="true"><source data-src="/assets/hero/forest.mp4?v=3" type="video/mp4"></video>
-    <div class="hc">
-      <h2>扭到腳踝，能走路就算好了嗎？</h2>
-      <a href="/notes/ankle-sprain-cai">扭傷 10 個常見問題</a>
-    </div>
-  </div>
-  <div class="slide" data-dur="5500">
-    <video class="hm" muted playsinline loop preload="none" poster="/assets/hero/ridge.webp?v=3" aria-hidden="true"><source data-src="/assets/hero/ridge.mp4?v=3" type="video/mp4"></video>
-    <div class="hc">
-      <h2>ACSM 和 NSCA 的肌力訓練建議，差在哪？</h2>
-      <a href="/notes/acsm-vs-nsca-resistance-training">負荷、組數、休息怎麼選</a>
-    </div>
-  </div>
-  <a class="hero-skip" href="#feed">直接看文章</a>
-  <div class="hnav" role="tablist" aria-label="切換精選">
-    <button class="hn" type="button" role="tab" aria-selected="true" aria-label="阿硯物理治療師"><i></i><span class="hn-brand"><span>阿硯</span><span>物理治療師</span></span></button>
-    <button class="hn" type="button" role="tab" aria-selected="false"><i></i><span>肩頸痠痛</span></button>
-    <button class="hn" type="button" role="tab" aria-selected="false"><i></i><span>腳踝扭傷</span></button>
-    <button class="hn" type="button" role="tab" aria-selected="false" aria-label="ACSM 與 NSCA 訓練比較"><i></i><span>訓練比較</span></button>
-  </div>
-</section>
-
-<div class="wrap">
-  <aside class="side" id="side-menu">
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="side-menu" aria-label="開啟選單">
-      <svg class="mb-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
-      <svg class="mb-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
-    </button>
-    <div class="avatar"><img src="/assets/img/avatar.webp" width="48" height="48" alt="阿硯物理治療師的大頭照"></div>
+<main id="main">
+  <div class="wrap hero-edit">
     <div>
-      <h1 class="brand">阿硯物理治療師</h1>
-      <div class="muted">物理治療師的肌力教練</div>
-      <div class="muted">不要再靠腰，做就對了！</div>
+      <p class="eyebrow">仁士居家物理治療所</p>
+      <h1>從復健，<br>練到變強。</h1>
+      <p class="lede">我是物理治療師，臨床快二十年，專長骨科徒手治療、術後復健和運動傷害。先看懂你的身體，再從復健帶你練回去。受過傷、怕受傷、想練強，都可以從這裡開始。</p>
+      <div class="hero-actions">
+        <a class="btn btn-accent" href="/book">預約物理治療</a>
+        <a class="btn btn-ghost" href="#feed">看實證筆記</a>
+      </div>
     </div>
-    <div class="search">
-      <label for="q" class="sr-only">搜尋文章</label>
-      <input id="q" type="search" placeholder="搜尋文章" autocomplete="off">
-    </div>
-    <nav aria-label="主選單">
-      <a href="/about">關於作者</a>
-      <a href="/book">預約物理治療</a>
-      <a href="/privacy">留言與資料說明</a>
-    </nav>
-    <a class="ig" href="https://www.instagram.com/hi_ptkong/" target="_blank" rel="noopener" aria-label="Instagram @hi_ptkong（另開新視窗）">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h2l1.5-2h4l1.5 2h2A2.5 2.5 0 0 1 20 8.5v9A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
-      <span>@hi_ptkong</span>
-    </a>
-    <div class="muted copy">© 2026 阿硯物理治療師</div>
-  </aside>
-
-  <main>
-    <div id="feed" class="tabs" role="toolbar" aria-label="篩選貼文">
-      <button class="tab" type="button" data-filter="all" aria-pressed="true">全部</button>
-      <button class="tab" type="button" data-filter="mood" aria-pressed="false">心情<span class="caret" aria-hidden="true">▾</span></button>
-      <button class="tab" type="button" data-filter="note" aria-pressed="false">專業分享<span class="caret" aria-hidden="true">▾</span></button>
-    </div>
-    <div class="subtabs" role="toolbar" aria-label="細項分類" hidden></div>
-
-    <div class="grid">
-      <!-- 新貼文放在最上面。data-cat：mood = 心情、note = 專業分享。細項會依標題與摘要自動分類（規則在下方 CATS）；要指定細項就加 data-sub="代號"。 -->
-      <article class="tile imgpost" data-cat="mood" tabindex="0" role="button" aria-haspopup="dialog" aria-label="打開完整貼文">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIi8+CiAgPCEtLSBmbG9vciAtLT4KICA8cGF0aCBkPSJNNDAgMjY4IEgzNjAiLz4KICA8IS0tIGxlZnQgcGVyc29uOiBjbGllbnQsIHRhbGtpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iMTEyIiByPSIxOCIvPgogIDxwYXRoIGQ9Ik0xMTAgMTMwIFYyMDAiLz4KICA8cGF0aCBkPSJNMTEwIDIwMCBMOTQgMjY2Ii8+CiAgPHBhdGggZD0iTTExMCAyMDAgTDEyNiAyNjYiLz4KICA8cGF0aCBkPSJNMTEwIDE0OCBMODQgMTc2Ii8+CiAgPCEtLSBhcm0gZ2VzdHVyaW5nIHRvd2FyZCBidWJibGUgLS0+CiAgPHBhdGggZD0iTTExMCAxNDggTDEzOCAxMzIgTDE1MCAxMTYiLz4KICA8IS0tIG1vdXRoIG9wZW4gLS0+CiAgPHBhdGggZD0iTTExOCAxMTcgUTEyMiAxMjAgMTE4IDEyMyIvPgogIDwhLS0gc3BlZWNoIGJ1YmJsZSAtLT4KICA8cmVjdCB4PSIxNDYiIHk9IjIwIiB3aWR0aD0iMTI2IiBoZWlnaHQ9IjY4IiByeD0iMjQiLz4KICA8cGF0aCBkPSJNMTY2IDg4IEwxMjYgMTAyIEwxODYgODgiIGZpbGw9IiNmZmZmZmYiLz4KICA8cGF0aCBkPSJNMTY3IDg3IEgxODUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPCEtLSBjcmFja2VkIHZlcnRlYnJhZSBpbnNpZGUgYnViYmxlIC0tPgogIDxyZWN0IHg9IjE2OCIgeT0iMzQiIHdpZHRoPSI0NCIgaGVpZ2h0PSIxMCIgcng9IjQiLz4KICA8cmVjdCB4PSIxNjgiIHk9IjQ5IiB3aWR0aD0iNDQiIGhlaWdodD0iMTAiIHJ4PSI0Ii8+CiAgPHJlY3QgeD0iMTY4IiB5PSI2NCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjEwIiByeD0iNCIvPgogIDxwYXRoIGQ9Ik0xOTAgMzAgTDE4NCA0MCBMMTk0IDUwIEwxODYgNjAgTDE5NiA3MCBMMTg4IDgwIiBzdHJva2U9IiNjMjQxMGMiIHN0cm9rZS13aWR0aD0iMi40Ii8+CiAgPHBhdGggZD0iTTIyMCA0MCBMMjMwIDM0Ii8+CiAgPHBhdGggZD0iTTIyMiA1NiBIMjM0Ii8+CiAgPHBhdGggZD0iTTIyMCA3MiBMMjMwIDc4Ii8+CiAgPCEtLSByaWdodCBwZXJzb246IHRoZXJhcGlzdCwgaGFuZCBvbiBmb3JlaGVhZCAtLT4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIxMTIiIHI9IjE4Ii8+CiAgPHBhdGggZD0iTTMwMCAxMzAgVjIwMCIvPgogIDxwYXRoIGQ9Ik0zMDAgMjAwIEwyODQgMjY2Ii8+CiAgPHBhdGggZD0iTTMwMCAyMDAgTDMxNiAyNjYiLz4KICA8IS0tIGFybSB0byBmb3JlaGVhZCAoZmFjZXBhbG0pIC0tPgogIDxwYXRoIGQ9Ik0zMDAgMTQ4IEwyNzYgMTMyIEwyODggMTA0Ii8+CiAgPCEtLSBvdGhlciBhcm0gb24gaGlwIC0tPgogIDxwYXRoIGQ9Ik0zMDAgMTUwIEwzMjQgMTcwIEwzMTIgMTg2Ii8+CiAgPCEtLSBmbGF0IG1vdXRoIC0tPgogIDxwYXRoIGQ9Ik0yOTYgMTIwIEgzMDYiLz4KICA8IS0tIHF1ZXN0aW9uIG1hcmtzIC0tPgogIDx0ZXh0IHg9IjMwMCIgeT0iODAiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyMzIzMjMiIHN0cm9rZT0ibm9uZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Pz8/PC90ZXh0PgogIDwhLS0gc3dlYXQgZHJvcCAtLT4KICA8cGF0aCBkPSJNMzIyIDk4IFEzMjYgMTA2IDMyMiAxMTAgUTMxOCAxMDYgMzIyIDk4IFoiLz4KPC9zdmc+Cg==" alt="線條人插圖：客人轉述教練說脊椎會裂掉，對話框裡畫著裂開的脊椎；旁邊的治療師扶著額頭，頭上三個問號">
-        <div>
-          <div class="meta"><span>心情</span><time datetime="2026-10-28">2026.10.28</time></div>
-          <p class="post-text">昨天客人跟我說，教練說我的多裂肌很緊，要做運動按摩，不然脊椎會裂掉？？？<br>啥？<br>我知道有業績壓力，但用這方式……你也幫幫忙。</p>
-        </div>
-      </article>
-      <a class="tile notepost" data-cat="note" href="/notes/cscs-bioenergetics">
-        <div>
-          <div class="meta"><span>專業分享</span><time datetime="2026-11-04">2026.11.04</time></div>
-          <h3 class="note-title">CSCS 筆記：生物能量學</h3>
-          <p class="note-sub">拉時間看主要能量系統、切換看乳酸閾值移動、算間歇休息時間，附考題與翻面卡。</p>
-        </div>
-        <span class="note-more">開始互動</span>
-      </a>
-      <a class="tile notepost" data-cat="note" href="/notes/neck-pain-red-flags">
-        <div>
-          <div class="meta"><span>專業分享</span><time datetime="2026-10-31">2026.10.31</time></div>
-          <h3 class="note-title">肩頸痠痛是哪裡出了問題？什麼情況要先看醫師？</h3>
-          <p class="note-sub">肩頸痠痛系列 1：怎麼分類、手麻是不是壓到神經、要先就醫的警訊，附自我檢查。</p>
-        </div>
-        <span class="note-more">閱讀全文</span>
-      </a>
-      <a class="tile notepost" data-cat="note" href="/notes/ankle-sprain-cai">
-        <div>
-          <div class="meta"><span>專業分享</span><time datetime="2026-10-26">2026.10.26</time></div>
-          <h3 class="note-title">扭到腳踝，能走路就算好了嗎？</h3>
-          <p class="note-sub">扭傷 10 個常見問題：要不要照 X 光、要不要冰敷、一扭再扭怎麼練、什麼時候可以回場上。</p>
-        </div>
-        <span class="note-more">閱讀全文</span>
-      </a>
-      <a class="tile notepost" data-cat="note" href="/notes/acsm-vs-nsca-resistance-training">
-        <div>
-          <div class="meta"><span>專業分享</span><time datetime="2026-10-28">2026.10.28</time></div>
-          <h3 class="note-title">ACSM 和 NSCA 的肌力訓練建議，差在哪？</h3>
-          <p class="note-sub">2026 新版 ACSM 立場聲明 vs NSCA：負荷、組數、休息怎麼選，附互動比較。</p>
-        </div>
-        <span class="note-more">閱讀全文</span>
-      </a>
-      <a class="tile notepost" data-cat="note" href="/notes/cscs-body-systems">
-        <div>
-          <div class="meta"><span>專業分享</span><time datetime="2026-10-28">2026.10.28</time></div>
-          <h3 class="note-title">CSCS 筆記：肌絲滑動、肌纖維類型與運動單位徵召</h3>
-          <p class="note-sub">拉滑桿看肌小節收縮、比較三型肌纖維、模擬運動單位徵召，附考題與翻面卡。</p>
-        </div>
-        <span class="note-more">開始互動</span>
-      </a>
-      <a class="tile notepost" data-cat="note" href="/notes/cscs-biomechanics">
-        <div>
-          <div class="meta"><span>專業分享</span><time datetime="2026-10-26">2026.10.26</time></div>
-          <h3 class="note-title">CSCS 筆記：生物力學互動教學</h3>
-          <p class="note-sub">拖曳角度看力矩、切換槓桿、算爆發力，附考題與翻面卡。</p>
-        </div>
-        <span class="note-more">開始互動</span>
-      </a>
-      <a class="tile notepost" data-cat="note" href="/notes/cscs-endocrine">
-        <div>
-          <div class="meta"><span>專業分享</span><time datetime="2026-10-25">2026.10.25</time></div>
-          <h3 class="note-title">CSCS 筆記：阻力訓練的內分泌適應</h3>
-          <p class="note-sub">睪固酮、生長激素、IGF-1、皮質醇，附原始研究出處。</p>
-        </div>
-        <span class="note-more">閱讀全文</span>
-      </a>
-      <article class="tile imgpost" data-cat="mood" tabindex="0" role="button" aria-haspopup="dialog" aria-label="打開完整貼文">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIi8+CiAgPCEtLSBmbG9vciAtLT4KICA8cGF0aCBkPSJNNjAgMjY4IEgzNzAiLz4KICA8IS0tIGNoYWlyIC0tPgogIDxwYXRoIGQ9Ik05OCAyMDYgSDE1OCIvPgogIDxwYXRoIGQ9Ik05OCAyMDYgTDkyIDEyOCIvPgogIDxwYXRoIGQ9Ik0xMDQgMjA2IFYyNjYiLz4KICA8cGF0aCBkPSJNMTUyIDIwNiBWMjY2Ii8+CiAgPCEtLSBkZXNrIC0tPgogIDxwYXRoIGQ9Ik0xOTYgMTg2IEgzNjYiLz4KICA8cGF0aCBkPSJNMjEwIDE4NiBWMjY2Ii8+CiAgPHBhdGggZD0iTTM1MiAxODYgVjI2NiIvPgogIDwhLS0gcGVyc29uOiBoZWFkLCBiYWNrLCBsZWdzIC0tPgogIDxjaXJjbGUgY3g9IjE1MiIgY3k9Ijk0IiByPSIyMCIvPgogIDxwYXRoIGQ9Ik0xNDkgMTE0IFExMzggMTYwIDEyOCAyMDAiLz4KICA8cGF0aCBkPSJNMTI4IDIwMCBIMTkyIFYyNjIgSDIxMCIvPgogIDwhLS0gYXJtIHJlc3Rpbmcgb24gdGhlIGRlc2sgLS0+CiAgPHBhdGggZD0iTTE0NSAxMzQgTDE4OCAxNzYgTDIzOCAxODEiLz4KICA8IS0tIHNlY29uZCBhcm0gaG9sZGluZyB0aGUgYm9vayAtLT4KICA8cGF0aCBkPSJNMTQ3IDEyOCBMMTg0IDE2NiBMMjI2IDE3NiIvPgogIDwhLS0gcGVuY2lsIC0tPgogIDxwYXRoIGQ9Ik0yMzYgMTgxIEwyNTAgMTcwIi8+CiAgPCEtLSBvcGVuIGJvb2sgLS0+CiAgPHBhdGggZD0iTTIyNiAxODUgUTI0NiAxNzEgMjY2IDE4MiBRMjg2IDE3MSAzMDYgMTg1Ii8+CiAgPHBhdGggZD0iTTI2NiAxODIgVjE4NiIvPgogIDxwYXRoIGQ9Ik0yMzYgMTgwIFEyNDYgMTc1IDI1OCAxNzkiLz4KICA8cGF0aCBkPSJNMjc0IDE3OSBRMjg2IDE3NSAyOTggMTgwIi8+CiAgPCEtLSBzdGFjayBvZiBib29rcyAtLT4KICA8cmVjdCB4PSIzMTQiIHk9IjE3MCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjE2IiByeD0iMS41Ii8+CiAgPHJlY3QgeD0iMzE4IiB5PSIxNTYiIHdpZHRoPSIzOCIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPgogIDxyZWN0IHg9IjMxNiIgeT0iMTQ0IiB3aWR0aD0iNDAiIGhlaWdodD0iMTIiIHJ4PSIxLjUiLz4KICA8dGV4dCB4PSIzMzciIHk9IjE4MSIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjMjMyMzIzIiBzdHJva2U9Im5vbmUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj5DU0NTPC90ZXh0PgogIDwhLS0gZGVzayBsYW1wIC0tPgogIDxwYXRoIGQ9Ik0zNDIgMTQ0IFYxMzQgTDMxOCAxMDQiLz4KICA8cGF0aCBkPSJNMzA0IDEwMCBMMzI2IDkyIEwzMjIgMTE2IFoiLz4KICA8cGF0aCBkPSJNMzAwIDEyMiBMMjg0IDE0NiIgc3Ryb2tlLWRhc2hhcnJheT0iMyA2Ii8+CiAgPHBhdGggZD0iTTMxMCAxMjYgTDMwMCAxNTYiIHN0cm9rZS1kYXNoYXJyYXk9IjMgNiIvPgogIDwhLS0gdGhpbmtpbmcgbWFya3MgLS0+CiAgPHBhdGggZD0iTTE3OCA2NiBMMTg2IDU4Ii8+CiAgPHBhdGggZD0iTTE4OCA3NCBMMTk4IDcwIi8+CiAgPHBhdGggZD0iTTE2NiA2MCBMMTY4IDUwIi8+Cjwvc3ZnPgo=" alt="線條人坐在書桌前 K 書，桌上有攤開的書和一疊 CSCS 書">
-        <div>
-          <div class="meta"><span>心情</span><time datetime="2026-10-25">2026.10.25</time></div>
-          <p class="post-text">最近在準備 CSCS 考試。<br>嚴格來說，考試內容並不難，但畢竟是不同的領域，專業之間還是有差別。<br>該 K 的書，一頁都不能少。</p>
-        </div>
-      </article>
-    </div>
-    <p class="empty" hidden>還沒有貼文。</p>
-
-    <section id="about" class="about" aria-labelledby="about-title">
-      <h2 id="about-title">關於</h2>
-      <p class="about-lead">物理治療師出身的肌力教練，臨床快二十年。用治療師的眼光帶肌力訓練，從復健一路練到變強；下班後騎車、爬山、露營，最近在準備 CSCS。</p>
-      <details class="about-more">
-        <summary>看阿硯物理治療師的自我介紹</summary>
-        <p>我是物理治療師，在臨床待了快二十年，專長是骨科徒手治療、術後復健和運動傷害。</p>
-        <p>現在把重心放在肌力教練：先用治療師的眼光看懂你的身體，再帶你練。受過傷、怕受傷、想練強，都是我想幫的人。</p>
-        <p>下班後，我也是一個還想騎車、爬山、去露營的人。</p>
-        <p>時間永遠不夠用，膝蓋跟腰也三不五時出來抗議，但再忙還是得擠出時間動一動。</p>
-        <p>最近在準備 CSCS（肌力與體能訓練專家）證照。物理治療跟肌力體能雖有相關，但終究是不同領域，專業還是有差。所以最近還在乖乖 K 書，但年紀有一點了，腦袋有點鈍，好在現在有ＡＩ能幫忙。</p>
-        <p>這裡會放兩種東西：</p>
+    <div class="hero-visual">
+      <img src="/assets/hero/beach.webp?v=3" width="960" height="640" alt="海邊沙灘，一個人走向海。網站裡的實拍，不是治療示意。" decoding="async">
+      <aside class="float-card" aria-label="目前看得到的診所資料">
+        <p class="who">阿硯物理治療師</p>
+        <p class="sub">孔士硯 · 物理治療師、肌力教練</p>
         <ul>
-        <li><strong>心情</strong>：騎車、爬山、露營，還有生活裡的碎碎念。</li>
-        <li><strong>專業分享</strong>：用物理治療師的角度，整理我讀到、用到的東西。</li>
+          <li><span>治療所</span><b>50 分鐘</b></li>
+          <li><span>到府居家</span><b>60 分鐘</b></li>
+          <li><span>服務地區</span><b>龜山、林口</b></li>
         </ul>
-        <p>就這樣。內容對你有幫助，就是有緣啦！</p>
-      </details>
-      <p class="about-link"><a href="/about">完整介紹與聯絡方式</a>　<a href="/book">預約物理治療</a></p>
-    </section>
+      </aside>
+    </div>
+  </div>
 
-    <footer class="m-foot">
-      <span>© 2026 阿硯物理治療師</span>
-    </footer>
-  </main>
-</div>
+  <div class="wrap">
+    <section class="facts" aria-label="網站上寫過的事實">
+      <div class="fact"><b>快二十年</b><span>臨床物理治療，關於頁的自我介紹</span></div>
+      <div class="fact"><b>徒手治療</b><span>骨科、術後復健、運動傷害</span></div>
+      <div class="fact"><b>50／60 分</b><span>治療所一節，到府居家一節</span></div>
+      <div class="fact"><b>附出處</b><span>專業筆記的關鍵數據對過原始研究</span></div>
+    </section>
+  </div>
+
+  <section class="section" id="services" aria-labelledby="svc-title">
+    <div class="wrap">
+      <h2 id="svc-title">兩種看診，加上練回去。</h2>
+      <p class="section-lead">預約頁只列了這兩種時長。肌力是我現在帶人的方式，網站沒有另外寫一組時長或費用，所以這裡也不編。</p>
+      <div class="svc-row">
+        <article class="svc-card is-on">
+          <button class="svc-tab" type="button" role="tab" aria-selected="true" id="svc-tab-1" aria-controls="svc-panel-1"><span class="svc-no">01</span><span class="svc-name">治療所</span></button>
+          <div class="svc-panel" id="svc-panel-1" role="tabpanel" aria-labelledby="svc-tab-1">
+            <p class="svc-kicker">物理治療 · 50 分鐘 · 治療所</p>
+            <h3>先看懂，再處理。</h3>
+            <p>骨科徒手治療、術後復健、運動傷害。臨床快二十年，用治療師的眼光看活動、負荷和你想回到的生活，再決定接下來怎麼處理。</p>
+            <a class="btn btn-accent" href="/book">預約治療所</a>
+          </div>
+        </article>
+        <article class="svc-card">
+          <button class="svc-tab" type="button" role="tab" aria-selected="false" id="svc-tab-2" aria-controls="svc-panel-2"><span class="svc-no">02</span><span class="svc-name">到府</span></button>
+          <div class="svc-panel" id="svc-panel-2" role="tabpanel" aria-labelledby="svc-tab-2">
+            <p class="svc-kicker">居家物理復能 · 60 分鐘 · 到府</p>
+            <h3>人在家裡，也能開始。</h3>
+            <p>同一個人到府。肩頸那篇文章寫的服務地區是龜山、林口。其他地區請先用 LINE 問，我沒有在網站上擴大範圍。</p>
+            <a class="btn btn-accent" href="/book">預約到府</a>
+          </div>
+        </article>
+        <article class="svc-card">
+          <button class="svc-tab" type="button" role="tab" aria-selected="false" id="svc-tab-3" aria-controls="svc-panel-3"><span class="svc-no">03</span><span class="svc-name">肌力</span></button>
+          <div class="svc-panel" id="svc-panel-3" role="tabpanel" aria-labelledby="svc-tab-3">
+            <p class="svc-kicker">從復健練到變強 · 時長未另列</p>
+            <h3>治療師的眼光，帶你練。</h3>
+            <p>現在把重心放在肌力。受過傷、怕受傷、想練強，都是我想幫的人。CSCS 還在準備，不是已經拿到；讀書筆記公開在下面，考試內容以 NSCA 為準。</p>
+            <a class="btn btn-ghost" href="#feed">看肌力與 CSCS 筆記</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process" aria-labelledby="process-title">
+    <div class="wrap process">
+      <div>
+        <h2 id="process-title">復健不是一條直線。</h2>
+        <p class="section-lead">下面四步是我在網站上寫過的順序：先排除該看醫師的情況，再評估、處理，然後練回生活。沒有療程週數，因為每個人不一樣，我也沒有在這裡統計個案。</p>
+        <ol class="steps">
+          <li><i class="dot" aria-hidden="true"></i><div><b>先看警訊</b><span>文章是衛教。胸痛、突然無力、麻木擴大，先就醫，不要先約治療。</span></div></li>
+          <li><i class="dot" aria-hidden="true"></i><div><b>評估活動與負荷</b><span>看你現在怎麼動、日常怎麼用這塊身體，以及你想回到什麼樣的生活或運動。</span></div></li>
+          <li><i class="dot" aria-hidden="true"></i><div><b>徒手與運動</b><span>需要時做徒手治療，並配一個你帶得走的運動計畫。有爭議的地方，筆記會直接寫出來。</span></div></li>
+          <li><i class="dot" aria-hidden="true"></i><div><b>練回你要的生活</b><span>目標不是停在「不痛」。受過傷的人，也可以再把力量練回來。</span></div></li>
+        </ol>
+      </div>
+      <figure class="chart">
+        <svg viewBox="0 0 640 320" role="img" aria-labelledby="chart-title chart-desc">
+          <title id="chart-title">復健過程概念圖</title>
+          <desc id="chart-desc">一條起伏的曲線，標出評估、處理、練回來、回到生活。沒有個案數字。</desc>
+          <line x1="48" y1="40" x2="48" y2="250" stroke="#e4e2dc" stroke-width="1"/>
+          <line x1="48" y1="250" x2="610" y2="250" stroke="#e4e2dc" stroke-width="1"/>
+          <path d="M48 220 C 120 210, 150 150, 190 156 S 270 230, 320 168 S 430 70, 500 96 S 560 140, 600 78" fill="none" stroke="#d84b20" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="48" cy="220" r="5" fill="#141414"/>
+          <circle cx="190" cy="156" r="5" fill="#141414"/>
+          <circle cx="360" cy="150" r="5" fill="#c2410c"/>
+          <circle cx="600" cy="78" r="5" fill="#141414"/>
+          <text x="48" y="278" fill="#5e5c57" font-size="13" font-family="Noto Sans TC, sans-serif">評估</text>
+          <text x="168" y="278" fill="#5e5c57" font-size="13" font-family="Noto Sans TC, sans-serif">處理</text>
+          <text x="328" y="278" fill="#5e5c57" font-size="13" font-family="Noto Sans TC, sans-serif">練回來</text>
+          <text x="548" y="278" fill="#5e5c57" font-size="13" font-family="Noto Sans TC, sans-serif">回到生活</text>
+          <text x="64" y="36" fill="#5e5c57" font-size="12" font-family="Noto Sans TC, sans-serif">能做的事（概念，沒有單位）</text>
+        </svg>
+        <figcaption>概念圖，不是個案數據，也沒有週數或分數。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="feed" aria-labelledby="feed-title">
+    <div class="wrap">
+      <div class="notes-head">
+        <div>
+          <h2 id="feed-title">寫下來，並附出處。</h2>
+          <p class="section-lead">專業分享用物理治療師的角度整理，關鍵數據附原始研究。心情是騎車、爬山和生活。兩篇心情貼文仍可點開。</p>
+        </div>
+        <div class="notes-tools">
+          <label for="q" class="sr-only">搜尋文章</label>
+          <input id="q" type="search" placeholder="搜尋文章" autocomplete="off">
+        </div>
+      </div>
+      <div class="tabs" role="toolbar" aria-label="篩選貼文">
+        <button class="tab" type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button class="tab" type="button" data-filter="note" aria-pressed="false">專業分享</button>
+        <button class="tab" type="button" data-filter="mood" aria-pressed="false">心情</button>
+      </div>
+      <div class="subtabs" role="toolbar" aria-label="細項分類" hidden></div>
+      <div class="grid" style="margin-top:16px">
+              <!-- 新貼文放在最上面。data-cat：mood = 心情、note = 專業分享。細項會依標題與摘要自動分類（規則在下方 CATS）；要指定細項就加 data-sub="代號"。 -->
+              <article class="tile imgpost" data-cat="mood" tabindex="0" role="button" aria-haspopup="dialog" aria-label="打開完整貼文">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIi8+CiAgPCEtLSBmbG9vciAtLT4KICA8cGF0aCBkPSJNNDAgMjY4IEgzNjAiLz4KICA8IS0tIGxlZnQgcGVyc29uOiBjbGllbnQsIHRhbGtpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iMTEyIiByPSIxOCIvPgogIDxwYXRoIGQ9Ik0xMTAgMTMwIFYyMDAiLz4KICA8cGF0aCBkPSJNMTEwIDIwMCBMOTQgMjY2Ii8+CiAgPHBhdGggZD0iTTExMCAyMDAgTDEyNiAyNjYiLz4KICA8cGF0aCBkPSJNMTEwIDE0OCBMODQgMTc2Ii8+CiAgPCEtLSBhcm0gZ2VzdHVyaW5nIHRvd2FyZCBidWJibGUgLS0+CiAgPHBhdGggZD0iTTExMCAxNDggTDEzOCAxMzIgTDE1MCAxMTYiLz4KICA8IS0tIG1vdXRoIG9wZW4gLS0+CiAgPHBhdGggZD0iTTExOCAxMTcgUTEyMiAxMjAgMTE4IDEyMyIvPgogIDwhLS0gc3BlZWNoIGJ1YmJsZSAtLT4KICA8cmVjdCB4PSIxNDYiIHk9IjIwIiB3aWR0aD0iMTI2IiBoZWlnaHQ9IjY4IiByeD0iMjQiLz4KICA8cGF0aCBkPSJNMTY2IDg4IEwxMjYgMTAyIEwxODYgODgiIGZpbGw9IiNmZmZmZmYiLz4KICA8cGF0aCBkPSJNMTY3IDg3IEgxODUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPCEtLSBjcmFja2VkIHZlcnRlYnJhZSBpbnNpZGUgYnViYmxlIC0tPgogIDxyZWN0IHg9IjE2OCIgeT0iMzQiIHdpZHRoPSI0NCIgaGVpZ2h0PSIxMCIgcng9IjQiLz4KICA8cmVjdCB4PSIxNjgiIHk9IjQ5IiB3aWR0aD0iNDQiIGhlaWdodD0iMTAiIHJ4PSI0Ii8+CiAgPHJlY3QgeD0iMTY4IiB5PSI2NCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjEwIiByeD0iNCIvPgogIDxwYXRoIGQ9Ik0xOTAgMzAgTDE4NCA0MCBMMTk0IDUwIEwxODYgNjAgTDE5NiA3MCBMMTg4IDgwIiBzdHJva2U9IiNjMjQxMGMiIHN0cm9rZS13aWR0aD0iMi40Ii8+CiAgPHBhdGggZD0iTTIyMCA0MCBMMjMwIDM0Ii8+CiAgPHBhdGggZD0iTTIyMiA1NiBIMjM0Ii8+CiAgPHBhdGggZD0iTTIyMCA3MiBMMjMwIDc4Ii8+CiAgPCEtLSByaWdodCBwZXJzb246IHRoZXJhcGlzdCwgaGFuZCBvbiBmb3JlaGVhZCAtLT4KICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIxMTIiIHI9IjE4Ii8+CiAgPHBhdGggZD0iTTMwMCAxMzAgVjIwMCIvPgogIDxwYXRoIGQ9Ik0zMDAgMjAwIEwyODQgMjY2Ii8+CiAgPHBhdGggZD0iTTMwMCAyMDAgTDMxNiAyNjYiLz4KICA8IS0tIGFybSB0byBmb3JlaGVhZCAoZmFjZXBhbG0pIC0tPgogIDxwYXRoIGQ9Ik0zMDAgMTQ4IEwyNzYgMTMyIEwyODggMTA0Ii8+CiAgPCEtLSBvdGhlciBhcm0gb24gaGlwIC0tPgogIDxwYXRoIGQ9Ik0zMDAgMTUwIEwzMjQgMTcwIEwzMTIgMTg2Ii8+CiAgPCEtLSBmbGF0IG1vdXRoIC0tPgogIDxwYXRoIGQ9Ik0yOTYgMTIwIEgzMDYiLz4KICA8IS0tIHF1ZXN0aW9uIG1hcmtzIC0tPgogIDx0ZXh0IHg9IjMwMCIgeT0iODAiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyMzIzMjMiIHN0cm9rZT0ibm9uZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Pz8/PC90ZXh0PgogIDwhLS0gc3dlYXQgZHJvcCAtLT4KICA8cGF0aCBkPSJNMzIyIDk4IFEzMjYgMTA2IDMyMiAxMTAgUTMxOCAxMDYgMzIyIDk4IFoiLz4KPC9zdmc+Cg==" alt="線條人插圖：客人轉述教練說脊椎會裂掉，對話框裡畫著裂開的脊椎；旁邊的治療師扶著額頭，頭上三個問號">
+                <div>
+                  <div class="meta"><span>心情</span><time datetime="2026-10-28">2026.10.28</time></div>
+                  <p class="post-text">昨天客人跟我說，教練說我的多裂肌很緊，要做運動按摩，不然脊椎會裂掉？？？<br>啥？<br>我知道有業績壓力，但用這方式……你也幫幫忙。</p>
+                </div>
+              </article>
+              <a class="tile notepost" data-cat="note" href="/notes/cscs-bioenergetics">
+                <div>
+                  <div class="meta"><span>專業分享</span><time datetime="2026-11-04">2026.11.04</time></div>
+                  <h3 class="note-title">CSCS 筆記：生物能量學</h3>
+                  <p class="note-sub">拉時間看主要能量系統、切換看乳酸閾值移動、算間歇休息時間，附考題與翻面卡。</p>
+                </div>
+                <span class="note-more">開始互動</span>
+              </a>
+              <a class="tile notepost" data-cat="note" href="/notes/neck-pain-red-flags">
+                <div>
+                  <div class="meta"><span>專業分享</span><time datetime="2026-10-31">2026.10.31</time></div>
+                  <h3 class="note-title">肩頸痠痛是哪裡出了問題？什麼情況要先看醫師？</h3>
+                  <p class="note-sub">肩頸痠痛系列 1：怎麼分類、手麻是不是壓到神經、要先就醫的警訊，附自我檢查。</p>
+                </div>
+                <span class="note-more">閱讀全文</span>
+              </a>
+              <a class="tile notepost" data-cat="note" href="/notes/ankle-sprain-cai">
+                <div>
+                  <div class="meta"><span>專業分享</span><time datetime="2026-10-26">2026.10.26</time></div>
+                  <h3 class="note-title">扭到腳踝，能走路就算好了嗎？</h3>
+                  <p class="note-sub">扭傷 10 個常見問題：要不要照 X 光、要不要冰敷、一扭再扭怎麼練、什麼時候可以回場上。</p>
+                </div>
+                <span class="note-more">閱讀全文</span>
+              </a>
+              <a class="tile notepost" data-cat="note" href="/notes/acsm-vs-nsca-resistance-training">
+                <div>
+                  <div class="meta"><span>專業分享</span><time datetime="2026-10-28">2026.10.28</time></div>
+                  <h3 class="note-title">ACSM 和 NSCA 的肌力訓練建議，差在哪？</h3>
+                  <p class="note-sub">2026 新版 ACSM 立場聲明 vs NSCA：負荷、組數、休息怎麼選，附互動比較。</p>
+                </div>
+                <span class="note-more">閱讀全文</span>
+              </a>
+              <a class="tile notepost" data-cat="note" href="/notes/cscs-body-systems">
+                <div>
+                  <div class="meta"><span>專業分享</span><time datetime="2026-10-28">2026.10.28</time></div>
+                  <h3 class="note-title">CSCS 筆記：肌絲滑動、肌纖維類型與運動單位徵召</h3>
+                  <p class="note-sub">拉滑桿看肌小節收縮、比較三型肌纖維、模擬運動單位徵召，附考題與翻面卡。</p>
+                </div>
+                <span class="note-more">開始互動</span>
+              </a>
+              <a class="tile notepost" data-cat="note" href="/notes/cscs-biomechanics">
+                <div>
+                  <div class="meta"><span>專業分享</span><time datetime="2026-10-26">2026.10.26</time></div>
+                  <h3 class="note-title">CSCS 筆記：生物力學互動教學</h3>
+                  <p class="note-sub">拖曳角度看力矩、切換槓桿、算爆發力，附考題與翻面卡。</p>
+                </div>
+                <span class="note-more">開始互動</span>
+              </a>
+              <a class="tile notepost" data-cat="note" href="/notes/cscs-endocrine">
+                <div>
+                  <div class="meta"><span>專業分享</span><time datetime="2026-10-25">2026.10.25</time></div>
+                  <h3 class="note-title">CSCS 筆記：阻力訓練的內分泌適應</h3>
+                  <p class="note-sub">睪固酮、生長激素、IGF-1、皮質醇，附原始研究出處。</p>
+                </div>
+                <span class="note-more">閱讀全文</span>
+              </a>
+              <article class="tile imgpost" data-cat="mood" tabindex="0" role="button" aria-haspopup="dialog" aria-label="打開完整貼文">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMyMzIzIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIi8+CiAgPCEtLSBmbG9vciAtLT4KICA8cGF0aCBkPSJNNjAgMjY4IEgzNzAiLz4KICA8IS0tIGNoYWlyIC0tPgogIDxwYXRoIGQ9Ik05OCAyMDYgSDE1OCIvPgogIDxwYXRoIGQ9Ik05OCAyMDYgTDkyIDEyOCIvPgogIDxwYXRoIGQ9Ik0xMDQgMjA2IFYyNjYiLz4KICA8cGF0aCBkPSJNMTUyIDIwNiBWMjY2Ii8+CiAgPCEtLSBkZXNrIC0tPgogIDxwYXRoIGQ9Ik0xOTYgMTg2IEgzNjYiLz4KICA8cGF0aCBkPSJNMjEwIDE4NiBWMjY2Ii8+CiAgPHBhdGggZD0iTTM1MiAxODYgVjI2NiIvPgogIDwhLS0gcGVyc29uOiBoZWFkLCBiYWNrLCBsZWdzIC0tPgogIDxjaXJjbGUgY3g9IjE1MiIgY3k9Ijk0IiByPSIyMCIvPgogIDxwYXRoIGQ9Ik0xNDkgMTE0IFExMzggMTYwIDEyOCAyMDAiLz4KICA8cGF0aCBkPSJNMTI4IDIwMCBIMTkyIFYyNjIgSDIxMCIvPgogIDwhLS0gYXJtIHJlc3Rpbmcgb24gdGhlIGRlc2sgLS0+CiAgPHBhdGggZD0iTTE0NSAxMzQgTDE4OCAxNzYgTDIzOCAxODEiLz4KICA8IS0tIHNlY29uZCBhcm0gaG9sZGluZyB0aGUgYm9vayAtLT4KICA8cGF0aCBkPSJNMTQ3IDEyOCBMMTg0IDE2NiBMMjI2IDE3NiIvPgogIDwhLS0gcGVuY2lsIC0tPgogIDxwYXRoIGQ9Ik0yMzYgMTgxIEwyNTAgMTcwIi8+CiAgPCEtLSBvcGVuIGJvb2sgLS0+CiAgPHBhdGggZD0iTTIyNiAxODUgUTI0NiAxNzEgMjY2IDE4MiBRMjg2IDE3MSAzMDYgMTg1Ii8+CiAgPHBhdGggZD0iTTI2NiAxODIgVjE4NiIvPgogIDxwYXRoIGQ9Ik0yMzYgMTgwIFEyNDYgMTc1IDI1OCAxNzkiLz4KICA8cGF0aCBkPSJNMjc0IDE3OSBRMjg2IDE3NSAyOTggMTgwIi8+CiAgPCEtLSBzdGFjayBvZiBib29rcyAtLT4KICA8cmVjdCB4PSIzMTQiIHk9IjE3MCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjE2IiByeD0iMS41Ii8+CiAgPHJlY3QgeD0iMzE4IiB5PSIxNTYiIHdpZHRoPSIzOCIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPgogIDxyZWN0IHg9IjMxNiIgeT0iMTQ0IiB3aWR0aD0iNDAiIGhlaWdodD0iMTIiIHJ4PSIxLjUiLz4KICA8dGV4dCB4PSIzMzciIHk9IjE4MSIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjMjMyMzIzIiBzdHJva2U9Im5vbmUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj5DU0NTPC90ZXh0PgogIDwhLS0gZGVzayBsYW1wIC0tPgogIDxwYXRoIGQ9Ik0zNDIgMTQ0IFYxMzQgTDMxOCAxMDQiLz4KICA8cGF0aCBkPSJNMzA0IDEwMCBMMzI2IDkyIEwzMjIgMTE2IFoiLz4KICA8cGF0aCBkPSJNMzAwIDEyMiBMMjg0IDE0NiIgc3Ryb2tlLWRhc2hhcnJheT0iMyA2Ii8+CiAgPHBhdGggZD0iTTMxMCAxMjYgTDMwMCAxNTYiIHN0cm9rZS1kYXNoYXJyYXk9IjMgNiIvPgogIDwhLS0gdGhpbmtpbmcgbWFya3MgLS0+CiAgPHBhdGggZD0iTTE3OCA2NiBMMTg2IDU4Ii8+CiAgPHBhdGggZD0iTTE4OCA3NCBMMTk4IDcwIi8+CiAgPHBhdGggZD0iTTE2NiA2MCBMMTY4IDUwIi8+Cjwvc3ZnPgo=" alt="線條人坐在書桌前 K 書，桌上有攤開的書和一疊 CSCS 書">
+                <div>
+                  <div class="meta"><span>心情</span><time datetime="2026-10-25">2026.10.25</time></div>
+                  <p class="post-text">最近在準備 CSCS 考試。<br>嚴格來說，考試內容並不難，但畢竟是不同的領域，專業之間還是有差別。<br>該 K 的書，一頁都不能少。</p>
+                </div>
+              </article>
+            
+
+      </div>
+      <p class="empty" hidden>還沒有貼文。</p>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="founder-title">
+    <div class="wrap">
+      <article class="founder">
+        <img src="/assets/img/avatar.webp" width="440" height="520" alt="網站現有的個人圖片：一幅面向海的馬賽克地景，不是證件照。">
+        <div>
+          <p class="eyebrow">一個人的診所</p>
+          <h2 id="founder-title">阿硯物理治療師</h2>
+          <p class="alias">本名孔士硯 · 仁士居家物理治療所</p>
+          <ul>
+            <li>物理治療師，臨床將近二十年。</li>
+            <li>專長骨科徒手治療、術後復健、運動傷害。</li>
+            <li>現在以肌力教練為主，CSCS 還在準備，不是已考取。</li>
+            <li>這裡沒有其他治療師。不會把一個人寫成一個團隊。</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-accent" href="/about">完整介紹</a>
+            <a class="btn btn-ghost" href="https://www.instagram.com/hi_ptkong/" target="_blank" rel="noopener">Instagram @hi_ptkong</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="pricing" aria-labelledby="price-title">
+    <div class="wrap">
+      <h2 id="price-title">時長寫清楚，費用不編。</h2>
+      <p class="section-lead">預約頁只有服務名稱和時間。網站沒有標價，我就不在這裡補一個數字。</p>
+      <div class="pricing">
+        <ul class="price-list">
+          <li><div><b>物理治療</b><span>治療所。骨科徒手、術後復健、運動傷害都從這裡談。</span></div><em>50 分鐘</em></li>
+          <li><div><b>居家物理復能</b><span>到府。文章寫的服務地區是龜山、林口。</span></div><em>60 分鐘</em></li>
+          <li><div><b>肌力訓練</b><span>從復健練到變強。沒有另外公布的時長。</span></div><em>未列時長</em></li>
+        </ul>
+        <aside class="price-card">
+          <strong>線上預約還在準備。</strong>
+          <p>現在用 LINE 跟我約時間，我會回覆。費用當面或在 LINE 裡說，不寫在這個頁面上。</p>
+          <a class="btn" href="/book">前往預約</a>
+        </aside>
+      </div>
+      <p class="price-note">有胸痛、突然無力或麻木擴大，請先就醫，不要先留電話在留言區。</p>
+    </div>
+  </section>
+
+  <div class="wrap banner-wrap">
+    <section class="banner" aria-labelledby="banner-title">
+      <div>
+        <h2 id="banner-title">先約時間，再一起看身體。</h2>
+        <p>治療所或到府都可以。線上時段還沒開放，按鈕會進到現在的預約頁，再用 LINE @emmsc。</p>
+      </div>
+      <a class="btn" href="/book">用 LINE 約時間</a>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="foot-grid">
+    <div>
+      <p class="foot-brand">阿硯物理治療師</p>
+      <p>仁士居家物理治療所</p>
+      <p>物理治療師出身的肌力教練。臨床將近二十年。一個人看，不另列團隊。</p>
+    </div>
+    <div>
+      <p class="foot-h">網站</p>
+      <a href="/">首頁</a>
+      <a href="/about">關於作者</a>
+      <a href="/#feed">專業分享</a>
+      <a href="/book">預約</a>
+      <a href="/privacy">留言與資料說明</a>
+    </div>
+    <div>
+      <p class="foot-h">聯絡</p>
+      <a href="https://line.me/R/ti/p/@emmsc" rel="noopener" target="_blank">LINE @emmsc</a>
+      <a href="https://www.instagram.com/hi_ptkong/" rel="noopener" target="_blank">Instagram @hi_ptkong</a>
+      <p>服務地區：龜山、林口</p>
+      <p>地址與門診時間沒有寫在網站上，請用 LINE 問。</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 阿硯物理治療師</span>
+    <span>文章是衛教，不能取代面對面的評估。</span>
+  </div>
+</footer>
 <script src="/assets/scripts/index-1-e10977def00d.js"></script>
 <dialog class="post-dialog" aria-label="完整貼文">
   <button type="button" class="pd-close" aria-label="關閉">×</button>
   <div class="pd-content"></div>
 </dialog>
 <script src="/assets/scripts/index-2-da7160acc9fc.js"></script>
-<script src="/assets/hero.js?v=20261104-auto"></script>
+<script src="/assets/clinic.js"></script>
 </body>
 </html>

@@ -413,8 +413,23 @@ details.refs-box[open] .refs-hint { display: none; }
 <link rel="stylesheet" href="/assets/engage.css">
 <script src="/assets/engage.js?v=20261104-orig" defer></script>
 <link rel="stylesheet" href="/assets/mobile.css">
+<link rel="stylesheet" href="/assets/clinic.css?v=20261123b">
 </head>
-<body>
+<body class="has-chrome">
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><span class="site-mark" aria-hidden="true">硯</span><span>阿硯物理治療師</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="網站導覽">
+      <a href="/#services">服務</a>
+      <a href="/#process">進行方式</a>
+      <a href="/#feed">筆記</a>
+      <a href="/about">關於</a>
+      <a class="nav-cta" href="/book">預約</a>
+    </nav>
+  </div>
+</header>
+
 <article class="page">
   <a class="back" href="../#feed">← 回到所有貼文</a>
   <nav class="crumbs" aria-label="麵包屑"><a href="../">首頁</a> › <a href="../#feed">專業分享</a> › CSCS 筆記：生物能量學</nav>
@@ -756,5 +771,33 @@ details.refs-box[open] .refs-hint { display: none; }
 
 <script src="/assets/scripts/cscs-bioenergetics-2-2953a2432a9f.js"></script>
 
+<footer class="site-footer">
+  <div class="foot-grid">
+    <div>
+      <p class="foot-brand">阿硯物理治療師</p>
+      <p>仁士居家物理治療所</p>
+      <p>物理治療師出身的肌力教練。臨床將近二十年。</p>
+    </div>
+    <div>
+      <p class="foot-h">網站</p>
+      <a href="/">首頁</a>
+      <a href="/about">關於作者</a>
+      <a href="/#feed">專業分享</a>
+      <a href="/book">預約</a>
+      <a href="/privacy">留言與資料說明</a>
+    </div>
+    <div>
+      <p class="foot-h">聯絡</p>
+      <a href="https://line.me/R/ti/p/@emmsc" rel="noopener" target="_blank">LINE @emmsc</a>
+      <a href="https://www.instagram.com/hi_ptkong/" rel="noopener" target="_blank">Instagram @hi_ptkong</a>
+      <p>服務地區：龜山、林口</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 阿硯物理治療師</span>
+    <span>文章是衛教，不能取代面對面的評估。</span>
+  </div>
+</footer>
+<script src="/assets/clinic.js"></script>
 </body>
 </html>
