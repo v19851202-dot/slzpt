@@ -278,6 +278,7 @@ body.home .fact span { display: block; margin-top: 6px; color: var(--c-ink-2); f
   font-weight: 700;
 }
 .svc-panel p { margin: 0 0 16px; color: #3f3e3a; max-width: 38em; }
+.svc-note { margin: 0 0 16px; color: var(--c-ink-2); font-size: 14px; }
 .svc-panel .btn { align-self: flex-start; margin-top: auto; }
 
 .process {
@@ -402,6 +403,7 @@ body.home .note-title { margin: 0; font-family: var(--c-serif); font-size: 22px;
   background: #eceae4;
 }
 .founder h2 { margin-bottom: 6px; }
+.founder p { margin: 0 0 12px; }
 .founder .alias { margin: 0 0 12px; color: var(--c-ink-2); }
 .founder ul { margin: 0 0 18px; padding-left: 1.1em; }
 .founder li { margin: 0 0 6px; }
