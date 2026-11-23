@@ -40,3 +40,23 @@
 - 規則在首頁引用的 `assets/scripts/index-1-*.js` 的 `CATS`（每個細項一行 `{ id, name, re }`）；陣列順序就是按鈕順序，標 `first: true` 的優先比對。
 - 自動判斷不對時，在卡片加 `data-sub="細項代號"` 強制指定，例如 `data-sub="lower"`。
 - 網址可直接開到分類，例如 `https://slzpt.com/#note/spine`。
+
+## 線上預約開關
+
+預約入口有三個：首頁右上「預約」、首頁側邊選單「預約物理治療」、首頁關於區與 `/about` 的「預約物理治療」。三個都只連到 `/book`，**要不要開放線上預約，只由 `book.html` 決定**。`scripts/check-static.py` 會擋下直接連到 `book.slzpt.com` 的入口。
+
+- **目前：關閉**。`book.html` 顯示「線上預約準備中」並導向 LINE @emmsc；頁面設 `noindex`，不放進 `sitemap.xml`。
+- **開放時**（clinic-booking 已部署到 `https://book.slzpt.com`、改期取消的本人驗證已補上）：
+  1. 把 `book.html` 裡 `data-booking="closed"` 那一整塊換成：
+     ```html
+     <div class="status" data-booking="open">
+       <b>選時段、留下姓名電話就完成</b>
+       <p>送出後我會打電話跟你確認。不方便上網的話，也可以用 LINE 約。</p>
+       <a class="btn" href="https://book.slzpt.com">開始線上預約</a>
+       <p><a href="https://line.me/R/ti/p/@emmsc" rel="noopener" target="_blank">或用 LINE 預約（@emmsc）</a></p>
+     </div>
+     ```
+  2. 刪掉 `<meta name="robots" content="noindex">`，並把 `https://slzpt.com/book` 加進 `sitemap.xml`。
+  3. 跑 `.claude/check.sh`，應顯示 `booking switch (open)`。
+
+品質閘門：`.claude/check.sh`（= `python3 scripts/check-static.py`）。

@@ -17,7 +17,8 @@ class Page(HTMLParser):
     def handle_endtag(self,tag):
         if tag=='script': self.current=None
 
-for path in [root/'index.html',root/'about.html',root/'privacy.html',root/'404.html',*sorted((root/'notes').glob('*.html'))]:
+pages=[root/'index.html',root/'about.html',root/'privacy.html',root/'book.html',root/'404.html',*sorted((root/'notes').glob('*.html'))]
+for path in pages:
     page=Page(); page.feed(path.read_text())
     assert sum(tag=='h1' for tag,_ in page.tags)==1, path
     for attrs,script in page.scripts:
@@ -46,4 +47,20 @@ script=re.search(r'(?:^|;)\s*script-src\s+([^;]+)',csp)[1]
 assert "'self'" in script and 'unsafe-inline' not in script and 'unsafe-eval' not in script
 assert 'script-src-attr \'none\'' in csp
 assert '<source src=' not in (root/'index.html').read_text()
-print('PASS: 10 HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, and enforced CSP')
+# 線上預約開關：所有入口只能連到 /book，開放與否只由 book.html 的 data-booking 決定。
+BOOKING_HOST='book.slzpt.com'
+for path in pages:
+    if path.name!='book.html':
+        assert BOOKING_HOST not in path.read_text(),('booking entry must link to /book, not the booking system directly',path)
+book=(root/'book.html').read_text()
+states=re.findall(r'data-booking="(open|closed)"',book)
+assert len(states)==1,('book.html needs exactly one data-booking="open|closed" block',states)
+noindex='<meta name="robots" content="noindex">' in book
+in_sitemap='https://slzpt.com/book' in (root/'sitemap.xml').read_text()
+if states[0]=='closed':
+    assert BOOKING_HOST not in book,'booking is closed but book.html links to the booking system'
+    assert noindex and not in_sitemap,'closed booking page must be noindex and left out of sitemap.xml'
+else:
+    assert 'https://'+BOOKING_HOST in book,'booking is open but book.html has no link to the booking system'
+    assert not noindex,'open booking page should be indexable'
+print(f'PASS: {len(pages)} HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, enforced CSP, booking switch ({states[0]})')
