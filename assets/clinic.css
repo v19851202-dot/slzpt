@@ -413,15 +413,11 @@ body.home .note-title { margin: 0; font-family: var(--c-serif); font-size: 22px;
 }
 .price-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--c-line); }
 .price-list li {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px 18px;
   padding: 16px 0;
   border-bottom: 1px solid var(--c-line);
 }
 .price-list b { display: block; }
 .price-list span { color: var(--c-ink-2); font-size: 14px; }
-.price-list em { font-style: normal; font-weight: 600; }
 .price-card {
   background: var(--c-char);
   color: #f6f3ee;
