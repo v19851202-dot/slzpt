@@ -22,35 +22,35 @@
       var tl = CX - THICK / 2 * S, tr = CX + THICK / 2 * S;
       var al = zl + THIN * S, ar = zr - THIN * S;
       var g = sv.querySelector('g.dr'); if (g) sv.removeChild(g); g = el('g', { 'class': 'dr' }, sv);
-      var hl = '#fde68a';
+      var hl = '#FEF3C7';
       if (zone === 'A') el('rect', { x: tl, y: 36, width: tr - tl, height: 128, fill: hl, rx: 4 }, g);
       if (zone === 'I') { el('rect', { x: zl, y: 36, width: tl - zl, height: 128, fill: hl, rx: 4 }, g); el('rect', { x: tr, y: 36, width: zr - tr, height: 128, fill: hl, rx: 4 }, g); }
       if (zone === 'H' && ar > al) el('rect', { x: al, y: 36, width: ar - al, height: 128, fill: hl, rx: 4 }, g);
       [70, 100, 130].forEach(function (y) {
-        el('rect', { x: tl, y: y - 5, width: tr - tl, height: 10, rx: 3, fill: '#2b2b2b' }, g);
+        el('rect', { x: tl, y: y - 5, width: tr - tl, height: 10, rx: 3, fill: '#18181B' }, g);
         for (var x = tl + 10; x < tr - 6; x += 16) {
           if (Math.abs(x - CX) < 16) continue;
           var d = x < CX ? -1 : 1;
-          el('line', { x1: x, y1: y - 5, x2: x + 5 * d, y2: y - 11, stroke: '#2b2b2b', 'stroke-width': 2 }, g);
-          el('line', { x1: x, y1: y + 5, x2: x + 5 * d, y2: y + 11, stroke: '#2b2b2b', 'stroke-width': 2 }, g);
+          el('line', { x1: x, y1: y - 5, x2: x + 5 * d, y2: y - 11, stroke: '#18181B', 'stroke-width': 2 }, g);
+          el('line', { x1: x, y1: y + 5, x2: x + 5 * d, y2: y + 11, stroke: '#18181B', 'stroke-width': 2 }, g);
         }
       });
       [55, 85, 115, 145].forEach(function (y) {
-        el('rect', { x: zl, y: y - 3, width: THIN * S, height: 6, rx: 3, fill: '#ea580c' }, g);
-        el('rect', { x: zr - THIN * S, y: y - 3, width: THIN * S, height: 6, rx: 3, fill: '#ea580c' }, g);
+        el('rect', { x: zl, y: y - 3, width: THIN * S, height: 6, rx: 3, fill: '#B45309' }, g);
+        el('rect', { x: zr - THIN * S, y: y - 3, width: THIN * S, height: 6, rx: 3, fill: '#B45309' }, g);
       });
-      var zc = zone === 'Z' ? '#c2410c' : '#6b6b6b', zw = zone === 'Z' ? 5 : 3;
+      var zc = zone === 'Z' ? '#B45309' : '#63636B', zw = zone === 'Z' ? 5 : 3;
       [zl, zr].forEach(function (x) {
         var pts = [];
         for (var i = 0; i <= 8; i++) pts.push((x + (i % 2 ? 5 : -5)) + ',' + (34 + i * 16.5));
         el('polyline', { points: pts.join(' '), fill: 'none', stroke: zc, 'stroke-width': zw, 'stroke-linejoin': 'round' }, g);
       });
-      el('line', { x1: CX, y1: 40, x2: CX, y2: 160, stroke: zone === 'M' ? '#c2410c' : '#9a9a9a', 'stroke-width': zone === 'M' ? 4 : 2, 'stroke-dasharray': '4 4' }, g);
-      function lbl(x, y, t, bold) { var e = el('text', { x: x, y: y, 'text-anchor': 'middle', 'font-size': 18, 'font-weight': bold ? 700 : 500, fill: bold ? '#9a3412' : '#6b6b6b' }, g); e.textContent = t; }
+      el('line', { x1: CX, y1: 40, x2: CX, y2: 160, stroke: zone === 'M' ? '#B45309' : '#63636B', 'stroke-width': zone === 'M' ? 4 : 2, 'stroke-dasharray': '4 4' }, g);
+      function lbl(x, y, t, bold) { var e = el('text', { x: x, y: y, 'text-anchor': 'middle', 'font-size': 18, 'font-weight': bold ? 700 : 500, fill: bold ? '#B45309' : '#63636B' }, g); e.textContent = t; }
       lbl(zl, 22, 'Z', zone === 'Z'); lbl(zr, 22, 'Z', zone === 'Z'); lbl(CX, 22, 'M', zone === 'M');
       function brace(x1, x2, y, t, on) {
         if (x2 - x1 < 2) { lbl((x1 + x2) / 2, y + 20, t + '（消失）', on); return; }
-        el('path', { d: 'M' + x1 + ' ' + (y - 6) + ' V' + y + ' H' + x2 + ' V' + (y - 6), fill: 'none', stroke: on ? '#c2410c' : '#9a9a9a', 'stroke-width': on ? 2.5 : 1.5 }, g);
+        el('path', { d: 'M' + x1 + ' ' + (y - 6) + ' V' + y + ' H' + x2 + ' V' + (y - 6), fill: 'none', stroke: on ? '#B45309' : '#63636B', 'stroke-width': on ? 2.5 : 1.5 }, g);
         lbl((x1 + x2) / 2, y + 20, t, on);
       }
       brace(tl, tr, 180, 'A 帶', zone === 'A');
@@ -84,7 +84,7 @@
       { t: 'IIa', r: 16, th: 28 }, { t: 'IIa', r: 18, th: 40 }, { t: 'IIa', r: 20, th: 52 },
       { t: 'IIx', r: 23, th: 66 }, { t: 'IIx', r: 26, th: 80 }
     ];
-    var COL = { I: '#64748b', IIa: '#ea580c', IIx: '#9a3412' };
+    var COL = { I: '#63636B', IIa: '#B45309', IIx: '#18181B' };
     var mode = 'ramp';
     var modeBtns = document.querySelectorAll('#mu-lab [data-mode]');
     function drawMU() {
@@ -98,13 +98,13 @@
         var x = 42 + i * 62, y = 150;
         var rate = 0;
         if (on) { n++; if (types.indexOf(u.t) < 0) types.push(u.t); rate = mode === 'ballistic' ? 1 : Math.min(1, 0.3 + (f - th) / 45); }
-        el('rect', { x: x - 8, y: 20, width: 16, height: 90, rx: 3, fill: '#f1f1f1' }, g);
+        el('rect', { x: x - 8, y: 20, width: 16, height: 90, rx: 3, fill: '#F8F8F7' }, g);
         if (rate > 0) el('rect', { x: x - 8, y: 20 + 90 * (1 - rate), width: 16, height: 90 * rate, rx: 3, fill: COL[u.t] }, g);
-        el('circle', { cx: x, cy: y, r: u.r, fill: on ? COL[u.t] : '#fff', stroke: COL[u.t], 'stroke-width': 2.5 }, g);
-        var t = el('text', { x: x, y: 204, 'text-anchor': 'middle', 'font-size': 17, 'font-weight': on ? 700 : 400, fill: on ? '#232323' : '#9a9a9a' }, g);
+        el('circle', { cx: x, cy: y, r: u.r, fill: on ? COL[u.t] : '#FFFFFF', stroke: COL[u.t], 'stroke-width': 2.5 }, g);
+        var t = el('text', { x: x, y: 204, 'text-anchor': 'middle', 'font-size': 17, 'font-weight': on ? 700 : 400, fill: on ? '#18181B' : '#63636B' }, g);
         t.textContent = u.t;
       });
-      var cap = el('text', { x: 6, y: 14, 'font-size': 14, fill: '#6b6b6b' }, g); cap.textContent = '放電頻率（相對）';
+      var cap = el('text', { x: 6, y: 14, 'font-size': 14, fill: '#63636B' }, g); cap.textContent = '放電頻率（相對）';
       $('mu-n').textContent = n + ' / 8';
       $('mu-type').textContent = types.length ? types.join('、') : '無';
       $('mu-note').textContent = mode === 'ramp'
