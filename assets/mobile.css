@@ -34,8 +34,8 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
   .side > .muted:not(:first-child), .side > .wx-credit { display: none !important; }
 
   /* 跑馬燈、時鐘、天氣在手機上縮小成輔助資訊，不搶貼文的風采 */
-  .top-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 12px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #eeeeee; }
-  .top-row .ticker { font-size: 0.875rem; line-height: 1.55; height: 3.1em; color: #555555; }
+  .top-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 12px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #E6E6E3; }
+  .top-row .ticker { font-size: 0.875rem; line-height: 1.55; height: 3.1em; color: #63636B; }
   .top-row .ticker-wrap { grid-column: 1 / -1; }
   .clock { gap: 2px; }
   .fc { gap: 2px; }
@@ -127,10 +127,10 @@ a, button, summary, input, select, textarea, [role="button"] { -webkit-tap-highl
   .table-wrap table { min-width: 0; width: 100%; border-collapse: separate; }
   .table-wrap thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .table-wrap tbody, .table-wrap tr { display: block; }
-  .table-wrap tr { border: 1px solid #e6e6e6; border-radius: 10px; padding: 10px 14px; margin: 0 0 10px; background: #fff; }
+  .table-wrap tr { border: 1px solid #E6E6E3; border-radius: 10px; padding: 10px 14px; margin: 0 0 10px; background: #FFFFFF; }
   .table-wrap td { display: grid; grid-template-columns: minmax(5.5em, 36%) minmax(0, 1fr); gap: 10px; border: 0; padding: 6px 0; font-size: 15px; line-height: 1.6; }
-  .table-wrap td::before { content: attr(data-label); color: #6b6b6b; font-size: 13px; font-weight: 600; line-height: 1.7; }
-  .table-wrap td:first-child { display: block; font-size: 16px; font-weight: 700; padding: 0 0 8px; margin-bottom: 4px; border-bottom: 1px solid #eeeeee; }
+  .table-wrap td::before { content: attr(data-label); color: #63636B; font-size: 13px; font-weight: 600; line-height: 1.7; }
+  .table-wrap td:first-child { display: block; font-size: 16px; font-weight: 700; padding: 0 0 8px; margin-bottom: 4px; border-bottom: 1px solid #E6E6E3; }
   .table-wrap td:first-child::before { content: none; }
   .table-wrap td:not([data-label])::before { content: none; }
   .table-wrap td:not([data-label]) { display: block; }

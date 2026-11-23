@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFFFF">
 <title>ACSM 和 NSCA 的肌力訓練建議，差在哪？2026 新版立場聲明比較｜阿硯物理治療師</title>
 <meta name="description" content="ACSM 2026 阻力訓練立場聲明與 NSCA《Essentials》課表建議比較：肌力、肌肥大、爆發力、肌耐力的負荷、組數、休息怎麼選，要不要練到力竭，考 CSCS 該背哪一套，附互動比較表。">
 <meta name="author" content="阿硯物理治療師">
@@ -232,9 +233,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
-:root { --ink: #232323; --muted: #6b6b6b; --line: #e6e6e6; --soft: #f6f6f6; --accent: #c2410c; --ok: #15803d; --bad: #b91c1c; }
+:root { --ink: #18181B; --muted: #63636B; --line: #E6E6E3; --soft: #F8F8F7; --accent: #B45309; --ok: #15803d; --bad: #b91c1c; }
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: #ffffff; color: var(--ink); font-family: Inter, "Noto Sans TC", system-ui, sans-serif; font-size: 16px; line-height: 1.8; }
+body { margin: 0; background: #FFFFFF; color: var(--ink); font-family: Inter, "Noto Sans TC", system-ui, sans-serif; font-size: 16px; line-height: 1.8; }
 a { color: var(--ink); text-underline-offset: 3px; }
 .page { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
 .back { font-size: 13px; text-decoration: none; display: inline-block; padding: 10px 0; }
@@ -248,14 +249,14 @@ h3 { font-size: 16px; margin: 28px 0 4px; }
 p, li { margin: 8px 0; }
 ul, ol { padding-left: 1.3em; }
 .byline { font-size: 13px; color: var(--muted); margin: 0 0 16px; }
-.lead { font-size: 17px; color: #3a3a3a; }
+.lead { font-size: 17px; color: #18181B; }
 .summary { border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 20px 0; }
 .summary h2 { border: 0; margin: 0 0 4px; padding: 0; font-size: 16px; }
 .summary ul { margin: 0; }
 .toc { font-size: 14px; }
 .toc a { text-decoration: none; }
 .toc a:hover { text-decoration: underline; }
-.trap { background: var(--soft); border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 15px; }
+.trap { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 15px; }
 .table-wrap { overflow-x: auto; margin: 16px 0; }
 table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
 th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
@@ -267,15 +268,15 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
 .lab-tag { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: .04em; }
 .lab-title { font-size: 16px; font-weight: 700; margin: 2px 0 12px; }
 .seg { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.seg button, .btn { font: inherit; font-size: 14px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
-.seg button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.seg button, .btn { font: inherit; font-size: 14px; border: 1px solid var(--line); background: #FFFFFF; color: var(--ink); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
 .seg button:focus-visible, .btn:focus-visible, .opt:focus-visible, .card:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .lab svg { display: block; width: 100%; height: auto; max-width: 520px; margin: 0 auto; }
 .readout { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 12px; }
-.stat { background: var(--soft); border-radius: 8px; padding: 8px 12px; }
+.stat { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
 .stat-k { font-size: 12px; color: var(--muted); }
 .stat-v { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.lab-note { font-size: 14px; color: #3a3a3a; margin: 10px 0 0; }
+.lab-note { font-size: 14px; color: #18181B; margin: 10px 0 0; }
 .range { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin: 12px 0 0; font-size: 14px; }
 .range input { width: 100%; accent-color: var(--accent); min-height: 32px; }
 .range output { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 4.5em; text-align: right; }
@@ -283,14 +284,14 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
 .fields label { font-size: 13px; color: var(--muted); display: block; }
 .fields input { font: inherit; width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; margin-top: 4px; font-variant-numeric: tabular-nums; }
 .steps { margin: 12px 0 0; padding: 0; list-style: none; font-size: 14px; font-variant-numeric: tabular-nums; }
-.steps li { background: var(--soft); border-radius: 8px; padding: 8px 12px; margin: 6px 0; }
+.steps li { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 6px 0; }
 .steps b { font-size: 16px; }
 
 /* 考題 */
 .quiz { border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 20px 0; }
 .quiz-q { font-weight: 600; margin: 4px 0 12px; }
-.opt { display: block; width: 100%; text-align: left; font: inherit; font-size: 15px; line-height: 1.6; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; color: var(--ink); }
-.opt:hover { border-color: #bdbdbd; }
+.opt { display: block; width: 100%; text-align: left; font: inherit; font-size: 15px; line-height: 1.6; background: #FFFFFF; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; color: var(--ink); }
+.opt:hover { border-color: #63636B; }
 .opt.is-right { border-color: var(--ok); background: #f0fdf4; }
 .opt.is-wrong { border-color: var(--bad); background: #fef2f2; }
 .verdict { font-weight: 700; margin: 8px 0 0; }
@@ -305,7 +306,7 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
 .card-in { display: block; position: relative; width: 100%; height: 100%; min-height: 170px; transition: transform .45s; transform-style: preserve-3d; }
 .card[aria-pressed="true"] .card-in { transform: rotateY(180deg); }
 .face { position: absolute; inset: 0; border-radius: 10px; padding: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; }
-.front { background: var(--ink); color: #fff; justify-content: space-between; }
+.front { background: var(--ink); color: #FFFFFF; justify-content: space-between; }
 .front .q { font-size: 17px; font-weight: 700; line-height: 1.5; }
 .front .hint { font-size: 12px; opacity: .7; }
 .back-f { background: var(--soft); transform: rotateY(180deg); font-size: 14px; line-height: 1.7; overflow: auto; }
@@ -313,23 +314,23 @@ th { font-weight: 600; font-size: 13px; color: var(--muted); }
 
 .faq dt { font-weight: 600; margin-top: 20px; }
 .faq dd { margin: 4px 0 0; }
-.refs { font-size: 13px; color: #555; }
+.refs { font-size: 13px; color: #63636B; }
 .refs li { margin: 6px 0; }
-.author { background: var(--soft); border-radius: 8px; padding: 16px; margin-top: 40px; font-size: 14px; }
+.author { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-top: 40px; font-size: 14px; }
 .author p { margin: 2px 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* 文獻標記與參考文獻 */
 sup.cref { font-size: .68em; line-height: 0; vertical-align: super; margin-left: 1px; }
 sup.cref a { color: var(--accent); text-decoration: none; padding: 0 2px; border-radius: 3px; font-weight: 600; font-variant-numeric: tabular-nums; }
-sup.cref a:hover, sup.cref a:focus-visible { background: #fff1e6; outline: none; box-shadow: 0 0 0 2px var(--accent); }
+sup.cref a:hover, sup.cref a:focus-visible { background: #FFFBEB; outline: none; box-shadow: 0 0 0 2px var(--accent); }
 sup.cref.next::before { content: ","; color: var(--muted); }
 html.hide-cites sup.cref { display: none; }
-.cite-toggle { font: inherit; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 6px 14px; min-height: 36px; cursor: pointer; margin: 0 0 8px; }
-.cite-toggle .ct-dot { width: 28px; height: 16px; border-radius: 999px; background: #d4d4d4; position: relative; transition: background .2s; }
-.cite-toggle .ct-dot::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.cite-toggle { font: inherit; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #FFFFFF; color: var(--ink); border-radius: 999px; padding: 6px 14px; min-height: 36px; cursor: pointer; margin: 0 0 8px; }
+.cite-toggle .ct-dot { width: 28px; height: 16px; border-radius: 999px; background: #E6E6E3; position: relative; transition: background .2s; }
+.cite-toggle .ct-dot::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: #18181B; transition: transform .2s; }
 .cite-toggle[aria-pressed="true"] .ct-dot { background: var(--accent); }
-.cite-toggle[aria-pressed="true"] .ct-dot::after { transform: translateX(12px); }
+.cite-toggle[aria-pressed="true"] .ct-dot::after { background: #FFFFFF; transform: translateX(12px); }
 .cite-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 details.refs-box { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 8px; }
 details.refs-box summary { cursor: pointer; display: flex; align-items: baseline; gap: 10px; padding: 10px 0; min-height: 44px; list-style: none; }
@@ -339,42 +340,42 @@ details.refs-box[open] summary::before { content: "▾"; }
 .refs-title { font-size: 19px; font-weight: 700; }
 .refs-hint { font-size: 13px; color: var(--muted); }
 details.refs-box[open] .refs-hint { display: none; }
-.refs li:target { background: #fff7ed; border-radius: 4px; }
+.refs li:target { background: #FFFBEB; border-radius: 4px; }
 #cite-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; justify-content: center; padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); pointer-events: none; }
-#cite-sheet .cs-card { pointer-events: auto; width: 100%; max-width: 640px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.18); padding: 14px 16px 12px; font-size: 14px; line-height: 1.7; transform: translateY(0); transition: transform .2s ease, opacity .2s ease; }
+#cite-sheet .cs-card { pointer-events: auto; width: 100%; max-width: 640px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 12px; font-size: 14px; line-height: 1.7; transform: translateY(0); transition: transform .2s ease, opacity .2s ease; }
 #cite-sheet[hidden] { display: flex !important; visibility: hidden; }
 #cite-sheet[hidden] .cs-card { transform: translateY(24px); opacity: 0; }
 .cs-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
 .cs-label { font-size: 12px; font-weight: 600; color: var(--accent); }
 .cs-close { font: inherit; font-size: 20px; line-height: 1; border: 0; background: none; color: var(--muted); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; }
 .cs-close:hover, .cs-close:focus-visible { background: var(--soft); outline: none; }
-.cs-body { color: #333; overflow-wrap: anywhere; }
+.cs-body { color: #18181B; overflow-wrap: anywhere; }
 .cs-body a { color: var(--ink); }
 .cs-all { display: inline-block; margin-top: 8px; font-size: 13px; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { #cite-sheet .cs-card, .cite-toggle .ct-dot, .cite-toggle .ct-dot::after { transition: none; } }
-.subtitle { font-size: 17px; font-weight: 600; color: #3a3a3a; margin: -4px 0 12px; }
+.subtitle { font-size: 17px; font-weight: 600; color: #18181B; margin: -4px 0 12px; }
 .pivot { font-size: 18px; font-weight: 700; margin: 20px 0 8px; }
 .cite { font-size: 13px; color: var(--muted); }
 .vs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-.vs-card { background: var(--soft); border-radius: 10px; padding: 14px 16px; }
+.vs-card { background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
 .vs-org { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .04em; margin-bottom: 6px; }
 .vs-body { font-size: 15px; line-height: 1.8; }
-#cmp-table tr.is-on td { background: #fff7ed; }
+#cmp-table tr.is-on td { background: #FFFBEB; }
 .related { margin: 32px 0 0; }
 .related h2 { font-size: 17px; margin: 0 0 8px; }
 .related ul { list-style: none; margin: 0; padding: 0; }
-.related li { border-bottom: 1px solid #eeeeee; }
+.related li { border-bottom: 1px solid #E6E6E3; }
 .related a { display: flex; align-items: center; min-height: 48px; padding: 8px 0; line-height: 1.5; }
 .related .cur { display: block; padding: 12px 0; line-height: 1.5; }
 .related a { text-decoration: none; }
 .related a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.related .cur { color: #6b6b6b; }
+.related .cur { color: #63636B; }
 .related .cur::after { content: "（本篇）"; font-size: 13px; margin-left: 2px; white-space: nowrap; }
 </style>
 <link rel="stylesheet" href="/assets/engage.css">
 <script src="/assets/engage.js?v=20261104-orig" defer></script>
 <link rel="stylesheet" href="/assets/mobile.css">
-<link rel="stylesheet" href="/assets/clinic.css?v=20261123e">
+<link rel="stylesheet" href="/assets/clinic.css?v=20261123-c">
 </head>
 <body class="has-chrome">
 <header class="site-header">

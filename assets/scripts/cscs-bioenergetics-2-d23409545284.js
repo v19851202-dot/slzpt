@@ -9,7 +9,7 @@
   }
   function txt(parent, x, y, s, o) {
     o = o || {};
-    var t = el('text', { x: x, y: y, 'text-anchor': o.a || 'middle', 'font-size': o.fs || 14, 'font-weight': o.w || 500, fill: o.c || '#6b6b6b' }, parent);
+    var t = el('text', { x: x, y: y, 'text-anchor': o.a || 'middle', 'font-size': o.fs || 14, 'font-weight': o.w || 500, fill: o.c || '#63636B' }, parent);
     t.textContent = s;
     return t;
   }
@@ -24,10 +24,10 @@
   var sv = $('sys-svg');
   if (sv) {
     var BANDS = [
-      { a: 0, b: 6, lab: '0–6 秒', int: '極高', sys: '磷酸原系統', col: '#9a3412' },
-      { a: 6, b: 30, lab: '6–30 秒', int: '很高', sys: '磷酸原＋快速糖解', col: '#c2410c' },
-      { a: 30, b: 120, lab: '30 秒–2 分', int: '高', sys: '快速糖解', col: '#ea580c' },
-      { a: 120, b: 180, lab: '2–3 分', int: '中等', sys: '快速糖解＋氧化', col: '#f59e0b' },
+      { a: 0, b: 6, lab: '0–6 秒', int: '極高', sys: '磷酸原系統', col: '#18181B' },
+      { a: 6, b: 30, lab: '6–30 秒', int: '很高', sys: '磷酸原＋快速糖解', col: '#323238' },
+      { a: 30, b: 120, lab: '30 秒–2 分', int: '高', sys: '快速糖解', col: '#B45309' },
+      { a: 120, b: 180, lab: '2–3 分', int: '中等', sys: '快速糖解＋氧化', col: '#63636B' },
       { a: 180, b: 600, lab: '> 3 分', int: '低', sys: '氧化系統', col: '#64748b' }
     ];
     var X0 = 20, X1 = 500, T0 = 1, T1 = 600;
@@ -42,11 +42,11 @@
       BANDS.forEach(function (b, i) {
         var xa = sToX(Math.max(b.a, T0)), xb = sToX(b.b);
         el('rect', { x: xa, y: 40, width: xb - xa, height: 34, fill: b.col, opacity: i === bi ? 1 : 0.22 }, g);
-        txt(g, (xa + xb) / 2, 98, b.lab, { fs: 13, w: i === bi ? 700 : 400, c: i === bi ? '#232323' : '#9a9a9a' });
+        txt(g, (xa + xb) / 2, 98, b.lab, { fs: 13, w: i === bi ? 700 : 400, c: i === bi ? '#18181B' : '#63636B' });
       });
       var mx = sToX(s);
-      el('path', { d: 'M' + (mx - 7) + ' 22 L' + (mx + 7) + ' 22 L' + mx + ' 34 Z', fill: '#232323' }, g);
-      el('line', { x1: mx, y1: 34, x2: mx, y2: 80, stroke: '#232323', 'stroke-width': 2 }, g);
+      el('path', { d: 'M' + (mx - 7) + ' 22 L' + (mx + 7) + ' 22 L' + mx + ' 34 Z', fill: '#18181B' }, g);
+      el('line', { x1: mx, y1: 34, x2: mx, y2: 80, stroke: '#18181B', 'stroke-width': 2 }, g);
       txt(g, X0, 132, '短（強度高）', { a: 'start', fs: 13 });
       txt(g, X1, 132, '長（強度低）', { a: 'end', fs: 13 });
       var b = BANDS[bi];
@@ -75,24 +75,24 @@
     function drawLT() {
       var c = LT[state];
       var g = lv.querySelector('g.dr'); if (g) lv.removeChild(g); g = el('g', { 'class': 'dr' }, lv);
-      el('rect', { x: px(c.lo), y: PY1, width: px(c.hi) - px(c.lo), height: PY0 - PY1, fill: '#fde68a', opacity: 0.6 }, g);
-      el('line', { x1: PX0, y1: PY0, x2: PX1, y2: PY0, stroke: '#9a9a9a' }, g);
-      el('line', { x1: PX0, y1: PY0, x2: PX0, y2: PY1, stroke: '#9a9a9a' }, g);
+      el('rect', { x: px(c.lo), y: PY1, width: px(c.hi) - px(c.lo), height: PY0 - PY1, fill: '#FEF3C7', opacity: 1 }, g);
+      el('line', { x1: PX0, y1: PY0, x2: PX1, y2: PY0, stroke: '#63636B' }, g);
+      el('line', { x1: PX0, y1: PY0, x2: PX0, y2: PY1, stroke: '#63636B' }, g);
       [20, 40, 60, 80, 100].forEach(function (p) { txt(g, px(p), PY0 + 18, p + '%', { fs: 12 }); });
       [0, 2, 4, 6, 8, 10].forEach(function (l) { txt(g, PX0 - 8, py(l) + 4, String(l), { a: 'end', fs: 12 }); });
       txt(g, (PX0 + PX1) / 2, PY0 + 40, '運動強度（% VO₂max）', { fs: 13 });
-      el('line', { x1: PX0, y1: py(4), x2: PX1, y2: py(4), stroke: '#c2410c', 'stroke-width': 1.5, 'stroke-dasharray': '6 5' }, g);
-      txt(g, PX0 + 6, py(4) - 6, 'OBLA 4 mmol/L', { a: 'start', fs: 12, c: '#9a3412', w: 600 });
+      el('line', { x1: PX0, y1: py(4), x2: PX1, y2: py(4), stroke: '#B45309', 'stroke-width': 1.5, 'stroke-dasharray': '6 5' }, g);
+      txt(g, PX0 + 6, py(4) - 6, 'OBLA 4 mmol/L', { a: 'start', fs: 12, c: '#B45309', w: 600 });
       var pts = [];
       for (var p = 20; p <= 100; p += 1) {
         var l = lac(p, c.at);
         if (l > LMAX) break;
         pts.push(px(p).toFixed(1) + ',' + py(l).toFixed(1));
       }
-      el('polyline', { points: pts.join(' '), fill: 'none', stroke: '#232323', 'stroke-width': 3, 'stroke-linejoin': 'round' }, g);
+      el('polyline', { points: pts.join(' '), fill: 'none', stroke: '#18181B', 'stroke-width': 3, 'stroke-linejoin': 'round' }, g);
       var ly = py(lac(c.at, c.at));
-      el('circle', { cx: px(c.at), cy: ly, r: 6, fill: '#ea580c', stroke: '#fff', 'stroke-width': 2 }, g);
-      txt(g, px(c.at), ly - 14, 'LT', { fs: 14, w: 700, c: '#9a3412' });
+      el('circle', { cx: px(c.at), cy: ly, r: 6, fill: '#B45309', stroke: '#FFFFFF', 'stroke-width': 2 }, g);
+      txt(g, px(c.at), ly - 14, 'LT', { fs: 14, w: 700, c: '#B45309' });
       $('lt-v').textContent = c.lo + '–' + c.hi + '% VO₂max';
       $('lt-note').textContent = state === 'untrained'
         ? '未訓練者：血乳酸約在 50–60% VO₂max 開始明顯上升。'
