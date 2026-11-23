@@ -264,7 +264,8 @@ body.home .fact span { display: block; margin-top: 6px; color: var(--c-ink-2); f
 }
 .svc-no { font-family: var(--c-serif); font-size: 14px; color: var(--c-ink-2); }
 .svc-card.is-on .svc-no { color: var(--c-accent); }
-.svc-name { writing-mode: vertical-rl; font-weight: 600; letter-spacing: .08em; }
+.svc-name { writing-mode: vertical-rl; font-weight: 600; letter-spacing: .04em; }
+.float-card li b { text-align: right; }
 .svc-card.is-on .svc-name { display: none; }
 .svc-panel { display: none; padding: 28px 28px 28px 8px; }
 .svc-card.is-on .svc-panel { display: flex; flex-direction: column; min-width: 0; }
