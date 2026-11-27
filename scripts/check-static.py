@@ -17,7 +17,7 @@ class Page(HTMLParser):
     def handle_endtag(self,tag):
         if tag=='script': self.current=None
 
-pages=[root/'index.html',root/'about.html',root/'privacy.html',root/'book.html',root/'404.html',*sorted((root/'notes').glob('*.html'))]
+pages=[root/'index.html',root/'about.html',root/'privacy.html',root/'book.html',root/'404.html',root/'ip-preview.html',*sorted((root/'notes').glob('*.html'))]
 for path in pages:
     page=Page(); page.feed(path.read_text())
     assert sum(tag=='h1' for tag,_ in page.tags)==1, path
