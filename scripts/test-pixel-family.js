@@ -9,7 +9,7 @@ const { chromium } = require('playwright-core');
 
 const ROOT = path.resolve(__dirname, '..');
 const KEY = 'slzpt-pixel-family';
-const LINES = ['膝蓋看這篇', '肩頸先看這篇', '腰痛看這篇', '居家這篇先看'];
+const LINES = ['嗨，歡迎你來', '哈囉，你好呀', '你好，慢慢逛喔', '嘿，很高興見到你'];
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.txt': 'text/plain', '.xml': 'application/xml', '.ico': 'image/x-icon', '.mp4': 'video/mp4', '.jpg': 'image/jpeg' };
 
 function globalHeaders() {
@@ -100,6 +100,16 @@ async function main() {
       record('首頁桌機有像素層', (await page.$$('.pixel-family')).length === 1 && pixelRequests.length > 0);
       record('首頁桌機小人會走（位置與幀隨時間改變）', visibleCount(a) > 0 && a.some((c, i) => c.t !== b[i].t) && a.some((c, i) => c.bp !== b[i].bp), `${a[0].t} → ${b[0].t}`);
       record('同時可見角色數 ≤ 2', visibleCount(b) >= 1 && visibleCount(b) <= 2, `可見 ${visibleCount(b)}`);
+      const geo = await page.evaluate(() => {
+        const abs = (el) => { const r = el.getBoundingClientRect(); return { top: r.top + scrollY, bottom: r.bottom + scrollY, w: r.width, h: r.height }; };
+        const foot = abs(document.querySelector('.site-footer'));
+        const main = abs(document.querySelector('main'));
+        const layer = abs(document.querySelector('.pixel-family'));
+        const chars = [...document.querySelectorAll('.pf-char')].map(abs);
+        return { foot, main, layer, chars, docH: document.documentElement.scrollHeight, pos: getComputedStyle(document.querySelector('.pixel-family')).position };
+      });
+      record('小人 72×72px', geo.chars.every((c) => c.w === 72 && c.h === 72), geo.chars.map((c) => `${c.w}×${c.h}`).join(','));
+      record('小人只在頁尾下方的底部留白（不覆蓋內文與頁尾）', geo.pos === 'absolute' && geo.chars.every((c) => c.top >= geo.foot.bottom && c.top >= geo.main.bottom) && Math.abs(geo.layer.bottom - geo.docH) <= 1, `footer底 ${Math.round(geo.foot.bottom)}、小人頂 ${Math.round(Math.min(...geo.chars.map((c) => c.top)))}、頁高 ${geo.docH}`);
       record('沒互動前不寫 localStorage', await page.evaluate(() => localStorage.length === 0));
       if (shots) await page.screenshot({ path: path.join(shots, 'home-desktop.png') });
 
@@ -182,7 +192,20 @@ async function main() {
       await wait(900);
       const d = await snap(page);
       record('手機按「顯示小人」後才走', visibleCount(d) >= 1 && visibleCount(d) <= 2 && c.some((x, i) => x.t !== d[i].t));
+      await page.reload();
+      await page.waitForSelector('.pixel-family');
+      const kept = await page.evaluate((k) => localStorage.getItem(k), KEY);
+      record('手機按顯示後重整仍記住 on', kept === 'on' && visibleCount(await snap(page)) >= 1);
       if (shots) await page.screenshot({ path: path.join(shots, 'home-mobile-on.png') });
+      await ctx.close();
+    }
+
+    for (const [w, h, label, expectOn] of [[820, 1180, '平板 820', false], [900, 1000, '寬 900', false], [901, 1000, '寬 901', true], [1024, 768, '寬 1024', true]]) {
+      const { ctx, page } = await newPage({ viewport: { width: w, height: h } }, label);
+      await page.goto(base + '/');
+      await page.waitForSelector('.pixel-family');
+      const n = visibleCount(await snap(page));
+      record(`${label} 預設${expectOn ? '開啟' : '關閉'}（900px 以下預設關）`, expectOn ? n >= 1 && n <= 2 : n === 0, `可見 ${n}`);
       await ctx.close();
     }
 

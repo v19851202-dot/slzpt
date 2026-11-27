@@ -1,12 +1,12 @@
 (function () {
   var CAST = [
-    { id: 'mom', name: '媽媽', line: '膝蓋看這篇' },
-    { id: 'sis', name: '姊姊', line: '肩頸先看這篇' },
-    { id: 'dad', name: '爸爸', line: '腰痛看這篇' },
-    { id: 'mei', name: '妹妹', line: '居家這篇先看' }
+    { id: 'mom', name: '媽媽', line: '嗨，歡迎你來' },
+    { id: 'sis', name: '姊姊', line: '哈囉，你好呀' },
+    { id: 'dad', name: '爸爸', line: '你好，慢慢逛喔' },
+    { id: 'mei', name: '妹妹', line: '嘿，很高興見到你' }
   ];
-  var SIZE = 96, FRAMES = 4, TICK = 140, STEP = 3;
-  var narrowMq = window.matchMedia('(max-width: 640px)');
+  var SIZE = 72, FRAMES = 4, TICK = 140, STEP = 3;
+  var narrowMq = window.matchMedia('(max-width: 900px)');
   var motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function readPref() {

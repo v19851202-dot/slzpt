@@ -1,20 +1,23 @@
-/* 首頁全家像素小人。精靈圖是 CSS 背景，屬裝飾；按鈕名稱由 aria-label 提供。 */
+/* 首頁全家像素小人。精靈圖是 CSS 背景，屬裝飾；按鈕名稱由 aria-label 提供。只走在頁尾下方的留白，不覆蓋內文。 */
+body.pf-ready { position: relative; padding-bottom: 56px; }
+body.pf-ready.pf-on { padding-bottom: 128px; }
 .pixel-family {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 96px;
+  height: 56px;
   z-index: 30;
   pointer-events: none;
 }
-.pf-stage { position: absolute; inset: 0; }
+.pf-stage { position: absolute; left: 0; right: 0; bottom: 0; height: 72px; }
+body.pf-on .pixel-family { height: 128px; }
 .pf-char {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 96px;
-  height: 96px;
+  width: 72px;
+  height: 72px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -22,10 +25,10 @@
   pointer-events: auto;
   will-change: transform;
 }
-.pf-body, .pf-sprite { display: block; width: 96px; height: 96px; }
+.pf-body, .pf-sprite { display: block; width: 72px; height: 72px; }
 .pf-sprite {
   background-repeat: no-repeat;
-  background-size: 384px 96px;
+  background-size: 288px 72px;
   image-rendering: pixelated;
 }
 .pf-sprite.is-left { transform: scaleX(-1); }
@@ -36,12 +39,13 @@
 .pf-body.is-jump { animation: pf-jump .45s ease-out; }
 @keyframes pf-jump {
   0%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-22px); }
+  40% { transform: translateY(-16px); }
 }
 .pf-bubble {
   position: absolute;
   left: 0;
-  bottom: 104px;
+  bottom: 78px;
+  z-index: 2;
   margin: 0;
   padding: 6px 10px;
   background: #FFFFFF;
@@ -57,8 +61,8 @@
 .pf-bubble:empty { display: none; }
 .pf-ctrl {
   position: absolute;
-  left: 12px;
-  bottom: 12px;
+  right: 12px;
+  top: 10px;
   z-index: 1;
   display: flex;
   gap: 6px;
@@ -76,8 +80,6 @@
   cursor: pointer;
 }
 .pf-char:focus-visible, .pf-ctrl button:focus-visible { outline: 2px solid #B45309; outline-offset: 2px; }
-body.pf-ready { padding-bottom: 60px; }
-body.pf-ready.pf-on { padding-bottom: 112px; }
 @media (prefers-reduced-motion: reduce) {
   .pf-body.is-jump { animation: none; }
   .pf-char { will-change: auto; }

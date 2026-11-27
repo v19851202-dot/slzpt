@@ -95,11 +95,18 @@ css=pf_css.read_text()
 assert re.search(r'@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*animation:\s*none',css)
 assert 'image-rendering: pixelated' in css
 layer_css=re.search(r'\.pixel-family\s*\{([^}]*)\}',css)[1]
-assert 'pointer-events: none' in layer_css and 'position: fixed' in layer_css
+assert 'pointer-events: none' in layer_css and 'position: absolute' in layer_css and 'position: fixed' not in css,'pixel layer lives in the bottom padding, never fixed over content'
+assert re.search(r'body\.pf-ready\s*\{[^}]*position:\s*relative',css),'pixel layer must anchor to the page bottom'
+assert int(re.search(r'SIZE = (\d+)',src)[1])==72 and 'background-size: 288px 72px' in css and 'width: 72px' in css,'sprites are 72px'
+pad=lambda sel:int(re.search(re.escape(sel)+r'\s*\{[^}]*padding-bottom:\s*(\d+)px',css)[1])
+assert pad('body.pf-ready.pf-on')>=72+44 and pad('body.pf-ready')>=44,'bottom padding must hold the walkers and controls below the footer'
+lines=re.findall(r"line: '([^']*)'",src)
+assert len(lines)==4 and not any(re.search(r'這篇|文章|看|點|連結|http|痛|治療|復健|膝|肩|腰|醫',l) for l in lines),('pixel lines are greetings only',lines)
 def z_of(text,sel): return int(re.search(re.escape(sel)+r'\s*\{[^}]*?z-index:\s*(\d+)',text)[1])
 clinic=(root/'assets/clinic.css').read_text()
 assert z_of(css,'.pixel-family')<min(z_of(clinic,'.site-header'),z_of(clinic,'.skip')),'pixel layer must sit under header and skip link'
 assert int(re.search(r"max-width: (\d+)px",src)[1]) in {int(n) for n in re.findall(r'@media \(max-width: (\d+)px\)',clinic)},'narrow breakpoint must reuse clinic.css'
+assert int(re.search(r"max-width: (\d+)px",src)[1])==900,'pixel family defaults off at 900px and below (tablets too)'
 phone=re.compile(r'(?<![\w.-])(?:09\d{2}-?\d{3}-?\d{3}|0\d{1,2}-\d{3,4}-?\d{4}|\+886[\d-]{8,})(?![\w-])')
 new_files=[pf_js[0],pf_css,root/'scripts/test-pixel-family.js',*root.glob('.claude/**/*') ]
 for path in new_files:
