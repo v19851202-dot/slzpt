@@ -8,4 +8,9 @@ if ! out="$(python3 scripts/check-static.py 2>&1)"; then
   exit 2
 fi
 printf '%s\n' "$out"
+if ! hook_out="$(bash scripts/test-claude-hooks.sh 2>&1)"; then
+  printf '%s\n' "$hook_out" >&2
+  echo "hook 測試未通過，請修正後再結束。" >&2
+  exit 2
+fi
 exit 0

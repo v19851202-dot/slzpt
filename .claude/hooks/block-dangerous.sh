@@ -7,7 +7,9 @@ deny() {
   exit 0
 }
 has() { printf '%s' "$cmd" | grep -Eq -- "$1"; }
-if has 'git[[:space:]]+push'; then
+if has '(^|[;&|[:space:]])git([[:space:]]|$)' && has '(^|[[:space:]])push([[:space:]]|$)'; then
+  branch="$(git -C "${CLAUDE_PROJECT_DIR:-.}" rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  [ "$branch" = "main" ] && deny "目前在 main 分支，不准推送；請先切到作業分支。"
   has '(^|[[:space:]:+/])main([[:space:]]|$)' && deny "不准推 main；推送由人來做。"
   has '[[:space:]](-f|--force|--force-with-lease|--force-if-includes|--mirror)([[:space:]=]|$)|[[:space:]]-[a-zA-Z]*f|[[:space:]]\+' && deny "不准強制推送。"
 fi
