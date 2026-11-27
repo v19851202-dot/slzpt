@@ -18,6 +18,9 @@
 /assets/scripts/*
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/ip-animation/*
+  Cache-Control: public, max-age=604800
+
 https://slzpt.pages.dev/*
   X-Robots-Tag: noindex
 

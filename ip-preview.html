@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="robots" content="noindex">
+<title>像素 IP 動畫預覽｜阿硯物理治療師</title>
+<meta name="description" content="內部預覽頁，用來查看像素 IP 的片頭、片尾與透明貼圖。不對外公開、不列入搜尋。">
+<link rel="canonical" href="https://slzpt.com/ip-preview">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="阿硯物理治療師">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="像素 IP 動畫預覽｜阿硯物理治療師">
+<meta property="og:description" content="內部預覽頁，用來查看像素 IP 的片頭、片尾與透明貼圖。">
+<meta property="og:url" content="https://slzpt.com/ip-preview">
+<meta property="og:image" content="https://slzpt.com/assets/img/og-cover.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #FFFFFF; color: #18181B; font-family: Inter, "Noto Sans TC", system-ui, sans-serif; font-size: 16px; line-height: 1.85; }
+a { color: #18181B; text-underline-offset: 3px; }
+.page { max-width: 56em; margin: 0 auto; padding: 32px 24px 96px; }
+.back { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+.notice { margin: 12px 0 24px; padding: 14px 16px; background: #F8F8F7; border: 1px solid #E6E6E3; border-radius: 10px; color: #63636B; font-size: 14px; }
+h1 { font-size: 26px; line-height: 1.4; margin: 8px 0 8px; }
+.lead { color: #63636B; margin: 0 0 28px; }
+h2 { font-size: 18px; line-height: 1.5; margin: 36px 0 12px; }
+p { margin: 0 0 12px; }
+.clips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.portrait-clip { margin: 0; }
+.portrait-clip video { display: block; width: 100%; height: auto; max-height: 70vh; background: #FEF7E5; border-radius: 12px; border: 1px solid #E6E6E3; }
+.portrait-clip figcaption { margin-top: 8px; font-size: 14px; color: #63636B; }
+.sticker-stage { position: relative; overflow: hidden; background: #F8F8F7; border: 1px solid #E6E6E3; border-radius: 16px; padding: 24px 200px 24px 24px; min-height: 280px; }
+.sticker-copy { max-width: 36em; }
+.sticker-copy p:last-child { margin-bottom: 0; }
+.sticker-layer { position: absolute; right: 4px; bottom: 0; width: 180px; height: 180px; pointer-events: none; }
+.sticker-layer video,
+.sticker-layer img { display: block; width: 100%; height: 100%; object-fit: contain; background: transparent; }
+.note { font-size: 14px; color: #63636B; margin-top: 12px; }
+@media (max-width: 640px) {
+  .sticker-stage { padding: 20px 20px 160px; }
+  .sticker-layer { width: 150px; height: 150px; right: 8px; }
+}
+</style>
+<link rel="stylesheet" href="/assets/mobile.css">
+<link rel="stylesheet" href="/assets/clinic.css?v=20261123-c">
+</head>
+<body class="has-chrome">
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><span class="site-mark" aria-hidden="true">硯</span><span>阿硯物理治療師</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="網站導覽">
+      <a href="/#services">服務</a>
+      <a href="/#process">進行方式</a>
+      <a href="/#feed">筆記</a>
+      <a href="/about">關於</a>
+      <a class="nav-cta" href="/book">預約</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <a class="back" href="/">← 回到首頁</a>
+  <p class="notice">這是內部預覽頁，沒有掛到主選單，也沒有放進網站地圖。目前只在分支預覽上給內部看，請勿當成正式發布。</p>
+  <h1>像素 IP 動畫預覽</h1>
+  <p class="lead">下面是片頭、片尾，以及一張可透明疊在網頁上的循環貼圖。影片已設成靜音、自動循環播放，也保留可點的控制列，方便在手機直式畫面暫停或重播。</p>
+
+  <h2>直式短片</h2>
+  <div class="clips">
+    <figure class="portrait-clip">
+      <video muted loop playsinline autoplay controls preload="auto" width="1080" height="1920" src="/assets/ip-animation/intro-kongge.mp4?v=20261127-2d">你的瀏覽器不支援影片播放。</video>
+      <figcaption>片頭，9:16、4 秒，角色走進畫面後跳一下並帶出標題。</figcaption>
+    </figure>
+    <figure class="portrait-clip">
+      <video muted loop playsinline autoplay controls preload="auto" width="1080" height="1920" src="/assets/ip-animation/outro-family.mp4?v=20261127-2d">你的瀏覽器不支援影片播放。</video>
+      <figcaption>片尾，9:16、3 秒，一家人走進來一起跳，並帶出追蹤與預約資訊。</figcaption>
+    </figure>
+  </div>
+
+  <h2>透明貼圖疊在內容上</h2>
+  <div class="sticker-stage">
+    <div class="sticker-copy">
+      <p>這段文字是示範用的網頁內容。右側（手機上是下方）的小人貼圖用透明背景疊上來，角色周圍不該出現色塊，文字或底色要能從空隙透出來。</p>
+      <p>支援透明 WebM 的瀏覽器會播 VP9 貼圖；若瀏覽器播不了（常見是 Safari），會自動改成透明 GIF。兩種都是約 3 秒的循環動畫，沒有聲音。</p>
+    </div>
+    <div class="sticker-layer" aria-hidden="true">
+      <video class="ip-sticker-webm" muted loop playsinline autoplay preload="auto" width="480" height="480" src="/assets/ip-animation/dad-dance-sticker.webm?v=20261127-2d"></video>
+      <img class="ip-sticker-gif" src="/assets/ip-animation/dad-dance-sticker.gif?v=20261127-2d" width="480" height="480" alt="" hidden>
+    </div>
+  </div>
+  <p class="note">貼圖檔案：dad-dance-sticker.webm（優先）與 dad-dance-sticker.gif（備援）。</p>
+</main>
+<footer class="site-footer">
+  <div class="foot-grid">
+    <div>
+      <p class="foot-brand">阿硯物理治療師｜仁士居家物理治療所</p>
+      <p>臨床近二十年物理治療師，從徒手復健陪你練回日常肌力。一人親自評估與陪伴。</p>
+    </div>
+    <div>
+      <p class="foot-h">網站</p>
+      <a href="/">首頁</a>
+      <a href="/about">關於作者</a>
+      <a href="/#feed">專業分享</a>
+      <a href="/book">預約</a>
+      <a href="/privacy">留言與資料說明</a>
+    </div>
+    <div>
+      <p class="foot-h">聯絡</p>
+      <a href="https://line.me/R/ti/p/@emmsc" rel="noopener" target="_blank">LINE：@emmsc</a>
+      <a href="https://www.instagram.com/hi_ptkong/" rel="noopener" target="_blank">Instagram：@hi_ptkong</a>
+      <p>服務地區：桃園龜山、林口</p>
+      <p>門診地址與可預約時段，歡迎透過 LINE 洽詢。</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 阿硯物理治療師</span>
+    <span>本站內容僅供衛教參考，實際診斷與治療仍需由專業醫療人員面對面評估。</span>
+  </div>
+</footer>
+<script src="/assets/clinic.js"></script>
+<script src="/assets/ip-preview.js"></script>
+</body>
+</html>
