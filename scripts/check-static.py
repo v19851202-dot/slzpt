@@ -63,4 +63,80 @@ if states[0]=='closed':
 else:
     assert 'https://'+BOOKING_HOST in book,'booking is open but book.html has no link to the booking system'
     assert not noindex,'open booking page should be indexable'
-print(f'PASS: {len(pages)} HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, enforced CSP, booking switch ({states[0]})')
+# 全家像素小人：首頁頁首走道與文章標題旁，不外連、不收資料、尊重減少動態、z-index 低於頁首與跳到內容。
+all_html=[p for p in root.rglob('*.html') if not {'node_modules','.git','.wrangler'}&set(p.parts)]
+for path in all_html:
+    page=Page(); page.feed(path.read_text())
+    for tag,attrs in page.tags:
+        if tag=='img': assert 'alt' in attrs,('<img> needs alt',path)
+pf_js=sorted(root.glob('assets/scripts/pixel-family-*.js')); pf_css=root/'assets/pixel-family.css'
+assert len(pf_js)==1 and pf_css.exists(),('pixel family needs exactly one JS and its CSS',pf_js)
+notes=sorted((root/'notes').glob('*.html'))
+assert notes,('expected article pages in notes/',)
+pf_ref=re.compile(r'pixel-family[^"\'\s>]*\.(?:js|css)|family-pixel/')
+want=sorted(['pixel-family.css',pf_js[0].name])
+for path in all_html:
+    refs=pf_ref.findall(path.read_text())
+    if path==root/'index.html' or path in notes:
+        assert sorted(refs)==want,('index and articles must load pixel family CSS and JS once',path,refs)
+    else:
+        assert not refs,('pixel family only on home and article pages',path,refs)
+for path in [*root.glob('assets/**/*.js'),*root.glob('assets/**/*.css')]:
+    if path not in (pf_js[0],pf_css):
+        assert not pf_ref.search(path.read_text()),('pixel family loaded from shared asset',path)
+src=pf_js[0].read_text()
+for bad in (r'\bfetch\s*\(',r'XMLHttpRequest',r'sendBeacon',r'\beval\s*\(',r'new\s+Function',r'WebSocket',r'EventSource',r'\bimport\s*\(',r'document\.cookie',r'indexedDB',r'\.innerHTML',r'\blocation\b'):
+    assert not re.search(bad,src),('pixel family JS must not use',bad)
+assert not re.search(r'https?://(?!www\.w3\.org/2000/svg)',src),('pixel family JS must not use external URLs',)
+ls_sets=re.findall(r'localStorage\.setItem\s*\([^)]*\)',src)
+assert ls_sets and all(re.fullmatch(r"localStorage\.setItem\(KEY, '(?:on|off)'\)",s) or re.fullmatch(r"window\.localStorage\.setItem\('slzpt-pixel-family', '(?:on|off)'\)",s) for s in ls_sets) or all('slzpt-pixel-family' not in s or re.search(r"setItem\(KEY, '(?:on|off)'\)",s) for s in ls_sets)
+# localStorage 只存 on/off；sessionStorage 只記本次造訪是否已自動跳過一次舞。
+assert "localStorage.setItem(KEY, 'on')" in src and "localStorage.setItem(KEY, 'off')" in src
+assert "localStorage.getItem(KEY)" in src and src.count('localStorage.getItem(')==1
+assert "sessionStorage.getItem(AUTO_KEY)" in src and "sessionStorage.setItem(AUTO_KEY, '1')" in src
+assert "AUTO_KEY = 'slzpt-pixel-family-auto'" in src
+assert 'removeItem' not in src and '.clear(' not in src
+assert "matchMedia('(prefers-reduced-motion: reduce)')" in src and 'motionMq.matches' in src
+assert 'document.hidden' in src and "'visibilitychange'" in src
+assert 'requestAnimationFrame' in src
+assert "param('pf')" in src and "=== 'dance'" in src
+assert all(f"=== '{p}'" in src or f"persona === '{p}'" in src for p in ('shy','sudden','bold'))
+css=pf_css.read_text()
+assert re.search(r'@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*animation:\s*none',css)
+assert 'pixelated' not in css and 'image-rendering' not in css
+assert 'createElementNS' in src and 'pf-arm' in src and 'pf-leg' in src and 'pf-head' in src and 'pf-torso' in src
+assert 'is-walk' in src and 'is-dance' in css and 'pf-svg' in css
+assert not list((root/'assets').rglob('family-pixel/*')),('unused sprite files should be removed',)
+assert 'walk.png' not in css+src and 'dance.png' not in css+src
+assert 'pointer-events: none' in css and 'position: fixed' not in css,'pixel layer is never fixed over content'
+home_layer=re.search(r'body\.home \.pixel-family\s*\{([^}]*)\}',css)[1]
+assert 'position: absolute' in home_layer and 'top: 0' in home_layer
+assert re.search(r'body\.home\.pf-ready\s*\{[^}]*position:\s*relative',css)
+assert re.search(r'body\.home\.pf-ready\s*\{[^}]*padding-top:\s*\d+px',css)
+assert int(re.search(r'DESKTOP = (\d+)',src)[1])==44 and int(re.search(r'MOBILE = (\d+)',src)[1])==36
+assert '--pf-size: 44px' in css and '--pf-size: 36px' in css
+pad=lambda sel:int(re.search(re.escape(sel)+r'\s*\{[^}]*padding-top:\s*(\d+)px',css)[1])
+assert pad('body.home.pf-ready.pf-on')>=44+36 and pad('body.home.pf-ready')>=36,'top padding must hold the walkers and controls above the header'
+lines=re.findall(r"line: '([^']*)'",src)
+assert len(lines)==4 and not any(re.search(r'這篇|文章|看|點|連結|http|痛|治療|復健|膝|肩|腰|醫',l) for l in lines),('pixel lines are greetings only',lines)
+assert "HELLO = '嘿！你好啊！'" in src
+def z_of(text,sel): return int(re.search(re.escape(sel)+r'\s*\{[^}]*?z-index:\s*(\d+)',text,re.S)[1])
+clinic=(root/'assets/clinic.css').read_text()
+assert z_of(css,'body.home .pixel-family')<min(z_of(clinic,'.site-header'),z_of(clinic,'.skip')),'pixel layer must sit under header and skip link'
+# 網站上不得出現團體或歌曲名稱，也不得附音樂或音效。
+ban=re.compile(r'BTS|Blackpink|BLACKPINK|NewJeans|TWICE|Seventeen|Stray\s*Kids|\bEXO\b|BigBang|BIGBANG|\bPSY\b|Gangnam|Dynamite|Permission to Dance|\bButter\b|AudioContext|HTMLAudioElement|new\s+Audio\b|<audio\b|<video\b|\.mp3\b|\.wav\b|\.ogg\b|\.m4a\b|\.aac\b',re.I)
+scan_files=[pf_js[0],pf_css,root/'scripts/test-pixel-family.js',root/'index.html',*notes]
+for path in scan_files:
+    text=path.name if path.suffix=='.png' else path.read_text()
+    if path.suffix=='.png': text=path.name
+    hit=ban.search(text)
+    assert not hit,('banned group, song, or audio mark',path,hit.group(0) if hit else None)
+assert not re.search(r'\bnew\s+Audio\b|AudioContext|<audio\b|<video\b',src)
+assert 'startMove' in src and 'AUTO_KEY' in src and 'MOVE_MS' in src
+phone=re.compile(r'(?<![\w.-])(?:09\d{2}-?\d{3}-?\d{3}|0\d{1,2}-\d{3,4}-?\d{4}|\+886[\d-]{8,})(?![\w-])')
+new_files=[pf_js[0],pf_css,root/'scripts/test-pixel-family.js',*root.glob('.claude/**/*') ]
+for path in new_files:
+    if path.is_file():
+        hits=[m for m in phone.findall(path.read_text()) if m!='0912-000-000']
+        assert not hits,('phone number pattern in new file',path,hits)
+print(f'PASS: {len(pages)} HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, enforced CSP, booking switch ({states[0]}), pixel family (home and {len(notes)} articles)')
