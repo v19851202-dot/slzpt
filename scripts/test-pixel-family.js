@@ -386,7 +386,7 @@ async function main() {
     {
       const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'shared-pref');
       await page.addInitScript((k) => localStorage.setItem(k, 'off'), KEY);
-      await page.goto(base + ARTICLE);
+      await page.goto(base + ARTICLE + '?pf=bold');
       await page.waitForSelector('.pixel-family.pf-article');
       record('文章頁共用關閉設定：進頁時不顯示小人', visibleCount(await snap(page)) === 0 && await page.isVisible('.pf-ctrl button:has-text("顯示小人")'));
       await page.click('.pf-ctrl button:has-text("顯示小人")');
@@ -475,6 +475,39 @@ async function main() {
       await wait(80);
       const dancing = await page.getAttribute('.pixel-family', 'data-pf-dancing');
       record('?pf=dance 可直接看跳舞', dancing === '1');
+      await ctx.close();
+    }
+
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'line-boil');
+      await page.goto(base + '/');
+      await page.waitForSelector('.pf-svg[data-character] path.pf-body-fill');
+      const changed = await page.waitForFunction(() => {
+        const el = document.querySelector('.pf-svg[data-character]');
+        if (!el) return false;
+        const d = el.querySelector('path.pf-body-fill') && el.querySelector('path.pf-body-fill').getAttribute('d');
+        const boil = el.getAttribute('data-boil');
+        if (window.__pfBoilStart === undefined) {
+          window.__pfBoilStart = { d: d, boil: boil };
+          return false;
+        }
+        return d && d !== window.__pfBoilStart.d && boil !== window.__pfBoilStart.boil;
+      }, { timeout: 2000 }).then(() => true).catch(() => false);
+      record('線沸：線條會隨時間微微抖動', changed);
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' }, 'line-boil-reduced');
+      await page.goto(base + '/');
+      await page.waitForSelector('.pf-svg[data-character] path.pf-body-fill');
+      const a = await page.$eval('.pf-svg[data-character] path.pf-body-fill', (el) => el.getAttribute('d'));
+      const boil0 = await page.$eval('.pf-svg[data-character]', (el) => el.getAttribute('data-boil'));
+      await wait(260);
+      const b = await page.$eval('.pf-svg[data-character] path.pf-body-fill', (el) => el.getAttribute('d'));
+      const boil1 = await page.$eval('.pf-svg[data-character]', (el) => el.getAttribute('data-boil'));
+      record('減少動態時不線沸', a === b && boil0 === boil1 && (boil1 === '0' || boil1 === null));
       await ctx.close();
     }
 
