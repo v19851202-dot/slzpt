@@ -66,13 +66,18 @@ function watch(page, base, label) {
 }
 
 async function snap(page) {
-  return page.$$eval('.pf-char', (els) => els.map((b) => ({
-    visible: b.getClientRects().length > 0 && getComputedStyle(b).visibility !== 'hidden' && !b.classList.contains('is-away'),
-    t: b.style.transform,
-    bp: b.querySelector('.pf-sprite').style.backgroundPosition,
-    peek: b.classList.contains('is-peek'),
-    dancing: b.querySelector('.pf-sprite').classList.contains('is-dance'),
-  })));
+  return page.$$eval('.pf-char', (els) => els.map((b) => {
+    const arm = b.querySelector('.pf-arm-l');
+    return {
+      visible: b.getClientRects().length > 0 && getComputedStyle(b).visibility !== 'hidden' && !b.classList.contains('is-away'),
+      t: b.style.transform,
+      arm: arm ? getComputedStyle(arm).transform : '',
+      peek: b.classList.contains('is-peek'),
+      dancing: b.classList.contains('is-dance'),
+      walk: b.classList.contains('is-walk'),
+      svg: !!b.querySelector('svg.pf-svg'),
+    };
+  }));
 }
 const visibleCount = (s) => s.filter((c) => c.visible).length;
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -106,7 +111,7 @@ async function main() {
       await wait(900);
       const b = await snap(page);
       record('首頁桌機有像素層', (await page.$$('.pixel-family')).length === 1 && pixelRequests.length > 0);
-      record('首頁桌機小人會走（位置與幀隨時間改變）', visibleCount(a) > 0 && a.some((c, i) => c.t !== b[i].t) && a.some((c, i) => c.bp !== b[i].bp), `${a[0].t} → ${b[0].t}`);
+      record('首頁桌機小人會走（位置與擺手動畫）', visibleCount(a) > 0 && a.some((c, i) => c.t !== b[i].t) && a.every((c) => c.walk) && a.some((c, i) => c.arm !== b[i].arm), `${a[0].t} → ${b[0].t}`);
       record('同時可見角色數 ≤ 2', visibleCount(b) >= 1 && visibleCount(b) <= 2, `可見 ${visibleCount(b)}`);
       const geo = await page.evaluate(() => {
         const box = (el) => { const r = el.getBoundingClientRect(); return { top: r.top + scrollY, bottom: r.bottom + scrollY, left: r.left, right: r.right, w: r.width, h: r.height }; };
@@ -119,14 +124,15 @@ async function main() {
         const ctrl = [...document.querySelectorAll('.pf-ctrl button')].map(box);
         return { header, brand, cta, main, layer, chars, ctrl, pos: getComputedStyle(document.querySelector('.pixel-family')).position };
       });
-      record('小人 72×72px', geo.chars.every((c) => c.w === 72 && c.h === 72), geo.chars.map((c) => `${c.w}×${c.h}`).join(','));
+      record('桌機小人約 44×44px', geo.chars.every((c) => Math.abs(c.w - 44) <= 1 && Math.abs(c.h - 44) <= 1), geo.chars.map((c) => `${c.w}×${c.h}`).join(','));
+      record('角色是 SVG 而不是像素圖', (await snap(page)).every((c) => c.svg) && await page.evaluate(() => !document.querySelector('.pf-sprite') && getComputedStyle(document.querySelector('.pf-svg')).imageRendering !== 'pixelated'));
       record('小人只在頁首上方的走道（不覆蓋導覽列、Logo、預約與內文）', geo.pos === 'absolute' && geo.chars.every((c) => c.bottom <= geo.header.top + 0.5 && c.bottom <= geo.brand.top + 0.5 && c.bottom <= geo.cta.top + 0.5 && c.bottom <= geo.main.top + 0.5) && geo.ctrl.every((c) => c.bottom <= geo.header.top + 0.5), `header頂 ${Math.round(geo.header.top)}、小人底 ${Math.round(Math.max(...geo.chars.map((c) => c.bottom)))}`);
       record('沒互動前不寫 localStorage', await page.evaluate(() => localStorage.length === 0));
       if (shots) await page.screenshot({ path: path.join(shots, 'home-desktop.png') });
 
       const urlBefore = page.url();
       const firstChar = page.locator('.pf-char').first();
-      await firstChar.click({ delay: 0 });
+      await firstChar.click({ force: true });
       await wait(400);
       const said = await page.textContent('.pf-bubble');
       const live = await page.getAttribute('.pf-bubble', 'aria-live');
@@ -210,6 +216,8 @@ async function main() {
       await wait(900);
       const b = await snap(page);
       record('手機 390 預設開啟並會走', visibleCount(a) >= 1 && visibleCount(b) <= 2 && a.some((c, i) => c.t !== b[i].t));
+      const mobSize = await page.$$eval('.pf-char', (els) => els.map((el) => ({ w: el.getBoundingClientRect().width, h: el.getBoundingClientRect().height })));
+      record('手機小人約 36×36px', mobSize.every((c) => Math.abs(c.w - 36) <= 1 && Math.abs(c.h - 36) <= 1), mobSize.map((c) => `${c.w}×${c.h}`).join(','));
       const mobileGeo = await page.evaluate(() => {
         const box = (el) => el.getBoundingClientRect();
         const header = box(document.querySelector('.site-header'));
@@ -399,7 +407,7 @@ async function main() {
       const a = await snap(page);
       await wait(500);
       const b = await snap(page);
-      record('跳舞時會換幀', a.some((c, i) => c.dancing && c.bp !== b[i].bp), `${a[0].bp} → ${b[0].bp}`);
+      record('跳舞時部位會動', a.some((c, i) => c.dancing && c.arm && c.arm !== b[i].arm), `${a[0].arm} → ${b[0].arm}`);
       if (shots) await page.screenshot({ path: path.join(shots, 'home-dance.png') });
       await wait(2800);
       const after = await snap(page);
