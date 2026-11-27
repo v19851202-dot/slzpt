@@ -1,4 +1,4 @@
-// 首頁全家像素小人行為測試。不需安裝進 repo：
+// 像素小人行為測試。不需安裝進 repo：
 // NODE_PATH=/path/to/node_modules node scripts/test-pixel-family.js
 // 可選 SHOTS_DIR=/某處 輸出截圖（不要放進 repo）。
 // 本機伺服器只供靜態檔，不跑 Pages Functions；/api/ 的 404 不算錯，CSP 與 JS 錯誤照算。
@@ -9,7 +9,10 @@ const { chromium } = require('playwright-core');
 
 const ROOT = path.resolve(__dirname, '..');
 const KEY = 'slzpt-pixel-family';
+const AUTO_KEY = 'slzpt-pixel-family-auto';
 const LINES = ['嗨，歡迎你來', '哈囉，你好呀', '你好，慢慢逛喔', '嘿，很高興見到你'];
+const HELLO = '嘿！你好啊！';
+const ARTICLE = '/notes/neck-pain-red-flags';
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.txt': 'text/plain', '.xml': 'application/xml', '.ico': 'image/x-icon', '.mp4': 'video/mp4', '.jpg': 'image/jpeg' };
 
 function globalHeaders() {
@@ -64,13 +67,18 @@ function watch(page, base, label) {
 
 async function snap(page) {
   return page.$$eval('.pf-char', (els) => els.map((b) => ({
-    visible: b.getClientRects().length > 0,
+    visible: b.getClientRects().length > 0 && getComputedStyle(b).visibility !== 'hidden' && !b.classList.contains('is-away'),
     t: b.style.transform,
     bp: b.querySelector('.pf-sprite').style.backgroundPosition,
+    peek: b.classList.contains('is-peek'),
+    dancing: b.querySelector('.pf-sprite').classList.contains('is-dance'),
   })));
 }
 const visibleCount = (s) => s.filter((c) => c.visible).length;
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+function overlap(a, b) {
+  return a.left < b.right - 0.5 && a.right > b.left + 0.5 && a.top < b.bottom - 0.5 && a.bottom > b.top + 0.5;
+}
 
 async function main() {
   const server = await startServer(globalHeaders());
@@ -101,26 +109,30 @@ async function main() {
       record('首頁桌機小人會走（位置與幀隨時間改變）', visibleCount(a) > 0 && a.some((c, i) => c.t !== b[i].t) && a.some((c, i) => c.bp !== b[i].bp), `${a[0].t} → ${b[0].t}`);
       record('同時可見角色數 ≤ 2', visibleCount(b) >= 1 && visibleCount(b) <= 2, `可見 ${visibleCount(b)}`);
       const geo = await page.evaluate(() => {
-        const abs = (el) => { const r = el.getBoundingClientRect(); return { top: r.top + scrollY, bottom: r.bottom + scrollY, w: r.width, h: r.height }; };
-        const foot = abs(document.querySelector('.site-footer'));
-        const main = abs(document.querySelector('main'));
-        const layer = abs(document.querySelector('.pixel-family'));
-        const chars = [...document.querySelectorAll('.pf-char')].map(abs);
-        return { foot, main, layer, chars, docH: document.documentElement.scrollHeight, pos: getComputedStyle(document.querySelector('.pixel-family')).position };
+        const box = (el) => { const r = el.getBoundingClientRect(); return { top: r.top + scrollY, bottom: r.bottom + scrollY, left: r.left, right: r.right, w: r.width, h: r.height }; };
+        const header = box(document.querySelector('.site-header'));
+        const brand = box(document.querySelector('.site-brand'));
+        const cta = box(document.querySelector('.nav-cta'));
+        const main = box(document.querySelector('main'));
+        const layer = box(document.querySelector('.pixel-family'));
+        const chars = [...document.querySelectorAll('.pf-char')].map(box);
+        const ctrl = [...document.querySelectorAll('.pf-ctrl button')].map(box);
+        return { header, brand, cta, main, layer, chars, ctrl, pos: getComputedStyle(document.querySelector('.pixel-family')).position };
       });
       record('小人 72×72px', geo.chars.every((c) => c.w === 72 && c.h === 72), geo.chars.map((c) => `${c.w}×${c.h}`).join(','));
-      record('小人只在頁尾下方的底部留白（不覆蓋內文與頁尾）', geo.pos === 'absolute' && geo.chars.every((c) => c.top >= geo.foot.bottom && c.top >= geo.main.bottom) && Math.abs(geo.layer.bottom - geo.docH) <= 1, `footer底 ${Math.round(geo.foot.bottom)}、小人頂 ${Math.round(Math.min(...geo.chars.map((c) => c.top)))}、頁高 ${geo.docH}`);
+      record('小人只在頁首上方的走道（不覆蓋導覽列、Logo、預約與內文）', geo.pos === 'absolute' && geo.chars.every((c) => c.bottom <= geo.header.top + 0.5 && c.bottom <= geo.brand.top + 0.5 && c.bottom <= geo.cta.top + 0.5 && c.bottom <= geo.main.top + 0.5) && geo.ctrl.every((c) => c.bottom <= geo.header.top + 0.5), `header頂 ${Math.round(geo.header.top)}、小人底 ${Math.round(Math.max(...geo.chars.map((c) => c.bottom)))}`);
       record('沒互動前不寫 localStorage', await page.evaluate(() => localStorage.length === 0));
       if (shots) await page.screenshot({ path: path.join(shots, 'home-desktop.png') });
 
       const urlBefore = page.url();
-      await page.locator('.pf-char').first().click();
+      const firstChar = page.locator('.pf-char').first();
+      await firstChar.click({ delay: 0 });
+      await wait(400);
       const said = await page.textContent('.pf-bubble');
       const live = await page.getAttribute('.pf-bubble', 'aria-live');
       const jumped = await page.$eval('.pf-char .pf-body', (n) => n.classList.contains('is-jump'));
       record('點小人出現台詞且 URL 不變', LINES.includes(said) && page.url() === urlBefore && live === 'polite', `「${said}」`);
       record('點小人會跳一下', jumped);
-      if (shots) await page.screenshot({ path: path.join(shots, 'home-desktop-click.png') });
 
       await page.evaluate(() => {
         Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
@@ -146,6 +158,17 @@ async function main() {
       });
       record('頁首（含選單按鈕）與跳到內容的 z-index 高於像素層', z.header > z.layer && z.skip > z.layer, JSON.stringify(z));
 
+      const blockedHeader = await page.evaluate(() => {
+        const sels = ['.site-brand', '.nav-cta', '.site-nav a'];
+        return sels.filter((s) => {
+          const l = document.querySelector(s);
+          const r = l.getBoundingClientRect();
+          const hit = document.elementFromPoint(r.left + Math.min(r.width / 2, 20), r.top + r.height / 2);
+          return !(hit && (l === hit || l.contains(hit)));
+        });
+      });
+      record('頁首 Logo、預約與導覽都點得到', blockedHeader.length === 0, blockedHeader.join('、'));
+
       await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
       await wait(200);
       const blocked = await page.$$eval('.site-footer a', (links) => links.filter((l) => {
@@ -154,6 +177,7 @@ async function main() {
         return !(hit && l.contains(hit));
       }).map((l) => l.textContent));
       record('捲到底時頁尾連結都點得到', blocked.length === 0, blocked.join('、'));
+      await page.evaluate(() => window.scrollTo(0, 0));
 
       await page.click('.pf-ctrl button:has-text("關閉小人")');
       const offVal = await page.evaluate((k) => localStorage.getItem(k), KEY);
@@ -168,7 +192,7 @@ async function main() {
       await ctx.close();
     }
 
-    for (const p of ['/about', '/book', '/privacy', '/notes/neck-pain-red-flags']) {
+    for (const p of ['/about', '/book', '/privacy']) {
       const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, p);
       const pixelRequests = [];
       page.on('request', (r) => { if (/pixel-family|family-pixel/.test(r.url())) pixelRequests.push(r.url()); });
@@ -181,31 +205,37 @@ async function main() {
     {
       const { ctx, page } = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, 'mobile');
       await page.goto(base + '/');
-      await page.waitForSelector('.pixel-family');
+      await page.waitForSelector('.pixel-family .pf-char');
       const a = await snap(page);
-      await wait(700);
-      const b = await snap(page);
-      record('手機 390 預設不走、看不到小人', visibleCount(a) === 0 && JSON.stringify(a) === JSON.stringify(b) && await page.isVisible('.pf-ctrl button:has-text("顯示小人")'));
-      if (shots) await page.screenshot({ path: path.join(shots, 'home-mobile-off.png') });
-      await page.tap('.pf-ctrl button:has-text("顯示小人")');
-      const c = await snap(page);
       await wait(900);
-      const d = await snap(page);
-      record('手機按「顯示小人」後才走', visibleCount(d) >= 1 && visibleCount(d) <= 2 && c.some((x, i) => x.t !== d[i].t));
+      const b = await snap(page);
+      record('手機 390 預設開啟並會走', visibleCount(a) >= 1 && visibleCount(b) <= 2 && a.some((c, i) => c.t !== b[i].t));
+      const mobileGeo = await page.evaluate(() => {
+        const box = (el) => el.getBoundingClientRect();
+        const header = box(document.querySelector('.site-header'));
+        const toggle = box(document.querySelector('.nav-toggle'));
+        const chars = [...document.querySelectorAll('.pf-char')].map(box);
+        const hit = document.elementFromPoint(toggle.left + toggle.width / 2, toggle.top + toggle.height / 2);
+        const btn = document.querySelector('.nav-toggle');
+        return { headerTop: header.top, charBottom: Math.max(...chars.map((c) => c.bottom)), toggleOk: !!(hit && (hit === btn || btn.contains(hit))) };
+      });
+      record('手機小人不擋漢堡選單', mobileGeo.charBottom <= mobileGeo.headerTop + 0.5 && mobileGeo.toggleOk, JSON.stringify(mobileGeo));
+      if (shots) await page.screenshot({ path: path.join(shots, 'home-mobile-on.png') });
+      await page.tap('.pf-ctrl button:has-text("關閉小人")');
+      const keptOff = await page.evaluate((k) => localStorage.getItem(k), KEY);
+      record('手機按關閉後記住 off', keptOff === 'off' && visibleCount(await snap(page)) === 0);
       await page.reload();
       await page.waitForSelector('.pixel-family');
-      const kept = await page.evaluate((k) => localStorage.getItem(k), KEY);
-      record('手機按顯示後重整仍記住 on', kept === 'on' && visibleCount(await snap(page)) >= 1);
-      if (shots) await page.screenshot({ path: path.join(shots, 'home-mobile-on.png') });
+      record('手機重整後仍關閉', visibleCount(await snap(page)) === 0 && await page.isVisible('.pf-ctrl button:has-text("顯示小人")'));
       await ctx.close();
     }
 
-    for (const [w, h, label, expectOn] of [[820, 1180, '平板 820', false], [900, 1000, '寬 900', false], [901, 1000, '寬 901', true], [1024, 768, '寬 1024', true]]) {
+    for (const [w, h, label] of [[820, 1180, '平板 820'], [900, 1000, '寬 900'], [901, 1000, '寬 901'], [1024, 768, '寬 1024']]) {
       const { ctx, page } = await newPage({ viewport: { width: w, height: h } }, label);
       await page.goto(base + '/');
-      await page.waitForSelector('.pixel-family');
+      await page.waitForSelector('.pixel-family .pf-char');
       const n = visibleCount(await snap(page));
-      record(`${label} 預設${expectOn ? '開啟' : '關閉'}（900px 以下預設關）`, expectOn ? n >= 1 && n <= 2 : n === 0, `可見 ${n}`);
+      record(`${label} 預設開啟`, n >= 1 && n <= 2, `可見 ${n}`);
       await ctx.close();
     }
 
@@ -218,6 +248,7 @@ async function main() {
       const b = await snap(page);
       record('減少動態：位置與幀不隨時間改變', visibleCount(a) >= 1 && JSON.stringify(a) === JSON.stringify(b));
       await page.locator('.pf-char').first().click();
+      await wait(400);
       const said = await page.textContent('.pf-bubble');
       const jumped = await page.$$eval('.pf-body', (n) => n.some((x) => x.classList.contains('is-jump')));
       record('減少動態：點擊只出台詞、不跳', LINES.includes(said) && !jumped && !(await page.isVisible('.pf-ctrl button:has-text("暫停動畫")')));
@@ -234,6 +265,208 @@ async function main() {
       await page.waitForSelector('.pixel-family .pf-char');
       await page.click('.pf-ctrl button:has-text("關閉小人")');
       record('localStorage 不可用時安全降級', visibleCount(await snap(page)) === 0 && await page.isVisible('.pf-ctrl button:has-text("顯示小人")'));
+      await ctx.close();
+    }
+
+    async function articleOverlap(page) {
+      return page.evaluate(() => {
+        const box = (el) => {
+          const r = el.getBoundingClientRect();
+          return { top: r.top, bottom: r.bottom, left: r.left, right: r.right };
+        };
+        const hit = (a, b) => a.left < b.right - 0.5 && a.right > b.left + 0.5 && a.top < b.bottom - 0.5 && a.bottom > b.top + 0.5;
+        const h1 = box(document.querySelector('article.page h1'));
+        const content = [...document.querySelectorAll('article.page .subtitle, article.page .byline, article.page .lead, article.page p, article.page h2, article.page li')]
+          .filter((el) => !el.closest('.pixel-family') && !el.closest('h1'))
+          .map(box);
+        const chars = [...document.querySelectorAll('.pf-char')].filter((el) => getComputedStyle(el).visibility !== 'hidden' && !el.classList.contains('is-away')).map(box);
+        const vsTitle = chars.filter((c) => hit(c, h1));
+        const vsContent = chars.filter((c) => content.some((t) => hit(c, t)));
+        return { chars: chars.length, vsTitle: vsTitle.length, vsContent: vsContent.length };
+      });
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'article-desktop');
+      await page.goto(base + ARTICLE + '?pf=sudden');
+      await page.waitForSelector('.pixel-family.pf-article');
+      record('文章頁桌機有像素層', (await page.$$('.pixel-family.pf-article .pf-char')).length === 1);
+      const persona = await page.getAttribute('.pixel-family', 'data-pf-persona');
+      record('?pf=sudden 指定突然個性', persona === 'sudden');
+      const before = await snap(page);
+      await wait(500);
+      const mid = await snap(page);
+      record('突然個性先停頓、尚未走出', visibleCount(before) === 0 && visibleCount(mid) === 0);
+      await wait(600);
+      const after = await snap(page);
+      record('突然個性彈出後會在標題附近走', visibleCount(after) === 1);
+      await wait(900);
+      const walked = await snap(page);
+      record('文章頁桌機小人會走', visibleCount(walked) === 1 && walked[0].t !== after[0].t);
+      const ov = await articleOverlap(page);
+      record('文章頁桌機小人不重疊標題與內文', ov.chars >= 1 && ov.vsTitle === 0 && ov.vsContent === 0, JSON.stringify(ov));
+      if (shots) await page.screenshot({ path: path.join(shots, 'article-desktop.png') });
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, 'article-mobile');
+      await page.goto(base + ARTICLE + '?pf=sudden');
+      await page.waitForSelector('.pixel-family.pf-article');
+      await wait(1600);
+      const n = visibleCount(await snap(page));
+      const ov = await articleOverlap(page);
+      record('文章頁手機 390 有小人且不重疊標題與內文', n === 1 && ov.vsTitle === 0 && ov.vsContent === 0, JSON.stringify({ n, ...ov }));
+      if (shots) await page.screenshot({ path: path.join(shots, 'article-mobile.png') });
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'article-shy');
+      await page.goto(base + ARTICLE + '?pf=shy');
+      await page.waitForSelector('.pixel-family.pf-article .pf-char');
+      const peek = await page.$eval('.pf-char', (el) => el.classList.contains('is-peek'));
+      const a = await snap(page);
+      await wait(700);
+      const b = await snap(page);
+      record('害羞個性慢慢探頭、先不走', peek && visibleCount(a) === 1 && a[0].t === b[0].t && a[0].peek);
+      const ov = await articleOverlap(page);
+      record('害羞探頭時不重疊標題與內文', ov.vsTitle === 0 && ov.vsContent === 0, JSON.stringify(ov));
+      await page.evaluate(() => {
+        const el = document.querySelector('.pf-char');
+        const r = el.getBoundingClientRect();
+        document.dispatchEvent(new PointerEvent('pointermove', { clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, bubbles: true }));
+      });
+      await wait(80);
+      const hid = await page.$eval('.pf-char', (el) => el.classList.contains('is-away') || getComputedStyle(el).visibility === 'hidden');
+      record('害羞：游標靠近會縮回', hid);
+      await wait(2000);
+      const back = await page.$eval('.pf-char', (el) => el.classList.contains('is-peek') && !el.classList.contains('is-away') && getComputedStyle(el).visibility !== 'hidden');
+      record('害羞：過一下再探出來', back);
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'article-bold');
+      await page.goto(base + ARTICLE + '?pf=bold');
+      await page.waitForSelector('.pixel-family.pf-article .pf-char');
+      const said = await page.textContent('.pf-bubble');
+      const loud = await page.$eval('.pf-bubble', (el) => el.classList.contains('is-loud'));
+      const a = await snap(page);
+      await wait(400);
+      const b = await snap(page);
+      record('大膽個性大步走出並大聲打招呼', said === HELLO && loud && a[0].t !== b[0].t, `「${said}」`);
+      const ov = await articleOverlap(page);
+      record('大膽走動時不重疊標題與內文', ov.vsTitle === 0 && ov.vsContent === 0, JSON.stringify(ov));
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' }, 'article-reduced');
+      await page.goto(base + ARTICLE + '?pf=bold');
+      await page.waitForSelector('.pixel-family.pf-article .pf-char');
+      const a = await snap(page);
+      await wait(900);
+      const b = await snap(page);
+      const pop = await page.$$eval('.pf-body', (n) => n.some((x) => x.classList.contains('is-pop') || x.classList.contains('is-jump')));
+      record('文章頁減少動態：靜止站在標題旁', visibleCount(a) === 1 && JSON.stringify(a) === JSON.stringify(b) && !a[0].peek && !pop);
+      const ov = await articleOverlap(page);
+      record('文章頁減少動態時不重疊標題與內文', ov.vsTitle === 0 && ov.vsContent === 0, JSON.stringify(ov));
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'shared-pref');
+      await page.addInitScript((k) => localStorage.setItem(k, 'off'), KEY);
+      await page.goto(base + ARTICLE);
+      await page.waitForSelector('.pixel-family.pf-article');
+      record('文章頁共用關閉設定：進頁時不顯示小人', visibleCount(await snap(page)) === 0 && await page.isVisible('.pf-ctrl button:has-text("顯示小人")'));
+      await page.click('.pf-ctrl button:has-text("顯示小人")');
+      const onVal = await page.evaluate((k) => localStorage.getItem(k), KEY);
+      record('文章頁按顯示後寫入同一個 key', onVal === 'on' && visibleCount(await snap(page)) === 1);
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'dance-dblclick');
+      await page.goto(base + '/');
+      await page.waitForSelector('.pixel-family .pf-char');
+      await page.locator('.pf-char').first().dblclick();
+      await wait(120);
+      const dancing = await page.getAttribute('.pixel-family', 'data-pf-dancing');
+      const frames = await snap(page);
+      record('桌機連點兩下會跳舞', dancing === '1' && frames.some((c) => c.dancing));
+      const a = await snap(page);
+      await wait(500);
+      const b = await snap(page);
+      record('跳舞時會換幀', a.some((c, i) => c.dancing && c.bp !== b[i].bp), `${a[0].bp} → ${b[0].bp}`);
+      if (shots) await page.screenshot({ path: path.join(shots, 'home-dance.png') });
+      await wait(2800);
+      const after = await snap(page);
+      record('跳舞約 3 秒後恢復走動', (await page.getAttribute('.pixel-family', 'data-pf-dancing')) !== '1' && after.every((c) => !c.dancing));
+      const audio = await page.evaluate(() => ({
+        tags: document.querySelectorAll('audio, video').length,
+        ctor: typeof Audio !== 'undefined',
+      }));
+      record('頁面沒有 audio／video 標籤', audio.tags === 0);
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, 'dance-tap');
+      await page.goto(base + '/');
+      await page.waitForSelector('.pixel-family .pf-char');
+      const char = page.locator('.pf-char').first();
+      await char.tap();
+      await wait(80);
+      await char.tap();
+      await wait(120);
+      const dancing = await page.getAttribute('.pixel-family', 'data-pf-dancing');
+      record('手機連點兩下會跳舞', dancing === '1');
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'dance-auto');
+      await page.addInitScript(() => { window.PF_AUTO_MS = 400; });
+      await page.goto(base + '/');
+      await page.waitForSelector('.pixel-family .pf-char');
+      await wait(200);
+      record('進首頁一下子還不會自動跳舞', (await page.getAttribute('.pixel-family', 'data-pf-dancing')) !== '1');
+      await wait(500);
+      const danced = await page.getAttribute('.pixel-family', 'data-pf-dancing');
+      const stored = await page.evaluate((k) => sessionStorage.getItem(k), AUTO_KEY);
+      record('停留一陣子後自動跳一次並記入 sessionStorage', danced === '1' && stored === '1');
+      await wait(3200);
+      await page.reload();
+      await page.waitForSelector('.pixel-family .pf-char');
+      await wait(900);
+      const again = await page.getAttribute('.pixel-family', 'data-pf-dancing');
+      const stored2 = await page.evaluate((k) => sessionStorage.getItem(k), AUTO_KEY);
+      record('同一造訪重整後不會再自動跳', again !== '1' && stored2 === '1');
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' }, 'dance-reduced');
+      await page.addInitScript(() => { window.PF_AUTO_MS = 400; });
+      await page.goto(base + '/?pf=dance');
+      await page.waitForSelector('.pixel-family .pf-char');
+      await page.locator('.pf-char').first().dblclick();
+      await wait(600);
+      const dancing = await page.getAttribute('.pixel-family', 'data-pf-dancing');
+      const frames = await snap(page);
+      record('減少動態時不跳舞（含 ?pf=dance 與連點）', dancing !== '1' && frames.every((c) => !c.dancing) && JSON.stringify(frames) === JSON.stringify(await snap(page)));
+      await ctx.close();
+    }
+
+    {
+      const { ctx, page } = await newPage({ viewport: { width: 1280, height: 800 } }, 'dance-param');
+      await page.goto(base + '/?pf=dance');
+      await page.waitForSelector('.pixel-family .pf-char');
+      await wait(80);
+      const dancing = await page.getAttribute('.pixel-family', 'data-pf-dancing');
+      record('?pf=dance 可直接看跳舞', dancing === '1');
       await ctx.close();
     }
 

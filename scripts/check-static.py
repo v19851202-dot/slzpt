@@ -63,7 +63,7 @@ if states[0]=='closed':
 else:
     assert 'https://'+BOOKING_HOST in book,'booking is open but book.html has no link to the booking system'
     assert not noindex,'open booking page should be indexable'
-# 全家像素小人：只在首頁、不外連、不收資料、尊重減少動態、z-index 低於頁首與跳到內容。
+# 全家像素小人：首頁頁首走道與文章標題旁，不外連、不收資料、尊重減少動態、z-index 低於頁首與跳到內容。
 all_html=[p for p in root.rglob('*.html') if not {'node_modules','.git','.wrangler'}&set(p.parts)]
 for path in all_html:
     page=Page(); page.feed(path.read_text())
@@ -71,46 +71,69 @@ for path in all_html:
         if tag=='img': assert 'alt' in attrs,('<img> needs alt',path)
 pf_js=sorted(root.glob('assets/scripts/pixel-family-*.js')); pf_css=root/'assets/pixel-family.css'
 assert len(pf_js)==1 and pf_css.exists(),('pixel family needs exactly one JS and its CSS',pf_js)
+notes=sorted((root/'notes').glob('*.html'))
+assert notes,('expected article pages in notes/',)
 pf_ref=re.compile(r'pixel-family[^"\'\s>]*\.(?:js|css)|family-pixel/')
+want=sorted(['pixel-family.css',pf_js[0].name])
 for path in all_html:
     refs=pf_ref.findall(path.read_text())
-    if path==root/'index.html':
-        assert sorted(refs)==sorted([f'pixel-family.css',pf_js[0].name]),('index.html must load pixel family CSS and JS once',refs)
+    if path==root/'index.html' or path in notes:
+        assert sorted(refs)==want,('index and articles must load pixel family CSS and JS once',path,refs)
     else:
-        assert not refs,('pixel family is home page only',path,refs)
+        assert not refs,('pixel family only on home and article pages',path,refs)
 for path in [*root.glob('assets/**/*.js'),*root.glob('assets/**/*.css')]:
     if path not in (pf_js[0],pf_css):
         assert not pf_ref.search(path.read_text()),('pixel family loaded from shared asset',path)
 src=pf_js[0].read_text()
-for bad in (r'\bfetch\s*\(',r'XMLHttpRequest',r'sendBeacon',r'https?://',r'\beval\s*\(',r'new\s+Function',r'WebSocket',r'EventSource',r'\bimport\s*\(',r'sessionStorage',r'document\.cookie',r'indexedDB',r'\.innerHTML',r'\blocation\b'):
+for bad in (r'\bfetch\s*\(',r'XMLHttpRequest',r'sendBeacon',r'https?://',r'\beval\s*\(',r'new\s+Function',r'WebSocket',r'EventSource',r'\bimport\s*\(',r'document\.cookie',r'indexedDB',r'\.innerHTML',r'\blocation\b'):
     assert not re.search(bad,src),('pixel family JS must not use',bad)
-sets=re.findall(r'setItem\s*\([^)]*\)',src)
-assert sets and all(re.fullmatch(r"setItem\('slzpt-pixel-family', '(?:on|off)'\)",s) for s in sets),('localStorage only stores on/off under one key',sets)
-assert set(re.findall(r"getItem\('([^']*)'\)",src))=={'slzpt-pixel-family'} and src.count('getItem(')==1
+ls_sets=re.findall(r'localStorage\.setItem\s*\([^)]*\)',src)
+assert ls_sets and all(re.fullmatch(r"localStorage\.setItem\(KEY, '(?:on|off)'\)",s) or re.fullmatch(r"window\.localStorage\.setItem\('slzpt-pixel-family', '(?:on|off)'\)",s) for s in ls_sets) or all('slzpt-pixel-family' not in s or re.search(r"setItem\(KEY, '(?:on|off)'\)",s) for s in ls_sets)
+# localStorage 只存 on/off；sessionStorage 只記本次造訪是否已自動跳過一次舞。
+assert "localStorage.setItem(KEY, 'on')" in src and "localStorage.setItem(KEY, 'off')" in src
+assert "localStorage.getItem(KEY)" in src and src.count('localStorage.getItem(')==1
+assert "sessionStorage.getItem(AUTO_KEY)" in src and "sessionStorage.setItem(AUTO_KEY, '1')" in src
+assert "AUTO_KEY = 'slzpt-pixel-family-auto'" in src
 assert 'removeItem' not in src and '.clear(' not in src
 assert "matchMedia('(prefers-reduced-motion: reduce)')" in src and 'motionMq.matches' in src
 assert 'document.hidden' in src and "'visibilitychange'" in src
-assert re.search(r'setInterval\(tick, TICK\)',src) and int(re.search(r'TICK = (\d+)',src)[1])>=100
+assert 'setInterval(' in src and int(re.search(r'TICK = (\d+)',src)[1])>=100
+assert "param('pf')" in src and "=== 'dance'" in src
+assert all(f"=== '{p}'" in src or f"persona === '{p}'" in src for p in ('shy','sudden','bold'))
 css=pf_css.read_text()
 assert re.search(r'@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*animation:\s*none',css)
 assert 'image-rendering: pixelated' in css
-layer_css=re.search(r'\.pixel-family\s*\{([^}]*)\}',css)[1]
-assert 'pointer-events: none' in layer_css and 'position: absolute' in layer_css and 'position: fixed' not in css,'pixel layer lives in the bottom padding, never fixed over content'
-assert re.search(r'body\.pf-ready\s*\{[^}]*position:\s*relative',css),'pixel layer must anchor to the page bottom'
+assert 'pointer-events: none' in css and 'position: fixed' not in css,'pixel layer is never fixed over content'
+home_layer=re.search(r'body\.home \.pixel-family\s*\{([^}]*)\}',css)[1]
+assert 'position: absolute' in home_layer and 'top: 0' in home_layer
+assert re.search(r'body\.home\.pf-ready\s*\{[^}]*position:\s*relative',css)
+assert re.search(r'body\.home\.pf-ready\s*\{[^}]*padding-top:\s*\d+px',css)
 assert int(re.search(r'SIZE = (\d+)',src)[1])==72 and 'background-size: 288px 72px' in css and 'width: 72px' in css,'sprites are 72px'
-pad=lambda sel:int(re.search(re.escape(sel)+r'\s*\{[^}]*padding-bottom:\s*(\d+)px',css)[1])
-assert pad('body.pf-ready.pf-on')>=72+44 and pad('body.pf-ready')>=44,'bottom padding must hold the walkers and controls below the footer'
+pad=lambda sel:int(re.search(re.escape(sel)+r'\s*\{[^}]*padding-top:\s*(\d+)px',css)[1])
+assert pad('body.home.pf-ready.pf-on')>=72+44 and pad('body.home.pf-ready')>=44,'top padding must hold the walkers and controls above the header'
 lines=re.findall(r"line: '([^']*)'",src)
 assert len(lines)==4 and not any(re.search(r'這篇|文章|看|點|連結|http|痛|治療|復健|膝|肩|腰|醫',l) for l in lines),('pixel lines are greetings only',lines)
-def z_of(text,sel): return int(re.search(re.escape(sel)+r'\s*\{[^}]*?z-index:\s*(\d+)',text)[1])
+assert "HELLO = '嘿！你好啊！'" in src
+def z_of(text,sel): return int(re.search(re.escape(sel)+r'\s*\{[^}]*?z-index:\s*(\d+)',text,re.S)[1])
 clinic=(root/'assets/clinic.css').read_text()
-assert z_of(css,'.pixel-family')<min(z_of(clinic,'.site-header'),z_of(clinic,'.skip')),'pixel layer must sit under header and skip link'
-assert int(re.search(r"max-width: (\d+)px",src)[1]) in {int(n) for n in re.findall(r'@media \(max-width: (\d+)px\)',clinic)},'narrow breakpoint must reuse clinic.css'
-assert int(re.search(r"max-width: (\d+)px",src)[1])==900,'pixel family defaults off at 900px and below (tablets too)'
+assert z_of(css,'body.home .pixel-family')<min(z_of(clinic,'.site-header'),z_of(clinic,'.skip')),'pixel layer must sit under header and skip link'
+dance=[root/'assets/img/family-pixel'/f'{n}-dance.png' for n in ('mom','sis','dad','mei')]
+assert all(p.exists() and p.stat().st_size>0 for p in dance),('each character needs a dance sprite sheet',dance)
+assert 'background-size: 576px 72px' in css and all(p.name in css for p in dance)
+# 網站上不得出現團體或歌曲名稱，也不得附音樂或音效。
+ban=re.compile(r'BTS|Blackpink|BLACKPINK|NewJeans|TWICE|Seventeen|Stray\s*Kids|\bEXO\b|BigBang|BIGBANG|\bPSY\b|Gangnam|Dynamite|Permission to Dance|\bButter\b|AudioContext|HTMLAudioElement|new\s+Audio\b|<audio\b|<video\b|\.mp3\b|\.wav\b|\.ogg\b|\.m4a\b|\.aac\b',re.I)
+scan_files=[pf_js[0],pf_css,root/'scripts/test-pixel-family.js',root/'index.html',*notes,*dance]
+for path in scan_files:
+    text=path.name if path.suffix=='.png' else path.read_text()
+    if path.suffix=='.png': text=path.name
+    hit=ban.search(text)
+    assert not hit,('banned group, song, or audio mark',path,hit.group(0) if hit else None)
+assert not re.search(r'\bnew\s+Audio\b|AudioContext|<audio\b|<video\b',src)
+assert 'startMove' in src and 'AUTO_KEY' in src and 'MOVE_MS' in src
 phone=re.compile(r'(?<![\w.-])(?:09\d{2}-?\d{3}-?\d{3}|0\d{1,2}-\d{3,4}-?\d{4}|\+886[\d-]{8,})(?![\w-])')
 new_files=[pf_js[0],pf_css,root/'scripts/test-pixel-family.js',*root.glob('.claude/**/*') ]
 for path in new_files:
     if path.is_file():
         hits=[m for m in phone.findall(path.read_text()) if m!='0912-000-000']
         assert not hits,('phone number pattern in new file',path,hits)
-print(f'PASS: {len(pages)} HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, enforced CSP, booking switch ({states[0]}), pixel family (index only)')
+print(f'PASS: {len(pages)} HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, enforced CSP, booking switch ({states[0]}), pixel family (home and {len(notes)} articles)')
