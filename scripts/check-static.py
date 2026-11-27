@@ -63,4 +63,47 @@ if states[0]=='closed':
 else:
     assert 'https://'+BOOKING_HOST in book,'booking is open but book.html has no link to the booking system'
     assert not noindex,'open booking page should be indexable'
-print(f'PASS: {len(pages)} HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, enforced CSP, booking switch ({states[0]})')
+# 全家像素小人：只在首頁、不外連、不收資料、尊重減少動態、z-index 低於頁首與跳到內容。
+all_html=[p for p in root.rglob('*.html') if not {'node_modules','.git','.wrangler'}&set(p.parts)]
+for path in all_html:
+    page=Page(); page.feed(path.read_text())
+    for tag,attrs in page.tags:
+        if tag=='img': assert 'alt' in attrs,('<img> needs alt',path)
+pf_js=sorted(root.glob('assets/scripts/pixel-family-*.js')); pf_css=root/'assets/pixel-family.css'
+assert len(pf_js)==1 and pf_css.exists(),('pixel family needs exactly one JS and its CSS',pf_js)
+pf_ref=re.compile(r'pixel-family[^"\'\s>]*\.(?:js|css)|family-pixel/')
+for path in all_html:
+    refs=pf_ref.findall(path.read_text())
+    if path==root/'index.html':
+        assert sorted(refs)==sorted([f'pixel-family.css',pf_js[0].name]),('index.html must load pixel family CSS and JS once',refs)
+    else:
+        assert not refs,('pixel family is home page only',path,refs)
+for path in [*root.glob('assets/**/*.js'),*root.glob('assets/**/*.css')]:
+    if path not in (pf_js[0],pf_css):
+        assert not pf_ref.search(path.read_text()),('pixel family loaded from shared asset',path)
+src=pf_js[0].read_text()
+for bad in (r'\bfetch\s*\(',r'XMLHttpRequest',r'sendBeacon',r'https?://',r'\beval\s*\(',r'new\s+Function',r'WebSocket',r'EventSource',r'\bimport\s*\(',r'sessionStorage',r'document\.cookie',r'indexedDB',r'\.innerHTML',r'\blocation\b'):
+    assert not re.search(bad,src),('pixel family JS must not use',bad)
+sets=re.findall(r'setItem\s*\([^)]*\)',src)
+assert sets and all(re.fullmatch(r"setItem\('slzpt-pixel-family', '(?:on|off)'\)",s) for s in sets),('localStorage only stores on/off under one key',sets)
+assert set(re.findall(r"getItem\('([^']*)'\)",src))=={'slzpt-pixel-family'} and src.count('getItem(')==1
+assert 'removeItem' not in src and '.clear(' not in src
+assert "matchMedia('(prefers-reduced-motion: reduce)')" in src and 'motionMq.matches' in src
+assert 'document.hidden' in src and "'visibilitychange'" in src
+assert re.search(r'setInterval\(tick, TICK\)',src) and int(re.search(r'TICK = (\d+)',src)[1])>=100
+css=pf_css.read_text()
+assert re.search(r'@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*animation:\s*none',css)
+assert 'image-rendering: pixelated' in css
+layer_css=re.search(r'\.pixel-family\s*\{([^}]*)\}',css)[1]
+assert 'pointer-events: none' in layer_css and 'position: fixed' in layer_css
+def z_of(text,sel): return int(re.search(re.escape(sel)+r'\s*\{[^}]*?z-index:\s*(\d+)',text)[1])
+clinic=(root/'assets/clinic.css').read_text()
+assert z_of(css,'.pixel-family')<min(z_of(clinic,'.site-header'),z_of(clinic,'.skip')),'pixel layer must sit under header and skip link'
+assert int(re.search(r"max-width: (\d+)px",src)[1]) in {int(n) for n in re.findall(r'@media \(max-width: (\d+)px\)',clinic)},'narrow breakpoint must reuse clinic.css'
+phone=re.compile(r'(?<![\w.-])(?:09\d{2}-?\d{3}-?\d{3}|0\d{1,2}-\d{3,4}-?\d{4}|\+886[\d-]{8,})(?![\w-])')
+new_files=[pf_js[0],pf_css,root/'scripts/test-pixel-family.js',*root.glob('.claude/**/*') ]
+for path in new_files:
+    if path.is_file():
+        hits=[m for m in phone.findall(path.read_text()) if m!='0912-000-000']
+        assert not hits,('phone number pattern in new file',path,hits)
+print(f'PASS: {len(pages)} HTML pages, local resource links, metadata, JavaScript syntax, cache hashes, enforced CSP, booking switch ({states[0]}), pixel family (index only)')
